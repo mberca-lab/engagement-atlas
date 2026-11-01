@@ -20,7 +20,11 @@ def main():
         browser = playwright.chromium.launch(
             channel="msedge" if sys.platform == "win32" else None, headless=True
         )
-        page = browser.new_page(viewport={"width": 1440, "height": 1050}, device_scale_factor=1)
+        page = browser.new_page(
+            viewport={"width": 1440, "height": 1050},
+            device_scale_factor=1,
+            reduced_motion="no-preference",
+        )
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto(url, wait_until="load")
@@ -32,6 +36,25 @@ def main():
         assert not errors, errors
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
             "Desktop overflow"
+        )
+        assert page.locator("#hero-art").evaluate(
+            """el => {
+                const animations = el.getAnimations({subtree: true});
+                return animations.length > 0 && animations.every(animation => {
+                    const timing = animation.effect.getComputedTiming();
+                    return timing.iterations === 1 && timing.endTime <= 5000;
+                });
+            }"""
+        ), "Decorative atlas should assemble once and finish within five seconds."
+        page.wait_for_function(
+            """() => {
+                const art = document.getElementById("hero-art");
+                return [...art.querySelectorAll(".atlas-contour")].every(el =>
+                    parseFloat(getComputedStyle(el).strokeDashoffset) === 0)
+                    && art.getAnimations({subtree: true}).every(animation =>
+                        animation.playState === "finished");
+            }""",
+            timeout=5500,
         )
         if args.screenshots:
             folder = ROOT / "docs" / "assets"
@@ -73,16 +96,31 @@ def main():
         page.get_by_role("button", name="Profile 2", exact=True).click()
         page.locator("#prediction-select").select_option("Office of Personnel Management")
         assert not errors, errors
-        for width, height in [(390, 844), (768, 1024)]:
+        for width, height in [(320, 844), (390, 844), (768, 1024)]:
             page.set_viewport_size({"width": width, "height": height})
             page.wait_for_timeout(200)
             assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
                 f"Horizontal overflow at {width}px"
             )
+            assert page.locator("#hero-title").evaluate(
+                """el => {
+                    const range = document.createRange();
+                    range.selectNodeContents(el);
+                    const bounds = el.getBoundingClientRect();
+                    return [...range.getClientRects()].every(rect =>
+                        rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1);
+                }"""
+            ), f"Title is clipped at {width}px"
             assert not errors, errors
         page.emulate_media(reduced_motion="reduce")
         page.reload(wait_until="load")
         assert page.locator("svg").count() >= 5
+        assert page.locator("#hero-art").evaluate(
+            "el => el.getAnimations({subtree: true}).length === 0"
+        ), "Reduced-motion visitors should see a static atlas."
+        assert page.locator("#hero-art .atlas-landmark").first.evaluate(
+            "el => Number(getComputedStyle(el).opacity) > 0"
+        ), "The static atlas should retain its landmarks."
         if args.screenshots:
             page.set_viewport_size({"width": 390, "height": 844})
             page.evaluate("window.scrollTo(0, 0)")
