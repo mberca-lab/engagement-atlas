@@ -37,20 +37,20 @@ def main():
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
             "Desktop overflow"
         )
-        for selector in ["#hero-art", "#hero-route"]:
-            assert page.locator(selector).evaluate(
-                """el => {
-                    const animations = el.getAnimations({subtree: true});
-                    return animations.length > 0 && animations.every(animation => {
-                        const timing = animation.effect.getComputedTiming();
-                        return timing.iterations === 1 && timing.endTime <= 5000;
-                    });
-                }"""
-            ), f"{selector} should assemble once and finish within five seconds."
+        assert page.locator("#hero-route").count() == 0, "The left-side route was removed."
+        assert page.locator("#hero-art").evaluate(
+            """el => {
+                const animations = el.getAnimations({subtree: true});
+                return animations.length > 0 && animations.every(animation => {
+                    const timing = animation.effect.getComputedTiming();
+                    return timing.iterations === 1 && timing.endTime <= 5000;
+                });
+            }"""
+        ), "Decorative atlas should assemble once and finish within five seconds."
         page.wait_for_function(
             """() => {
                 const hero = document.querySelector(".hero");
-                return [...hero.querySelectorAll(".atlas-contour, .route-line")].every(el =>
+                return [...hero.querySelectorAll(".atlas-contour")].every(el =>
                     parseFloat(getComputedStyle(el).strokeDashoffset) === 0)
                     && hero.getAnimations({subtree: true}).every(animation =>
                         animation.playState === "finished");
@@ -112,22 +112,13 @@ def main():
                         rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1);
                 }"""
             ), f"Title is clipped at {width}px"
-            route_bounds = page.locator("#hero-route").bounding_box()
-            title_bounds = page.locator("#hero-title").bounding_box()
-            assert route_bounds["x"] + route_bounds["width"] < title_bounds["x"], (
-                f"Decorative route overlaps title at {width}px"
-            )
             assert not errors, errors
         page.emulate_media(reduced_motion="reduce")
         page.reload(wait_until="load")
         assert page.locator("svg").count() >= 5
-        for selector in ["#hero-art", "#hero-route"]:
-            assert page.locator(selector).evaluate(
-                "el => el.getAnimations({subtree: true}).length === 0"
-            ), f"Reduced-motion visitors should see static artwork in {selector}."
-        assert page.locator("#hero-route .route-waypoint").evaluate_all(
-            "els => els.every(el => Number(getComputedStyle(el).opacity) > 0)"
-        ), "The static route should retain its waypoints."
+        assert page.locator("#hero-art").evaluate(
+            "el => el.getAnimations({subtree: true}).length === 0"
+        ), "Reduced-motion visitors should see a static atlas."
         assert page.locator("#hero-art .atlas-landmark").first.evaluate(
             "el => Number(getComputedStyle(el).opacity) > 0"
         ), "The static atlas should retain its landmarks."
