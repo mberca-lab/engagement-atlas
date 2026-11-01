@@ -37,21 +37,22 @@ def main():
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
             "Desktop overflow"
         )
-        assert page.locator("#hero-art").evaluate(
-            """el => {
-                const animations = el.getAnimations({subtree: true});
-                return animations.length > 0 && animations.every(animation => {
-                    const timing = animation.effect.getComputedTiming();
-                    return timing.iterations === 1 && timing.endTime <= 5000;
-                });
-            }"""
-        ), "Decorative atlas should assemble once and finish within five seconds."
+        for selector in ["#hero-art", "#hero-route"]:
+            assert page.locator(selector).evaluate(
+                """el => {
+                    const animations = el.getAnimations({subtree: true});
+                    return animations.length > 0 && animations.every(animation => {
+                        const timing = animation.effect.getComputedTiming();
+                        return timing.iterations === 1 && timing.endTime <= 5000;
+                    });
+                }"""
+            ), f"{selector} should assemble once and finish within five seconds."
         page.wait_for_function(
             """() => {
-                const art = document.getElementById("hero-art");
-                return [...art.querySelectorAll(".atlas-contour")].every(el =>
+                const hero = document.querySelector(".hero");
+                return [...hero.querySelectorAll(".atlas-contour, .route-line")].every(el =>
                     parseFloat(getComputedStyle(el).strokeDashoffset) === 0)
-                    && art.getAnimations({subtree: true}).every(animation =>
+                    && hero.getAnimations({subtree: true}).every(animation =>
                         animation.playState === "finished");
             }""",
             timeout=5500,
@@ -96,7 +97,7 @@ def main():
         page.get_by_role("button", name="Profile 2", exact=True).click()
         page.locator("#prediction-select").select_option("Office of Personnel Management")
         assert not errors, errors
-        for width, height in [(320, 844), (390, 844), (768, 1024)]:
+        for width, height in [(320, 844), (390, 844), (768, 1024), (1440, 1050)]:
             page.set_viewport_size({"width": width, "height": height})
             page.wait_for_timeout(200)
             assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
@@ -111,13 +112,22 @@ def main():
                         rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1);
                 }"""
             ), f"Title is clipped at {width}px"
+            route_bounds = page.locator("#hero-route").bounding_box()
+            title_bounds = page.locator("#hero-title").bounding_box()
+            assert route_bounds["x"] + route_bounds["width"] < title_bounds["x"], (
+                f"Decorative route overlaps title at {width}px"
+            )
             assert not errors, errors
         page.emulate_media(reduced_motion="reduce")
         page.reload(wait_until="load")
         assert page.locator("svg").count() >= 5
-        assert page.locator("#hero-art").evaluate(
-            "el => el.getAnimations({subtree: true}).length === 0"
-        ), "Reduced-motion visitors should see a static atlas."
+        for selector in ["#hero-art", "#hero-route"]:
+            assert page.locator(selector).evaluate(
+                "el => el.getAnimations({subtree: true}).length === 0"
+            ), f"Reduced-motion visitors should see static artwork in {selector}."
+        assert page.locator("#hero-route .route-waypoint").evaluate_all(
+            "els => els.every(el => Number(getComputedStyle(el).opacity) > 0)"
+        ), "The static route should retain its waypoints."
         assert page.locator("#hero-art .atlas-landmark").first.evaluate(
             "el => Number(getComputedStyle(el).opacity) > 0"
         ), "The static atlas should retain its landmarks."
