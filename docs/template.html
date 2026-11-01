@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The Engagement Atlas — an independent HR analytics portfolio exploring public organization-level survey evidence, engagement trajectories, and honest forecasting.">
+  <title>The Engagement Atlas · Public HR analytics</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; }
+    ::selection { background: var(--cp-highlight); color: var(--cp-text); }
+    a { color: inherit; text-underline-offset: 4px; }
+    button, input, select { font: inherit; }
+    button, select { cursor: pointer; }
+    button, input, select { background: var(--cp-bg-elevated); color: var(--cp-text); border: 1px solid var(--cp-border-strong); border-radius: .625rem; padding: 10px 14px; }
+    button:hover { background: var(--cp-accent-soft); border-color: var(--cp-accent); }
+    :focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 4px; }
+    button[aria-pressed="true"] { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+    svg { display: block; width: 100%; height: auto; overflow: visible; }
+    svg text { font-family: inherit; fill: var(--cp-text-muted); font-size: 13px; }
+    svg .axis-title { fill: var(--cp-text); font-size: 14px; font-weight: 600; }
+    svg .grid-line { stroke: var(--cp-border); stroke-width: 1; }
+    svg .mark { cursor: pointer; stroke: var(--cp-bg); stroke-width: 1.5; transition: r .15s ease, opacity .15s ease; }
+    svg .mark:hover, svg .mark:focus { stroke: var(--cp-text); stroke-width: 3; opacity: 1; }
+    .skip { position: fixed; left: 16px; top: -80px; background: var(--cp-surface); padding: 12px; z-index: 100; }
+    .skip:focus { top: 16px; }
+    .wrap { max-width: 1440px; margin: auto; padding: 0 64px; }
+    .masthead { border-bottom: 1px solid var(--cp-border); background: var(--cp-bg); position: sticky; top: 0; z-index: 20; }
+    .masthead .wrap { display: flex; min-height: 72px; align-items: center; gap: 32px; }
+    .brand { text-decoration: none; font-size: 13px; font-weight: 800; letter-spacing: .15em; white-space: nowrap; }
+    .brand-symbol { color: var(--cp-accent); margin-right: 10px; font-size: 21px; }
+    nav { display: flex; gap: 24px; margin-left: auto; font-size: 12px; }
+    nav a { text-decoration: none; color: var(--cp-text-muted); }
+    nav a:hover, nav a[aria-current="location"] { color: var(--cp-accent); }
+    .theme-button { font-size: 12px; padding: 8px 12px; white-space: nowrap; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .17em; font-size: 11px; font-weight: 700; color: var(--cp-text-muted); }
+    .accent { color: var(--cp-accent); }
+    .hero { position: relative; overflow: hidden; padding-top: 56px; padding-bottom: 48px; }
+    .hero-top { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .edition { border: 1px solid var(--cp-border-strong); border-radius: .625rem; padding: 6px 12px; font: 11px Consolas, "Courier New", Courier, monospace; }
+    .hero-title { position: relative; z-index: 2; margin: 44px 0 28px; font-weight: 850; font-size: clamp(72px, 10.9vw, 158px); letter-spacing: -.075em; line-height: .87; pointer-events: none; }
+    .hero-title .small { display: block; font-size: .3em; font-weight: 400; letter-spacing: -.045em; line-height: 1.6; }
+    .hero-title .outline { color: var(--cp-accent); display: block; }
+    .hero-art { width: 56%; position: absolute; right: -1%; top: 92px; opacity: .65; pointer-events: none; }
+    .hero-copy { display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; position: relative; z-index: 3; }
+    .standfirst { font-size: clamp(22px, 2.3vw, 32px); line-height: 1.35; max-width: 680px; font-weight: 400; letter-spacing: -.035em; margin: 8px 0 24px; }
+    .hero-note { border-left: 2px solid var(--cp-accent); padding-left: 24px; align-self: end; font-size: 14px; color: var(--cp-text-muted); max-width: 430px; }
+    .text-link { display: inline-flex; align-items: center; gap: 16px; font-size: 13px; font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--cp-accent); padding-bottom: 6px; }
+    .text-link span { color: var(--cp-accent); }
+    .facts { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--cp-border-strong); margin-top: 48px; }
+    .fact { padding: 24px 20px 8px 0; }
+    .fact + .fact { border-left: 1px solid var(--cp-border); padding-left: 24px; }
+    .fact strong { display: block; font-weight: 400; font-size: clamp(30px, 3.7vw, 52px); letter-spacing: -.06em; line-height: 1.1; }
+    .fact span { font-size: 12px; color: var(--cp-text-muted); }
+    .section { padding: 76px 0; border-top: 1px solid var(--cp-border); }
+    .section-heading { display: grid; grid-template-columns: 92px 1.1fr 1fr; gap: 24px; align-items: start; margin-bottom: 40px; }
+    .chapter { font: 14px Consolas, "Courier New", Courier, monospace; color: var(--cp-accent); padding-top: 10px; display: flex; align-items: center; gap: 12px; }
+    .chapter::after { content: ""; width: 36px; height: 1px; background: var(--cp-accent); }
+    h2 { font-weight: 450; font-size: clamp(34px, 4.2vw, 56px); letter-spacing: -.055em; line-height: 1.07; margin: 0; }
+    h3 { margin: 0 0 12px; font-size: 20px; font-weight: 550; letter-spacing: -.025em; line-height: 1.3; }
+    .section-heading p { margin: 4px 0 0; color: var(--cp-text-muted); font-size: 15px; max-width: 480px; }
+    .panel { border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-bg-elevated); padding: 28px; }
+    .panel-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 20px; }
+    .panel-top h3 { margin: 0; }
+    .panel-top span { font: 11px Consolas, "Courier New", Courier, monospace; color: var(--cp-text-muted); }
+    .chart-scroll { overflow-x: auto; padding: 6px; margin: 0 -6px; }
+    .chart-scroll svg { min-width: 620px; }
+    .chart-caption { color: var(--cp-text-muted); font-size: 12px; margin: 16px 0 0; }
+    .split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); gap: 24px; }
+    .split > *, .sources > *, .methods > *, .panel { min-width: 0; }
+    .aside { display: flex; flex-direction: column; gap: 24px; }
+    .insight { padding: 24px 0; border-top: 1px solid var(--cp-border-strong); }
+    .insight .big { display: block; font-size: 48px; line-height: 1.1; letter-spacing: -.055em; font-weight: 400; color: var(--cp-accent); margin: 12px 0; }
+    .insight p { color: var(--cp-text-muted); font-size: 14px; }
+    .question { background: var(--cp-accent-soft); border-left: 2px solid var(--cp-accent); padding: 20px 24px; border-radius: 0 .625rem .625rem 0; font-size: 14px; }
+    .question p { margin: 8px 0 0; }
+    .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; margin-bottom: 24px; }
+    .field { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 150px; }
+    .field label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--cp-text-muted); }
+    .field.search { flex: 1.7; }
+    .field input, .field select { width: 100%; min-height: 46px; }
+    .status { color: var(--cp-text-muted); font-size: 12px; margin: 12px 0; min-height: 20px; }
+    .detail { background: var(--cp-surface); border: 1px solid var(--cp-border); border-radius: .625rem; padding: 20px; min-height: 138px; }
+    .detail h3 { font-size: 18px; }
+    .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .detail-grid strong { display: block; font-size: 24px; font-weight: 450; letter-spacing: -.04em; }
+    .detail-grid span { display: block; color: var(--cp-text-muted); font-size: 11px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 16px; color: var(--cp-text-muted); font-size: 12px; margin: 12px 0; }
+    .legend-item { display: inline-flex; gap: 8px; align-items: center; }
+    .swatch { width: 24px; height: 3px; background: var(--cp-accent); }
+    .swatch.secondary { background: var(--cp-text-muted); }
+    .swatch.tertiary { background: var(--cp-border-strong); }
+    .correlation-row { display: grid; grid-template-columns: minmax(180px,1fr) minmax(120px,1fr) 68px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--cp-border); font-size: 14px; }
+    .correlation-row small { display: block; color: var(--cp-text-muted); font: 11px Consolas, "Courier New", Courier, monospace; margin-top: 4px; }
+    .rho-track { position: relative; height: 24px; background: var(--cp-surface-soft); border-radius: 4px; }
+    .rho-track::after { position: absolute; content: ""; left: 50%; width: 1px; top: 0; bottom: 0; background: var(--cp-border-strong); }
+    .rho-fill { position: absolute; height: 8px; top: 8px; background: var(--cp-accent); border-radius: 2px; }
+    .rho-value { font: 16px Consolas, "Courier New", Courier, monospace; text-align: right; }
+    .correlation-axis { display: flex; justify-content: space-between; color: var(--cp-text-muted); font-size: 11px; }
+    .trajectory-picks { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+    .landscape { background: var(--cp-surface); }
+    .profile-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .profile-tabs button { font-size: 12px; }
+    .profile-feature { margin: 16px 0; }
+    .profile-feature .line { display: flex; justify-content: space-between; gap: 16px; font-size: 12px; margin-bottom: 6px; }
+    .bar-track { background: var(--cp-surface-soft); height: 5px; border-radius: 4px; overflow: hidden; }
+    .bar-fill { background: var(--cp-accent); height: 100%; border-radius: 4px; }
+    .model-section { background: var(--cp-bg-elevated); }
+    .model-strip { display: grid; grid-template-columns: repeat(4,1fr); margin-bottom: 32px; border-top: 1px solid var(--cp-border-strong); border-bottom: 1px solid var(--cp-border); }
+    .model-strip > div { padding: 20px; border-right: 1px solid var(--cp-border); }
+    .model-strip > div:first-child { padding-left: 0; }
+    .model-strip > div:last-child { border: 0; }
+    .model-strip strong { display: block; font-size: 23px; font-weight: 450; letter-spacing: -.04em; }
+    .model-strip span { color: var(--cp-text-muted); font-size: 11px; }
+    .tournament { display: flex; flex-direction: column; gap: 24px; }
+    .model-row { display: grid; grid-template-columns: 175px 1fr 72px; align-items: center; gap: 16px; font-size: 13px; }
+    .model-row .bar-track { height: 28px; background: var(--cp-surface-soft); }
+    .model-row .bar-fill { min-width: 2px; border-radius: 3px; }
+    .model-row .baseline { background: var(--cp-text-muted); }
+    .model-row .score { font: 18px Consolas, "Courier New", Courier, monospace; text-align: right; }
+    .pill { border: 1px solid var(--cp-border); border-radius: .625rem; font-size: 10px; padding: 2px 6px; display: inline-block; margin-top: 4px; color: var(--cp-text-muted); }
+    .methods { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+    details { border-top: 1px solid var(--cp-border); padding: 16px 0; }
+    summary { cursor: pointer; font-weight: 600; font-size: 13px; }
+    details > p, details > ul { color: var(--cp-text-muted); font-size: 13px; }
+    .table-scroll { overflow-x: auto; margin-top: 16px; max-height: 440px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; font-variant-numeric: tabular-nums; }
+    th { position: sticky; top: 0; z-index: 1; background: var(--cp-bg-elevated); font-weight: 700; }
+    th, td { border-bottom: 1px solid var(--cp-border); padding: 12px; vertical-align: top; }
+    caption { text-align: left; color: var(--cp-text-muted); margin-bottom: 12px; }
+    .empty { padding: 48px 24px; text-align: center; border: 1px dashed var(--cp-border-strong); border-radius: .625rem; color: var(--cp-text-muted); }
+    .responsibility { display: grid; grid-template-columns: repeat(3,1fr); gap: 36px; margin-bottom: 40px; }
+    .responsibility article { border-top: 2px solid var(--cp-accent); padding-top: 20px; }
+    .responsibility p { font-size: 14px; color: var(--cp-text-muted); }
+    .responsibility .number { font: 11px Consolas, "Courier New", Courier, monospace; color: var(--cp-accent); margin-bottom: 20px; display: block; }
+    .sources { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
+    .source-list { display: flex; flex-direction: column; gap: 16px; }
+    .source-list a { color: var(--cp-accent); overflow-wrap: anywhere; }
+    .source-list p { margin: 0; font-size: 13px; color: var(--cp-text-muted); }
+    footer { border-top: 1px solid var(--cp-border-strong); padding: 40px 0 32px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 24px; }
+    .footer-name { font-size: 28px; letter-spacing: -.04em; font-weight: 450; margin: 4px 0 8px; }
+    .footer-links { display: flex; gap: 24px; align-items: start; flex-wrap: wrap; }
+    .footer-bottom { font-size: 11px; color: var(--cp-text-muted); display: flex; justify-content: space-between; gap: 20px; margin-top: 40px; }
+    .tooltip { position: fixed; pointer-events: none; z-index: 40; max-width: 300px; padding: 12px 16px; background: var(--cp-surface); color: var(--cp-text); border: 1px solid var(--cp-border-strong); border-radius: .625rem; font-size: 12px; box-shadow: var(--cp-shadow); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .reveal { animation: enter .7s ease both; }
+    .hero-title { animation-delay: .1s; }
+    .hero-copy { animation-delay: .2s; }
+    .facts { animation-delay: .3s; }
+    @keyframes enter { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @media (min-width: 1600px) { .hero-art { right: 4%; } }
+    @media (max-width: 1080px) {
+      .wrap { padding: 0 32px; }
+      nav { gap: 16px; }
+      .masthead .wrap { gap: 20px; }
+      .section-heading { grid-template-columns: 60px 1fr 1fr; }
+      .hero-copy { gap: 40px; }
+      .split { grid-template-columns: minmax(0,1.7fr) minmax(240px,1fr); }
+      .panel { padding: 20px; }
+      .model-row { grid-template-columns: 130px 1fr 64px; }
+      .detail-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 760px) {
+      .wrap { padding: 0 20px; }
+      .masthead .wrap { min-height: 64px; gap: 12px; }
+      nav { display: none; }
+      .theme-button { margin-left: auto; }
+      .brand { font-size: 10px; letter-spacing: .1em; }
+      .hero { padding-top: 32px; }
+      .hero-top { align-items: start; }
+      .hero-top .eyebrow { max-width: 180px; font-size: 9px; }
+      .hero-title { margin-top: 48px; font-size: clamp(32px,13vw,94px); overflow-wrap: anywhere; }
+      .hero-art { width: 95%; right: -28%; top: 68px; opacity: .38; }
+      .hero-copy, .split, .sources { grid-template-columns: 1fr; gap: 24px; }
+      .hero-note { max-width: none; }
+      .facts { grid-template-columns: repeat(2,1fr); margin-top: 32px; }
+      .fact { padding-top: 20px; padding-bottom: 16px; }
+      .fact:nth-child(3) { border-left: 0; padding-left: 0; border-top: 1px solid var(--cp-border); }
+      .fact:nth-child(4) { border-top: 1px solid var(--cp-border); }
+      .section { padding: 48px 0; }
+      .section-heading { grid-template-columns: 40px 1fr; gap: 16px; margin-bottom: 28px; }
+      .section-heading p { grid-column: 2; margin-top: 4px; }
+      .chapter::after { display: none; }
+      .panel { padding: 16px; }
+      .panel-top { flex-wrap: wrap; gap: 8px; }
+      .trajectory-picks, .methods, .responsibility { grid-template-columns: 1fr; }
+      .trajectory-picks { gap: 12px; }
+      .model-strip { grid-template-columns: repeat(2,1fr); }
+      .model-strip > div { padding: 16px; }
+      .model-strip > div:nth-child(3) { padding-left: 0; border-top: 1px solid var(--cp-border); }
+      .model-strip > div:nth-child(4) { border-top: 1px solid var(--cp-border); }
+      .correlation-row { grid-template-columns: minmax(125px,1fr) minmax(72px,.7fr) 52px; gap: 12px; font-size: 12px; }
+      .model-row { grid-template-columns: 115px 1fr 60px; gap: 12px; font-size: 11px; }
+      .responsibility { gap: 20px; }
+      .footer-top, .footer-bottom { flex-direction: column; }
+      .footer-links { margin-top: 16px; }
+      .edition { font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    @media print {
+      .masthead, .controls, .theme-button, .tooltip, .profile-tabs, .text-link { display: none; }
+      .wrap { padding: 0 20px; }
+      .section { padding: 32px 0; break-inside: avoid; }
+      .chart-scroll { overflow: visible; }
+      .chart-scroll svg { min-width: 0; }
+      details .table-scroll { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to the analysis</a>
+  <header class="masthead">
+    <div class="wrap">
+      <a class="brand" href="#main"><span class="brand-symbol" aria-hidden="true">✳</span>THE ENGAGEMENT ATLAS</a>
+      <nav aria-label="Analysis chapters">
+        <a href="#over-time">Over time</a><a href="#explorer">Explore</a><a href="#landscape">Patterns</a><a href="#forecast">Forecast</a><a href="#responsible">Methods</a>
+      </nav>
+      <button class="theme-button" id="theme-toggle" type="button" aria-label="Toggle dark theme" aria-pressed="false">Dark / light</button>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-top"><span class="eyebrow">Public evidence. Human questions.<br><span class="accent">An independent HR analytics study</span></span><span class="edition" id="edition">PUBLIC SURVEY ATLAS</span></div>
+      <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+      <h1 class="hero-title reveal" id="hero-title"><span class="small">THE</span>ENGAGEMENT<span class="outline">ATLAS.</span></h1>
+      <div class="hero-copy reveal">
+        <div><p class="standfirst" id="headline">Engagement is a signal.<br>Understanding it takes a wider view.</p><a class="text-link" href="#over-time">Follow the evidence <span aria-hidden="true">↘</span></a></div>
+        <div class="hero-note"><span class="eyebrow accent">The premise</span><p>How does the employee experience differ across organizations, change over time, and inform what we ask next?</p><p id="hero-source">An exploration of fully public, organization-level survey aggregates. No individual records. No simulated survey results.</p></div>
+      </div>
+      <div class="facts reveal" id="hero-facts"></div>
+    </section>
+
+    <section class="section" id="over-time" aria-labelledby="time-heading">
+      <div class="wrap">
+        <div class="section-heading"><span class="chapter">01</span><h2 id="time-heading">The view<br>across time.</h2><p>Averages tell one story. The spread between organizations tells another. Start with both, and check who is represented each year.</p></div>
+        <div class="split">
+          <div class="panel"><div class="panel-top"><h3>Engagement, year by year</h3><span>INDEX · 0–100</span></div><div class="chart-scroll" id="annual-chart"></div><div class="legend"><span class="legend-item"><i class="swatch"></i>Mean engagement</span><span class="legend-item"><i class="swatch secondary"></i>Median</span><span class="legend-item" id="balanced-legend" hidden><svg viewBox="0 0 28 8" style="width:28px" aria-hidden="true"><line x1="0" x2="28" y1="4" y2="4" stroke="var(--cp-text)" stroke-width="2" stroke-dasharray="2 5"/></svg>Continuously observed agency names · mean</span><span class="legend-item">Shaded band: organization min–max</span></div><p class="chart-caption">Annual summaries are across included agencies, not an estimate for all employees. Changing coverage can change the mean. The continuous cohort, when shown, uses reporting names observed in every source year—not a guarantee of unchanged agency boundaries or workforces.</p><details><summary>Read the annual data table</summary><div class="table-scroll" id="annual-table"></div></details></div>
+          <aside class="aside"><div class="insight" id="annual-insight"></div><div class="question"><span class="eyebrow accent">A question for HR</span><p>Does a change in the average reflect a shared shift, a few organizations, or a change in who is included?</p></div><div id="summary-insights"></div></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="explorer" aria-labelledby="explorer-heading">
+      <div class="wrap">
+        <div class="section-heading"><span class="chapter">02</span><h2 id="explorer-heading">Every point.<br>A different context.</h2><p>Look beyond the leaderboard. Explore how a measured aspect of work sits alongside engagement, one public agency at a time.</p></div>
+        <div class="panel">
+          <div class="controls"><div class="field"><label for="explorer-year">Survey year</label><select id="explorer-year"></select></div><div class="field"><label for="explorer-feature">Horizontal dimension</label><select id="explorer-feature"></select></div><div class="field search"><label for="organization-search">Find an organization</label><input type="search" id="organization-search" placeholder="Type an organization name…" autocomplete="off"></div><button id="explorer-reset" type="button">Reset view</button></div>
+          <div class="split"><div><div class="chart-scroll" id="scatter-chart"></div><p class="status" id="scatter-status" role="status" aria-live="polite"></p><p class="chart-caption">Each dot is one published agency aggregate; all dots have equal size. Search filters the view. Missing values are excluded from the plot, not replaced. Intent to leave, when available, is self-reported survey intention—not observed attrition.</p><p class="chart-caption" id="intention-context" hidden></p><p class="chart-caption" id="supplementary-context" hidden></p></div><aside class="aside"><div class="detail" id="scatter-detail" aria-live="polite"></div><p class="chart-caption">Hover or focus a point for its values. With a point focused, use arrow keys to move between organizations; Enter selects, Escape dismisses the tooltip.</p><div class="question"><span class="eyebrow accent">A question for HR</span><p>Which agencies merit a conversation about their context—not a label based on where they sit?</p></div></aside></div>
+          <details><summary>Read the filtered organization table</summary><div class="table-scroll" id="scatter-table"></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="relationships" aria-labelledby="relationships-heading">
+      <div class="wrap">
+        <div class="section-heading"><span class="chapter">03</span><h2 id="relationships-heading">Related.<br>Not independent.</h2><p>The engagement index contains Leaders lead, Supervisory support, and Intrinsic work experience. Their correlations with the whole are partly mechanical—not discoveries of independent drivers.</p></div>
+        <div class="split"><div class="panel"><div class="panel-top"><h3>Feature ↔ engagement</h3><span id="correlation-year"></span></div><div id="correlation-list"></div><p class="chart-caption">Spearman rank correlation (ρ), with the supplied p-values and multiple-testing-adjusted q-values. EEI components share content by construction; global satisfaction comes from the same survey. Shared responses and omitted context also contribute. None of these relationships identifies a causal effect.</p><details><summary>Read all correlation statistics</summary><div class="table-scroll" id="correlation-table"></div></details></div><aside class="aside"><div class="insight" id="correlation-insight"></div><div class="question"><span class="eyebrow accent">A question for HR</span><p>What would independent evidence add beyond the engagement index’s own components?</p></div></aside></div>
+      </div>
+    </section>
+
+    <section class="section" id="trajectories" aria-labelledby="trajectory-heading">
+      <div class="wrap">
+        <div class="section-heading"><span class="chapter">04</span><h2 id="trajectory-heading">The path matters<br>as much as the point.</h2><p>A single snapshot hides direction. Compare published organization trajectories without treating year-to-year differences as proven change in individual employees.</p></div>
+        <div class="panel"><div class="trajectory-picks" id="trajectory-controls"></div><div class="chart-scroll" id="trajectory-chart"></div><div class="legend" id="trajectory-legend"></div><p class="status" id="trajectory-status" aria-live="polite"></p><p class="chart-caption">Lines connect consecutive survey years only. Missing years remain gaps; organization naming or survey changes may affect comparability. Default examples are alphabetical, not selected for performance.</p><details><summary>Read the selected trajectories</summary><div class="table-scroll" id="trajectory-table"></div></details></div>
+        <div class="panel" id="change-panel" style="margin-top:24px" hidden><div class="panel-top"><h3>What changes together within agencies?</h3><span>FIRST DIFFERENCES · DESCRIPTIVE</span></div><p class="chart-caption">Adjusted associations in annual engagement change per one standard deviation of feature change, with year effects. EEI components are part of the outcome itself: a close fit is partly compositional, not validation of independent drivers or interventions.</p><div class="chart-scroll" id="change-chart"></div><p class="chart-caption" id="change-caption"></p><details><summary>Read adjusted change estimates and uncertainty</summary><div class="table-scroll" id="change-table"></div></details><details><summary>Read change correlations and cluster-bootstrap intervals</summary><div class="table-scroll" id="change-correlation-table"></div></details><details><summary>Within-agency change methodology</summary><div id="change-method"></div></details></div>
+      </div>
+    </section>
+
+    <section class="section landscape" id="landscape" aria-labelledby="landscape-heading">
+      <div class="wrap">
+        <div class="section-heading"><span class="chapter">05</span><h2 id="landscape-heading">A landscape.<br>Not a taxonomy.</h2><p>Multiple survey dimensions, seen together. A two-dimensional PCA projection makes similarities visible; descriptive clusters organize questions, not people.</p></div>
+        <div class="split"><div class="panel"><div class="panel-top"><h3>Multivariate survey landscape</h3><span id="pca-variance"></span></div><div class="chart-scroll" id="cluster-chart"></div><div class="legend" id="cluster-legend"></div><div class="detail" id="cluster-detail" aria-live="polite"></div><p class="chart-caption">Coordinates are principal-component scores, not index points. Proximity in this projection is an imperfect summary of the full feature space. Cluster numbers have no rank.</p><details><summary>Read the PCA coordinates and clusters</summary><div class="table-scroll" id="cluster-table"></div></details></div><aside class="aside"><div class="profile-tabs" id="profile-tabs" role="group" aria-label="Select a descriptive cluster profile"></div><div id="cluster-profile"></div><div class="question"><span class="eyebrow accent">A question for HR</span><p>Do organizations with similar survey profiles share a meaningful context, or only similar averages?</p></div></aside></div>
+        <details><summary>How to interpret these descriptive clusters</summary><p id="cluster-method"></p><p>Feature standardization gives survey dimensions comparable influence on the projection. Cluster profiles below return to the original 0–100 scale. A silhouette score is a geometric diagnostic, not evidence of distinct types of organization; neither PCA nor clustering identifies causes.</p></details>
+      </div>
+    </section>
+
+    <section class="section model-section" id="forecast" aria-labelledby="forecast-heading">
+      <div class="wrap">
+        <div class="section-heading"><span class="chapter">06</span><h2 id="forecast-heading">The future.<br>With a reality check.</h2><p>A next-year engagement forecasting tournament, judged on an actual temporal holdout. More sophisticated models must earn their place against a simple baseline.</p></div>
+        <div class="model-strip" id="model-strip"></div>
+        <div class="split"><div class="panel"><div class="panel-top"><h3>The model tournament</h3><span>MAE · INDEX POINTS · LOWER IS BETTER</span></div><div class="tournament" id="model-tournament"></div><p class="chart-caption" id="model-caption"></p><details><summary>Read the full holdout scorecard</summary><div class="table-scroll" id="model-table"></div></details></div><aside class="aside"><div class="insight" id="model-insight"></div><div class="question"><span class="eyebrow accent">A question for HR</span><p>Is the forecast more useful than carrying the last observation forward—and is its uncertainty acceptable for the decision?</p></div></aside></div>
+        <div class="methods"><div class="panel"><div class="panel-top"><h3>Prediction meets observation</h3><span id="prediction-year"></span></div><div class="chart-scroll" id="prediction-chart"></div><p class="chart-caption">Selected model predictions against actual held-out engagement. The diagonal is perfect agreement, not a fitted line. These are retrospective forecasts, not future promises.</p><div class="field" style="margin-top:20px"><label for="prediction-select">Inspect a held-out organization</label><select id="prediction-select"></select></div><div class="detail" id="prediction-detail" aria-live="polite" style="margin-top:16px"></div><details><summary>Read held-out predictions and baseline</summary><div class="table-scroll" id="prediction-table"></div></details></div><div class="panel"><h3>Inside the explanatory ML model</h3><p class="chart-caption" id="importance-caption">Supplied permutation importance: change in model error when a feature is shuffled. This is predictive relevance, not causal leverage; correlated features can share or obscure importance. The explained ML model need not be the tournament winner.</p><div id="importance-list"></div><details><summary>Read permutation importance statistics</summary><div class="table-scroll" id="importance-table"></div></details><div class="insight" id="interval-insight"></div></div></div>
+        <details><summary>Open the forecasting methodology</summary><div id="forecast-method"></div></details>
+      </div>
+    </section>
+
+    <section class="section" id="responsible" aria-labelledby="responsible-heading">
+      <div class="wrap">
+        <div class="section-heading"><span class="chapter">07</span><h2 id="responsible-heading">Better questions.<br>Not easy verdicts.</h2><p>Responsible people analytics makes the limits visible. The purpose of this atlas is to guide evidence-seeking conversations—not to automate judgments about workforces.</p></div>
+        <div class="responsibility"><article><span class="number">I / UNIT OF ANALYSIS</span><h3>Organizations are not people.</h3><p>These are public organization-level aggregates. They cannot explain an individual employee’s experience, identify subgroups, or support individual-level predictions. Avoid the ecological fallacy.</p></article><article><span class="number">II / INFERENCE</span><h3>A pattern is not a lever.</h3><p>Correlation, clustering, and predictive importance are descriptive or predictive. None identifies the effect of an HR intervention. No causal uplift, business impact, or “what-if” promises are made here.</p></article><article><span class="number">III / DECISION USE</span><h3>Context before action.</h3><p>Check survey definitions, response coverage, uncertainty, and local context. Pair the findings with employee listening and domain expertise before designing or evaluating a response.</p></article></div>
+        <div class="split"><div><h3>Where to take the conversation</h3><div id="recommendations"></div></div><div class="panel"><h3>Data quality, in plain sight</h3><div id="quality-summary"></div><details><summary>Read feature missingness</summary><div class="table-scroll" id="quality-table"></div></details></div></div>
+        <div class="methods"><div><details><summary>Measurement and comparability</summary><p>OPM FEVS engagement (EEI) is a percent-positive index on a 0–100 scale, composed of Leaders lead, Supervisory support, and Intrinsic work experience. Global satisfaction and the other survey percentages also use 0–100. A difference in index points is not a relative percentage change. Intent to leave is self-reported, not an actual exit rate.</p><p>Published respondent counts and response rates provide context but do not eliminate nonresponse bias. Changes in agency boundaries, instruments, wording, and response composition may compromise comparisons across years. Agency means should not be interpreted as employee-weighted federal estimates. See OPM documentation for exact item definitions and survey methodology.</p></details><details><summary>What this analysis cannot establish</summary><p>Aggregate data cannot diagnose individuals, demonstrate subgroup fairness, recover within-agency distributions, or identify causal intervention effects. Forecast evaluation in historical years does not guarantee transportability to later years, other sectors, or changing survey instruments.</p></details></div><div><details><summary>Analysis design and reproducibility</summary><div id="analysis-method"></div><p>Use the linked repository for source ingestion, cleaning decisions, feature definitions, temporal evaluation, and reproducible code. Source publications, not this visualization, remain authoritative.</p></details><details><summary>Public-data boundary</summary><p>Only fully public agency-level survey aggregates belong in this portfolio. No confidential telemetry, respondent-level records, de-anonymized customer lists, or synthetic substitute survey data are used. Public availability does not remove the obligation to respect source licensing and avoid stigmatizing interpretations.</p></details></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="sources" aria-labelledby="sources-heading">
+      <div class="wrap"><div class="section-heading"><span class="chapter">08</span><h2 id="sources-heading">Open evidence.<br>Open workings.</h2><p>Good analysis should be inspectable. Follow the publication, understand the terms, and examine the analytical choices behind the visuals.</p></div><div class="sources"><div class="source-list" id="source-list"></div><div class="question"><span class="eyebrow accent">A portfolio, not an official publication</span><p>This is an independent analytical interpretation of public survey releases. It is not endorsed by the source organization and should not be used as a substitute for official statistics or local interpretation.</p></div></div></div>
+    </section>
+  </main>
+  <footer><div class="wrap"><div class="footer-top"><div><span class="eyebrow">People analytics · Public-data portfolio</span><p class="footer-name" id="author-name">Margarita Bermejo Cano</p><span class="chart-caption">Evidence, with a human perspective.</span></div><div class="footer-links" id="footer-links"><a class="text-link" href="#main">Back to the atlas <span aria-hidden="true">↑</span></a></div></div><div class="footer-bottom"><span>THE ENGAGEMENT ATLAS / No individual records. No causal shortcuts.</span><span id="footer-provenance"></span></div></div></footer>
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <noscript><div class="wrap empty">This interactive atlas needs JavaScript to display its embedded public survey data. Use the source publication or repository for the underlying evidence.</div></noscript>
+  <script>
+    "use strict";
+    const DATA = __ATLAS_DATA__;
+    (() => {
+      const meta = DATA.meta || {};
+      const rows = Array.isArray(DATA.rows) ? DATA.rows : [];
+      const annual = (DATA.annual || []).slice().sort((a, b) => a.year - b.year);
+      const features = meta.features || [];
+      const years = (meta.years || [...new Set(rows.map(r => r.year))]).slice().sort((a,b) => a-b);
+      const latest = meta.latestYear ?? years.at(-1);
+      const models = DATA.models || {};
+      const clusters = DATA.clusters || {};
+      const quality = DATA.quality || {};
+      const findings = DATA.findings || {};
+      const $ = id => document.getElementById(id);
+      const valid = v => typeof v === "number" && Number.isFinite(v);
+      const fmt = (v, digits = 1) => valid(v) ? v.toLocaleString("en-GB", { maximumFractionDigits: digits, minimumFractionDigits: digits }) : "—";
+      const integer = v => fmt(v, 0);
+      const sign = v => valid(v) ? `${v > 0 ? "+" : ""}${fmt(v)}` : "—";
+      const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+      const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+      const featureLabel = key => features.find(f => f.key === key)?.label || key || "Survey feature";
+      const componentNote = key => ["leaders","supervisors","intrinsic"].includes(key) ? "EEI component · shared content" : "Same-survey association";
+      const empty = (id, text = "No published observations available for this view.") => { $(id).innerHTML = `<div class="empty">${esc(text)}</div>`; };
+      const text = (id, value) => { $(id).textContent = value; };
+      const safeUrl = value => {
+        try { const u = new URL(value); return ["http:", "https:"].includes(u.protocol) ? u.href : null; } catch { return null; }
+      };
+      const table = (id, title, headers, data) => {
+        if (!data.length) { empty(id); return; }
+        $(id).innerHTML = `<table><caption>${esc(title)}</caption><thead><tr>${headers.map(h=>`<th scope="col">${esc(h)}</th>`).join("")}</tr></thead><tbody>${data.map(row=>`<tr>${row.map((v,i)=>i===0 ? `<th scope="row">${esc(v)}</th>` : `<td>${esc(v)}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+      };
+      const options = (values, selected) => values.map(v => `<option value="${esc(v.value)}"${String(v.value)===String(selected)?" selected":""}>${esc(v.label)}</option>`).join("");
+      const pctUnit = value => valid(value) ? `${fmt(value)}%` : "—";
+      const probability = value => valid(value) ? (value === 0 ? "0 (reported)" : value < .001 ? value.toExponential(2) : fmt(value, 3)) : "—";
+      const colors = ["var(--cp-accent)", "var(--cp-text-muted)", "var(--cp-border-strong)", "var(--cp-text)"];
+      const dash = ["", "8 5", "2 5", "12 4 2 4"];
+      const chartBox = { w:900, h:440, left:72, right:32, top:24, bottom:64 };
+      function chartFrame(id, title, description, xLabel, yLabel, xDomain = [0,100], yDomain = [0,100], xTicks, yTicks) {
+        const b = chartBox;
+        const x = v => b.left + (v-xDomain[0])/(xDomain[1]-xDomain[0] || 1)*(b.w-b.left-b.right);
+        const y = v => b.h-b.bottom-(v-yDomain[0])/(yDomain[1]-yDomain[0] || 1)*(b.h-b.top-b.bottom);
+        const ticks = domain => Array.from({length:6}, (_,i)=>domain[0]+i*(domain[1]-domain[0])/5);
+        let body = `<title id="${id}-title">${esc(title)}</title><desc id="${id}-desc">${esc(description)}</desc>`;
+        (yTicks || ticks(yDomain)).forEach(v => { body += `<line class="grid-line" x1="${b.left}" x2="${b.w-b.right}" y1="${y(v)}" y2="${y(v)}"/><text x="${b.left-12}" y="${y(v)+4}" text-anchor="end">${esc(fmt(v,Number.isInteger(v)?0:1))}</text>`; });
+        (xTicks || ticks(xDomain)).forEach(v=> { body += `<text x="${x(v)}" y="${b.h-b.bottom+26}" text-anchor="middle">${esc(fmt(v,Number.isInteger(v)?0:1))}</text>`; });
+        body += `<text class="axis-title" x="${(b.left+b.w-b.right)/2}" y="${b.h-8}" text-anchor="middle">${esc(xLabel)}</text><text class="axis-title" transform="translate(19 ${(b.top+b.h-b.bottom)/2}) rotate(-90)" text-anchor="middle">${esc(yLabel)}</text>`;
+        const finish = marks => `<svg viewBox="0 0 ${b.w} ${b.h}" role="group" aria-labelledby="${id}-title ${id}-desc">${body}${marks}</svg>`;
+        return { x, y, finish };
+      }
+      function linePath(list, x, y, xKey, yKey) {
+        let active = false, lastYear = null;
+        return list.map(r=>{
+          if(!valid(r[xKey]) || !valid(r[yKey])) { active = false; return ""; }
+          const gap = xKey === "year" && lastYear !== null && r[xKey] !== lastYear+1;
+          const part = `${active && !gap ? "L":"M"}${x(r[xKey]).toFixed(2)},${y(r[yKey]).toFixed(2)}`;
+          active = true; lastYear = r[xKey]; return part;
+        }).join(" ");
+      }
+      const tooltip = $("tooltip");
+      function hideTooltip() { tooltip.hidden = true; document.querySelectorAll('[aria-describedby="tooltip"]').forEach(el=>el.removeAttribute("aria-describedby")); }
+      function showTooltip(mark, content, event) {
+        tooltip.textContent = content; tooltip.hidden = false; mark.setAttribute("aria-describedby","tooltip");
+        const rect = mark.getBoundingClientRect();
+        const x = event?.clientX ?? rect.left+rect.width/2;
+        const y = event?.clientY ?? rect.bottom;
+        tooltip.style.left = `${clamp(x+16, 8, Math.max(8,window.innerWidth-tooltip.offsetWidth-8))}px`;
+        tooltip.style.top = `${clamp(y+16,8,Math.max(8,window.innerHeight-tooltip.offsetHeight-8))}px`;
+      }
+      function bindMarks(container, list, describe, onSelect) {
+        const marks = [...$(container).querySelectorAll("[data-point]")];
+        marks.forEach((mark, i) => {
+          const row = list[Number(mark.dataset.point)];
+          mark.setAttribute("tabindex", i===0 ? "0":"-1");
+          mark.setAttribute("role", "button");
+          mark.setAttribute("aria-label", `${describe(row)}. Select for details.`);
+          const select = () => onSelect(row);
+          mark.addEventListener("pointerenter", e=>showTooltip(mark,describe(row),e));
+          mark.addEventListener("pointermove", e=>showTooltip(mark,describe(row),e));
+          mark.addEventListener("pointerleave", hideTooltip);
+          mark.addEventListener("focus", ()=> { showTooltip(mark,describe(row)); select(); });
+          mark.addEventListener("blur", hideTooltip);
+          mark.addEventListener("click", ()=> { marks.forEach(m=>m.setAttribute("tabindex","-1")); mark.setAttribute("tabindex","0"); select(); mark.focus(); });
+          mark.addEventListener("keydown", e=>{
+            if (e.key==="Escape") { hideTooltip(); e.preventDefault(); }
+            if (["Enter"," "].includes(e.key)) { select(); e.preventDefault(); }
+            if (["ArrowRight","ArrowDown","ArrowLeft","ArrowUp","Home","End"].includes(e.key)) {
+              e.preventDefault();
+              const next = e.key==="Home" ? 0 : e.key==="End" ? marks.length-1 : (i+(["ArrowRight","ArrowDown"].includes(e.key)?1:-1)+marks.length)%marks.length;
+              marks.forEach(m=>m.setAttribute("tabindex","-1")); marks[next].setAttribute("tabindex","0"); marks[next].focus();
+            }
+          });
+        });
+      }
+      window.addEventListener("scroll",hideTooltip,{passive:true});
+      window.addEventListener("resize",hideTooltip);
+      document.addEventListener("keydown",e=> { if(e.key==="Escape") hideTooltip(); });
+
+      // The required detection snippet is kept intact; normalize explicit light/dark parameters.
+      const requestedTheme = new URLSearchParams(location.search).get("scoutTheme");
+      if (["light","dark"].includes(requestedTheme)) document.documentElement.dataset.theme = requestedTheme;
+      function syncThemeButton() {
+        const dark = document.documentElement.dataset.theme==="dark";
+        $("theme-toggle").setAttribute("aria-pressed",String(dark));
+        $("theme-toggle").setAttribute("aria-label",dark?"Switch to light theme":"Switch to dark theme");
+        text("theme-toggle",dark?"Light mode ↗":"Dark mode ↗");
+      }
+      $("theme-toggle").addEventListener("click",()=> { document.documentElement.dataset.theme = document.documentElement.dataset.theme==="dark"?"light":"dark"; syncThemeButton(); });
+      syncThemeButton();
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries=> {
+          entries.forEach(entry=> { if(entry.isIntersecting) document.querySelectorAll("nav a").forEach(a=> { if(a.getAttribute("href")===`#${entry.target.id}`) a.setAttribute("aria-current","location"); else a.removeAttribute("aria-current"); }); });
+        }, {rootMargin:"-15% 0px -55% 0px"});
+        document.querySelectorAll("main section[id]").forEach(el=>observer.observe(el));
+      }
+
+      text("edition",years.length ? `${years[0]}—${years.at(-1)} / PUBLIC SURVEY EDITION` : "PUBLIC SURVEY EDITION");
+      if (findings.headline) text("headline",findings.headline);
+      text("hero-source",`${meta.source || "Public survey releases"} · Organization-level aggregates only. No individual records or simulated survey results.`);
+      const latestAnnual = annual.find(a=>a.year===latest);
+      const facts = [
+        [integer(meta.orgCount ?? new Set(rows.map(r=>r.organization)).size),"organizations in the source panel"],
+        [integer(meta.rowCount ?? rows.length),"published organization-year observations"],
+        [years.length ? `${years[0]}–${years.at(-1)}` : "—","survey years represented"],
+        [fmt(latestAnnual?.engagement),`${latest ?? "Latest"} mean engagement · index points`]
+      ];
+      $("hero-facts").innerHTML = facts.map(([value,label])=>`<div class="fact"><strong>${esc(value)}</strong><span>${esc(label)}</span></div>`).join("");
+      text("footer-provenance",`${meta.source || "Public survey data"} · Latest survey: ${latest ?? "not supplied"}`);
+      if(meta.author) text("author-name",meta.author);
+
+      function renderHero() {
+        const sample = rows.filter(r=>r.year===latest && valid(r.engagement)).sort((a,b)=>String(a.organization).localeCompare(String(b.organization)));
+        if(!sample.length) return;
+        const feature = features.find(f=>sample.some(r=>valid(r[f.key])));
+        const s = `<svg viewBox="0 0 720 580"><title>Decorative constellation of published latest-year organization engagement</title>`;
+        const avg = sample.reduce((sum,r)=>sum+r.engagement,0)/sample.length;
+        const cx = 390, cy = 280, ringCount = 15;
+        let art = "";
+        for(let i=0;i<ringCount;i++) {
+          const radius = 60+i*16;
+          art += `<ellipse cx="${cx}" cy="${cy}" rx="${radius*1.08}" ry="${radius*(.35+avg/200)}" transform="rotate(-28 ${cx} ${cy})" fill="none" stroke="var(--cp-accent)" stroke-width="${i%4===0?1.3:.6}" opacity="${.16+i*.018}"/>`;
+        }
+        art += `<line x1="50" x2="700" y1="${cy}" y2="${cy}" stroke="var(--cp-border-strong)" stroke-dasharray="3 7"/><line x1="${cx}" x2="${cx}" y1="30" y2="560" stroke="var(--cp-border-strong)" stroke-dasharray="3 7"/>`;
+        sample.forEach((r,i)=>{
+          const angle = ((feature && valid(r[feature.key])) ? r[feature.key]/100 : i/sample.length)*Math.PI*2-Math.PI/2;
+          const radius = 62+r.engagement*2;
+          const px = cx+Math.cos(angle)*radius, py=cy+Math.sin(angle)*radius*.77;
+          art += `<circle cx="${px.toFixed(2)}" cy="${py.toFixed(2)}" r="2.5" fill="var(--cp-accent)" opacity=".65"/>`;
+        });
+        $("hero-art").innerHTML=s+art+"</svg>";
+      }
+      renderHero();
+
+      function renderAnnual() {
+        if (!annual.length) { empty("annual-chart"); empty("annual-table"); empty("annual-insight"); return; }
+        const domain = years.length > 1 ? [years[0],years.at(-1)] : [annual[0].year-1,annual[0].year+1];
+        const frame = chartFrame("annual","Annual engagement mean, median and range","Mean and median engagement on a 0–100 index, with a minimum-to-maximum band. Read the accompanying annual table for exact values.","Survey year","Engagement index",domain,[0,100],annual.map(r=>r.year));
+        const bandRows = annual.filter(r=>valid(r.min)&&valid(r.max));
+        let marks = "";
+        const bandGroups = [];
+        bandRows.forEach(r=> { const group = bandGroups.at(-1); if(group && group.at(-1).year+1===r.year) group.push(r); else bandGroups.push([r]); });
+        bandGroups.forEach(group=> {
+          const points = group.map(r=>`${frame.x(r.year)},${frame.y(r.max)}`).concat(group.slice().reverse().map(r=>`${frame.x(r.year)},${frame.y(r.min)}`));
+          if(group.length>1) marks+=`<polygon points="${points.join(" ")}" fill="var(--cp-accent-soft)"/>`;
+          else marks+=`<line x1="${frame.x(group[0].year)}" x2="${frame.x(group[0].year)}" y1="${frame.y(group[0].min)}" y2="${frame.y(group[0].max)}" stroke="var(--cp-accent-soft)" stroke-width="12"/>`;
+        });
+        marks += `<path d="${linePath(annual,frame.x,frame.y,"year","median")}" fill="none" stroke="var(--cp-text-muted)" stroke-width="2" stroke-dasharray="5 5"/><path d="${linePath(annual,frame.x,frame.y,"year","engagement")}" fill="none" stroke="var(--cp-accent)" stroke-width="3"/>`;
+        const balanced=(models.balancedTrend || []).filter(r=>valid(r.year)&&valid(r.engagement)).slice().sort((a,b)=>a.year-b.year);
+        $("balanced-legend").hidden=!balanced.length;
+        if(balanced.length) marks+=`<path d="${linePath(balanced,frame.x,frame.y,"year","engagement")}" fill="none" stroke="var(--cp-text)" stroke-width="2" stroke-dasharray="2 5"/>`;
+        const plotted = annual.filter(r=>valid(r.engagement));
+        plotted.forEach((r,i)=> { marks+=`<circle class="mark" data-point="${i}" cx="${frame.x(r.year)}" cy="${frame.y(r.engagement)}" r="5" fill="var(--cp-accent)"/>`; });
+        $("annual-chart").innerHTML = frame.finish(marks);
+        const describe = r=>`${r.year}: mean ${fmt(r.engagement)}, median ${fmt(r.median)}, range ${fmt(r.min)} to ${fmt(r.max)}, ${integer(r.n)} organizations`;
+        bindMarks("annual-chart",plotted,describe,()=>{});
+        table("annual-table","Published annual engagement summaries (index points); continuous cohort uses names observed every source year",["Year","Agencies","Mean","Median","Minimum","Maximum",...(balanced.length?["Continuously observed names","Continuous-cohort mean"]:[])],annual.map(r=> {
+          const continuous=balanced.find(b=>b.year===r.year);
+          return [r.year,integer(r.n),fmt(r.engagement),fmt(r.median),fmt(r.min),fmt(r.max),...(balanced.length?[integer(continuous?.n),fmt(continuous?.engagement)]:[])];
+        }));
+        const first = annual.find(r=>valid(r.engagement));
+        const last = annual.slice().reverse().find(r=>valid(r.engagement));
+        if(first && last) {
+          const delta = last.engagement-first.engagement;
+          $("annual-insight").innerHTML = `<span class="eyebrow">The long view / ${esc(first.year)}–${esc(last.year)}</span><strong class="big">${sign(delta)}<span style="font-size:18px;letter-spacing:0"> pts</span></strong><h3>Difference in the observed mean.</h3><p>From ${fmt(first.engagement)} to ${fmt(last.engagement)} across the included organizations. This is a difference between cross-sectional summaries, not a matched-panel effect.</p>`;
+        } else empty("annual-insight");
+      }
+      renderAnnual();
+      $("summary-insights").innerHTML=(findings.summary || []).map(s=>`<p class="chart-caption">${esc(s)}</p>`).join("");
+
+      const explorerDimensions = [...features];
+      if(rows.some(r=>valid(r.response_rate)) && !features.some(f=>f.key==="response_rate")) explorerDimensions.push({key:"response_rate",label:"Survey response rate"});
+      if(rows.some(r=>valid(r.intent_leave)) && !features.some(f=>f.key==="intent_leave")) explorerDimensions.push({key:"intent_leave",label:"Self-reported intent to leave"});
+      const supplementaryThemes = [
+        {key:"pay_satisfaction",label:"Pay satisfaction"},
+        {key:"job_satisfaction",label:"Job satisfaction"},
+        {key:"organization_satisfaction",label:"Organization satisfaction"},
+        {key:"recommendation",label:"Recommend organization"}
+      ];
+      supplementaryThemes.slice(0,2).forEach(f=> {
+        if(rows.some(r=>valid(r[f.key])) && !explorerDimensions.some(d=>d.key===f.key)) explorerDimensions.push({...f,supplementary:true});
+      });
+      $("explorer-year").innerHTML=options(years.map(y=>({value:y,label:y})),latest);
+      $("explorer-feature").innerHTML=options(explorerDimensions.map(f=>({value:f.key,label:`${f.label} · 0–100${f.supplementary?" · supplementary":""}`})),explorerDimensions[0]?.key);
+      function scatterDetail(row,key,label) {
+        if(!row) { $("scatter-detail").innerHTML="<h3>Choose an organization</h3><p class=\"chart-caption\">Select a point to inspect its published survey values.</p>"; return; }
+        const themes = supplementaryThemes.filter(f=>valid(row[f.key]));
+        $("scatter-detail").innerHTML=`<span class="eyebrow">${esc(row.year)} / PUBLISHED AGENCY AGGREGATE</span><h3>${esc(row.organization)}</h3><div class="detail-grid"><div><strong class="accent">${fmt(row.engagement)}</strong><span>Engagement index</span></div><div><strong>${fmt(row[key])}</strong><span>${esc(label)}</span></div><div><strong>${integer(row.response_count)}</strong><span>Responses</span></div><div><strong>${pctUnit(row.response_rate)}</strong><span>Response rate</span></div>${valid(row.intent_leave)&&key!=="intent_leave"?`<div><strong>${pctUnit(row.intent_leave)}</strong><span>Self-reported intent to leave</span></div>`:""}</div>${row.agency_size?`<p class="chart-caption">Published agency size: ${esc(row.agency_size)}</p>`:""}${themes.length?`<details><summary>Additional published satisfaction themes</summary>${themes.map(f=>`<div class="profile-feature"><div class="line"><span>${esc(f.label)}</span><span>${fmt(row[f.key])}</span></div><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:${clamp(row[f.key],0,100)}%"></div></div></div>`).join("")}<p class="chart-caption">Additional global-satisfaction items have a shorter available history and are not primary forecasting features.</p></details>`:""}`;
+      }
+      function renderScatter() {
+        hideTooltip();
+        const year = Number($("explorer-year").value);
+        const key = $("explorer-feature").value;
+        const label = explorerDimensions.find(f=>f.key===key)?.label || "Survey feature";
+        const query = $("organization-search").value.trim().toLocaleLowerCase();
+        const matches = rows.filter(r=>r.year===year && String(r.organization).toLocaleLowerCase().includes(query)).sort((a,b)=>String(a.organization).localeCompare(String(b.organization)));
+        const plotted = matches.filter(r=>valid(r.engagement)&&valid(r[key]));
+        if (!plotted.length) empty("scatter-chart", matches.length ? "Matched organizations have no complete values for these two dimensions. Try another dimension." : "No organizations match this search. Try a shorter name or reset the view.");
+        else {
+          const frame = chartFrame("scatter","Organization engagement explorer",`${year}. Each point is an organization. Use arrow keys between points; select a point for details. A filtered data table is available below.`,`${label} · 0–100`,"Engagement index");
+          const marks = plotted.map((r,i)=>`<circle class="mark" data-point="${i}" cx="${frame.x(r[key])}" cy="${frame.y(r.engagement)}" r="5" fill="var(--cp-accent)" opacity=".75"/>`).join("");
+          $("scatter-chart").innerHTML=frame.finish(marks);
+          bindMarks("scatter-chart",plotted,r=>`${r.organization}, ${r.year}: ${label} ${fmt(r[key])}, engagement ${fmt(r.engagement)}`,r=>scatterDetail(r,key,label));
+        }
+        text("scatter-status",`${integer(plotted.length)} plotted / ${integer(matches.length)} matched organizations · ${integer(matches.length-plotted.length)} excluded for missing plot values`);
+        const intention=DATA.intentionAnalysis || {};
+        $("intention-context").hidden=!(key==="intent_leave" && year===latest);
+        if(!$("intention-context").hidden) text("intention-context",`${latest} full matched-agency supplement: n=${integer(intention.n)}, Spearman ρ=${fmt(intention.rho,2)}, p=${probability(intention.p)}. This full-cohort estimate does not change with search. Self-reported intention percentages are unweighted and are not realized exit rates; association with engagement is noncausal.`);
+        const supplementary=explorerDimensions.find(f=>f.key===key)?.supplementary;
+        $("supplementary-context").hidden=!supplementary;
+        if(supplementary) {
+          const observedYears=[...new Set(rows.filter(r=>valid(r[key])).map(r=>r.year))].sort((a,b)=>a-b);
+          text("supplementary-context",`${label} is a supplementary 0–100 survey item, not a primary forecasting feature. Published values are available in ${observedYears.join(", ")} only; other years are not imputed.`);
+        }
+        scatterDetail(null,key,label);
+        table("scatter-table",`${year} filtered survey observations; — means not reported`,["Organization","Year",label,"Engagement","Responses","Response rate"],matches.map(r=>[r.organization,r.year,fmt(r[key]),fmt(r.engagement),integer(r.response_count),pctUnit(r.response_rate)]));
+      }
+      $("explorer-year").addEventListener("change",renderScatter);
+      $("explorer-feature").addEventListener("change",renderScatter);
+      let searchTimer;
+      $("organization-search").addEventListener("input",()=> { clearTimeout(searchTimer); searchTimer=setTimeout(renderScatter,100); });
+      $("explorer-reset").addEventListener("click",()=> { $("explorer-year").value=String(latest ?? ""); $("explorer-feature").value=explorerDimensions[0]?.key || ""; $("organization-search").value=""; renderScatter(); });
+      renderScatter();
+
+      function renderCorrelations() {
+        text("correlation-year",`${latest ?? "LATEST YEAR"} / SPEARMAN ρ`);
+        const corr = (DATA.correlations || []).filter(r=>valid(r.rho)).slice().sort((a,b)=>Math.abs(b.rho)-Math.abs(a.rho));
+        if(!corr.length) { empty("correlation-list","No correlation estimates are available."); empty("correlation-insight"); empty("correlation-table"); return; }
+        $("correlation-list").innerHTML=corr.map(r=> {
+          const amount = clamp(Math.abs(r.rho),0,1)*50;
+          const left = r.rho>=0 ? 50 : 50-amount;
+          return `<div class="correlation-row"><div>${esc(r.label || featureLabel(r.feature))}<small>${esc(componentNote(r.feature))}<br>n=${integer(r.n)} · q=${esc(probability(r.q))}</small></div><div class="rho-track" aria-hidden="true"><span class="rho-fill" style="left:${left}%;width:${amount}%"></span></div><span class="rho-value">${r.rho>0?"+":""}${fmt(r.rho,2)}</span></div>`;
+        }).join("")+`<div class="correlation-row" aria-hidden="true"><span class="chart-caption">Rank association</span><div class="correlation-axis"><span>−1</span><span>0</span><span>+1</span></div><span></span></div>`;
+        const top = corr[0];
+        $("correlation-insight").innerHTML=`<span class="eyebrow">Largest absolute association in this set</span><strong class="big">${top.rho>0?"+":""}${fmt(top.rho,2)} <span style="font-size:18px">ρ</span></strong><h3>${esc(top.label || featureLabel(top.feature))}</h3><p>${esc(componentNote(top.feature))}. Estimated from ${integer(top.n)} agency aggregates in ${esc(latest ?? "the latest year")}. ${["leaders","supervisors","intrinsic"].includes(top.feature)?"This domain contributes to the EEI itself, so the relationship is partly mechanical. ":""}This is not an independent driver discovery or evidence that changing this dimension would change engagement.</p>`;
+        table("correlation-table",`Latest-year Spearman correlations with engagement (${latest ?? "year not supplied"})`,["Feature","Relationship","ρ","p","Adjusted q","Agencies"],corr.map(r=>[r.label || featureLabel(r.feature),componentNote(r.feature),fmt(r.rho,3),probability(r.p),probability(r.q),integer(r.n)]));
+      }
+      renderCorrelations();
+
+      const organizations = [...new Set(rows.map(r=>r.organization))].sort((a,b)=>String(a).localeCompare(String(b)));
+      $("trajectory-controls").innerHTML=Array.from({length:3},(_,i)=>`<div class="field"><label for="trajectory-${i}">Trajectory ${i+1}</label><select id="trajectory-${i}">${options([{value:"",label:"None"},...organizations.map(o=>({value:o,label:o}))],organizations[i] || "")}</select></div>`).join("");
+      function renderTrajectories() {
+        const selected = [...new Set(Array.from({length:3},(_,i)=>$(`trajectory-${i}`).value).filter(Boolean))];
+        const data = selected.map(o=>rows.filter(r=>r.organization===o).sort((a,b)=>a.year-b.year));
+        if(!selected.length || !years.length) { empty("trajectory-chart","Choose at least one organization to explore its trajectory."); $("trajectory-legend").innerHTML=""; text("trajectory-status","No organization selected."); empty("trajectory-table"); return; }
+        const domain = years.length>1 ? [years[0],years.at(-1)] : [years[0]-1,years[0]+1];
+        const frame = chartFrame("trajectories","Selected organization engagement trajectories","Up to three organizations. Missing years remain gaps. See the adjacent legend and data table.","Survey year","Engagement index",domain,[0,100],years);
+        let marks="", points=[];
+        data.forEach((series,i)=> {
+          marks+=`<path d="${linePath(series,frame.x,frame.y,"year","engagement")}" fill="none" stroke="${colors[i]}" stroke-width="3" stroke-dasharray="${dash[i]}"/>`;
+          series.filter(r=>valid(r.engagement)).forEach(r=> { const index=points.push(r)-1; marks+=`<circle class="mark" data-point="${index}" cx="${frame.x(r.year)}" cy="${frame.y(r.engagement)}" r="${5+i}" fill="${colors[i]}"/>`; });
+        });
+        $("trajectory-chart").innerHTML=frame.finish(marks);
+        bindMarks("trajectory-chart",points,r=>`${r.organization}, ${r.year}: engagement ${fmt(r.engagement)}`,()=>{});
+        $("trajectory-legend").innerHTML=selected.map((o,i)=>`<span class="legend-item"><svg width="28" height="8" viewBox="0 0 28 8" aria-hidden="true" style="width:28px"><line x1="0" x2="28" y1="4" y2="4" stroke="${colors[i]}" stroke-width="3" stroke-dasharray="${dash[i]}"/></svg>${esc(o)}</span>`).join("");
+        const summaries = data.map(series=> {
+          const validRows=series.filter(r=>valid(r.engagement)), first=validRows[0], last=validRows.at(-1);
+          return first && last ? `${first.organization}: ${sign(last.engagement-first.engagement)} index points (${first.year}–${last.year})` : `${series[0]?.organization || "Organization"}: no published engagement`;
+        });
+        text("trajectory-status",summaries.join(" · "));
+        table("trajectory-table","Selected organizations: published engagement observations",["Organization","Year","Engagement","Responses","Response rate"],data.flat().map(r=>[r.organization,r.year,fmt(r.engagement),integer(r.response_count),pctUnit(r.response_rate)]));
+      }
+      Array.from({length:3},(_,i)=>$(`trajectory-${i}`)).forEach(el=>el.addEventListener("change",renderTrajectories));
+      renderTrajectories();
+
+      function renderChangeAnalysis() {
+        const change=DATA.changeAnalysis || {};
+        const coefficients=(change.coefficients || []).filter(c=>valid(c.estimate));
+        if(!coefficients.length) return;
+        $("change-panel").hidden=false;
+        const extrema=coefficients.flatMap(c=>[c.estimate,c.low,c.high]).filter(valid);
+        const lo=Math.min(0,...extrema), hi=Math.max(0,...extrema), pad=(hi-lo || 1)*.16;
+        const left=230, right=48, top=36, rowHeight=58, width=900, height=top+coefficients.length*rowHeight+64;
+        const domain=[lo-pad,hi+pad];
+        const x=v=>left+(v-domain[0])/(domain[1]-domain[0])*(width-left-right);
+        let marks=`<title id="change-svg-title">Adjusted annual change associations</title><desc id="change-svg-description">Coefficient estimates with supplied organization-clustered 95 percent intervals. Units are engagement index-point change per one standard deviation of feature change. These associations are partly mechanical for engagement components. Exact statistics are in the table.</desc><line x1="${x(0)}" x2="${x(0)}" y1="16" y2="${height-62}" stroke="var(--cp-text-muted)" stroke-dasharray="5 5"/>`;
+        Array.from({length:5},(_,i)=>domain[0]+i*(domain[1]-domain[0])/4).forEach(v=> {
+          marks+=`<line class="grid-line" x1="${x(v)}" x2="${x(v)}" y1="16" y2="${height-62}"/><text x="${x(v)}" y="${height-38}" text-anchor="middle">${fmt(v,1)}</text>`;
+        });
+        coefficients.forEach((c,i)=> {
+          const y=top+i*rowHeight;
+          marks+=`<text x="${left-20}" y="${y+5}" text-anchor="end">${esc(c.label || featureLabel(c.feature))}</text>`;
+          if(valid(c.low)&&valid(c.high)) marks+=`<line x1="${x(c.low)}" x2="${x(c.high)}" y1="${y}" y2="${y}" stroke="var(--cp-accent)" stroke-width="2"/><line x1="${x(c.low)}" x2="${x(c.low)}" y1="${y-6}" y2="${y+6}" stroke="var(--cp-accent)"/><line x1="${x(c.high)}" x2="${x(c.high)}" y1="${y-6}" y2="${y+6}" stroke="var(--cp-accent)"/>`;
+          marks+=`<circle cx="${x(c.estimate)}" cy="${y}" r="5" fill="var(--cp-accent)"/>`;
+        });
+        marks+=`<text class="axis-title" x="${(left+width-right)/2}" y="${height-8}" text-anchor="middle">Engagement change · index points per 1 SD feature change</text>`;
+        $("change-chart").innerHTML=`<svg viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="change-svg-title change-svg-description">${marks}</svg>`;
+        text("change-caption",`${integer(change.n)} consecutive agency-year change observations across ${integer(change.organizations)} agencies. In-sample adjusted-model R²=${fmt(change.r2,3)}; this is not forecast accuracy or causal validation. Bars are supplied organization-clustered 95% intervals.`);
+        table("change-table","Adjusted annual-change associations; engagement index points per 1 SD feature change",["Feature","Estimate","95% low","95% high","p","Adjusted q"],coefficients.map(c=>[c.label || featureLabel(c.feature),fmt(c.estimate,3),fmt(c.low,3),fmt(c.high,3),probability(c.p),probability(c.q)]));
+        table("change-correlation-table","First-difference Spearman correlations; whole-agency trajectory bootstrap intervals",["Feature","ρ","95% low","95% high","Change observations"],(change.correlations || []).map(c=>[c.label || featureLabel(c.feature),fmt(c.rho,3),fmt(c.low,3),fmt(c.high,3),integer(c.n)]));
+        $("change-method").innerHTML=(change.notes || []).map(note=>`<p class="chart-caption">${esc(note)}</p>`).join("")+`<p class="chart-caption">Model condition number: ${fmt(change.conditionNumber,1)}. First differences and statistical adjustment do not resolve shared-component construction, reverse causality, measurement error, or omitted time-varying context.</p>`;
+      }
+      renderChangeAnalysis();
+
+      const profiles = (clusters.profiles || []).slice().sort((a,b)=>a.cluster-b.cluster);
+      const clusterPoints = (clusters.points || []).filter(p=>valid(p.x)&&valid(p.y));
+      let selectedCluster = profiles[0]?.cluster;
+      const clusterIndex = id => Math.max(0,profiles.findIndex(p=>String(p.cluster)===String(id)));
+      function clusterMark(p,index,x,y) {
+        const c=clusterIndex(p.cluster), color=colors[c%colors.length], opacity=String(p.cluster)===String(selectedCluster)?1:.26;
+        const shape=c%3, radius=6;
+        const common=`class="mark" data-point="${index}" fill="${color}" opacity="${opacity}"`;
+        if(shape===1) return `<rect ${common} x="${x-radius}" y="${y-radius}" width="${radius*2}" height="${radius*2}"/>`;
+        if(shape===2) return `<path ${common} d="M${x},${y-radius-1} L${x+radius+1},${y+radius} L${x-radius-1},${y+radius} Z"/>`;
+        return `<circle ${common} cx="${x}" cy="${y}" r="${radius}"/>`;
+      }
+      function renderClusters() {
+        const variance=(clusters.variance || []).filter(valid);
+        text("pca-variance",variance.length>=2 ? `PC1 ${fmt(variance[0]*100)}% / PC2 ${fmt(variance[1]*100)}% variance` : "EXPLAINED VARIANCE NOT SUPPLIED");
+        text("cluster-method",`Supplied partition: k=${integer(clusters.k)}. Silhouette=${fmt(clusters.silhouette,3)}. ${variance.length>=2 ? `The first two principal components retain ${fmt((variance[0]+variance[1])*100)}% of feature variance.`:"Explained variance is not available."} These summaries depend on feature choice, missing-value handling, and the clustering specification; see the repository for exact fitting decisions.`);
+        $("profile-tabs").innerHTML=profiles.map(p=>`<button type="button" data-cluster="${esc(p.cluster)}" aria-pressed="${String(p.cluster)===String(selectedCluster)}">${esc(p.name || `Profile ${p.cluster}`)}</button>`).join("");
+        $("profile-tabs").querySelectorAll("button").forEach(button=>button.addEventListener("click",()=> {
+          selectedCluster=profiles.find(p=>String(p.cluster)===button.dataset.cluster)?.cluster;
+          renderClusterMarks(); renderProfile();
+          $("profile-tabs").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.cluster===String(selectedCluster))));
+        }));
+        renderClusterMarks(); renderProfile();
+        $("cluster-legend").innerHTML=profiles.map((p,i)=>`<span class="legend-item"><svg viewBox="0 0 18 18" style="width:16px" aria-hidden="true">${i%3===1?`<rect x="3" y="3" width="12" height="12" fill="${colors[i%colors.length]}"/>`:i%3===2?`<path d="M9 2 L16 15 L2 15 Z" fill="${colors[i%colors.length]}"/>`:`<circle cx="9" cy="9" r="6" fill="${colors[i%colors.length]}"/>`}</svg>${esc(p.name || `Profile ${p.cluster}`)}</span>`).join("");
+        table("cluster-table","Published organizations projected into the supplied PCA landscape",["Organization","PC1","PC2","Cluster","Engagement"],clusterPoints.map(p=>[p.organization,fmt(p.x,3),fmt(p.y,3),p.cluster,fmt(p.engagement)]));
+        $("cluster-detail").innerHTML="<h3>Explore a profile, then an organization.</h3><p class=\"chart-caption\">Focus or select a landscape point for its PCA coordinates and engagement.</p>";
+      }
+      function renderClusterMarks() {
+        hideTooltip();
+        if(!clusterPoints.length) { empty("cluster-chart","No fitted PCA landscape is available."); return; }
+        const extent = key => {
+          const values=clusterPoints.map(p=>p[key]), lo=Math.min(...values), hi=Math.max(...values), pad=(hi-lo || 1)*.12;
+          return [lo-pad,hi+pad];
+        };
+        const frame = chartFrame("clusters","PCA survey landscape","Each shape is an organization; shapes indicate descriptive clusters. Select a profile to highlight its organizations. Use arrow keys between points.","Principal component 1","Principal component 2",extent("x"),extent("y"));
+        let marks="";
+        clusterPoints.forEach((p,i)=> { marks+=clusterMark(p,i,frame.x(p.x),frame.y(p.y)); });
+        $("cluster-chart").innerHTML=frame.finish(marks);
+        bindMarks("cluster-chart",clusterPoints,p=>`${p.organization}: profile ${profiles.find(f=>String(f.cluster)===String(p.cluster))?.name || p.cluster}, PC1 ${fmt(p.x,2)}, PC2 ${fmt(p.y,2)}, engagement ${fmt(p.engagement)}`,p=> {
+          $("cluster-detail").innerHTML=`<span class="eyebrow">DESCRIPTIVE PROFILE ${esc(p.cluster)}</span><h3>${esc(p.organization)}</h3><div class="detail-grid"><div><strong>${fmt(p.engagement)}</strong><span>Engagement index</span></div><div><strong>${fmt(p.x,2)}</strong><span>PC1 score</span></div><div><strong>${fmt(p.y,2)}</strong><span>PC2 score</span></div></div>`;
+        });
+      }
+      function renderProfile() {
+        const p=profiles.find(p=>String(p.cluster)===String(selectedCluster));
+        if(!p) { empty("cluster-profile","No descriptive profiles are available."); return; }
+        $("cluster-profile").innerHTML=`<span class="eyebrow accent">PROFILE ${esc(p.cluster)} / ${integer(p.n)} ORGANIZATIONS</span><h3 style="margin-top:12px">${esc(p.name || `Profile ${p.cluster}`)}</h3><p class="chart-caption">Feature means · original 0–100 scale. Descriptive labels are summaries, not diagnoses or maturity scores.</p>`+
+          features.map(f=> { const value=p.features?.[f.key]; return `<div class="profile-feature"><div class="line"><span>${esc(f.label)}</span><span>${fmt(value)}</span></div><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:${valid(value)?clamp(value,0,100):0}%"></div></div></div>`; }).join("")+
+          `<details><summary>Read this profile’s feature means</summary><div class="table-scroll"><table><caption>${esc(p.name || `Profile ${p.cluster}`)} · ${integer(p.n)} organizations</caption><thead><tr><th scope="col">Feature</th><th scope="col">Mean</th></tr></thead><tbody>${features.map(f=>`<tr><th scope="row">${esc(f.label)}</th><td>${fmt(p.features?.[f.key])}</td></tr>`).join("")}</tbody></table></div></details>`;
+      }
+      renderClusters();
+
+      function isBaseline(metric) { return metric.baseline === true || /baseline|na[iï]ve|persistence|last[\s_-]*(value|year|observation)|carry[\s_-]*forward/i.test(metric.name || ""); }
+      const metrics=(models.metrics || []).filter(m=>valid(m.mae)).slice().sort((a,b)=>a.mae-b.mae);
+      const predictions=(models.predictions || []).filter(p=>valid(p.actual)&&valid(p.predicted)).slice().sort((a,b)=>String(a.organization).localeCompare(String(b.organization)));
+      function renderModels() {
+        const splitFacts=[
+          [(models.trainYears || []).join(" / ") || "—","Training target years"],
+          [models.validationYear ?? "—","Validation year · selection"],
+          [models.testYear ?? "—","Temporal test year · evaluation"],
+          [integer(models.nTest),"Held-out organization predictions"]
+        ];
+        $("model-strip").innerHTML=splitFacts.map(([value,label])=>`<div><strong>${esc(value)}</strong><span>${esc(label)}</span></div>`).join("");
+        text("prediction-year",`${models.testYear ?? "TEST YEAR NOT SUPPLIED"} / SELECTED MODEL`);
+        text("model-caption",`${models.target || "Next-year organization engagement"}. Selected model: ${models.selected || "not supplied"}. MAE and RMSE are engagement index points; R² is dimensionless. Model selection belongs to the validation year, not the final test year.`);
+        if(!metrics.length) { empty("model-tournament","No temporal holdout model results are available."); empty("model-table"); empty("model-insight"); }
+        else {
+          const max=Math.max(...metrics.map(m=>m.mae)) || 1;
+          $("model-tournament").innerHTML=metrics.map(m=>`<div class="model-row"><div>${esc(m.name)}${m.name===models.selected?'<br><span class="pill">Validation-selected</span>':""}${isBaseline(m)?'<br><span class="pill">Baseline</span>':""}</div><div class="bar-track" aria-hidden="true"><div class="bar-fill ${isBaseline(m)?"baseline":""}" style="width:${m.mae/max*100}%"></div></div><span class="score">${fmt(m.mae,2)}</span></div>`).join("");
+          table("model-table",`Temporal holdout (${models.testYear ?? "test year not supplied"}); supplied MAE interval bounds`,["Model","MAE (pts)","RMSE (pts)","R²","MAE low","MAE high"],metrics.map(m=>[m.name,fmt(m.mae,3),fmt(m.rmse,3),fmt(m.r2,3),fmt(m.low,3),fmt(m.high,3)]));
+          const selected=metrics.find(m=>m.name===models.selected), baseline=metrics.find(isBaseline);
+          if(selected && baseline) {
+            const improvement=baseline.mae-selected.mae;
+            $("model-insight").innerHTML=`<span class="eyebrow">Selected model vs baseline</span><strong class="big">${fmt(Math.abs(improvement),2)}<span style="font-size:18px;letter-spacing:0"> pts</span></strong><h3>${improvement>0?"Lower":improvement<0?"Higher":"Equal"} test MAE.</h3><p>${esc(selected.name)}: ${fmt(selected.mae,2)}. ${esc(baseline.name)}: ${fmt(baseline.mae,2)}. ${improvement>0?"A lower error on this holdout does not establish a durable advantage.":improvement<0?"On this holdout, the baseline is more accurate by MAE; model complexity is not a result.":"On this holdout, added complexity does not reduce MAE."} Check uncertainty and transferability before use.</p>`;
+          } else {
+            $("model-insight").innerHTML=`<span class="eyebrow">Holdout evidence</span><h3>${esc(models.selected || "Model selection not supplied")}</h3><p>A selected-model comparison requires both its test metric and a clearly labeled baseline metric. No advantage is inferred from incomplete results.</p>`;
+          }
+        }
+        const interval=models.interval || {};
+        $("interval-insight").innerHTML=`<span class="eyebrow">Uncertainty / supplied interval diagnostics</span><h3 style="margin-top:12px">Coverage is part of the result.</h3><div class="detail-grid"><div><strong>${valid(interval.coverage)?fmt(interval.coverage*100)+"%":"—"}</strong><span>Observed test coverage</span></div><div><strong>${valid(interval.nominal)?fmt(interval.nominal*100)+"%":"—"}</strong><span>Nominal coverage</span></div><div><strong>${fmt(interval.width)}</strong><span>Mean interval width · points</span></div><div><strong>${integer(models.nCalibration)}</strong><span>Calibration observations</span></div></div><p class="chart-caption">Coverage and width are reported together: wide intervals can cover more outcomes while offering little decision precision. Historical calibration does not guarantee future coverage.</p>`;
+        $("forecast-method").innerHTML=`<p class="chart-caption">Target: ${esc(models.target || "not supplied")}. Training target years: ${esc((models.trainYears || []).join(", ") || "not supplied")}; validation year: ${esc(models.validationYear ?? "not supplied")}; temporal test year: ${esc(models.testYear ?? "not supplied")}. Training observations: ${integer(models.nTrain)}; test observations: ${integer(models.nTest)}; calibration observations: ${integer(models.nCalibration)}.</p><p class="chart-caption">The tournament must use predictors available before the target survey year. Preprocessing and tuning should be fitted without test outcomes. Returning organizations may occur in more than one temporal partition: that evaluates forecasting for known organizations, not performance on entirely new organizations. The pipeline documents eligibility, lag alignment, baseline definition, calibration, and interval estimation.</p>${meta.modelNotes?`<p class="chart-caption">${esc(meta.modelNotes)}</p>`:""}<p class="chart-caption">MAE is mean absolute error, RMSE gives larger errors more weight, and R² is relative to a constant-mean reference. Negative R² is possible. Supplied low/high scorecard values are MAE uncertainty bounds; see the repository for their estimation method. Performance estimates are specific to this holdout and its organizations.</p>`;
+        table("prediction-table",`Retrospective next-year forecasts: test year ${models.testYear ?? "not supplied"}`,["Organization","Actual","Selected prediction","Baseline prediction"],predictions.map(p=>[p.organization,fmt(p.actual),fmt(p.predicted),fmt(p.baseline)]));
+        $("prediction-select").innerHTML=options(predictions.map(p=>({value:p.organization,label:p.organization})),predictions[0]?.organization);
+        renderPredictions();
+        renderPredictionDetail();
+        const importance=(models.importance || []).filter(i=>valid(i.mean)).slice().sort((a,b)=>b.mean-a.mean);
+        text("importance-caption",`Explained model: ${models.explanationModel || "not supplied"}. Supplied permutation importance reports the change in model error when a feature is shuffled. This is predictive relevance, not causal leverage; correlated features can share or obscure importance. The best validation ML model is explained even if Persistence wins the tournament; its importance does not explain a different selected model.`);
+        if(!importance.length) empty("importance-list","No permutation importance estimates are available.");
+        else {
+          const max=Math.max(...importance.map(i=>Math.abs(i.mean))) || 1;
+          $("importance-list").innerHTML=importance.map(i=>`<div class="profile-feature"><div class="line"><span>${esc(i.label || featureLabel(i.feature))}</span><span>${fmt(i.mean,2)} ± ${fmt(i.std,2)}</span></div><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:${Math.abs(i.mean)/max*100}%;background:${i.mean<0?"var(--cp-text-muted)":"var(--cp-accent)"}"></div></div></div>`).join("")+`<p class="chart-caption">Numbers retain the supplied error units. ± is variation across permutations, not a causal confidence interval. Bar length shows magnitude; the signed value remains authoritative.</p>`;
+        }
+        table("importance-table","Supplied permutation importance; signed error change",["Feature","Mean","Standard deviation"],importance.map(i=>[i.label || featureLabel(i.feature),fmt(i.mean,3),fmt(i.std,3)]));
+      }
+      function renderPredictions() {
+        if(!predictions.length) { empty("prediction-chart","No held-out predictions are available."); return; }
+        const values=predictions.flatMap(p=>[p.actual,p.predicted]), min=Math.min(...values), max=Math.max(...values);
+        // Keep the full index scale, expanding only if the supplied model predicts outside it.
+        const domain=[Math.min(0,Math.floor(min/10)*10),Math.max(100,Math.ceil(max/10)*10)];
+        const frame=chartFrame("prediction","Held-out forecast against observed engagement","Selected-model predicted values against actual engagement. The diagonal indicates exact agreement. Exact observations appear in the prediction table.","Observed engagement index","Predicted engagement index",domain,domain);
+        let marks=`<line x1="${frame.x(domain[0])}" x2="${frame.x(domain[1])}" y1="${frame.y(domain[0])}" y2="${frame.y(domain[1])}" stroke="var(--cp-text-muted)" stroke-dasharray="6 6" stroke-width="1.5"/>`;
+        marks+=predictions.map((p,i)=>`<circle class="mark" data-point="${i}" cx="${frame.x(p.actual)}" cy="${frame.y(p.predicted)}" r="5" fill="var(--cp-accent)" opacity=".72"/>`).join("");
+        $("prediction-chart").innerHTML=frame.finish(marks);
+        bindMarks("prediction-chart",predictions,p=>`${p.organization}: actual ${fmt(p.actual)}, predicted ${fmt(p.predicted)}, baseline ${fmt(p.baseline)}`,p=> { $("prediction-select").value=p.organization; renderPredictionDetail(); });
+      }
+      function renderPredictionDetail() {
+        const p=predictions.find(p=>p.organization===$("prediction-select").value);
+        if(!p) { empty("prediction-detail","No held-out organization selected."); return; }
+        $("prediction-detail").innerHTML=`<h3>${esc(p.organization)}</h3><div class="detail-grid"><div><strong>${fmt(p.actual)}</strong><span>Observed</span></div><div><strong class="accent">${fmt(p.predicted)}</strong><span>Selected model</span></div><div><strong>${fmt(p.baseline)}</strong><span>Baseline</span></div></div><p class="chart-caption">Absolute selected-model error: ${fmt(Math.abs(p.actual-p.predicted),2)} index points. ${valid(p.baseline)?`Baseline error: ${fmt(Math.abs(p.actual-p.baseline),2)} points.`:"Baseline prediction not supplied."}</p>`;
+      }
+      $("prediction-select").addEventListener("change",renderPredictionDetail);
+      renderModels();
+
+      $("recommendations").innerHTML=(findings.recommendations || []).map((r,i)=>`<div class="insight"><span class="eyebrow accent">QUESTION ${String(i+1).padStart(2,"0")}</span><p>${esc(r)}</p></div>`).join("") || `<div class="question"><p>What additional evidence would change your interpretation—and what decision is this aggregate data actually fit to support?</p></div>`;
+      $("quality-summary").innerHTML=`<p class="chart-caption">${integer(meta.rowCount ?? rows.length)} agency-year rows · ${integer(quality.duplicates)} duplicate agency-year keys reported.</p>`+(quality.notes || []).map(n=>`<p class="chart-caption">${esc(n)}</p>`).join("");
+      table("quality-table","Missing survey feature values; percentage of source rows",["Feature","Missing count","Missing %"],(quality.missing || []).map(m=>[featureLabel(m.feature),integer(m.count),valid(m.pct)?fmt(m.pct)+"%":"—"]));
+      $("analysis-method").innerHTML=`<p class="chart-caption">Public source: ${esc(meta.source || "not supplied")}. Survey years: ${esc(years.join(", ") || "not supplied")}. ${integer(meta.orgCount ?? organizations.length)} distinct agency names, ${integer(meta.rowCount ?? rows.length)} agency-year observations. Latest-year relationships use Spearman rank correlations with supplied multiple-testing-adjusted q-values; correlations with EEI components are partly mechanical. PCA and descriptive agency cluster results are provided by the analytical pipeline, not estimated by this page.</p>${meta.methodology?`<p class="chart-caption">${esc(meta.methodology)}</p>`:""}${(Array.isArray(meta.limitations)?meta.limitations:meta.limitations?[meta.limitations]:[]).map(note=>`<p class="chart-caption">${esc(note)}</p>`).join("")}`;
+      const sourceEntries=[["Source publication",meta.sourceUrl],["Reuse terms / license",meta.licenseUrl],["Reproduce the analysis",meta.repositoryUrl || meta.repoUrl]];
+      $("source-list").innerHTML=`<h3>${esc(meta.source || "Public organization-level survey releases")}</h3><p>${esc(meta.title || "Engagement and employee experience survey aggregates")}</p>`+
+        sourceEntries.map(([label,url])=> { const safe=safeUrl(url); return safe ? `<div><a href="${esc(safe)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗<span class="sr-only"> (opens in a new tab)</span></a><p>${esc(safe)}</p></div>` : `<p>${esc(label)}: link not supplied.</p>`; }).join("")+
+        (meta.sourceNotes?`<p>${esc(meta.sourceNotes)}</p>`:"");
+      [["Repository",meta.repositoryUrl || meta.repoUrl],["Profile",meta.profileUrl]].forEach(([label,url])=> {
+        const safe=safeUrl(url);
+        if(safe) $("footer-links").insertAdjacentHTML("afterbegin",`<a class="text-link" href="${esc(safe)}" target="_blank" rel="noopener noreferrer">${esc(label)} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>`);
+      });
+    })();
+  </script>
+</body>
+</html>

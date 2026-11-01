@@ -1,0 +1,24 @@
+{
+  "features": {
+    "leaders": "Leaders lead",
+    "supervisors": "Supervisory support",
+    "intrinsic": "Intrinsic work experience",
+    "satisfaction": "Global satisfaction"
+  },
+  "sourceSheets": {
+    "2021-ee:Overall EEI": "engagement",
+    "2021-ee:EEI-IntrinsicWorkExperience": "intrinsic",
+    "2021-ee:EEI-LeadersLead": "leaders",
+    "2021-ee:EEI-Supervisors": "supervisors",
+    "2021-gs:Overall Global Sat": "satisfaction",
+    "2024-ee:EEI": "engagement",
+    "2024-ee:EEI Leaders Lead": "leaders",
+    "2024-ee:EEI Supervisors": "supervisors",
+    "2024-ee:EEI Intrinsic Work Experience": "intrinsic",
+    "2024-gs:Global Satisfaction": "satisfaction",
+    "2024-gs:Pay Satisfaction": "pay_satisfaction",
+    "2024-gs:Job Satisfaction": "job_satisfaction",
+    "2024-gs:Organization Satisfaction": "organization_satisfaction",
+    "2024-gs:Recommend Organization": "recommendation"
+  }
+}

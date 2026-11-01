@@ -1,0 +1,44 @@
+[
+  {
+    "file": "2021-ee.xlsx",
+    "url": "https://www.opm.gov/fevs/reports/data-reports/index-results-by-agency/employee-engagement-index-results-by-agency/2021/2021-ee-report-excel.xlsx",
+    "bytes": 35989,
+    "sha256": "f1b54d2c24a6a0095a20023c4c1e03ef71002188524e85cfc7b11171f26a8c80",
+    "retrieved": "2026-11-01"
+  },
+  {
+    "file": "2024-ee.xlsx",
+    "url": "https://www.opm.gov/fevs/reports/data-reports/index-results-by-agency/employee-engagement-index-results-by-agency/2024/2024-ee-report-excel.xlsx",
+    "bytes": 43704,
+    "sha256": "88f4f838b6ab1f7a52bf4a16e973869aa2104711d2962eb64fb8324365a0bd89",
+    "retrieved": "2026-11-01"
+  },
+  {
+    "file": "2021-gs.xlsx",
+    "url": "https://www.opm.gov/fevs/reports/data-reports/index-results-by-agency/global-satisfaction-index-results-by-agency/2021/2021-gs-report-excel.xlsx",
+    "bytes": 15282,
+    "sha256": "ff9f5f5b49d576659f97e52b0502207b3cf333ffd9a755b5d8845414ea8cffb2",
+    "retrieved": "2026-11-01"
+  },
+  {
+    "file": "2024-gs.xlsx",
+    "url": "https://www.opm.gov/fevs/reports/data-reports/index-results-by-agency/global-satisfaction-index-results-by-agency/2024/2024-gs-report-excel.xlsx",
+    "bytes": 52099,
+    "sha256": "fc6ed531389d06b55f0b74b3e14d41ff016ea12a69f46ca3df22b3da76f2ea62",
+    "retrieved": "2026-11-01"
+  },
+  {
+    "file": "2024-responses.xlsx",
+    "url": "https://www.opm.gov/fevs/reports/data-reports/data-reports/response-rate-by-agency/2024/2024-response-rate-by-agency-excel.xlsx",
+    "bytes": 15294,
+    "sha256": "31805c34443f587ceff17c204339caed4d7069c2e6a0ee6d9e98db098d90364c",
+    "retrieved": "2026-11-01"
+  },
+  {
+    "file": "2024-intentions.xlsx",
+    "url": "https://www.opm.gov/fevs/reports/data-reports/data-reports/report-on-demographic-questions-by-agency/2024/2024-unweighted-demographics-report-excel.xlsx",
+    "bytes": 56252,
+    "sha256": "f4e2c64dccca90f5c42d5ff63ac8d0ccf5ac49a9615a99fde943e9b248493776",
+    "retrieved": "2026-11-01"
+  }
+]
