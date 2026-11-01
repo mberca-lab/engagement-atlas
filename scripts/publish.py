@@ -33,7 +33,12 @@ def run(arguments, cwd=ROOT, check=True):
 
 
 def git(arguments, cwd=ROOT, check=True):
-    return run(["git", *arguments], cwd=cwd, check=check)
+    authentication = (
+        ["-c", "credential.helper=", "-c", "credential.helper=!gh auth git-credential"]
+        if arguments and arguments[0] == "push"
+        else []
+    )
+    return run(["git", *authentication, *arguments], cwd=cwd, check=check)
 
 
 def commit_owned_files(paths, message, cwd=ROOT):
