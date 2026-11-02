@@ -37,6 +37,7 @@ on a genuinely later test year. If the simple model wins, say so.
 | In-depth executed notebook | Data quality, distributions, outliers, relationship tests, temporal comparisons, clustering, predictive evaluation, HR interpretation |
 | Statistical analysis | Spearman correlations, false-discovery adjustment, agency-trajectory bootstrap, first-difference regression with clustered uncertainty |
 | Advanced machine learning | Five regularized/ensemble models, expanding-window validation, persistence baseline, permutation importance, calibration intervals |
+| Interpretation checks | Paired model-error differences, continuous-cohort change, one-score cluster comparison, intention coverage and leave-one-agency-out sensitivity |
 | Reproducible publication | Source checksums, processed public aggregates, machine-readable results, tests, locked dependencies, GitHub Actions |
 
 **Real data, not synthetic.** These are published **organization aggregates**
@@ -51,6 +52,7 @@ analysis units are public reporting organizations.
 [Analysis JSON](outputs/atlas.json) ·
 [Public aggregate panel](data/processed/agency_panel.csv) ·
 [Forecast observations](outputs/forecast_panel.csv) ·
+[All-model held-out predictions](outputs/model_predictions.csv) ·
 [Figures](outputs/figures)
 
 The website is **static and self-contained**: no installation, account,

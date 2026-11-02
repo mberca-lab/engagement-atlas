@@ -43,7 +43,8 @@ def build_notebook():
     not a one-point change on a 0–10 employee rating scale.
 
     Run the parent pipeline first; this notebook reads its persisted evidence and
-    does **not** retrain the forecasting or clustering models. See
+    does **not** retrain the headline forecasting or full-feature clustering models.
+    Lightweight sensitivity diagnostics are recomputed and checked below. See
     `METHODOLOGY.md` for assumptions, equations, sources, and execution instructions.
     """)
     markdown(r"""
@@ -89,8 +90,9 @@ def build_notebook():
     if ROOT is None:
         raise RuntimeError("Start this notebook from engagement-atlas or its notebooks directory.")
     sys.path.insert(0, str(ROOT))
-    from atlas.methods import benjamini_hochberg
+    from atlas.methods import benjamini_hochberg, paired_error_comparison
     from atlas.source import CORE, DOWNLOADS, INTENTION_CROSSWALK, LICENSE_URL, SOURCE_URL
+    from atlas.statistics import balanced_longitudinal, intention_analysis
 
     FIGURES = ROOT / "outputs" / "figures"
     FIGURES.mkdir(parents=True, exist_ok=True)
@@ -395,6 +397,15 @@ def build_notebook():
         raise ValueError("Balanced-cohort means differ between CSV and JSON; regenerate the pipeline.")
     display(annual)
     print("Balanced exact-name agencies:", len(balanced), "of", df.organization.nunique())
+    cohort_check = balanced_longitudinal(df)
+    if not np.allclose(
+        [cohort_check[k] for k in ["meanChange", "low", "high"]],
+        [evidence["cohortSensitivity"][k] for k in ["meanChange", "low", "high"]]
+    ):
+        raise ValueError("Balanced endpoint diagnostics disagree with persisted evidence.")
+    display(pd.Series({k: cohort_check[k] for k in
+                       ["n", "firstYear", "lastYear", "meanChange", "low", "high"]}))
+    print(cohort_check["interpretation"])
     fig, ax = plt.subplots()
     ax.plot(annual.year, annual["mean"], marker="o", label="All observed: mean")
     ax.plot(annual.year, annual["median"], marker="s", label="All observed: median")
@@ -499,6 +510,16 @@ def build_notebook():
     display(metrics.rename(columns={"low": "MAE_CI_low", "high": "MAE_CI_high"}))
     print("Locked winner:", forecast_result["selected"])
     print("Final test year:", forecast_result["testYear"])
+    comparison_predictions = pd.DataFrame(forecast_result["modelPredictions"])
+    comparisons = pd.DataFrame(forecast_result["pairedComparisons"])
+    for row in comparisons.itertuples():
+        candidate = comparison_predictions[comparison_predictions.model == row.name]
+        check = paired_error_comparison(candidate.actual, candidate.predicted, candidate.baseline)
+        if not np.allclose([check[k] for k in ["difference", "low", "high"]],
+                           [row.difference, row.low, row.high]):
+            raise ValueError(f"Paired forecast comparison mismatch: {row.name}")
+    display(comparisons)
+    print(forecast_result["comparisonNotes"])
     fig, ax = plt.subplots(figsize=(11, 5))
     sns.lineplot(cv, x="year", y="mae", hue="name", marker="o", ax=ax)
     ax.set(title="Expanding-window validation: no future-year training",
@@ -601,6 +622,25 @@ def build_notebook():
     display(pd.Series({key: clusters[key] for key in
                        ["k", "silhouette", "stability", "variance"]}).to_frame("value"))
     display(pd.DataFrame(clusters["candidateScores"]))
+    from sklearn.cluster import KMeans
+    from sklearn.metrics import adjusted_rand_score
+    from sklearn.preprocessing import StandardScaler
+    from threadpoolctl import threadpool_limits
+
+    cluster_features = [row["feature"] for row in clusters["loadings"]]
+    eligible = latest.dropna(subset=cluster_features)
+    scaled = StandardScaler().fit_transform(eligible[cluster_features])
+    with threadpool_limits(limits=2):
+        level_labels = KMeans(n_clusters=clusters["k"], n_init=30, random_state=SEED).fit_predict(
+            scaled.mean(axis=1).reshape(-1, 1)
+        )
+    full_labels = pd.DataFrame(clusters["points"]).set_index("organization").loc[
+        eligible.organization, "cluster"
+    ]
+    level_agreement = adjusted_rand_score(full_labels, level_labels)
+    if not np.isclose(level_agreement, clusters["levelCheck"]["adjustedRand"]):
+        raise ValueError("One-score cluster diagnostic disagrees with persisted evidence.")
+    display(pd.Series(clusters["levelCheck"]).to_frame("one-score simplification check"))
     loadings = pd.DataFrame(clusters["loadings"])
     display(loadings)
     points = pd.DataFrame(clusters["points"])
@@ -657,6 +697,17 @@ def build_notebook():
           len(intention_pairs), "of", len(latest), "latest-year organizations.")
     if len(intention_pairs) != evidence["intentionAnalysis"]["n"]:
         raise ValueError("Intention sample differs between CSV and JSON; regenerate the pipeline.")
+    intention_check = intention_analysis(latest)
+    for key in ["rho", "low", "high", "leaveOneOutLow", "leaveOneOutHigh"]:
+        if not np.isclose(intention_check[key], evidence["intentionAnalysis"][key]):
+            raise ValueError(f"Intention sensitivity diagnostic mismatch: {key}")
+    display(pd.Series({k: intention_check[k] for k in
+                       ["n", "rho", "low", "high", "leaveOneOutLow", "leaveOneOutHigh",
+                        "leaveOneOutValid", "bootstrapValid", "bootstrapDraws"]}))
+    display(pd.DataFrame(intention_check["selection"]))
+    display(pd.DataFrame(intention_check["sizeComposition"]))
+    print(intention_check["interpretation"])
+    print("Sizes with no linked agencies:", intention_check["unrepresentedSizes"])
     provenance_cols = ["organization", "intent_leave"] + [
         c for c in ["intent_source_code", "intent_response_count"] if c in latest
     ]

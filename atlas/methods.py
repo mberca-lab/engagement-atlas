@@ -79,6 +79,35 @@ def model_metrics(name, actual, predicted):
     }
 
 
+def paired_error_comparison(actual, predicted, reference, n_boot=5000):
+    """Resample matched agency error differences; positive means lower model MAE."""
+    actual, predicted, reference = [
+        np.asarray(values, dtype=float) for values in [actual, predicted, reference]
+    ]
+    if (
+        actual.ndim != 1
+        or not actual.size
+        or actual.shape != predicted.shape
+        or actual.shape != reference.shape
+        or not all(np.isfinite(values).all() for values in [actual, predicted, reference])
+        or not isinstance(n_boot, int)
+        or n_boot < 1
+    ):
+        raise ValueError("Paired error comparisons need matching finite nonempty vectors.")
+    differences = np.abs(actual - reference) - np.abs(actual - predicted)
+    rng = np.random.default_rng(SEED)
+    sample = differences[rng.integers(0, len(actual), (n_boot, len(actual)))].mean(axis=1)
+    low, high = np.quantile(sample, [0.025, 0.975])
+    return {
+        "n": len(actual),
+        "difference": float(differences.mean()),
+        "low": float(low),
+        "high": float(high),
+        "fractionBetter": float(np.mean(differences > 0)),
+        "medianAbsoluteError": float(np.median(np.abs(actual - predicted))),
+    }
+
+
 def feature_correlations(frame, features):
     results = []
     for key, label in features.items():

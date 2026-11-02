@@ -30,6 +30,123 @@ def annual_summary(frame):
     return results
 
 
+def balanced_longitudinal(frame):
+    if frame.duplicated(["organization", "year"]).any():
+        raise ValueError("Balanced comparisons require unique organization-year keys.")
+    observed = frame.dropna(subset=["engagement"])
+    if not np.isfinite(observed.engagement).all():
+        raise ValueError("Balanced comparisons require finite engagement values.")
+    years = sorted(frame.year.unique())
+    counts = observed.groupby("organization").year.nunique()
+    names = counts[counts == len(years)].index
+    if len(names) < 2 or len(years) < 2:
+        raise ValueError("At least two continuously observed agencies and years are required.")
+    panel = observed[observed.organization.isin(names)].pivot(
+        index="organization", columns="year", values="engagement"
+    )
+    changes = panel[years[-1]] - panel[years[0]]
+    rng = np.random.default_rng(SEED)
+    sample = changes.to_numpy()[rng.integers(0, len(changes), (5000, len(changes)))].mean(axis=1)
+    low, high = np.quantile(sample, [0.025, 0.975])
+    return {
+        "n": len(panel),
+        "firstYear": int(years[0]),
+        "lastYear": int(years[-1]),
+        "firstMean": float(panel[years[0]].mean()),
+        "lastMean": float(panel[years[-1]].mean()),
+        "meanChange": float(changes.mean()),
+        "low": float(low),
+        "high": float(high),
+        "trend": [
+            {"year": int(year), "n": len(panel), "engagement": float(panel[year].mean())}
+            for year in years
+        ],
+        "agencyChanges": [
+            {"organization": name, "change": float(value)} for name, value in changes.items()
+        ],
+        "interpretation": (
+            "Sensitivity comparison: the same reporting names in every observed year. "
+            "Paired agency-bootstrap intervals describe this observed cohort, not national "
+            "employee sampling uncertainty. Related agencies weaken the resampling assumption. "
+            "Names do not guarantee unchanged agency boundaries or workforces."
+        ),
+    }
+
+
+def intention_analysis(latest):
+    if latest.organization.duplicated().any():
+        raise ValueError("Intention diagnostics require one observation per agency.")
+    paired = latest[["organization", "engagement", "intent_leave"]].dropna()
+    if len(paired) < 10:
+        raise ValueError("At least ten linked agencies are required for intention diagnostics.")
+    x, y = paired.engagement.to_numpy(), paired.intent_leave.to_numpy()
+    if not np.isfinite(x).all() or not np.isfinite(y).all():
+        raise ValueError("Intention diagnostics require finite survey values.")
+    if min(len(np.unique(x)), len(np.unique(y))) < 2:
+        raise ValueError("Intention diagnostics require varying engagement and intention scores.")
+    rho, p = stats.spearmanr(x, y)
+    rng = np.random.default_rng(SEED)
+    bootstrap = []
+    for index in rng.integers(0, len(paired), (3000, len(paired))):
+        if min(len(np.unique(x[index])), len(np.unique(y[index]))) > 1:
+            bootstrap.append(float(stats.spearmanr(x[index], y[index]).statistic))
+    if not bootstrap:
+        raise ValueError("No varying bootstrap samples remain for intention diagnostics.")
+    low, high = np.quantile(bootstrap, [0.025, 0.975])
+    leave_one_out = []
+    for i, name in enumerate(paired.organization):
+        a, b = np.delete(x, i), np.delete(y, i)
+        value = (
+            float(stats.spearmanr(a, b).statistic)
+            if min(len(np.unique(a)), len(np.unique(b))) > 1
+            else None
+        )
+        leave_one_out.append({"organization": name, "rho": value})
+    valid_loo = [row["rho"] for row in leave_one_out if row["rho"] is not None]
+    roster = latest.copy()
+    roster["linked"] = roster[["engagement", "intent_leave"]].notna().all(axis=1)
+    groups = []
+    for linked, group in roster.groupby("linked"):
+        groups.append(
+            {
+                "linked": bool(linked),
+                "label": "Linked" if linked else "Not linked",
+                "n": len(group),
+                "medianEngagement": float(group.engagement.median()),
+                "medianResponseRate": float(group.response_rate.median()),
+            }
+        )
+    composition = [
+        {
+            "size": str(size),
+            "linked": int(group.linked.sum()),
+            "unlinked": int((~group.linked).sum()),
+        }
+        for size, group in roster.groupby("agency_size")
+    ]
+    return {
+        "n": len(paired),
+        "rho": float(rho),
+        "p": float(p),
+        "low": float(low),
+        "high": float(high),
+        "leaveOneOut": leave_one_out,
+        "bootstrapValid": len(bootstrap),
+        "bootstrapDraws": 3000,
+        "leaveOneOutValid": len(valid_loo),
+        "leaveOneOutLow": min(valid_loo) if valid_loo else None,
+        "leaveOneOutHigh": max(valid_loo) if valid_loo else None,
+        "selection": groups,
+        "sizeComposition": composition,
+        "unrepresentedSizes": [row["size"] for row in composition if row["linked"] == 0],
+        "interpretation": (
+            "A distinct same-survey question, not an external or causal validation. "
+            "Agency-bootstrap and leave-one-out checks are conditional on the selected linked "
+            "agencies; they do not correct nonresponse, selection, or common-method bias."
+        ),
+    }
+
+
 def change_analysis(frame, features):
     ordered = frame.sort_values(["organization", "year"]).copy()
     grouped = ordered.groupby("organization")

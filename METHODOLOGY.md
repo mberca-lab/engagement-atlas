@@ -197,6 +197,13 @@ the persisted balanced evidence to detect stale or inconsistent artifacts.
 Balanced and all-observed comparisons reveal composition sensitivity; they do not
 eliminate survival bias or changes inside agencies.
 
+The published `cohortSensitivity` diagnostic also computes each continuously
+observed agency's last-minus-first change. A 5,000-draw paired agency bootstrap
+(seed 42) gives a percentile 95% interval for their mean change. Each resample
+retains an agency's endpoint pair. This is a coverage-sensitivity check conditional
+on the observed roster, not a causal effect, a respondent-level confidence interval,
+or a remedy for correlated agencies.
+
 Pandemic-era organizational conditions, survey administration changes, nonresponse,
 and revised measurement can affect temporal comparability. **Do not assert exact
 2020 redesign, survey-mode, item, or fieldwork changes without checking OPM's
@@ -324,6 +331,15 @@ intervals do not constitute a paired significance test. Bootstrap intervals do
 not capture training/model-selection uncertainty or generalize automatically to
 future years.
 
+The paired comparison resamples **within-agency absolute-error differences**:
+`abs(actual − persistence) − abs(actual − candidate)`. Positive values favor the
+candidate. Percentile 95% intervals use 5,000 agency draws with seed 42. Every
+candidate uses exactly the same held-out agencies; `outputs/model_predictions.csv`
+preserves all candidate predictions for independent inspection. These post-hoc
+intervals are not adjusted for five comparisons, do not refit models, and do not
+change the development-selected winner. Agency dependence remains a limitation;
+an interval spanning zero is not proof of equivalence.
+
 This experiment backtests the last observed year. It is not a verified live
 2025 forecast or a model of individual engagement.
 
@@ -361,6 +377,12 @@ Consequently these are **split-conformal-style temporal intervals, not an
 unconditional coverage guarantee**. An observed coverage shortfall should be
 reported rather than corrected using the final test.
 
+The story also reports the covered count and an illustrative 95% **Wilson binomial
+interval** around the observed coverage fraction. Its independence and fixed-
+prediction assumptions are not guaranteed for related agencies in one target year.
+Including nominal coverage does not establish calibration; this diagnostic is
+context, not a reason to retune intervals on test outcomes.
+
 Latest-year agency-size MAE/coverage tables are exploratory organizational
 diagnostics. Small category samples and selection make them unstable; they
 cannot establish protected-group employee fairness.
@@ -385,6 +407,13 @@ Thirty 80% subsamples are reclustered, and adjusted Rand agreement with the full
 solution is computed on common agencies. The full-sample scaling is held fixed,
 so this is **conditional assignment stability**, not end-to-end preprocessing
 stability or confirmation of a true population segmentation.
+
+A separate simplification check averages each agency's standardized input scores
+and fits one-dimensional KMeans with the **same eligible agencies and selected k**.
+Adjusted Rand agreement compares it with the unchanged full-feature assignments.
+ARI=1 means identical partitions up to arbitrary label numbering. High agreement
+shows how much grouping can be obtained from overall score level alone; it does
+not validate distinct experience types or independently confirm a segmentation.
 
 Profile means are shown on the raw index scale. Engagement is context after
 clustering, not an input. Cluster numbers are arbitrary; use neutral “Profile N”
@@ -435,6 +464,15 @@ unweighted intention aggregates are not interchangeable statistics.
 
 The notebook's agency-level scatter and BH-adjusted auxiliary correlations describe
 co-occurrence only. They cannot estimate retention-intervention ROI or causal effects.
+
+For the complete engagement/intention pairs, a 3,000-draw paired agency bootstrap
+(seed 42) reports a percentile 95% Spearman interval. Constant-score resamples are
+undefined and excluded, with the retained count disclosed. Leave-one-agency-out
+correlations show sensitivity to single agencies; undefined deletions are counted
+rather than treated as zero. Neither check corrects selection or common-method bias.
+Linked versus unlinked counts, median engagement, median response rate, and agency-
+size composition make coverage differences visible. These are descriptive
+comparisons, not a missing-at-random test or a guarantee of representativeness.
 
 ## 13. HR interpretation and decision gates
 

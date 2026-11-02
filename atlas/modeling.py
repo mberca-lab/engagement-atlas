@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+from scipy.stats import binomtest
 from sklearn.base import clone
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -24,6 +25,7 @@ from atlas.methods import (
     interval_radius,
     make_forecast_panel,
     model_metrics,
+    paired_error_comparison,
     temporal_partitions,
 )
 
@@ -94,12 +96,18 @@ def forecast(frame, features):
     selection = cv.groupby("name").mae.mean().sort_values()
     selected = str(selection.index[0])
     fitted_models, metrics = {}, [model_metrics("Persistence", test.target, test.engagement)]
+    all_predictions = {"Persistence": test.engagement.to_numpy()}
+    comparisons = []
     for name, specification in specs.items():
         with threadpool_limits(limits=2):
             fitted = clone(specification).fit(development[keys], development.target)
             predicted = np.clip(fitted.predict(test[keys]), 0, 100)
         fitted_models[name] = fitted
+        all_predictions[name] = predicted
         metrics.append(model_metrics(name, test.target, predicted))
+        comparisons.append(
+            {"name": name, **paired_error_comparison(test.target, predicted, test.engagement)}
+        )
     best_ml_name = str(selection.drop("Persistence").index[0])
     explanation_model = fitted_models[best_ml_name]
     with threadpool_limits(limits=2):
@@ -133,6 +141,8 @@ def forecast(frame, features):
             )
     radius = interval_radius(calibration.target - calibration_prediction)
     lower, upper = np.maximum(0, predicted - radius), np.minimum(100, predicted + radius)
+    covered = int(np.sum((test.target >= lower) & (test.target <= upper)))
+    coverage_interval = binomtest(covered, len(test)).proportion_ci(method="wilson")
     transport = []
     for train_idx, validation_idx in GroupKFold(n_splits=5).split(
         development, groups=development.organization
@@ -172,6 +182,25 @@ def forecast(frame, features):
         "selected": selected,
         "explanationModel": best_ml_name,
         "metrics": sorted(metrics, key=lambda r: r["mae"]),
+        "pairedComparisons": sorted(comparisons, key=lambda r: r["difference"], reverse=True),
+        "comparisonNotes": (
+            "Positive differences mean lower MAE than persistence on the same held-out agencies. "
+            "Percentile 95% intervals use 5,000 paired agency resamples with seed 42. "
+            "These post-hoc diagnostics do not change validation-based model selection, "
+            "adjust for five comparisons, or include model-training uncertainty. "
+            "Related agencies may weaken the independent-agency resampling assumption."
+        ),
+        "modelPredictions": [
+            {
+                "organization": row.organization,
+                "model": name,
+                "actual": float(row.target),
+                "predicted": float(values[i]),
+                "baseline": float(row.engagement),
+            }
+            for name, values in all_predictions.items()
+            for i, row in enumerate(test.itertuples())
+        ],
         "importance": sorted(importances, key=lambda r: r["mean"], reverse=True),
         "predictions": predictions,
         "nTrain": len(development),
@@ -180,6 +209,14 @@ def forecast(frame, features):
         "interval": {
             "nominal": 0.90,
             "coverage": float(np.mean((test.target >= lower) & (test.target <= upper))),
+            "covered": covered,
+            "n": len(test),
+            "coverageLow": float(coverage_interval.low),
+            "coverageHigh": float(coverage_interval.high),
+            "coverageNote": (
+                "The illustrative 95% Wilson interval assumes independent coverage events "
+                "and fixed predictions; it does not correct agency dependence or temporal shift."
+            ),
             "width": float(np.mean(upper - lower)),
             "radius": float(radius),
         },
@@ -205,6 +242,10 @@ def segmentation(latest, features):
             scores[k], models[k] = float(silhouette_score(scaled, fitted.labels_)), fitted
         k = max(scores, key=scores.get)
         fitted = models[k]
+        level_labels = KMeans(n_clusters=k, n_init=30, random_state=SEED).fit_predict(
+            scaled.mean(axis=1).reshape(-1, 1)
+        )
+        level_agreement = float(adjusted_rand_score(fitted.labels_, level_labels))
         pca = PCA(n_components=2).fit(scaled)
         coordinates = pca.transform(scaled)
         rng = np.random.default_rng(SEED)
@@ -235,6 +276,17 @@ def segmentation(latest, features):
         "k": int(k),
         "silhouette": scores[k],
         "stability": float(np.mean(stability)),
+        "levelCheck": {
+            "n": len(eligible),
+            "k": int(k),
+            "adjustedRand": level_agreement,
+            "interpretation": (
+                "Compare the full-feature partition with K-means on just the average "
+                "standardized input score, using the same agencies and k. "
+                "ARI=1 means identical assignments up to label permutation; "
+                "this is a descriptive simplification check, not independent validation."
+            ),
+        },
         "candidateScores": [{"k": int(k), "score": v} for k, v in scores.items()],
         "variance": [float(v) for v in pca.explained_variance_ratio_],
         "loadings": [

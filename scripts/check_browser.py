@@ -33,6 +33,15 @@ def main():
         assert "ENGAGEMENT" in body.upper()
         assert str(payload["meta"]["rowCount"]) in body
         assert page.locator("svg").count() >= 5
+        assert page.locator("#cohort-sensitivity").inner_text().startswith("Coverage check:")
+        assert (
+            "overall survey-score level alone" in page.locator("#cluster-level-check").inner_text()
+        )
+        assert page.locator("#paired-comparison-table tbody tr").count() == len(
+            payload["models"]["pairedComparisons"]
+        )
+        assert "not a new winner" in page.locator("#model-insight").inner_text()
+        assert "Wilson interval" in page.locator("#interval-insight").inner_text()
         assert not errors, errors
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
             "Desktop overflow"
@@ -86,7 +95,16 @@ def main():
         page.locator("#explorer-feature").select_option("intent_leave")
         after = page.locator("svg").evaluate_all("(els) => els.map(e => e.outerHTML).join('')")
         assert before != after, "Supplementary intention view did not update the chart."
+        assert page.locator("#intention-audit").is_visible()
+        assert "Leaving out one agency" in page.locator("#intention-context").inner_text()
+        assert page.locator("#intention-size-table tbody tr").count() == len(
+            payload["intentionAnalysis"]["sizeComposition"]
+        )
+        context = page.locator("#intention-context").inner_text()
+        page.locator("#organization-search").fill("Office")
+        assert page.locator("#intention-context").inner_text() == context
         page.locator("#explorer-reset").click()
+        assert not page.locator("#intention-audit").is_visible()
         trajectory = page.locator("#trajectory-0")
         options = trajectory.locator("option").evaluate_all("(els) => els.map(e => e.value)")
         value = next(value for value in options if value and value != trajectory.input_value())

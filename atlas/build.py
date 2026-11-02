@@ -10,12 +10,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from scipy import stats
 
 from atlas.methods import feature_correlations
 from atlas.modeling import forecast, segmentation
 from atlas.source import INTENTION_CROSSWALK, LICENSE_URL, ROOT, SOURCE_URL, ingest
-from atlas.statistics import annual_summary, change_analysis
+from atlas.statistics import (
+    annual_summary,
+    balanced_longitudinal,
+    change_analysis,
+    intention_analysis,
+)
 
 
 def clean_json(value):
@@ -255,7 +259,9 @@ def findings(data):
         "Temporal distribution shift means coverage is not guaranteed.",
         f"Latest-year K-means selects {data['clusters']['k']} descriptive profiles, with silhouette "
         f"{data['clusters']['silhouette']:.2f} and mean subsample agreement "
-        f"{data['clusters']['stability']:.2f}. These are organization profiles, not employee types.",
+        f"{data['clusters']['stability']:.2f}. Agreement with a one-score partition is "
+        f"{data['clusters']['levelCheck']['adjustedRand']:.3f} (ARI; 1 means identical assignments). "
+        "These are descriptive score profiles, not validated experience types.",
     ]
     if data["intentionAnalysis"]["n"] >= 10:
         intention = data["intentionAnalysis"]
@@ -306,6 +312,39 @@ def write_report(data):
         )
     lines += [
         "",
+        "### Paired differences versus persistence",
+        "",
+        data["models"]["comparisonNotes"],
+        "",
+        "| Model | MAE improvement (points) | Paired 95% interval | Agencies |",
+        "|---|---:|---:|---:|",
+    ]
+    for row in data["models"]["pairedComparisons"]:
+        lines.append(
+            f"| {row['name']} | {row['difference']:.3f} | {row['low']:.3f}–{row['high']:.3f} "
+            f"| {row['n']} |"
+        )
+    cohort, interval = data["cohortSensitivity"], data["models"]["interval"]
+    lines += [
+        "",
+        "## Consistent-cohort sensitivity",
+        "",
+        f"The same {cohort['n']} reporting names observed every year have mean engagement "
+        f"{cohort['firstMean']:.2f} in {cohort['firstYear']} and {cohort['lastMean']:.2f} "
+        f"in {cohort['lastYear']}: a mean paired change of {cohort['meanChange']:+.2f} points "
+        f"(95% agency-bootstrap interval {cohort['low']:.2f}–{cohort['high']:.2f}).",
+        cohort["interpretation"],
+        "",
+        "## Interval coverage context",
+        "",
+        f"{interval['covered']} of {interval['n']} held-out outcomes are covered "
+        f"({interval['coverage']:.1%}, nominal {interval['nominal']:.0%}). "
+        f"Illustrative 95% Wilson interval: {interval['coverageLow']:.1%}–"
+        f"{interval['coverageHigh']:.1%}. {interval['coverageNote']} "
+        "This does not establish calibration or correct the temporal coverage shortfall.",
+    ]
+    lines += [
+        "",
         "## Cross-sectional associations",
         "",
         "Latest-year reporting organizations. Shared content and index composition can make",
@@ -335,6 +374,38 @@ def write_report(data):
         "",
         "The engagement subindices are components of the target: the change regression",
         "is partly a decomposition of a composite index, **not discovery of independent HR drivers**.",
+        f"Its in-sample R² is {data['changeAnalysis']['r2']:.5f}; a close compositional fit "
+        "is not external validation.",
+        "",
+        "## Profile distinctiveness check",
+        "",
+        data["clusters"]["levelCheck"]["interpretation"],
+        f"Observed adjusted Rand agreement: {data['clusters']['levelCheck']['adjustedRand']:.3f}.",
+    ]
+    intention = data["intentionAnalysis"]
+    if intention["rho"] is not None:
+        lines += [
+            "",
+            "## Intention-to-leave sensitivity and coverage",
+            "",
+            f"Among {intention['n']} linked agencies, Spearman rho is {intention['rho']:.2f} "
+            f"(95% paired agency-bootstrap interval {intention['low']:.2f}–"
+            f"{intention['high']:.2f}); leaving out one agency at a time gives "
+            f"{intention['leaveOneOutLow']:.2f} to {intention['leaveOneOutHigh']:.2f} "
+            f"across {intention['leaveOneOutValid']} defined estimates.",
+            intention["interpretation"],
+            "Agency sizes without linked observations: "
+            + (", ".join(intention["unrepresentedSizes"]) or "none")
+            + ".",
+            "",
+            "| Agency size | Linked | Not linked |",
+            "|---|---:|---:|",
+            *[
+                f"| {r['size']} | {r['linked']} | {r['unlinked']} |"
+                for r in intention["sizeComposition"]
+            ],
+        ]
+    lines += [
         "",
         "## Practical HR questions",
         "",
@@ -400,11 +471,19 @@ def main():
     change, deltas = change_analysis(frame, features)
     panel.to_csv(output / "forecast_panel.csv", index=False)
     deltas.to_csv(output / "annual_changes.csv", index=False)
+    balanced = balanced_longitudinal(frame)
+    if balanced["n"] != models["balancedOrgCount"] or not np.allclose(
+        [r["engagement"] for r in balanced["trend"]],
+        [r["engagement"] for r in models["balancedTrend"]],
+    ):
+        raise ValueError("Balanced-cohort diagnostics disagree with the published trend.")
     intention = latest[["engagement", "intent_leave"]].dropna()
-    intention_analysis = {"n": len(intention), "rho": None, "p": None}
-    if len(intention) >= 10:
-        rho, p = stats.spearmanr(intention.engagement, intention.intent_leave)
-        intention_analysis.update({"rho": float(rho), "p": float(p)})
+    intention_result = (
+        intention_analysis(latest)
+        if len(intention) >= 10
+        else {"n": len(intention), "rho": None, "p": None}
+    )
+    pd.DataFrame(models["modelPredictions"]).to_csv(output / "model_predictions.csv", index=False)
     missing = [
         {
             "feature": key,
@@ -451,7 +530,8 @@ def main():
         "models": models,
         "clusters": clusters,
         "changeAnalysis": change,
-        "intentionAnalysis": intention_analysis,
+        "intentionAnalysis": intention_result,
+        "cohortSensitivity": balanced,
         "quality": {"missing": missing, "duplicates": duplicates, "notes": notes},
     }
     data["findings"] = findings(data)

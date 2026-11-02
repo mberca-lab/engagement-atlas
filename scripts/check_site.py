@@ -23,11 +23,18 @@ def main():
     assert "<title>" in html and 'name="viewport"' in html, "Page metadata missing."
     assert len(html) > 30000, "Expected complete story and embedded analytical outputs."
     assert not re.search(r"<script[^>]+src=", html), "Story must run without remote scripts."
-    payload = json.loads((ROOT / "outputs" / "atlas.json").read_text(encoding="utf-8"))
+    match = re.search(r"const DATA = (.*?);\s*\(\(\) =>", html, re.DOTALL)
+    assert match, "Embedded analytical evidence is missing."
+    payload = json.loads(match.group(1))
+    expected = json.loads((ROOT / "outputs" / "atlas.json").read_text(encoding="utf-8"))
+    assert payload == expected, "Served analytical evidence differs from the verified local build."
     assert len(payload["rows"]) == payload["meta"]["rowCount"]
     assert payload["meta"]["orgCount"] > 30
     assert len(payload["models"]["metrics"]) >= 5
     assert payload["models"]["testYear"] > payload["models"]["calibrationYear"]
+    assert len(payload["models"]["pairedComparisons"]) == len(payload["models"]["metrics"]) - 1
+    assert payload["cohortSensitivity"]["n"] == payload["models"]["balancedOrgCount"]
+    assert payload["clusters"]["levelCheck"]["n"] == len(payload["clusters"]["points"])
     print("PASS: published story, data contract, temporal partitions and offline assets.")
 
 

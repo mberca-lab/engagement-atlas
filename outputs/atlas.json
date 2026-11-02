@@ -14035,11 +14035,11 @@
     "metrics": [
       {
         "name": "Extra trees",
-        "mae": 3.265599118506504,
-        "rmse": 5.383989768088824,
-        "r2": 0.5808645637603534,
-        "low": 2.3846363824261663,
-        "high": 4.306572713254653
+        "mae": 3.2655991185065054,
+        "rmse": 5.383989768088826,
+        "r2": 0.5808645637603532,
+        "low": 2.384636382426171,
+        "high": 4.306572713254652
       },
       {
         "name": "Ridge",
@@ -14075,43 +14075,3495 @@
       },
       {
         "name": "Random forest",
-        "mae": 3.494346468475808,
+        "mae": 3.4943464684758094,
         "rmse": 5.537327460411599,
-        "r2": 0.5566503777860368,
-        "low": 2.5870738430785902,
+        "r2": 0.5566503777860367,
+        "low": 2.58707384307859,
         "high": 4.508637702826387
+      }
+    ],
+    "pairedComparisons": [
+      {
+        "name": "Extra trees",
+        "n": 81,
+        "difference": 0.07393338766633381,
+        "low": -0.5216081107443746,
+        "high": 0.9205227944470851,
+        "fractionBetter": 0.4691358024691358,
+        "medianAbsoluteError": 1.6673697520567714
+      },
+      {
+        "name": "Ridge",
+        "n": 81,
+        "difference": 0.04941450715536336,
+        "low": -0.31954378221960583,
+        "high": 0.4493899108440164,
+        "fractionBetter": 0.48148148148148145,
+        "medianAbsoluteError": 1.594827995512759
+      },
+      {
+        "name": "Elastic net",
+        "n": 81,
+        "difference": 0.04343383883685185,
+        "low": -0.3437849770411686,
+        "high": 0.4653341909634682,
+        "fractionBetter": 0.5185185185185185,
+        "medianAbsoluteError": 1.7158352533462136
+      },
+      {
+        "name": "Gradient boosting",
+        "n": 81,
+        "difference": -0.08596775758284061,
+        "low": -0.7578515325853702,
+        "high": 0.7920715841777592,
+        "fractionBetter": 0.4567901234567901,
+        "medianAbsoluteError": 1.6724060346118108
+      },
+      {
+        "name": "Random forest",
+        "n": 81,
+        "difference": -0.15481396230296984,
+        "low": -0.7697880645472864,
+        "high": 0.6797065604373469,
+        "fractionBetter": 0.35802469135802467,
+        "medianAbsoluteError": 2.0287118460466615
+      }
+    ],
+    "comparisonNotes": "Positive differences mean lower MAE than persistence on the same held-out agencies. Percentile 95% intervals use 5,000 paired agency resamples with seed 42. These post-hoc diagnostics do not change validation-based model selection, adjust for five comparisons, or include model-training uncertainty. Related agencies may weaken the independent-agency resampling assumption.",
+    "modelPredictions": [
+      {
+        "organization": "AbilityOne Commission",
+        "model": "Persistence",
+        "actual": 70.069957,
+        "predicted": 67.410595,
+        "baseline": 67.410595
+      },
+      {
+        "organization": "Advisory Council on Historic Preservation",
+        "model": "Persistence",
+        "actual": 66.05174,
+        "predicted": 84.125991,
+        "baseline": 84.125991
+      },
+      {
+        "organization": "African Development Foundation",
+        "model": "Persistence",
+        "actual": 85.170497,
+        "predicted": 74.516591,
+        "baseline": 74.516591
+      },
+      {
+        "organization": "American Battle Monuments Commission",
+        "model": "Persistence",
+        "actual": 72.458096,
+        "predicted": 60.59109,
+        "baseline": 60.59109
+      },
+      {
+        "organization": "Commission on Civil Rights",
+        "model": "Persistence",
+        "actual": 59.82732,
+        "predicted": 71.91875,
+        "baseline": 71.91875
+      },
+      {
+        "organization": "Commodity Futures Trading Commission",
+        "model": "Persistence",
+        "actual": 73.400484,
+        "predicted": 70.785268,
+        "baseline": 70.785268
+      },
+      {
+        "organization": "Consumer Product Safety Commission",
+        "model": "Persistence",
+        "actual": 79.741247,
+        "predicted": 76.322349,
+        "baseline": 76.322349
+      },
+      {
+        "organization": "Corporation for National and Community Service",
+        "model": "Persistence",
+        "actual": 82.419883,
+        "predicted": 79.297023,
+        "baseline": 79.297023
+      },
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "model": "Persistence",
+        "actual": 69.042119,
+        "predicted": 69.550309,
+        "baseline": 69.550309
+      },
+      {
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "model": "Persistence",
+        "actual": 79.524619,
+        "predicted": 82.538728,
+        "baseline": 82.538728
+      },
+      {
+        "organization": "Department of Agriculture",
+        "model": "Persistence",
+        "actual": 72.93029,
+        "predicted": 71.604944,
+        "baseline": 71.604944
+      },
+      {
+        "organization": "Department of Commerce",
+        "model": "Persistence",
+        "actual": 76.512831,
+        "predicted": 75.977209,
+        "baseline": 75.977209
+      },
+      {
+        "organization": "Department of Education",
+        "model": "Persistence",
+        "actual": 74.603856,
+        "predicted": 76.356104,
+        "baseline": 76.356104
+      },
+      {
+        "organization": "Department of Energy",
+        "model": "Persistence",
+        "actual": 79.840176,
+        "predicted": 79.206557,
+        "baseline": 79.206557
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "model": "Persistence",
+        "actual": 78.671859,
+        "predicted": 78.14407,
+        "baseline": 78.14407
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "model": "Persistence",
+        "actual": 68.79855,
+        "predicted": 66.93375,
+        "baseline": 66.93375
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "model": "Persistence",
+        "actual": 76.149513,
+        "predicted": 77.467012,
+        "baseline": 77.467012
+      },
+      {
+        "organization": "Department of Justice",
+        "model": "Persistence",
+        "actual": 67.62958,
+        "predicted": 65.032644,
+        "baseline": 65.032644
+      },
+      {
+        "organization": "Department of Labor",
+        "model": "Persistence",
+        "actual": 76.590049,
+        "predicted": 76.399209,
+        "baseline": 76.399209
+      },
+      {
+        "organization": "Department of State",
+        "model": "Persistence",
+        "actual": 70.501606,
+        "predicted": 69.023373,
+        "baseline": 69.023373
+      },
+      {
+        "organization": "Department of Transportation",
+        "model": "Persistence",
+        "actual": 73.508332,
+        "predicted": 73.437136,
+        "baseline": 73.437136
+      },
+      {
+        "organization": "Department of the Interior",
+        "model": "Persistence",
+        "actual": 73.064337,
+        "predicted": 72.265192,
+        "baseline": 72.265192
+      },
+      {
+        "organization": "Department of the Treasury",
+        "model": "Persistence",
+        "actual": 74.286652,
+        "predicted": 73.727152,
+        "baseline": 73.727152
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "model": "Persistence",
+        "actual": 80.696705,
+        "predicted": 79.236417,
+        "baseline": 79.236417
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "model": "Persistence",
+        "actual": 79.081448,
+        "predicted": 78.634077,
+        "baseline": 78.634077
+      },
+      {
+        "organization": "Export-Import Bank of the United States",
+        "model": "Persistence",
+        "actual": 63.119735,
+        "predicted": 64.891409,
+        "baseline": 64.891409
+      },
+      {
+        "organization": "Farm Credit Administration",
+        "model": "Persistence",
+        "actual": 81.661059,
+        "predicted": 84.170203,
+        "baseline": 84.170203
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "model": "Persistence",
+        "actual": 78.798674,
+        "predicted": 76.149919,
+        "baseline": 76.149919
+      },
+      {
+        "organization": "Federal Election Commission",
+        "model": "Persistence",
+        "actual": 73.707994,
+        "predicted": 74.117962,
+        "baseline": 74.117962
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "model": "Persistence",
+        "actual": 85.671379,
+        "predicted": 83.079441,
+        "baseline": 83.079441
+      },
+      {
+        "organization": "Federal Housing Finance Agency",
+        "model": "Persistence",
+        "actual": 70.74043,
+        "predicted": 70.751987,
+        "baseline": 70.751987
+      },
+      {
+        "organization": "Federal Labor Relations Authority",
+        "model": "Persistence",
+        "actual": 85.027109,
+        "predicted": 84.317485,
+        "baseline": 84.317485
+      },
+      {
+        "organization": "Federal Maritime Commission",
+        "model": "Persistence",
+        "actual": 63.627229,
+        "predicted": 70.778145,
+        "baseline": 70.778145
+      },
+      {
+        "organization": "Federal Mediation and Conciliation Service",
+        "model": "Persistence",
+        "actual": 70.151788,
+        "predicted": 63.501525,
+        "baseline": 63.501525
+      },
+      {
+        "organization": "Federal Retirement Thrift Investment Board",
+        "model": "Persistence",
+        "actual": 76.683037,
+        "predicted": 77.224295,
+        "baseline": 77.224295
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "model": "Persistence",
+        "actual": 80.257961,
+        "predicted": 78.712089,
+        "baseline": 78.712089
+      },
+      {
+        "organization": "General Services Administration",
+        "model": "Persistence",
+        "actual": 85.595863,
+        "predicted": 84.65503,
+        "baseline": 84.65503
+      },
+      {
+        "organization": "Institute of Museum and Library Services",
+        "model": "Persistence",
+        "actual": 82.335445,
+        "predicted": 74.109705,
+        "baseline": 74.109705
+      },
+      {
+        "organization": "Inter-American Foundation",
+        "model": "Persistence",
+        "actual": 46.190933,
+        "predicted": 69.060956,
+        "baseline": 69.060956
+      },
+      {
+        "organization": "International Boundary and Water Commission",
+        "model": "Persistence",
+        "actual": 70.38871,
+        "predicted": 69.872591,
+        "baseline": 69.872591
+      },
+      {
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "model": "Persistence",
+        "actual": 55.417321,
+        "predicted": 56.083234,
+        "baseline": 56.083234
+      },
+      {
+        "organization": "Marine Mammal Commission",
+        "model": "Persistence",
+        "actual": 98.056361,
+        "predicted": 97.986588,
+        "baseline": 97.986588
+      },
+      {
+        "organization": "Merit Systems Protection Board",
+        "model": "Persistence",
+        "actual": 69.836412,
+        "predicted": 71.466414,
+        "baseline": 71.466414
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "model": "Persistence",
+        "actual": 73.370837,
+        "predicted": 73.332818,
+        "baseline": 73.332818
+      },
+      {
+        "organization": "National Capital Planning Commission",
+        "model": "Persistence",
+        "actual": 84.373186,
+        "predicted": 86.212377,
+        "baseline": 86.212377
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "model": "Persistence",
+        "actual": 80.042401,
+        "predicted": 77.116472,
+        "baseline": 77.116472
+      },
+      {
+        "organization": "National Endowment for the Arts",
+        "model": "Persistence",
+        "actual": 72.250251,
+        "predicted": 74.350419,
+        "baseline": 74.350419
+      },
+      {
+        "organization": "National Endowment for the Humanities",
+        "model": "Persistence",
+        "actual": 86.031928,
+        "predicted": 86.363186,
+        "baseline": 86.363186
+      },
+      {
+        "organization": "National Gallery of Art",
+        "model": "Persistence",
+        "actual": 68.692025,
+        "predicted": 67.683555,
+        "baseline": 67.683555
+      },
+      {
+        "organization": "National Indian Gaming Commission",
+        "model": "Persistence",
+        "actual": 88.866532,
+        "predicted": 89.101499,
+        "baseline": 89.101499
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "model": "Persistence",
+        "actual": 72.058103,
+        "predicted": 77.748124,
+        "baseline": 77.748124
+      },
+      {
+        "organization": "National Mediation Board",
+        "model": "Persistence",
+        "actual": 64.072269,
+        "predicted": 67.269172,
+        "baseline": 67.269172
+      },
+      {
+        "organization": "National Science Foundation",
+        "model": "Persistence",
+        "actual": 72.921352,
+        "predicted": 78.649535,
+        "baseline": 78.649535
+      },
+      {
+        "organization": "National Transportation Safety Board",
+        "model": "Persistence",
+        "actual": 72.461217,
+        "predicted": 71.107024,
+        "baseline": 71.107024
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "model": "Persistence",
+        "actual": 75.262736,
+        "predicted": 74.426799,
+        "baseline": 74.426799
+      },
+      {
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "model": "Persistence",
+        "actual": 70.243148,
+        "predicted": 70.096473,
+        "baseline": 70.096473
+      },
+      {
+        "organization": "Occupational Safety and Health Review Commission",
+        "model": "Persistence",
+        "actual": 94.912725,
+        "predicted": 96.216812,
+        "baseline": 96.216812
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "model": "Persistence",
+        "actual": 81.851967,
+        "predicted": 79.031659,
+        "baseline": 79.031659
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "model": "Persistence",
+        "actual": 80.023419,
+        "predicted": 79.705074,
+        "baseline": 79.705074
+      },
+      {
+        "organization": "Office of the U.S. Trade Representative",
+        "model": "Persistence",
+        "actual": 65.2035,
+        "predicted": 69.809448,
+        "baseline": 69.809448
+      },
+      {
+        "organization": "Peace Corps",
+        "model": "Persistence",
+        "actual": 74.844826,
+        "predicted": 73.562934,
+        "baseline": 73.562934
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "model": "Persistence",
+        "actual": 88.960446,
+        "predicted": 87.205096,
+        "baseline": 87.205096
+      },
+      {
+        "organization": "Postal Regulatory Commission",
+        "model": "Persistence",
+        "actual": 82.246889,
+        "predicted": 89.65428,
+        "baseline": 89.65428
+      },
+      {
+        "organization": "Privacy and Civil Liberties Oversight Board",
+        "model": "Persistence",
+        "actual": 81.091228,
+        "predicted": 34.971528,
+        "baseline": 34.971528
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "model": "Persistence",
+        "actual": 77.444791,
+        "predicted": 76.503406,
+        "baseline": 76.503406
+      },
+      {
+        "organization": "Selective Service System",
+        "model": "Persistence",
+        "actual": 74.772565,
+        "predicted": 80.280954,
+        "baseline": 80.280954
+      },
+      {
+        "organization": "Small Business Administration",
+        "model": "Persistence",
+        "actual": 78.740506,
+        "predicted": 78.583804,
+        "baseline": 78.583804
+      },
+      {
+        "organization": "Social Security Administration",
+        "model": "Persistence",
+        "actual": 68.419714,
+        "predicted": 65.046148,
+        "baseline": 65.046148
+      },
+      {
+        "organization": "Surface Transportation Board",
+        "model": "Persistence",
+        "actual": 81.619472,
+        "predicted": 79.343563,
+        "baseline": 79.343563
+      },
+      {
+        "organization": "U.S. Access Board",
+        "model": "Persistence",
+        "actual": 64.881849,
+        "predicted": 71.762723,
+        "baseline": 71.762723
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "model": "Persistence",
+        "actual": 69.929538,
+        "predicted": 69.747767,
+        "baseline": 69.747767
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "model": "Persistence",
+        "actual": 69.884226,
+        "predicted": 69.911679,
+        "baseline": 69.911679
+      },
+      {
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "model": "Persistence",
+        "actual": 69.859982,
+        "predicted": 69.342144,
+        "baseline": 69.342144
+      },
+      {
+        "organization": "U.S. International Development Finance Corporation",
+        "model": "Persistence",
+        "actual": 73.829288,
+        "predicted": 70.477083,
+        "baseline": 70.477083
+      },
+      {
+        "organization": "U.S. International Trade Commission",
+        "model": "Persistence",
+        "actual": 80.090134,
+        "predicted": 79.203546,
+        "baseline": 79.203546
+      },
+      {
+        "organization": "U.S. Office of Government Ethics",
+        "model": "Persistence",
+        "actual": 90.140695,
+        "predicted": 90.305077,
+        "baseline": 90.305077
+      },
+      {
+        "organization": "U.S. Office of Special Counsel",
+        "model": "Persistence",
+        "actual": 85.724666,
+        "predicted": 88.117921,
+        "baseline": 88.117921
+      },
+      {
+        "organization": "U.S. Trade and Development Agency",
+        "model": "Persistence",
+        "actual": 85.219644,
+        "predicted": 88.69963,
+        "baseline": 88.69963
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "model": "Persistence",
+        "actual": 73.440435,
+        "predicted": 73.705671,
+        "baseline": 73.705671
+      },
+      {
+        "organization": "United States Department of the Army",
+        "model": "Persistence",
+        "actual": 75.208411,
+        "predicted": 73.268752,
+        "baseline": 73.268752
+      },
+      {
+        "organization": "United States Department of the Navy",
+        "model": "Persistence",
+        "actual": 74.206142,
+        "predicted": 72.137174,
+        "baseline": 72.137174
+      },
+      {
+        "organization": "AbilityOne Commission",
+        "model": "Ridge",
+        "actual": 70.069957,
+        "predicted": 69.67799501460206,
+        "baseline": 67.410595
+      },
+      {
+        "organization": "Advisory Council on Historic Preservation",
+        "model": "Ridge",
+        "actual": 66.05174,
+        "predicted": 82.9890121491181,
+        "baseline": 84.125991
+      },
+      {
+        "organization": "African Development Foundation",
+        "model": "Ridge",
+        "actual": 85.170497,
+        "predicted": 74.8683336301102,
+        "baseline": 74.516591
+      },
+      {
+        "organization": "American Battle Monuments Commission",
+        "model": "Ridge",
+        "actual": 72.458096,
+        "predicted": 64.47740993976304,
+        "baseline": 60.59109
+      },
+      {
+        "organization": "Commission on Civil Rights",
+        "model": "Ridge",
+        "actual": 59.82732,
+        "predicted": 73.66280736918276,
+        "baseline": 71.91875
+      },
+      {
+        "organization": "Commodity Futures Trading Commission",
+        "model": "Ridge",
+        "actual": 73.400484,
+        "predicted": 72.1582018263305,
+        "baseline": 70.785268
+      },
+      {
+        "organization": "Consumer Product Safety Commission",
+        "model": "Ridge",
+        "actual": 79.741247,
+        "predicted": 76.44406601964769,
+        "baseline": 76.322349
+      },
+      {
+        "organization": "Corporation for National and Community Service",
+        "model": "Ridge",
+        "actual": 82.419883,
+        "predicted": 78.62445866950067,
+        "baseline": 79.297023
+      },
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "model": "Ridge",
+        "actual": 69.042119,
+        "predicted": 70.95842257410824,
+        "baseline": 69.550309
+      },
+      {
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "model": "Ridge",
+        "actual": 79.524619,
+        "predicted": 81.6206831912111,
+        "baseline": 82.538728
+      },
+      {
+        "organization": "Department of Agriculture",
+        "model": "Ridge",
+        "actual": 72.93029,
+        "predicted": 72.44055539097195,
+        "baseline": 71.604944
+      },
+      {
+        "organization": "Department of Commerce",
+        "model": "Ridge",
+        "actual": 76.512831,
+        "predicted": 76.17023824109867,
+        "baseline": 75.977209
+      },
+      {
+        "organization": "Department of Education",
+        "model": "Ridge",
+        "actual": 74.603856,
+        "predicted": 76.41617268752717,
+        "baseline": 76.356104
+      },
+      {
+        "organization": "Department of Energy",
+        "model": "Ridge",
+        "actual": 79.840176,
+        "predicted": 78.9232146269238,
+        "baseline": 79.206557
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "model": "Ridge",
+        "actual": 78.671859,
+        "predicted": 78.10482888911054,
+        "baseline": 78.14407
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "model": "Ridge",
+        "actual": 68.79855,
+        "predicted": 69.07242776031336,
+        "baseline": 66.93375
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "model": "Ridge",
+        "actual": 76.149513,
+        "predicted": 77.55679902475696,
+        "baseline": 77.467012
+      },
+      {
+        "organization": "Department of Justice",
+        "model": "Ridge",
+        "actual": 67.62958,
+        "predicted": 67.43671022850971,
+        "baseline": 65.032644
+      },
+      {
+        "organization": "Department of Labor",
+        "model": "Ridge",
+        "actual": 76.590049,
+        "predicted": 76.60874533895634,
+        "baseline": 76.399209
+      },
+      {
+        "organization": "Department of State",
+        "model": "Ridge",
+        "actual": 70.501606,
+        "predicted": 70.63772599692327,
+        "baseline": 69.023373
+      },
+      {
+        "organization": "Department of Transportation",
+        "model": "Ridge",
+        "actual": 73.508332,
+        "predicted": 74.28503220922018,
+        "baseline": 73.437136
+      },
+      {
+        "organization": "Department of the Interior",
+        "model": "Ridge",
+        "actual": 73.064337,
+        "predicted": 73.21614433997577,
+        "baseline": 72.265192
+      },
+      {
+        "organization": "Department of the Treasury",
+        "model": "Ridge",
+        "actual": 74.286652,
+        "predicted": 74.3935703212872,
+        "baseline": 73.727152
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "model": "Ridge",
+        "actual": 80.696705,
+        "predicted": 79.02348229615787,
+        "baseline": 79.236417
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "model": "Ridge",
+        "actual": 79.081448,
+        "predicted": 78.41172042331922,
+        "baseline": 78.634077
+      },
+      {
+        "organization": "Export-Import Bank of the United States",
+        "model": "Ridge",
+        "actual": 63.119735,
+        "predicted": 66.03507810667716,
+        "baseline": 64.891409
+      },
+      {
+        "organization": "Farm Credit Administration",
+        "model": "Ridge",
+        "actual": 81.661059,
+        "predicted": 82.76253857993649,
+        "baseline": 84.170203
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "model": "Ridge",
+        "actual": 78.798674,
+        "predicted": 76.53052366382693,
+        "baseline": 76.149919
+      },
+      {
+        "organization": "Federal Election Commission",
+        "model": "Ridge",
+        "actual": 73.707994,
+        "predicted": 73.70068680030953,
+        "baseline": 74.117962
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "model": "Ridge",
+        "actual": 85.671379,
+        "predicted": 82.01196510321803,
+        "baseline": 83.079441
+      },
+      {
+        "organization": "Federal Housing Finance Agency",
+        "model": "Ridge",
+        "actual": 70.74043,
+        "predicted": 71.6955164062195,
+        "baseline": 70.751987
+      },
+      {
+        "organization": "Federal Labor Relations Authority",
+        "model": "Ridge",
+        "actual": 85.027109,
+        "predicted": 83.27352626472717,
+        "baseline": 84.317485
+      },
+      {
+        "organization": "Federal Maritime Commission",
+        "model": "Ridge",
+        "actual": 63.627229,
+        "predicted": 72.27707807723354,
+        "baseline": 70.778145
+      },
+      {
+        "organization": "Federal Mediation and Conciliation Service",
+        "model": "Ridge",
+        "actual": 70.151788,
+        "predicted": 66.53010799251079,
+        "baseline": 63.501525
+      },
+      {
+        "organization": "Federal Retirement Thrift Investment Board",
+        "model": "Ridge",
+        "actual": 76.683037,
+        "predicted": 77.09398198760431,
+        "baseline": 77.224295
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "model": "Ridge",
+        "actual": 80.257961,
+        "predicted": 77.85172776043296,
+        "baseline": 78.712089
+      },
+      {
+        "organization": "General Services Administration",
+        "model": "Ridge",
+        "actual": 85.595863,
+        "predicted": 83.44129634167486,
+        "baseline": 84.65503
+      },
+      {
+        "organization": "Institute of Museum and Library Services",
+        "model": "Ridge",
+        "actual": 82.335445,
+        "predicted": 74.87338201311506,
+        "baseline": 74.109705
+      },
+      {
+        "organization": "Inter-American Foundation",
+        "model": "Ridge",
+        "actual": 46.190933,
+        "predicted": 70.59099263330225,
+        "baseline": 69.060956
+      },
+      {
+        "organization": "International Boundary and Water Commission",
+        "model": "Ridge",
+        "actual": 70.38871,
+        "predicted": 71.6261141964019,
+        "baseline": 69.872591
+      },
+      {
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "model": "Ridge",
+        "actual": 55.417321,
+        "predicted": 60.481175351437734,
+        "baseline": 56.083234
+      },
+      {
+        "organization": "Marine Mammal Commission",
+        "model": "Ridge",
+        "actual": 98.056361,
+        "predicted": 93.81636312517968,
+        "baseline": 97.986588
+      },
+      {
+        "organization": "Merit Systems Protection Board",
+        "model": "Ridge",
+        "actual": 69.836412,
+        "predicted": 71.97132031620839,
+        "baseline": 71.466414
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "model": "Ridge",
+        "actual": 73.370837,
+        "predicted": 73.92800732026024,
+        "baseline": 73.332818
+      },
+      {
+        "organization": "National Capital Planning Commission",
+        "model": "Ridge",
+        "actual": 84.373186,
+        "predicted": 84.87193671909941,
+        "baseline": 86.212377
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "model": "Ridge",
+        "actual": 80.042401,
+        "predicted": 77.23203901937893,
+        "baseline": 77.116472
+      },
+      {
+        "organization": "National Endowment for the Arts",
+        "model": "Ridge",
+        "actual": 72.250251,
+        "predicted": 74.74903186020373,
+        "baseline": 74.350419
+      },
+      {
+        "organization": "National Endowment for the Humanities",
+        "model": "Ridge",
+        "actual": 86.031928,
+        "predicted": 85.0539322896559,
+        "baseline": 86.363186
+      },
+      {
+        "organization": "National Gallery of Art",
+        "model": "Ridge",
+        "actual": 68.692025,
+        "predicted": 69.67680279678838,
+        "baseline": 67.683555
+      },
+      {
+        "organization": "National Indian Gaming Commission",
+        "model": "Ridge",
+        "actual": 88.866532,
+        "predicted": 87.27170400448725,
+        "baseline": 89.101499
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "model": "Ridge",
+        "actual": 72.058103,
+        "predicted": 77.3477739785689,
+        "baseline": 77.748124
+      },
+      {
+        "organization": "National Mediation Board",
+        "model": "Ridge",
+        "actual": 64.072269,
+        "predicted": 69.634487980619,
+        "baseline": 67.269172
+      },
+      {
+        "organization": "National Science Foundation",
+        "model": "Ridge",
+        "actual": 72.921352,
+        "predicted": 78.50655982175223,
+        "baseline": 78.649535
+      },
+      {
+        "organization": "National Transportation Safety Board",
+        "model": "Ridge",
+        "actual": 72.461217,
+        "predicted": 72.53890350884512,
+        "baseline": 71.107024
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "model": "Ridge",
+        "actual": 75.262736,
+        "predicted": 74.70201622796912,
+        "baseline": 74.426799
+      },
+      {
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "model": "Ridge",
+        "actual": 70.243148,
+        "predicted": 71.63832600294744,
+        "baseline": 70.096473
+      },
+      {
+        "organization": "Occupational Safety and Health Review Commission",
+        "model": "Ridge",
+        "actual": 94.912725,
+        "predicted": 92.38627904643673,
+        "baseline": 96.216812
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "model": "Ridge",
+        "actual": 81.851967,
+        "predicted": 78.72441525559944,
+        "baseline": 79.031659
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "model": "Ridge",
+        "actual": 80.023419,
+        "predicted": 79.28274087645333,
+        "baseline": 79.705074
+      },
+      {
+        "organization": "Office of the U.S. Trade Representative",
+        "model": "Ridge",
+        "actual": 65.2035,
+        "predicted": 71.16816379810766,
+        "baseline": 69.809448
+      },
+      {
+        "organization": "Peace Corps",
+        "model": "Ridge",
+        "actual": 74.844826,
+        "predicted": 74.69546917844553,
+        "baseline": 73.562934
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "model": "Ridge",
+        "actual": 88.960446,
+        "predicted": 85.44579072296406,
+        "baseline": 87.205096
+      },
+      {
+        "organization": "Postal Regulatory Commission",
+        "model": "Ridge",
+        "actual": 82.246889,
+        "predicted": 87.3679964344941,
+        "baseline": 89.65428
+      },
+      {
+        "organization": "Privacy and Civil Liberties Oversight Board",
+        "model": "Ridge",
+        "actual": 81.091228,
+        "predicted": 43.88374830278637,
+        "baseline": 34.971528
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "model": "Ridge",
+        "actual": 77.444791,
+        "predicted": 76.87151197020734,
+        "baseline": 76.503406
+      },
+      {
+        "organization": "Selective Service System",
+        "model": "Ridge",
+        "actual": 74.772565,
+        "predicted": 79.98797101800027,
+        "baseline": 80.280954
+      },
+      {
+        "organization": "Small Business Administration",
+        "model": "Ridge",
+        "actual": 78.740506,
+        "predicted": 78.57168719790678,
+        "baseline": 78.583804
+      },
+      {
+        "organization": "Social Security Administration",
+        "model": "Ridge",
+        "actual": 68.419714,
+        "predicted": 67.22034355158927,
+        "baseline": 65.046148
+      },
+      {
+        "organization": "Surface Transportation Board",
+        "model": "Ridge",
+        "actual": 81.619472,
+        "predicted": 78.65153574467226,
+        "baseline": 79.343563
+      },
+      {
+        "organization": "U.S. Access Board",
+        "model": "Ridge",
+        "actual": 64.881849,
+        "predicted": 73.64472103923137,
+        "baseline": 71.762723
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "model": "Ridge",
+        "actual": 69.929538,
+        "predicted": 71.72352374948079,
+        "baseline": 69.747767
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "model": "Ridge",
+        "actual": 69.884226,
+        "predicted": 71.3916272818323,
+        "baseline": 69.911679
+      },
+      {
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "model": "Ridge",
+        "actual": 69.859982,
+        "predicted": 70.51281332734054,
+        "baseline": 69.342144
+      },
+      {
+        "organization": "U.S. International Development Finance Corporation",
+        "model": "Ridge",
+        "actual": 73.829288,
+        "predicted": 71.36988658462481,
+        "baseline": 70.477083
+      },
+      {
+        "organization": "U.S. International Trade Commission",
+        "model": "Ridge",
+        "actual": 80.090134,
+        "predicted": 78.62562617199004,
+        "baseline": 79.203546
+      },
+      {
+        "organization": "U.S. Office of Government Ethics",
+        "model": "Ridge",
+        "actual": 90.140695,
+        "predicted": 87.47605476439455,
+        "baseline": 90.305077
+      },
+      {
+        "organization": "U.S. Office of Special Counsel",
+        "model": "Ridge",
+        "actual": 85.724666,
+        "predicted": 85.9894174123527,
+        "baseline": 88.117921
+      },
+      {
+        "organization": "U.S. Trade and Development Agency",
+        "model": "Ridge",
+        "actual": 85.219644,
+        "predicted": 86.33634082598674,
+        "baseline": 88.69963
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "model": "Ridge",
+        "actual": 73.440435,
+        "predicted": 74.39317289722445,
+        "baseline": 73.705671
+      },
+      {
+        "organization": "United States Department of the Army",
+        "model": "Ridge",
+        "actual": 75.208411,
+        "predicted": 74.1545289107323,
+        "baseline": 73.268752
+      },
+      {
+        "organization": "United States Department of the Navy",
+        "model": "Ridge",
+        "actual": 74.206142,
+        "predicted": 73.0430013889866,
+        "baseline": 72.137174
+      },
+      {
+        "organization": "AbilityOne Commission",
+        "model": "Elastic net",
+        "actual": 70.069957,
+        "predicted": 69.71667416935351,
+        "baseline": 67.410595
+      },
+      {
+        "organization": "Advisory Council on Historic Preservation",
+        "model": "Elastic net",
+        "actual": 66.05174,
+        "predicted": 82.87378223764097,
+        "baseline": 84.125991
+      },
+      {
+        "organization": "African Development Foundation",
+        "model": "Elastic net",
+        "actual": 85.170497,
+        "predicted": 74.85096664846338,
+        "baseline": 74.516591
+      },
+      {
+        "organization": "American Battle Monuments Commission",
+        "model": "Elastic net",
+        "actual": 72.458096,
+        "predicted": 64.74943060431055,
+        "baseline": 60.59109
+      },
+      {
+        "organization": "Commission on Civil Rights",
+        "model": "Elastic net",
+        "actual": 59.82732,
+        "predicted": 73.74375943530924,
+        "baseline": 71.91875
+      },
+      {
+        "organization": "Commodity Futures Trading Commission",
+        "model": "Elastic net",
+        "actual": 73.400484,
+        "predicted": 72.27215198542373,
+        "baseline": 70.785268
+      },
+      {
+        "organization": "Consumer Product Safety Commission",
+        "model": "Elastic net",
+        "actual": 79.741247,
+        "predicted": 76.39904928821977,
+        "baseline": 76.322349
+      },
+      {
+        "organization": "Corporation for National and Community Service",
+        "model": "Elastic net",
+        "actual": 82.419883,
+        "predicted": 78.33713461984726,
+        "baseline": 79.297023
+      },
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "model": "Elastic net",
+        "actual": 69.042119,
+        "predicted": 70.95135898097969,
+        "baseline": 69.550309
+      },
+      {
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "model": "Elastic net",
+        "actual": 79.524619,
+        "predicted": 81.56232215831363,
+        "baseline": 82.538728
+      },
+      {
+        "organization": "Department of Agriculture",
+        "model": "Elastic net",
+        "actual": 72.93029,
+        "predicted": 72.36233026818662,
+        "baseline": 71.604944
+      },
+      {
+        "organization": "Department of Commerce",
+        "model": "Elastic net",
+        "actual": 76.512831,
+        "predicted": 76.05980704978094,
+        "baseline": 75.977209
+      },
+      {
+        "organization": "Department of Education",
+        "model": "Elastic net",
+        "actual": 74.603856,
+        "predicted": 76.3196912533462,
+        "baseline": 76.356104
+      },
+      {
+        "organization": "Department of Energy",
+        "model": "Elastic net",
+        "actual": 79.840176,
+        "predicted": 78.85066962506147,
+        "baseline": 79.206557
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "model": "Elastic net",
+        "actual": 78.671859,
+        "predicted": 77.98202730418703,
+        "baseline": 78.14407
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "model": "Elastic net",
+        "actual": 68.79855,
+        "predicted": 69.06785913397815,
+        "baseline": 66.93375
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "model": "Elastic net",
+        "actual": 76.149513,
+        "predicted": 77.43228953582808,
+        "baseline": 77.467012
+      },
+      {
+        "organization": "Department of Justice",
+        "model": "Elastic net",
+        "actual": 67.62958,
+        "predicted": 67.43894735441106,
+        "baseline": 65.032644
+      },
+      {
+        "organization": "Department of Labor",
+        "model": "Elastic net",
+        "actual": 76.590049,
+        "predicted": 76.48399270716678,
+        "baseline": 76.399209
+      },
+      {
+        "organization": "Department of State",
+        "model": "Elastic net",
+        "actual": 70.501606,
+        "predicted": 70.57214042096427,
+        "baseline": 69.023373
+      },
+      {
+        "organization": "Department of Transportation",
+        "model": "Elastic net",
+        "actual": 73.508332,
+        "predicted": 74.29042947026251,
+        "baseline": 73.437136
+      },
+      {
+        "organization": "Department of the Interior",
+        "model": "Elastic net",
+        "actual": 73.064337,
+        "predicted": 73.21075564259952,
+        "baseline": 72.265192
+      },
+      {
+        "organization": "Department of the Treasury",
+        "model": "Elastic net",
+        "actual": 74.286652,
+        "predicted": 74.2600837579297,
+        "baseline": 73.727152
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "model": "Elastic net",
+        "actual": 80.696705,
+        "predicted": 78.9445931240035,
+        "baseline": 79.236417
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "model": "Elastic net",
+        "actual": 79.081448,
+        "predicted": 78.22708139140038,
+        "baseline": 78.634077
+      },
+      {
+        "organization": "Export-Import Bank of the United States",
+        "model": "Elastic net",
+        "actual": 63.119735,
+        "predicted": 66.03431177738294,
+        "baseline": 64.891409
+      },
+      {
+        "organization": "Farm Credit Administration",
+        "model": "Elastic net",
+        "actual": 81.661059,
+        "predicted": 82.60458225988066,
+        "baseline": 84.170203
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "model": "Elastic net",
+        "actual": 78.798674,
+        "predicted": 76.44498434388522,
+        "baseline": 76.149919
+      },
+      {
+        "organization": "Federal Election Commission",
+        "model": "Elastic net",
+        "actual": 73.707994,
+        "predicted": 73.66406603264038,
+        "baseline": 74.117962
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "model": "Elastic net",
+        "actual": 85.671379,
+        "predicted": 81.7990658324938,
+        "baseline": 83.079441
+      },
+      {
+        "organization": "Federal Housing Finance Agency",
+        "model": "Elastic net",
+        "actual": 70.74043,
+        "predicted": 71.66475099875312,
+        "baseline": 70.751987
+      },
+      {
+        "organization": "Federal Labor Relations Authority",
+        "model": "Elastic net",
+        "actual": 85.027109,
+        "predicted": 83.01718504644181,
+        "baseline": 84.317485
+      },
+      {
+        "organization": "Federal Maritime Commission",
+        "model": "Elastic net",
+        "actual": 63.627229,
+        "predicted": 72.26467552362347,
+        "baseline": 70.778145
+      },
+      {
+        "organization": "Federal Mediation and Conciliation Service",
+        "model": "Elastic net",
+        "actual": 70.151788,
+        "predicted": 66.80731363006808,
+        "baseline": 63.501525
+      },
+      {
+        "organization": "Federal Retirement Thrift Investment Board",
+        "model": "Elastic net",
+        "actual": 76.683037,
+        "predicted": 77.03406637232285,
+        "baseline": 77.224295
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "model": "Elastic net",
+        "actual": 80.257961,
+        "predicted": 77.8468678674492,
+        "baseline": 78.712089
+      },
+      {
+        "organization": "General Services Administration",
+        "model": "Elastic net",
+        "actual": 85.595863,
+        "predicted": 83.26081579164807,
+        "baseline": 84.65503
+      },
+      {
+        "organization": "Institute of Museum and Library Services",
+        "model": "Elastic net",
+        "actual": 82.335445,
+        "predicted": 74.78098622688303,
+        "baseline": 74.109705
+      },
+      {
+        "organization": "Inter-American Foundation",
+        "model": "Elastic net",
+        "actual": 46.190933,
+        "predicted": 70.5828094449413,
+        "baseline": 69.060956
+      },
+      {
+        "organization": "International Boundary and Water Commission",
+        "model": "Elastic net",
+        "actual": 70.38871,
+        "predicted": 71.5921099813389,
+        "baseline": 69.872591
+      },
+      {
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "model": "Elastic net",
+        "actual": 55.417321,
+        "predicted": 60.46736074052025,
+        "baseline": 56.083234
+      },
+      {
+        "organization": "Marine Mammal Commission",
+        "model": "Elastic net",
+        "actual": 98.056361,
+        "predicted": 93.3875835251724,
+        "baseline": 97.986588
+      },
+      {
+        "organization": "Merit Systems Protection Board",
+        "model": "Elastic net",
+        "actual": 69.836412,
+        "predicted": 72.04170047723285,
+        "baseline": 71.466414
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "model": "Elastic net",
+        "actual": 73.370837,
+        "predicted": 73.83596718352737,
+        "baseline": 73.332818
+      },
+      {
+        "organization": "National Capital Planning Commission",
+        "model": "Elastic net",
+        "actual": 84.373186,
+        "predicted": 84.39917869073429,
+        "baseline": 86.212377
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "model": "Elastic net",
+        "actual": 80.042401,
+        "predicted": 77.13061124265225,
+        "baseline": 77.116472
+      },
+      {
+        "organization": "National Endowment for the Arts",
+        "model": "Elastic net",
+        "actual": 72.250251,
+        "predicted": 74.89283328276136,
+        "baseline": 74.350419
+      },
+      {
+        "organization": "National Endowment for the Humanities",
+        "model": "Elastic net",
+        "actual": 86.031928,
+        "predicted": 85.00894216509022,
+        "baseline": 86.363186
+      },
+      {
+        "organization": "National Gallery of Art",
+        "model": "Elastic net",
+        "actual": 68.692025,
+        "predicted": 69.6683607208642,
+        "baseline": 67.683555
+      },
+      {
+        "organization": "National Indian Gaming Commission",
+        "model": "Elastic net",
+        "actual": 88.866532,
+        "predicted": 87.13637114845025,
+        "baseline": 89.101499
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "model": "Elastic net",
+        "actual": 72.058103,
+        "predicted": 77.09392979465795,
+        "baseline": 77.748124
+      },
+      {
+        "organization": "National Mediation Board",
+        "model": "Elastic net",
+        "actual": 64.072269,
+        "predicted": 69.5498406271313,
+        "baseline": 67.269172
+      },
+      {
+        "organization": "National Science Foundation",
+        "model": "Elastic net",
+        "actual": 72.921352,
+        "predicted": 78.4951891616069,
+        "baseline": 78.649535
+      },
+      {
+        "organization": "National Transportation Safety Board",
+        "model": "Elastic net",
+        "actual": 72.461217,
+        "predicted": 72.651359372126,
+        "baseline": 71.107024
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "model": "Elastic net",
+        "actual": 75.262736,
+        "predicted": 74.68010965922947,
+        "baseline": 74.426799
+      },
+      {
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "model": "Elastic net",
+        "actual": 70.243148,
+        "predicted": 71.58143186434211,
+        "baseline": 70.096473
+      },
+      {
+        "organization": "Occupational Safety and Health Review Commission",
+        "model": "Elastic net",
+        "actual": 94.912725,
+        "predicted": 92.05776926765625,
+        "baseline": 96.216812
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "model": "Elastic net",
+        "actual": 81.851967,
+        "predicted": 78.60914504492749,
+        "baseline": 79.031659
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "model": "Elastic net",
+        "actual": 80.023419,
+        "predicted": 79.13569007298914,
+        "baseline": 79.705074
+      },
+      {
+        "organization": "Office of the U.S. Trade Representative",
+        "model": "Elastic net",
+        "actual": 65.2035,
+        "predicted": 71.04106467998653,
+        "baseline": 69.809448
+      },
+      {
+        "organization": "Peace Corps",
+        "model": "Elastic net",
+        "actual": 74.844826,
+        "predicted": 74.72575355489741,
+        "baseline": 73.562934
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "model": "Elastic net",
+        "actual": 88.960446,
+        "predicted": 85.29454381575171,
+        "baseline": 87.205096
+      },
+      {
+        "organization": "Postal Regulatory Commission",
+        "model": "Elastic net",
+        "actual": 82.246889,
+        "predicted": 87.21949758418135,
+        "baseline": 89.65428
+      },
+      {
+        "organization": "Privacy and Civil Liberties Oversight Board",
+        "model": "Elastic net",
+        "actual": 81.091228,
+        "predicted": 44.18705595964366,
+        "baseline": 34.971528
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "model": "Elastic net",
+        "actual": 77.444791,
+        "predicted": 76.71909538229686,
+        "baseline": 76.503406
+      },
+      {
+        "organization": "Selective Service System",
+        "model": "Elastic net",
+        "actual": 74.772565,
+        "predicted": 79.74620845026212,
+        "baseline": 80.280954
+      },
+      {
+        "organization": "Small Business Administration",
+        "model": "Elastic net",
+        "actual": 78.740506,
+        "predicted": 78.42732100203982,
+        "baseline": 78.583804
+      },
+      {
+        "organization": "Social Security Administration",
+        "model": "Elastic net",
+        "actual": 68.419714,
+        "predicted": 67.09270428422889,
+        "baseline": 65.046148
+      },
+      {
+        "organization": "Surface Transportation Board",
+        "model": "Elastic net",
+        "actual": 81.619472,
+        "predicted": 78.51826806140194,
+        "baseline": 79.343563
+      },
+      {
+        "organization": "U.S. Access Board",
+        "model": "Elastic net",
+        "actual": 64.881849,
+        "predicted": 73.54093944301275,
+        "baseline": 71.762723
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "model": "Elastic net",
+        "actual": 69.929538,
+        "predicted": 71.75468508723459,
+        "baseline": 69.747767
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "model": "Elastic net",
+        "actual": 69.884226,
+        "predicted": 71.33941704935904,
+        "baseline": 69.911679
+      },
+      {
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "model": "Elastic net",
+        "actual": 69.859982,
+        "predicted": 70.25631927180605,
+        "baseline": 69.342144
+      },
+      {
+        "organization": "U.S. International Development Finance Corporation",
+        "model": "Elastic net",
+        "actual": 73.829288,
+        "predicted": 71.32789683411313,
+        "baseline": 70.477083
+      },
+      {
+        "organization": "U.S. International Trade Commission",
+        "model": "Elastic net",
+        "actual": 80.090134,
+        "predicted": 78.46540917162949,
+        "baseline": 79.203546
+      },
+      {
+        "organization": "U.S. Office of Government Ethics",
+        "model": "Elastic net",
+        "actual": 90.140695,
+        "predicted": 87.20960548776861,
+        "baseline": 90.305077
+      },
+      {
+        "organization": "U.S. Office of Special Counsel",
+        "model": "Elastic net",
+        "actual": 85.724666,
+        "predicted": 85.80199434856034,
+        "baseline": 88.117921
+      },
+      {
+        "organization": "U.S. Trade and Development Agency",
+        "model": "Elastic net",
+        "actual": 85.219644,
+        "predicted": 85.89395940749128,
+        "baseline": 88.69963
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "model": "Elastic net",
+        "actual": 73.440435,
+        "predicted": 74.27640339442276,
+        "baseline": 73.705671
+      },
+      {
+        "organization": "United States Department of the Army",
+        "model": "Elastic net",
+        "actual": 75.208411,
+        "predicted": 74.0781282249943,
+        "baseline": 73.268752
+      },
+      {
+        "organization": "United States Department of the Navy",
+        "model": "Elastic net",
+        "actual": 74.206142,
+        "predicted": 72.96426363088337,
+        "baseline": 72.137174
+      },
+      {
+        "organization": "AbilityOne Commission",
+        "model": "Random forest",
+        "actual": 70.069957,
+        "predicted": 67.82753041004939,
+        "baseline": 67.410595
+      },
+      {
+        "organization": "Advisory Council on Historic Preservation",
+        "model": "Random forest",
+        "actual": 66.05174,
+        "predicted": 84.54922972772309,
+        "baseline": 84.125991
+      },
+      {
+        "organization": "African Development Foundation",
+        "model": "Random forest",
+        "actual": 85.170497,
+        "predicted": 75.01296649013662,
+        "baseline": 74.516591
+      },
+      {
+        "organization": "American Battle Monuments Commission",
+        "model": "Random forest",
+        "actual": 72.458096,
+        "predicted": 65.61236763430342,
+        "baseline": 60.59109
+      },
+      {
+        "organization": "Commission on Civil Rights",
+        "model": "Random forest",
+        "actual": 59.82732,
+        "predicted": 73.3109710034688,
+        "baseline": 71.91875
+      },
+      {
+        "organization": "Commodity Futures Trading Commission",
+        "model": "Random forest",
+        "actual": 73.400484,
+        "predicted": 70.88520938645775,
+        "baseline": 70.785268
+      },
+      {
+        "organization": "Consumer Product Safety Commission",
+        "model": "Random forest",
+        "actual": 79.741247,
+        "predicted": 74.79833822673311,
+        "baseline": 76.322349
+      },
+      {
+        "organization": "Corporation for National and Community Service",
+        "model": "Random forest",
+        "actual": 82.419883,
+        "predicted": 76.67939935083162,
+        "baseline": 79.297023
+      },
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "model": "Random forest",
+        "actual": 69.042119,
+        "predicted": 70.68688369992047,
+        "baseline": 69.550309
+      },
+      {
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "model": "Random forest",
+        "actual": 79.524619,
+        "predicted": 84.82580523297621,
+        "baseline": 82.538728
+      },
+      {
+        "organization": "Department of Agriculture",
+        "model": "Random forest",
+        "actual": 72.93029,
+        "predicted": 73.15841439433116,
+        "baseline": 71.604944
+      },
+      {
+        "organization": "Department of Commerce",
+        "model": "Random forest",
+        "actual": 76.512831,
+        "predicted": 75.57479972631705,
+        "baseline": 75.977209
+      },
+      {
+        "organization": "Department of Education",
+        "model": "Random forest",
+        "actual": 74.603856,
+        "predicted": 74.96469468722583,
+        "baseline": 76.356104
+      },
+      {
+        "organization": "Department of Energy",
+        "model": "Random forest",
+        "actual": 79.840176,
+        "predicted": 79.74275274192418,
+        "baseline": 79.206557
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "model": "Random forest",
+        "actual": 78.671859,
+        "predicted": 76.40214037996631,
+        "baseline": 78.14407
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "model": "Random forest",
+        "actual": 68.79855,
+        "predicted": 68.10848609848748,
+        "baseline": 66.93375
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "model": "Random forest",
+        "actual": 76.149513,
+        "predicted": 76.26539407243096,
+        "baseline": 77.467012
+      },
+      {
+        "organization": "Department of Justice",
+        "model": "Random forest",
+        "actual": 67.62958,
+        "predicted": 65.60086815395334,
+        "baseline": 65.032644
+      },
+      {
+        "organization": "Department of Labor",
+        "model": "Random forest",
+        "actual": 76.590049,
+        "predicted": 75.32982713738802,
+        "baseline": 76.399209
+      },
+      {
+        "organization": "Department of State",
+        "model": "Random forest",
+        "actual": 70.501606,
+        "predicted": 69.24261778787184,
+        "baseline": 69.023373
+      },
+      {
+        "organization": "Department of Transportation",
+        "model": "Random forest",
+        "actual": 73.508332,
+        "predicted": 75.13212082696053,
+        "baseline": 73.437136
+      },
+      {
+        "organization": "Department of the Interior",
+        "model": "Random forest",
+        "actual": 73.064337,
+        "predicted": 71.81323317817876,
+        "baseline": 72.265192
+      },
+      {
+        "organization": "Department of the Treasury",
+        "model": "Random forest",
+        "actual": 74.286652,
+        "predicted": 73.55241745522027,
+        "baseline": 73.727152
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "model": "Random forest",
+        "actual": 80.696705,
+        "predicted": 79.97240644440399,
+        "baseline": 79.236417
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "model": "Random forest",
+        "actual": 79.081448,
+        "predicted": 77.2112028386742,
+        "baseline": 78.634077
+      },
+      {
+        "organization": "Export-Import Bank of the United States",
+        "model": "Random forest",
+        "actual": 63.119735,
+        "predicted": 69.65855087918227,
+        "baseline": 64.891409
+      },
+      {
+        "organization": "Farm Credit Administration",
+        "model": "Random forest",
+        "actual": 81.661059,
+        "predicted": 84.47441561623543,
+        "baseline": 84.170203
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "model": "Random forest",
+        "actual": 78.798674,
+        "predicted": 75.38201796459904,
+        "baseline": 76.149919
+      },
+      {
+        "organization": "Federal Election Commission",
+        "model": "Random forest",
+        "actual": 73.707994,
+        "predicted": 73.65232328698053,
+        "baseline": 74.117962
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "model": "Random forest",
+        "actual": 85.671379,
+        "predicted": 82.82799136931203,
+        "baseline": 83.079441
+      },
+      {
+        "organization": "Federal Housing Finance Agency",
+        "model": "Random forest",
+        "actual": 70.74043,
+        "predicted": 71.50481674306437,
+        "baseline": 70.751987
+      },
+      {
+        "organization": "Federal Labor Relations Authority",
+        "model": "Random forest",
+        "actual": 85.027109,
+        "predicted": 81.89541113836985,
+        "baseline": 84.317485
+      },
+      {
+        "organization": "Federal Maritime Commission",
+        "model": "Random forest",
+        "actual": 63.627229,
+        "predicted": 72.3861353956476,
+        "baseline": 70.778145
+      },
+      {
+        "organization": "Federal Mediation and Conciliation Service",
+        "model": "Random forest",
+        "actual": 70.151788,
+        "predicted": 68.20028542846272,
+        "baseline": 63.501525
+      },
+      {
+        "organization": "Federal Retirement Thrift Investment Board",
+        "model": "Random forest",
+        "actual": 76.683037,
+        "predicted": 75.48153937529412,
+        "baseline": 77.224295
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "model": "Random forest",
+        "actual": 80.257961,
+        "predicted": 75.30081322782623,
+        "baseline": 78.712089
+      },
+      {
+        "organization": "General Services Administration",
+        "model": "Random forest",
+        "actual": 85.595863,
+        "predicted": 83.82137723161273,
+        "baseline": 84.65503
+      },
+      {
+        "organization": "Institute of Museum and Library Services",
+        "model": "Random forest",
+        "actual": 82.335445,
+        "predicted": 73.06257683819253,
+        "baseline": 74.109705
+      },
+      {
+        "organization": "Inter-American Foundation",
+        "model": "Random forest",
+        "actual": 46.190933,
+        "predicted": 68.77246199815346,
+        "baseline": 69.060956
+      },
+      {
+        "organization": "International Boundary and Water Commission",
+        "model": "Random forest",
+        "actual": 70.38871,
+        "predicted": 71.88201209958335,
+        "baseline": 69.872591
+      },
+      {
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "model": "Random forest",
+        "actual": 55.417321,
+        "predicted": 64.0973203205694,
+        "baseline": 56.083234
+      },
+      {
+        "organization": "Marine Mammal Commission",
+        "model": "Random forest",
+        "actual": 98.056361,
+        "predicted": 96.017994848509,
+        "baseline": 97.986588
+      },
+      {
+        "organization": "Merit Systems Protection Board",
+        "model": "Random forest",
+        "actual": 69.836412,
+        "predicted": 71.28260808792048,
+        "baseline": 71.466414
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "model": "Random forest",
+        "actual": 73.370837,
+        "predicted": 73.80216042061244,
+        "baseline": 73.332818
+      },
+      {
+        "organization": "National Capital Planning Commission",
+        "model": "Random forest",
+        "actual": 84.373186,
+        "predicted": 82.84023227794921,
+        "baseline": 86.212377
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "model": "Random forest",
+        "actual": 80.042401,
+        "predicted": 76.85843164452848,
+        "baseline": 77.116472
+      },
+      {
+        "organization": "National Endowment for the Arts",
+        "model": "Random forest",
+        "actual": 72.250251,
+        "predicted": 74.82029309125059,
+        "baseline": 74.350419
+      },
+      {
+        "organization": "National Endowment for the Humanities",
+        "model": "Random forest",
+        "actual": 86.031928,
+        "predicted": 86.85850721414545,
+        "baseline": 86.363186
+      },
+      {
+        "organization": "National Gallery of Art",
+        "model": "Random forest",
+        "actual": 68.692025,
+        "predicted": 67.47470722961046,
+        "baseline": 67.683555
+      },
+      {
+        "organization": "National Indian Gaming Commission",
+        "model": "Random forest",
+        "actual": 88.866532,
+        "predicted": 91.71220247346959,
+        "baseline": 89.101499
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "model": "Random forest",
+        "actual": 72.058103,
+        "predicted": 77.16303853753196,
+        "baseline": 77.748124
+      },
+      {
+        "organization": "National Mediation Board",
+        "model": "Random forest",
+        "actual": 64.072269,
+        "predicted": 65.67461724167234,
+        "baseline": 67.269172
+      },
+      {
+        "organization": "National Science Foundation",
+        "model": "Random forest",
+        "actual": 72.921352,
+        "predicted": 79.21146271938622,
+        "baseline": 78.649535
+      },
+      {
+        "organization": "National Transportation Safety Board",
+        "model": "Random forest",
+        "actual": 72.461217,
+        "predicted": 72.6373662251683,
+        "baseline": 71.107024
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "model": "Random forest",
+        "actual": 75.262736,
+        "predicted": 73.65365319559166,
+        "baseline": 74.426799
+      },
+      {
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "model": "Random forest",
+        "actual": 70.243148,
+        "predicted": 70.99789071007257,
+        "baseline": 70.096473
+      },
+      {
+        "organization": "Occupational Safety and Health Review Commission",
+        "model": "Random forest",
+        "actual": 94.912725,
+        "predicted": 95.01314198401259,
+        "baseline": 96.216812
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "model": "Random forest",
+        "actual": 81.851967,
+        "predicted": 79.39988135078386,
+        "baseline": 79.031659
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "model": "Random forest",
+        "actual": 80.023419,
+        "predicted": 81.24141041330648,
+        "baseline": 79.705074
+      },
+      {
+        "organization": "Office of the U.S. Trade Representative",
+        "model": "Random forest",
+        "actual": 65.2035,
+        "predicted": 71.54228277005897,
+        "baseline": 69.809448
+      },
+      {
+        "organization": "Peace Corps",
+        "model": "Random forest",
+        "actual": 74.844826,
+        "predicted": 74.64068513215669,
+        "baseline": 73.562934
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "model": "Random forest",
+        "actual": 88.960446,
+        "predicted": 85.77464008905838,
+        "baseline": 87.205096
+      },
+      {
+        "organization": "Postal Regulatory Commission",
+        "model": "Random forest",
+        "actual": 82.246889,
+        "predicted": 90.93588172668224,
+        "baseline": 89.65428
+      },
+      {
+        "organization": "Privacy and Civil Liberties Oversight Board",
+        "model": "Random forest",
+        "actual": 81.091228,
+        "predicted": 60.9960603812728,
+        "baseline": 34.971528
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "model": "Random forest",
+        "actual": 77.444791,
+        "predicted": 75.11534372561881,
+        "baseline": 76.503406
+      },
+      {
+        "organization": "Selective Service System",
+        "model": "Random forest",
+        "actual": 74.772565,
+        "predicted": 79.7312421967631,
+        "baseline": 80.280954
+      },
+      {
+        "organization": "Small Business Administration",
+        "model": "Random forest",
+        "actual": 78.740506,
+        "predicted": 78.56642327547142,
+        "baseline": 78.583804
+      },
+      {
+        "organization": "Social Security Administration",
+        "model": "Random forest",
+        "actual": 68.419714,
+        "predicted": 64.83565662286104,
+        "baseline": 65.046148
+      },
+      {
+        "organization": "Surface Transportation Board",
+        "model": "Random forest",
+        "actual": 81.619472,
+        "predicted": 78.97593300740344,
+        "baseline": 79.343563
+      },
+      {
+        "organization": "U.S. Access Board",
+        "model": "Random forest",
+        "actual": 64.881849,
+        "predicted": 73.89544708134952,
+        "baseline": 71.762723
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "model": "Random forest",
+        "actual": 69.929538,
+        "predicted": 71.86379074504774,
+        "baseline": 69.747767
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "model": "Random forest",
+        "actual": 69.884226,
+        "predicted": 71.93646226533396,
+        "baseline": 69.911679
+      },
+      {
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "model": "Random forest",
+        "actual": 69.859982,
+        "predicted": 68.59661175913638,
+        "baseline": 69.342144
+      },
+      {
+        "organization": "U.S. International Development Finance Corporation",
+        "model": "Random forest",
+        "actual": 73.829288,
+        "predicted": 70.17784231092696,
+        "baseline": 70.477083
+      },
+      {
+        "organization": "U.S. International Trade Commission",
+        "model": "Random forest",
+        "actual": 80.090134,
+        "predicted": 76.72128210489997,
+        "baseline": 79.203546
+      },
+      {
+        "organization": "U.S. Office of Government Ethics",
+        "model": "Random forest",
+        "actual": 90.140695,
+        "predicted": 88.65519171198349,
+        "baseline": 90.305077
+      },
+      {
+        "organization": "U.S. Office of Special Counsel",
+        "model": "Random forest",
+        "actual": 85.724666,
+        "predicted": 86.7389544934749,
+        "baseline": 88.117921
+      },
+      {
+        "organization": "U.S. Trade and Development Agency",
+        "model": "Random forest",
+        "actual": 85.219644,
+        "predicted": 85.17443160824256,
+        "baseline": 88.69963
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "model": "Random forest",
+        "actual": 73.440435,
+        "predicted": 73.17890962429422,
+        "baseline": 73.705671
+      },
+      {
+        "organization": "United States Department of the Army",
+        "model": "Random forest",
+        "actual": 75.208411,
+        "predicted": 72.33056373526502,
+        "baseline": 73.268752
+      },
+      {
+        "organization": "United States Department of the Navy",
+        "model": "Random forest",
+        "actual": 74.206142,
+        "predicted": 72.79351321108086,
+        "baseline": 72.137174
+      },
+      {
+        "organization": "AbilityOne Commission",
+        "model": "Extra trees",
+        "actual": 70.069957,
+        "predicted": 68.20540017722747,
+        "baseline": 67.410595
+      },
+      {
+        "organization": "Advisory Council on Historic Preservation",
+        "model": "Extra trees",
+        "actual": 66.05174,
+        "predicted": 83.78606065970668,
+        "baseline": 84.125991
+      },
+      {
+        "organization": "African Development Foundation",
+        "model": "Extra trees",
+        "actual": 85.170497,
+        "predicted": 74.72825706452619,
+        "baseline": 74.516591
+      },
+      {
+        "organization": "American Battle Monuments Commission",
+        "model": "Extra trees",
+        "actual": 72.458096,
+        "predicted": 65.36142742115396,
+        "baseline": 60.59109
+      },
+      {
+        "organization": "Commission on Civil Rights",
+        "model": "Extra trees",
+        "actual": 59.82732,
+        "predicted": 73.39522723299709,
+        "baseline": 71.91875
+      },
+      {
+        "organization": "Commodity Futures Trading Commission",
+        "model": "Extra trees",
+        "actual": 73.400484,
+        "predicted": 71.55501398414154,
+        "baseline": 70.785268
+      },
+      {
+        "organization": "Consumer Product Safety Commission",
+        "model": "Extra trees",
+        "actual": 79.741247,
+        "predicted": 75.40363365572584,
+        "baseline": 76.322349
+      },
+      {
+        "organization": "Corporation for National and Community Service",
+        "model": "Extra trees",
+        "actual": 82.419883,
+        "predicted": 77.47639035557064,
+        "baseline": 79.297023
+      },
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "model": "Extra trees",
+        "actual": 69.042119,
+        "predicted": 70.82852829260423,
+        "baseline": 69.550309
+      },
+      {
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "model": "Extra trees",
+        "actual": 79.524619,
+        "predicted": 82.74799962773342,
+        "baseline": 82.538728
+      },
+      {
+        "organization": "Department of Agriculture",
+        "model": "Extra trees",
+        "actual": 72.93029,
+        "predicted": 72.40127589171465,
+        "baseline": 71.604944
+      },
+      {
+        "organization": "Department of Commerce",
+        "model": "Extra trees",
+        "actual": 76.512831,
+        "predicted": 75.76296739150364,
+        "baseline": 75.977209
+      },
+      {
+        "organization": "Department of Education",
+        "model": "Extra trees",
+        "actual": 74.603856,
+        "predicted": 75.62725091992213,
+        "baseline": 76.356104
+      },
+      {
+        "organization": "Department of Energy",
+        "model": "Extra trees",
+        "actual": 79.840176,
+        "predicted": 79.09653936498454,
+        "baseline": 79.206557
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "model": "Extra trees",
+        "actual": 78.671859,
+        "predicted": 77.00448924794323,
+        "baseline": 78.14407
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "model": "Extra trees",
+        "actual": 68.79855,
+        "predicted": 67.91814135781914,
+        "baseline": 66.93375
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "model": "Extra trees",
+        "actual": 76.149513,
+        "predicted": 76.57136733713084,
+        "baseline": 77.467012
+      },
+      {
+        "organization": "Department of Justice",
+        "model": "Extra trees",
+        "actual": 67.62958,
+        "predicted": 66.19996752075842,
+        "baseline": 65.032644
+      },
+      {
+        "organization": "Department of Labor",
+        "model": "Extra trees",
+        "actual": 76.590049,
+        "predicted": 75.7439243534055,
+        "baseline": 76.399209
+      },
+      {
+        "organization": "Department of State",
+        "model": "Extra trees",
+        "actual": 70.501606,
+        "predicted": 69.36789289419913,
+        "baseline": 69.023373
+      },
+      {
+        "organization": "Department of Transportation",
+        "model": "Extra trees",
+        "actual": 73.508332,
+        "predicted": 74.30867430872179,
+        "baseline": 73.437136
+      },
+      {
+        "organization": "Department of the Interior",
+        "model": "Extra trees",
+        "actual": 73.064337,
+        "predicted": 72.31127902912687,
+        "baseline": 72.265192
+      },
+      {
+        "organization": "Department of the Treasury",
+        "model": "Extra trees",
+        "actual": 74.286652,
+        "predicted": 73.96662277392574,
+        "baseline": 73.727152
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "model": "Extra trees",
+        "actual": 80.696705,
+        "predicted": 79.37117087131044,
+        "baseline": 79.236417
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "model": "Extra trees",
+        "actual": 79.081448,
+        "predicted": 77.65443816545512,
+        "baseline": 78.634077
+      },
+      {
+        "organization": "Export-Import Bank of the United States",
+        "model": "Extra trees",
+        "actual": 63.119735,
+        "predicted": 69.37688997577447,
+        "baseline": 64.891409
+      },
+      {
+        "organization": "Farm Credit Administration",
+        "model": "Extra trees",
+        "actual": 81.661059,
+        "predicted": 84.11263465810042,
+        "baseline": 84.170203
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "model": "Extra trees",
+        "actual": 78.798674,
+        "predicted": 75.73456648460619,
+        "baseline": 76.149919
+      },
+      {
+        "organization": "Federal Election Commission",
+        "model": "Extra trees",
+        "actual": 73.707994,
+        "predicted": 73.5146909466242,
+        "baseline": 74.117962
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "model": "Extra trees",
+        "actual": 85.671379,
+        "predicted": 83.41735436794367,
+        "baseline": 83.079441
+      },
+      {
+        "organization": "Federal Housing Finance Agency",
+        "model": "Extra trees",
+        "actual": 70.74043,
+        "predicted": 71.6829079582591,
+        "baseline": 70.751987
+      },
+      {
+        "organization": "Federal Labor Relations Authority",
+        "model": "Extra trees",
+        "actual": 85.027109,
+        "predicted": 82.8877509736228,
+        "baseline": 84.317485
+      },
+      {
+        "organization": "Federal Maritime Commission",
+        "model": "Extra trees",
+        "actual": 63.627229,
+        "predicted": 72.54581239033986,
+        "baseline": 70.778145
+      },
+      {
+        "organization": "Federal Mediation and Conciliation Service",
+        "model": "Extra trees",
+        "actual": 70.151788,
+        "predicted": 67.79891535819957,
+        "baseline": 63.501525
+      },
+      {
+        "organization": "Federal Retirement Thrift Investment Board",
+        "model": "Extra trees",
+        "actual": 76.683037,
+        "predicted": 76.10123245579217,
+        "baseline": 77.224295
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "model": "Extra trees",
+        "actual": 80.257961,
+        "predicted": 75.9189895711135,
+        "baseline": 78.712089
+      },
+      {
+        "organization": "General Services Administration",
+        "model": "Extra trees",
+        "actual": 85.595863,
+        "predicted": 83.93391364761862,
+        "baseline": 84.65503
+      },
+      {
+        "organization": "Institute of Museum and Library Services",
+        "model": "Extra trees",
+        "actual": 82.335445,
+        "predicted": 73.66995085972403,
+        "baseline": 74.109705
+      },
+      {
+        "organization": "Inter-American Foundation",
+        "model": "Extra trees",
+        "actual": 46.190933,
+        "predicted": 69.54323208502619,
+        "baseline": 69.060956
+      },
+      {
+        "organization": "International Boundary and Water Commission",
+        "model": "Extra trees",
+        "actual": 70.38871,
+        "predicted": 71.24987795485734,
+        "baseline": 69.872591
+      },
+      {
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "model": "Extra trees",
+        "actual": 55.417321,
+        "predicted": 64.4338706152628,
+        "baseline": 56.083234
+      },
+      {
+        "organization": "Marine Mammal Commission",
+        "model": "Extra trees",
+        "actual": 98.056361,
+        "predicted": 96.1362550824604,
+        "baseline": 97.986588
+      },
+      {
+        "organization": "Merit Systems Protection Board",
+        "model": "Extra trees",
+        "actual": 69.836412,
+        "predicted": 71.20748962618515,
+        "baseline": 71.466414
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "model": "Extra trees",
+        "actual": 73.370837,
+        "predicted": 73.26105833725765,
+        "baseline": 73.332818
+      },
+      {
+        "organization": "National Capital Planning Commission",
+        "model": "Extra trees",
+        "actual": 84.373186,
+        "predicted": 85.15317016371993,
+        "baseline": 86.212377
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "model": "Extra trees",
+        "actual": 80.042401,
+        "predicted": 76.66589378427462,
+        "baseline": 77.116472
+      },
+      {
+        "organization": "National Endowment for the Arts",
+        "model": "Extra trees",
+        "actual": 72.250251,
+        "predicted": 74.46827286437227,
+        "baseline": 74.350419
+      },
+      {
+        "organization": "National Endowment for the Humanities",
+        "model": "Extra trees",
+        "actual": 86.031928,
+        "predicted": 86.25784314951194,
+        "baseline": 86.363186
+      },
+      {
+        "organization": "National Gallery of Art",
+        "model": "Extra trees",
+        "actual": 68.692025,
+        "predicted": 68.3485371332839,
+        "baseline": 67.683555
+      },
+      {
+        "organization": "National Indian Gaming Commission",
+        "model": "Extra trees",
+        "actual": 88.866532,
+        "predicted": 88.79897720461953,
+        "baseline": 89.101499
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "model": "Extra trees",
+        "actual": 72.058103,
+        "predicted": 77.93121864252358,
+        "baseline": 77.748124
+      },
+      {
+        "organization": "National Mediation Board",
+        "model": "Extra trees",
+        "actual": 64.072269,
+        "predicted": 66.74217380402276,
+        "baseline": 67.269172
+      },
+      {
+        "organization": "National Science Foundation",
+        "model": "Extra trees",
+        "actual": 72.921352,
+        "predicted": 78.48789843277406,
+        "baseline": 78.649535
+      },
+      {
+        "organization": "National Transportation Safety Board",
+        "model": "Extra trees",
+        "actual": 72.461217,
+        "predicted": 72.0790135378703,
+        "baseline": 71.107024
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "model": "Extra trees",
+        "actual": 75.262736,
+        "predicted": 73.92603912143822,
+        "baseline": 74.426799
+      },
+      {
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "model": "Extra trees",
+        "actual": 70.243148,
+        "predicted": 71.11144804942788,
+        "baseline": 70.096473
+      },
+      {
+        "organization": "Occupational Safety and Health Review Commission",
+        "model": "Extra trees",
+        "actual": 94.912725,
+        "predicted": 94.50643385694814,
+        "baseline": 96.216812
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "model": "Extra trees",
+        "actual": 81.851967,
+        "predicted": 78.21579196240641,
+        "baseline": 79.031659
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "model": "Extra trees",
+        "actual": 80.023419,
+        "predicted": 79.27585085868415,
+        "baseline": 79.705074
+      },
+      {
+        "organization": "Office of the U.S. Trade Representative",
+        "model": "Extra trees",
+        "actual": 65.2035,
+        "predicted": 71.01903798444643,
+        "baseline": 69.809448
+      },
+      {
+        "organization": "Peace Corps",
+        "model": "Extra trees",
+        "actual": 74.844826,
+        "predicted": 74.31151980213029,
+        "baseline": 73.562934
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "model": "Extra trees",
+        "actual": 88.960446,
+        "predicted": 86.18784098845029,
+        "baseline": 87.205096
+      },
+      {
+        "organization": "Postal Regulatory Commission",
+        "model": "Extra trees",
+        "actual": 82.246889,
+        "predicted": 88.96415502655145,
+        "baseline": 89.65428
+      },
+      {
+        "organization": "Privacy and Civil Liberties Oversight Board",
+        "model": "Extra trees",
+        "actual": 81.091228,
+        "predicted": 61.72704820567478,
+        "baseline": 34.971528
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "model": "Extra trees",
+        "actual": 77.444791,
+        "predicted": 76.23619090775838,
+        "baseline": 76.503406
+      },
+      {
+        "organization": "Selective Service System",
+        "model": "Extra trees",
+        "actual": 74.772565,
+        "predicted": 80.41661317771926,
+        "baseline": 80.280954
+      },
+      {
+        "organization": "Small Business Administration",
+        "model": "Extra trees",
+        "actual": 78.740506,
+        "predicted": 78.68929951316616,
+        "baseline": 78.583804
+      },
+      {
+        "organization": "Social Security Administration",
+        "model": "Extra trees",
+        "actual": 68.419714,
+        "predicted": 65.36952524235546,
+        "baseline": 65.046148
+      },
+      {
+        "organization": "Surface Transportation Board",
+        "model": "Extra trees",
+        "actual": 81.619472,
+        "predicted": 77.96278988315935,
+        "baseline": 79.343563
+      },
+      {
+        "organization": "U.S. Access Board",
+        "model": "Extra trees",
+        "actual": 64.881849,
+        "predicted": 73.11583863895392,
+        "baseline": 71.762723
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "model": "Extra trees",
+        "actual": 69.929538,
+        "predicted": 71.40573544145332,
+        "baseline": 69.747767
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "model": "Extra trees",
+        "actual": 69.884226,
+        "predicted": 71.46437044110137,
+        "baseline": 69.911679
+      },
+      {
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "model": "Extra trees",
+        "actual": 69.859982,
+        "predicted": 69.80568888435,
+        "baseline": 69.342144
+      },
+      {
+        "organization": "U.S. International Development Finance Corporation",
+        "model": "Extra trees",
+        "actual": 73.829288,
+        "predicted": 70.65906610541526,
+        "baseline": 70.477083
+      },
+      {
+        "organization": "U.S. International Trade Commission",
+        "model": "Extra trees",
+        "actual": 80.090134,
+        "predicted": 77.32107094283626,
+        "baseline": 79.203546
+      },
+      {
+        "organization": "U.S. Office of Government Ethics",
+        "model": "Extra trees",
+        "actual": 90.140695,
+        "predicted": 88.19732278762186,
+        "baseline": 90.305077
+      },
+      {
+        "organization": "U.S. Office of Special Counsel",
+        "model": "Extra trees",
+        "actual": 85.724666,
+        "predicted": 86.68742730856697,
+        "baseline": 88.117921
+      },
+      {
+        "organization": "U.S. Trade and Development Agency",
+        "model": "Extra trees",
+        "actual": 85.219644,
+        "predicted": 86.55001030343759,
+        "baseline": 88.69963
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "model": "Extra trees",
+        "actual": 73.440435,
+        "predicted": 73.34577321642766,
+        "baseline": 73.705671
+      },
+      {
+        "organization": "United States Department of the Army",
+        "model": "Extra trees",
+        "actual": 75.208411,
+        "predicted": 72.42977200224402,
+        "baseline": 73.268752
+      },
+      {
+        "organization": "United States Department of the Navy",
+        "model": "Extra trees",
+        "actual": 74.206142,
+        "predicted": 72.7438979256074,
+        "baseline": 72.137174
+      },
+      {
+        "organization": "AbilityOne Commission",
+        "model": "Gradient boosting",
+        "actual": 70.069957,
+        "predicted": 67.62650234791602,
+        "baseline": 67.410595
+      },
+      {
+        "organization": "Advisory Council on Historic Preservation",
+        "model": "Gradient boosting",
+        "actual": 66.05174,
+        "predicted": 82.88298743134692,
+        "baseline": 84.125991
+      },
+      {
+        "organization": "African Development Foundation",
+        "model": "Gradient boosting",
+        "actual": 85.170497,
+        "predicted": 75.60232147560203,
+        "baseline": 74.516591
+      },
+      {
+        "organization": "American Battle Monuments Commission",
+        "model": "Gradient boosting",
+        "actual": 72.458096,
+        "predicted": 67.43944600932012,
+        "baseline": 60.59109
+      },
+      {
+        "organization": "Commission on Civil Rights",
+        "model": "Gradient boosting",
+        "actual": 59.82732,
+        "predicted": 72.36581922580467,
+        "baseline": 71.91875
+      },
+      {
+        "organization": "Commodity Futures Trading Commission",
+        "model": "Gradient boosting",
+        "actual": 73.400484,
+        "predicted": 71.79529573812762,
+        "baseline": 70.785268
+      },
+      {
+        "organization": "Consumer Product Safety Commission",
+        "model": "Gradient boosting",
+        "actual": 79.741247,
+        "predicted": 74.82503994661836,
+        "baseline": 76.322349
+      },
+      {
+        "organization": "Corporation for National and Community Service",
+        "model": "Gradient boosting",
+        "actual": 82.419883,
+        "predicted": 75.73425427271495,
+        "baseline": 79.297023
+      },
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "model": "Gradient boosting",
+        "actual": 69.042119,
+        "predicted": 70.50751741061337,
+        "baseline": 69.550309
+      },
+      {
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "model": "Gradient boosting",
+        "actual": 79.524619,
+        "predicted": 84.8040867515088,
+        "baseline": 82.538728
+      },
+      {
+        "organization": "Department of Agriculture",
+        "model": "Gradient boosting",
+        "actual": 72.93029,
+        "predicted": 73.13595433227037,
+        "baseline": 71.604944
+      },
+      {
+        "organization": "Department of Commerce",
+        "model": "Gradient boosting",
+        "actual": 76.512831,
+        "predicted": 75.08802765845667,
+        "baseline": 75.977209
+      },
+      {
+        "organization": "Department of Education",
+        "model": "Gradient boosting",
+        "actual": 74.603856,
+        "predicted": 74.74287279076462,
+        "baseline": 76.356104
+      },
+      {
+        "organization": "Department of Energy",
+        "model": "Gradient boosting",
+        "actual": 79.840176,
+        "predicted": 79.20792958175021,
+        "baseline": 79.206557
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "model": "Gradient boosting",
+        "actual": 78.671859,
+        "predicted": 76.08809621449457,
+        "baseline": 78.14407
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "model": "Gradient boosting",
+        "actual": 68.79855,
+        "predicted": 68.09278570580591,
+        "baseline": 66.93375
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "model": "Gradient boosting",
+        "actual": 76.149513,
+        "predicted": 75.91481712497816,
+        "baseline": 77.467012
+      },
+      {
+        "organization": "Department of Justice",
+        "model": "Gradient boosting",
+        "actual": 67.62958,
+        "predicted": 65.05924201301042,
+        "baseline": 65.032644
+      },
+      {
+        "organization": "Department of Labor",
+        "model": "Gradient boosting",
+        "actual": 76.590049,
+        "predicted": 74.91764296538818,
+        "baseline": 76.399209
+      },
+      {
+        "organization": "Department of State",
+        "model": "Gradient boosting",
+        "actual": 70.501606,
+        "predicted": 69.3399374529969,
+        "baseline": 69.023373
+      },
+      {
+        "organization": "Department of Transportation",
+        "model": "Gradient boosting",
+        "actual": 73.508332,
+        "predicted": 74.81744760694951,
+        "baseline": 73.437136
+      },
+      {
+        "organization": "Department of the Interior",
+        "model": "Gradient boosting",
+        "actual": 73.064337,
+        "predicted": 72.60720367346757,
+        "baseline": 72.265192
+      },
+      {
+        "organization": "Department of the Treasury",
+        "model": "Gradient boosting",
+        "actual": 74.286652,
+        "predicted": 74.0139503539121,
+        "baseline": 73.727152
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "model": "Gradient boosting",
+        "actual": 80.696705,
+        "predicted": 79.7899384530159,
+        "baseline": 79.236417
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "model": "Gradient boosting",
+        "actual": 79.081448,
+        "predicted": 76.08809621449457,
+        "baseline": 78.634077
+      },
+      {
+        "organization": "Export-Import Bank of the United States",
+        "model": "Gradient boosting",
+        "actual": 63.119735,
+        "predicted": 70.39733028538227,
+        "baseline": 64.891409
+      },
+      {
+        "organization": "Farm Credit Administration",
+        "model": "Gradient boosting",
+        "actual": 81.661059,
+        "predicted": 86.2182669509707,
+        "baseline": 84.170203
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "model": "Gradient boosting",
+        "actual": 78.798674,
+        "predicted": 74.9875020470418,
+        "baseline": 76.149919
+      },
+      {
+        "organization": "Federal Election Commission",
+        "model": "Gradient boosting",
+        "actual": 73.707994,
+        "predicted": 72.85375935352981,
+        "baseline": 74.117962
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "model": "Gradient boosting",
+        "actual": 85.671379,
+        "predicted": 83.67032249377007,
+        "baseline": 83.079441
+      },
+      {
+        "organization": "Federal Housing Finance Agency",
+        "model": "Gradient boosting",
+        "actual": 70.74043,
+        "predicted": 72.04897528874001,
+        "baseline": 70.751987
+      },
+      {
+        "organization": "Federal Labor Relations Authority",
+        "model": "Gradient boosting",
+        "actual": 85.027109,
+        "predicted": 82.06020919395576,
+        "baseline": 84.317485
+      },
+      {
+        "organization": "Federal Maritime Commission",
+        "model": "Gradient boosting",
+        "actual": 63.627229,
+        "predicted": 71.96403837222444,
+        "baseline": 70.778145
+      },
+      {
+        "organization": "Federal Mediation and Conciliation Service",
+        "model": "Gradient boosting",
+        "actual": 70.151788,
+        "predicted": 70.64265665809849,
+        "baseline": 63.501525
+      },
+      {
+        "organization": "Federal Retirement Thrift Investment Board",
+        "model": "Gradient boosting",
+        "actual": 76.683037,
+        "predicted": 74.69768366661633,
+        "baseline": 77.224295
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "model": "Gradient boosting",
+        "actual": 80.257961,
+        "predicted": 75.19508053715742,
+        "baseline": 78.712089
+      },
+      {
+        "organization": "General Services Administration",
+        "model": "Gradient boosting",
+        "actual": 85.595863,
+        "predicted": 83.3622221004983,
+        "baseline": 84.65503
+      },
+      {
+        "organization": "Institute of Museum and Library Services",
+        "model": "Gradient boosting",
+        "actual": 82.335445,
+        "predicted": 73.6690790510132,
+        "baseline": 74.109705
+      },
+      {
+        "organization": "Inter-American Foundation",
+        "model": "Gradient boosting",
+        "actual": 46.190933,
+        "predicted": 68.84609986359091,
+        "baseline": 69.060956
+      },
+      {
+        "organization": "International Boundary and Water Commission",
+        "model": "Gradient boosting",
+        "actual": 70.38871,
+        "predicted": 70.79178713154208,
+        "baseline": 69.872591
+      },
+      {
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "model": "Gradient boosting",
+        "actual": 55.417321,
+        "predicted": 65.56046360677672,
+        "baseline": 56.083234
+      },
+      {
+        "organization": "Marine Mammal Commission",
+        "model": "Gradient boosting",
+        "actual": 98.056361,
+        "predicted": 95.05309629855333,
+        "baseline": 97.986588
+      },
+      {
+        "organization": "Merit Systems Protection Board",
+        "model": "Gradient boosting",
+        "actual": 69.836412,
+        "predicted": 72.00455454047952,
+        "baseline": 71.466414
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "model": "Gradient boosting",
+        "actual": 73.370837,
+        "predicted": 74.37768778275701,
+        "baseline": 73.332818
+      },
+      {
+        "organization": "National Capital Planning Commission",
+        "model": "Gradient boosting",
+        "actual": 84.373186,
+        "predicted": 83.40283679091853,
+        "baseline": 86.212377
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "model": "Gradient boosting",
+        "actual": 80.042401,
+        "predicted": 77.39344303864284,
+        "baseline": 77.116472
+      },
+      {
+        "organization": "National Endowment for the Arts",
+        "model": "Gradient boosting",
+        "actual": 72.250251,
+        "predicted": 73.85386080634557,
+        "baseline": 74.350419
+      },
+      {
+        "organization": "National Endowment for the Humanities",
+        "model": "Gradient boosting",
+        "actual": 86.031928,
+        "predicted": 86.37448863118215,
+        "baseline": 86.363186
+      },
+      {
+        "organization": "National Gallery of Art",
+        "model": "Gradient boosting",
+        "actual": 68.692025,
+        "predicted": 68.1405452484933,
+        "baseline": 67.683555
+      },
+      {
+        "organization": "National Indian Gaming Commission",
+        "model": "Gradient boosting",
+        "actual": 88.866532,
+        "predicted": 90.07761286096637,
+        "baseline": 89.101499
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "model": "Gradient boosting",
+        "actual": 72.058103,
+        "predicted": 78.09436572483571,
+        "baseline": 77.748124
+      },
+      {
+        "organization": "National Mediation Board",
+        "model": "Gradient boosting",
+        "actual": 64.072269,
+        "predicted": 64.9283771540889,
+        "baseline": 67.269172
+      },
+      {
+        "organization": "National Science Foundation",
+        "model": "Gradient boosting",
+        "actual": 72.921352,
+        "predicted": 80.24304288497801,
+        "baseline": 78.649535
+      },
+      {
+        "organization": "National Transportation Safety Board",
+        "model": "Gradient boosting",
+        "actual": 72.461217,
+        "predicted": 72.6259885565735,
+        "baseline": 71.107024
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "model": "Gradient boosting",
+        "actual": 75.262736,
+        "predicted": 74.59430340050024,
+        "baseline": 74.426799
+      },
+      {
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "model": "Gradient boosting",
+        "actual": 70.243148,
+        "predicted": 70.37935769296864,
+        "baseline": 70.096473
+      },
+      {
+        "organization": "Occupational Safety and Health Review Commission",
+        "model": "Gradient boosting",
+        "actual": 94.912725,
+        "predicted": 95.05309629855333,
+        "baseline": 96.216812
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "model": "Gradient boosting",
+        "actual": 81.851967,
+        "predicted": 79.7899384530159,
+        "baseline": 79.031659
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "model": "Gradient boosting",
+        "actual": 80.023419,
+        "predicted": 80.61355465880276,
+        "baseline": 79.705074
+      },
+      {
+        "organization": "Office of the U.S. Trade Representative",
+        "model": "Gradient boosting",
+        "actual": 65.2035,
+        "predicted": 71.1509527817108,
+        "baseline": 69.809448
+      },
+      {
+        "organization": "Peace Corps",
+        "model": "Gradient boosting",
+        "actual": 74.844826,
+        "predicted": 74.42144156506285,
+        "baseline": 73.562934
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "model": "Gradient boosting",
+        "actual": 88.960446,
+        "predicted": 86.0969634807046,
+        "baseline": 87.205096
+      },
+      {
+        "organization": "Postal Regulatory Commission",
+        "model": "Gradient boosting",
+        "actual": 82.246889,
+        "predicted": 93.3723259172225,
+        "baseline": 89.65428
+      },
+      {
+        "organization": "Privacy and Civil Liberties Oversight Board",
+        "model": "Gradient boosting",
+        "actual": 81.091228,
+        "predicted": 61.18221170705887,
+        "baseline": 34.971528
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "model": "Gradient boosting",
+        "actual": 77.444791,
+        "predicted": 75.36427868540062,
+        "baseline": 76.503406
+      },
+      {
+        "organization": "Selective Service System",
+        "model": "Gradient boosting",
+        "actual": 74.772565,
+        "predicted": 80.35062191628023,
+        "baseline": 80.280954
+      },
+      {
+        "organization": "Small Business Administration",
+        "model": "Gradient boosting",
+        "actual": 78.740506,
+        "predicted": 78.11999458506612,
+        "baseline": 78.583804
+      },
+      {
+        "organization": "Social Security Administration",
+        "model": "Gradient boosting",
+        "actual": 68.419714,
+        "predicted": 63.3601347396064,
+        "baseline": 65.046148
+      },
+      {
+        "organization": "Surface Transportation Board",
+        "model": "Gradient boosting",
+        "actual": 81.619472,
+        "predicted": 79.05757878205337,
+        "baseline": 79.343563
+      },
+      {
+        "organization": "U.S. Access Board",
+        "model": "Gradient boosting",
+        "actual": 64.881849,
+        "predicted": 73.62967310830362,
+        "baseline": 71.762723
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "model": "Gradient boosting",
+        "actual": 69.929538,
+        "predicted": 70.70224699468896,
+        "baseline": 69.747767
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "model": "Gradient boosting",
+        "actual": 69.884226,
+        "predicted": 71.2565283991993,
+        "baseline": 69.911679
+      },
+      {
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "model": "Gradient boosting",
+        "actual": 69.859982,
+        "predicted": 68.82986216316287,
+        "baseline": 69.342144
+      },
+      {
+        "organization": "U.S. International Development Finance Corporation",
+        "model": "Gradient boosting",
+        "actual": 73.829288,
+        "predicted": 71.54407169838409,
+        "baseline": 70.477083
+      },
+      {
+        "organization": "U.S. International Trade Commission",
+        "model": "Gradient boosting",
+        "actual": 80.090134,
+        "predicted": 76.51764525507666,
+        "baseline": 79.203546
+      },
+      {
+        "organization": "U.S. Office of Government Ethics",
+        "model": "Gradient boosting",
+        "actual": 90.140695,
+        "predicted": 90.07761286096637,
+        "baseline": 90.305077
+      },
+      {
+        "organization": "U.S. Office of Special Counsel",
+        "model": "Gradient boosting",
+        "actual": 85.724666,
+        "predicted": 86.68274573511862,
+        "baseline": 88.117921
+      },
+      {
+        "organization": "U.S. Trade and Development Agency",
+        "model": "Gradient boosting",
+        "actual": 85.219644,
+        "predicted": 86.68288551331483,
+        "baseline": 88.69963
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "model": "Gradient boosting",
+        "actual": 73.440435,
+        "predicted": 74.21129606078847,
+        "baseline": 73.705671
+      },
+      {
+        "organization": "United States Department of the Army",
+        "model": "Gradient boosting",
+        "actual": 75.208411,
+        "predicted": 74.12175592393535,
+        "baseline": 73.268752
+      },
+      {
+        "organization": "United States Department of the Navy",
+        "model": "Gradient boosting",
+        "actual": 74.206142,
+        "predicted": 72.89020303927738,
+        "baseline": 72.137174
       }
     ],
     "importance": [
       {
         "feature": "engagement",
         "label": "Prior-year engagement",
-        "mean": 1.4248353974182744,
-        "std": 0.2252858419780885
+        "mean": 1.424835397418273,
+        "std": 0.22528584197808835
       },
       {
         "feature": "leaders",
         "label": "Leaders lead",
-        "mean": 0.7339488049382827,
-        "std": 0.14433101209524055
+        "mean": 0.7339488049382812,
+        "std": 0.1443310120952406
       },
       {
         "feature": "satisfaction",
         "label": "Global satisfaction",
-        "mean": 0.16657194471810846,
-        "std": 0.07919916674902377
+        "mean": 0.1665719447181069,
+        "std": 0.0791991667490238
       },
       {
         "feature": "supervisors",
         "label": "Supervisory support",
-        "mean": 0.12216080033583035,
-        "std": 0.07593083998590988
+        "mean": 0.12216080033582934,
+        "std": 0.0759308399859096
       },
       {
         "feature": "intrinsic",
         "label": "Intrinsic work experience",
-        "mean": 0.10134920697500803,
-        "std": 0.05260501795296027
+        "mean": 0.10134920697500639,
+        "std": 0.05260501795295977
       }
     ],
     "predictions": [
@@ -14770,6 +18222,11 @@
     "interval": {
       "nominal": 0.9,
       "coverage": 0.8641975308641975,
+      "covered": 70,
+      "n": 81,
+      "coverageLow": 0.7729693623122126,
+      "coverageHigh": 0.9224453655826949,
+      "coverageNote": "The illustrative 95% Wilson interval assumes independent coverage events and fixed predictions; it does not correct agency dependence or temporal shift.",
       "width": 12.48333185185187,
       "radius": 6.28345800000001
     },
@@ -14795,13 +18252,13 @@
       {
         "name": "Random forest",
         "year": 2020,
-        "mae": 6.363126982185447,
+        "mae": 6.363126982185446,
         "n": 78
       },
       {
         "name": "Extra trees",
         "year": 2020,
-        "mae": 6.178597037143891,
+        "mae": 6.178597037143892,
         "n": 78
       },
       {
@@ -14837,7 +18294,7 @@
       {
         "name": "Extra trees",
         "year": 2021,
-        "mae": 3.5772439088768304,
+        "mae": 3.5772439088768286,
         "n": 78
       },
       {
@@ -14867,13 +18324,13 @@
       {
         "name": "Random forest",
         "year": 2022,
-        "mae": 2.575237385544333,
+        "mae": 2.5752373855443333,
         "n": 73
       },
       {
         "name": "Extra trees",
         "year": 2022,
-        "mae": 2.2429868686639116,
+        "mae": 2.242986868663913,
         "n": 73
       },
       {
@@ -14890,7 +18347,7 @@
       },
       {
         "name": "Extra trees",
-        "mae": 3.9996092715615443
+        "mae": 3.9996092715615448
       },
       {
         "name": "Elastic net",
@@ -14911,7 +18368,7 @@
     ],
     "transportability": {
       "model": "Extra trees",
-      "mae": 3.365234862777888,
+      "mae": 3.365234862777887,
       "folds": 5
     },
     "balancedTrend": [
@@ -14962,6 +18419,12 @@
     "k": 2,
     "silhouette": 0.43489319238775315,
     "stability": 0.8854993720144464,
+    "levelCheck": {
+      "n": 81,
+      "k": 2,
+      "adjustedRand": 1.0,
+      "interpretation": "Compare the full-feature partition with K-means on just the average standardized input score, using the same agencies and k. ARI=1 means identical assignments up to label permutation; this is a descriptive simplification check, not independent validation."
+    },
     "candidateScores": [
       {
         "k": 2,
@@ -15699,7 +19162,542 @@
   "intentionAnalysis": {
     "n": 34,
     "rho": -0.6152670750791803,
-    "p": 0.00010773867064200857
+    "p": 0.00010773867064200857,
+    "low": -0.8469132399989483,
+    "high": -0.2747144795690408,
+    "leaveOneOut": [
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "rho": -0.595570432427265
+      },
+      {
+        "organization": "Department of Agriculture",
+        "rho": -0.6194734837427573
+      },
+      {
+        "organization": "Department of Commerce",
+        "rho": -0.6105632711056065
+      },
+      {
+        "organization": "Department of Education",
+        "rho": -0.6219807968178089
+      },
+      {
+        "organization": "Department of Energy",
+        "rho": -0.6044296052924475
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "rho": -0.6022566006274027
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "rho": -0.5992478249373407
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "rho": -0.6306728154779879
+      },
+      {
+        "organization": "Department of Justice",
+        "rho": -0.5942331987872375
+      },
+      {
+        "organization": "Department of Labor",
+        "rho": -0.6311742780929982
+      },
+      {
+        "organization": "Department of State",
+        "rho": -0.627664039787926
+      },
+      {
+        "organization": "Department of Transportation",
+        "rho": -0.6183034043077331
+      },
+      {
+        "organization": "Department of the Interior",
+        "rho": -0.6251567267128744
+      },
+      {
+        "organization": "Department of the Treasury",
+        "rho": -0.6223151052278157
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "rho": -0.5912244230971756
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "rho": -0.6368575210631152
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "rho": -0.6071040725725025
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "rho": -0.5821980960269897
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "rho": -0.5918435650109369
+      },
+      {
+        "organization": "General Services Administration",
+        "rho": -0.5815294792069758
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "rho": -0.625104471375573
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "rho": -0.5930631193522133
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "rho": -0.6306728154779879
+      },
+      {
+        "organization": "National Science Foundation",
+        "rho": -0.6254387518415493
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "rho": -0.6173004790777125
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "rho": -0.7296281048400258
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "rho": -0.6037609884724336
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "rho": -0.5791893203369276
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "rho": -0.6070533262128559
+      },
+      {
+        "organization": "Small Business Administration",
+        "rho": -0.6077218871448085
+      },
+      {
+        "organization": "Social Security Administration",
+        "rho": -0.5942331987872375
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "rho": -0.6604262639686006
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "rho": -0.6116172361075954
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "rho": -0.6256581893278846
+      }
+    ],
+    "bootstrapValid": 3000,
+    "bootstrapDraws": 3000,
+    "leaveOneOutValid": 34,
+    "leaveOneOutLow": -0.7296281048400258,
+    "leaveOneOutHigh": -0.5791893203369276,
+    "selection": [
+      {
+        "linked": false,
+        "label": "Not linked",
+        "n": 47,
+        "medianEngagement": 74.206142,
+        "medianResponseRate": 67.8
+      },
+      {
+        "linked": true,
+        "label": "Linked",
+        "n": 34,
+        "medianEngagement": 75.7061245,
+        "medianResponseRate": 61.05
+      }
+    ],
+    "sizeComposition": [
+      {
+        "size": "Large",
+        "linked": 9,
+        "unlinked": 0
+      },
+      {
+        "size": "Medium",
+        "linked": 16,
+        "unlinked": 0
+      },
+      {
+        "size": "Small",
+        "linked": 3,
+        "unlinked": 26
+      },
+      {
+        "size": "Very Large",
+        "linked": 6,
+        "unlinked": 3
+      },
+      {
+        "size": "Very Small",
+        "linked": 0,
+        "unlinked": 18
+      }
+    ],
+    "unrepresentedSizes": [
+      "Very Small"
+    ],
+    "interpretation": "A distinct same-survey question, not an external or causal validation. Agency-bootstrap and leave-one-out checks are conditional on the selected linked agencies; they do not correct nonresponse, selection, or common-method bias."
+  },
+  "cohortSensitivity": {
+    "n": 72,
+    "firstYear": 2017,
+    "lastYear": 2024,
+    "firstMean": 70.4825922361111,
+    "lastMean": 76.03365101388889,
+    "meanChange": 5.551058777777778,
+    "low": 3.7315844496527784,
+    "high": 7.243143239236109,
+    "trend": [
+      {
+        "year": 2017,
+        "n": 72,
+        "engagement": 70.4825922361111
+      },
+      {
+        "year": 2018,
+        "n": 72,
+        "engagement": 69.96302494444444
+      },
+      {
+        "year": 2019,
+        "n": 72,
+        "engagement": 70.35541984722221
+      },
+      {
+        "year": 2020,
+        "n": 72,
+        "engagement": 75.83588218055554
+      },
+      {
+        "year": 2021,
+        "n": 72,
+        "engagement": 76.67089331944445
+      },
+      {
+        "year": 2022,
+        "n": 72,
+        "engagement": 76.02694719444445
+      },
+      {
+        "year": 2023,
+        "n": 72,
+        "engagement": 76.12705412500002
+      },
+      {
+        "year": 2024,
+        "n": 72,
+        "engagement": 76.03365101388889
+      }
+    ],
+    "agencyChanges": [
+      {
+        "organization": "AbilityOne Commission",
+        "change": 4.916496000000009
+      },
+      {
+        "organization": "American Battle Monuments Commission",
+        "change": 13.149494999999995
+      },
+      {
+        "organization": "Commission on Civil Rights",
+        "change": 4.796197999999997
+      },
+      {
+        "organization": "Commodity Futures Trading Commission",
+        "change": 6.330681000000013
+      },
+      {
+        "organization": "Consumer Product Safety Commission",
+        "change": 6.6630210000000005
+      },
+      {
+        "organization": "Corporation for National and Community Service",
+        "change": 5.713111999999995
+      },
+      {
+        "organization": "Court Services and Offender Supervision Agency",
+        "change": 0.04168599999999856
+      },
+      {
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "change": 23.692591
+      },
+      {
+        "organization": "Department of Agriculture",
+        "change": 4.822473000000002
+      },
+      {
+        "organization": "Department of Commerce",
+        "change": 5.645628000000002
+      },
+      {
+        "organization": "Department of Education",
+        "change": 7.205387999999999
+      },
+      {
+        "organization": "Department of Energy",
+        "change": 9.718202000000005
+      },
+      {
+        "organization": "Department of Health and Human Services",
+        "change": 6.463622999999998
+      },
+      {
+        "organization": "Department of Homeland Security",
+        "change": 9.213171000000003
+      },
+      {
+        "organization": "Department of Housing and Urban Development",
+        "change": 7.512309000000002
+      },
+      {
+        "organization": "Department of Justice",
+        "change": -0.047359999999997626
+      },
+      {
+        "organization": "Department of Labor",
+        "change": 6.994737999999998
+      },
+      {
+        "organization": "Department of State",
+        "change": 1.737922999999995
+      },
+      {
+        "organization": "Department of Transportation",
+        "change": 4.889559999999989
+      },
+      {
+        "organization": "Department of the Interior",
+        "change": 7.122582999999992
+      },
+      {
+        "organization": "Department of the Treasury",
+        "change": 6.0869009999999975
+      },
+      {
+        "organization": "Environmental Protection Agency",
+        "change": 11.37983299999999
+      },
+      {
+        "organization": "Equal Employment Opportunity Commission",
+        "change": 8.432413999999994
+      },
+      {
+        "organization": "Export-Import Bank of the United States",
+        "change": 0.23820399999999609
+      },
+      {
+        "organization": "Farm Credit Administration",
+        "change": 6.54786
+      },
+      {
+        "organization": "Federal Communications Commission",
+        "change": 9.557642999999999
+      },
+      {
+        "organization": "Federal Election Commission",
+        "change": 17.515963999999997
+      },
+      {
+        "organization": "Federal Energy Regulatory Commission",
+        "change": 5.029347999999999
+      },
+      {
+        "organization": "Federal Housing Finance Agency",
+        "change": 5.024657000000005
+      },
+      {
+        "organization": "Federal Labor Relations Authority",
+        "change": 8.121718000000001
+      },
+      {
+        "organization": "Federal Maritime Commission",
+        "change": -8.429638999999995
+      },
+      {
+        "organization": "Federal Mediation and Conciliation Service",
+        "change": -15.295494000000005
+      },
+      {
+        "organization": "Federal Retirement Thrift Investment Board",
+        "change": 10.998728999999997
+      },
+      {
+        "organization": "Federal Trade Commission",
+        "change": -2.257761000000002
+      },
+      {
+        "organization": "General Services Administration",
+        "change": 9.773940999999994
+      },
+      {
+        "organization": "Institute of Museum and Library Services",
+        "change": 26.74274700000001
+      },
+      {
+        "organization": "Inter-American Foundation",
+        "change": -20.439956999999993
+      },
+      {
+        "organization": "International Boundary and Water Commission",
+        "change": 7.104115
+      },
+      {
+        "organization": "Marine Mammal Commission",
+        "change": 1.9187879999999922
+      },
+      {
+        "organization": "Merit Systems Protection Board",
+        "change": -0.3658240000000035
+      },
+      {
+        "organization": "National Archives and Records Administration",
+        "change": 3.87465499999999
+      },
+      {
+        "organization": "National Capital Planning Commission",
+        "change": -0.9124049999999926
+      },
+      {
+        "organization": "National Credit Union Administration",
+        "change": 11.117288000000002
+      },
+      {
+        "organization": "National Endowment for the Arts",
+        "change": -9.009706999999992
+      },
+      {
+        "organization": "National Endowment for the Humanities",
+        "change": 6.950475999999995
+      },
+      {
+        "organization": "National Gallery of Art",
+        "change": 3.280411000000001
+      },
+      {
+        "organization": "National Indian Gaming Commission",
+        "change": 20.90573900000001
+      },
+      {
+        "organization": "National Labor Relations Board",
+        "change": -0.023657999999997514
+      },
+      {
+        "organization": "National Science Foundation",
+        "change": -1.8934289999999976
+      },
+      {
+        "organization": "National Transportation Safety Board",
+        "change": -1.1829159999999916
+      },
+      {
+        "organization": "Nuclear Regulatory Commission",
+        "change": 0.19745400000000757
+      },
+      {
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "change": 3.328468000000001
+      },
+      {
+        "organization": "Occupational Safety and Health Review Commission",
+        "change": 17.726046999999994
+      },
+      {
+        "organization": "Office of Management and Budget",
+        "change": 7.7653959999999955
+      },
+      {
+        "organization": "Office of Personnel Management",
+        "change": 8.866225
+      },
+      {
+        "organization": "Office of the U.S. Trade Representative",
+        "change": -3.265029999999996
+      },
+      {
+        "organization": "Pension Benefit Guaranty Corporation",
+        "change": 13.477643
+      },
+      {
+        "organization": "Postal Regulatory Commission",
+        "change": 4.482371999999998
+      },
+      {
+        "organization": "Railroad Retirement Board",
+        "change": 8.031037999999995
+      },
+      {
+        "organization": "Selective Service System",
+        "change": 17.514678000000004
+      },
+      {
+        "organization": "Small Business Administration",
+        "change": 11.629154
+      },
+      {
+        "organization": "Social Security Administration",
+        "change": 1.1599159999999955
+      },
+      {
+        "organization": "Surface Transportation Board",
+        "change": 10.254441999999997
+      },
+      {
+        "organization": "U.S. Agency for Global Media",
+        "change": 11.358417999999993
+      },
+      {
+        "organization": "U.S. Agency for International Development",
+        "change": -2.329603000000006
+      },
+      {
+        "organization": "U.S. International Development Finance Corporation",
+        "change": -1.570059999999998
+      },
+      {
+        "organization": "U.S. International Trade Commission",
+        "change": 1.5591250000000088
+      },
+      {
+        "organization": "U.S. Office of Government Ethics",
+        "change": 6.842821999999998
+      },
+      {
+        "organization": "U.S. Office of Special Counsel",
+        "change": 7.602947999999998
+      },
+      {
+        "organization": "United States Department of the Air Force",
+        "change": 5.188181
+      },
+      {
+        "organization": "United States Department of the Army",
+        "change": 7.590543999999994
+      },
+      {
+        "organization": "United States Department of the Navy",
+        "change": 4.8938950000000006
+      }
+    ],
+    "interpretation": "Sensitivity comparison: the same reporting names in every observed year. Paired agency-bootstrap intervals describe this observed cohort, not national employee sampling uncertainty. Related agencies weaken the resampling assumption. Names do not guarantee unchanged agency boundaries or workforces."
   },
   "quality": {
     "missing": [
@@ -15767,7 +19765,7 @@
       "The organization median is 74.8 in 2024, compared with 69.4 in 2017. The reporting cohort changes; this is not an official governmentwide respondent-weighted trend.",
       "Earlier rolling validation selects Persistence. On the untouched 2024 holdout its MAE is 3.34 points, versus 3.34 for persistence (+0.0% relative error reduction).",
       "Intervals calibrated for nominal 90% coverage cover 86.4% of the later test observations; average width 12.5 points. Temporal distribution shift means coverage is not guaranteed.",
-      "Latest-year K-means selects 2 descriptive profiles, with silhouette 0.43 and mean subsample agreement 0.89. These are organization profiles, not employee types.",
+      "Latest-year K-means selects 2 descriptive profiles, with silhouette 0.43 and mean subsample agreement 0.89. Agreement with a one-score partition is 1.000 (ARI; 1 means identical assignments). These are descriptive score profiles, not validated experience types.",
       "Among 34 explicitly linked agency aggregates, engagement and stated intention to leave have Spearman rho -0.62. Intention is not actual turnover, and this relationship is not causal."
     ],
     "recommendations": [
