@@ -24,6 +24,7 @@ def main():
             viewport={"width": 1440, "height": 1050},
             device_scale_factor=1,
             reduced_motion="no-preference",
+            color_scheme="light",
         )
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
@@ -66,9 +67,125 @@ def main():
             }""",
             timeout=5500,
         )
+        years = payload["meta"]["years"]
+        for chart in ["annual-chart", "living-chart", "trajectory-chart"]:
+            assert page.locator(f"#{chart} .x-tick").all_text_contents() == [
+                str(year) for year in sorted(years)
+            ], f"{chart} should display years without numeric grouping."
+        by_agency = {}
+        for row in payload["rows"]:
+            by_agency.setdefault(row["organization"], {})[row["year"]] = row
+        complete = {
+            name: observations
+            for name, observations in by_agency.items()
+            if all(
+                year in observations and isinstance(observations[year]["engagement"], (int, float))
+                for year in years
+            )
+        }
+        assert page.locator("#living-chart .atlas-path").count() == len(complete)
+        assert str(len(complete)) in page.locator("#living-heading").inner_text()
+        changes = [
+            observations[max(years)]["engagement"] - observations[min(years)]["engagement"]
+            for observations in complete.values()
+        ]
+        assert page.locator("#living-metrics strong").nth(0).inner_text() == str(
+            sum(change > 0 for change in changes)
+        )
+        assert page.locator("#living-metrics strong").nth(1).inner_text() == str(
+            sum(change < 0 for change in changes)
+        )
+        level_paths = page.locator("#living-chart .atlas-path").evaluate_all(
+            "els => els.map(el => el.getAttribute('d'))"
+        )
+        page.locator("#atlas-change").click()
+        assert page.locator("#atlas-change").get_attribute("aria-pressed") == "true"
+        change_paths = page.locator("#living-chart .atlas-path").evaluate_all(
+            "els => els.map(el => el.getAttribute('d'))"
+        )
+        assert level_paths != change_paths, "Atlas mode must change real path coordinates."
+        assert len({path.split(" ")[0] for path in change_paths}) == 1, (
+            "All baseline-relative paths must share their first-year origin."
+        )
+        assert "Change since" in page.locator("#living-chart .axis-title").all_text_contents()[1]
+        assert "median of agency changes" in page.locator("#atlas-status").inner_text()
+        agency_selector = page.locator("#atlas-agency")
+        agency_options = agency_selector.locator("option").evaluate_all(
+            "els => els.map(el => el.value)"
+        )
+        agency_selector.select_option(agency_options[-1])
+        assert agency_options[-1] in page.locator("#atlas-detail").inner_text()
+        selected_path = page.locator("#living-chart .atlas-path[tabindex='0']")
+        selected_path.focus()
+        selected_path.press("Home")
+        assert agency_selector.input_value() == agency_options[0]
+        page.locator("#living-chart .atlas-path[tabindex='0']").press("ArrowRight")
+        assert agency_selector.input_value() == agency_options[1]
+        assert (
+            page.locator("#living-chart .atlas-path.is-selected")
+            .get_attribute("aria-label")
+            .startswith(agency_options[1])
+        )
+        page.locator("#living-chart .atlas-path[tabindex='0']").press("Escape")
+        assert not page.locator("#tooltip").is_visible()
+        page.locator("#atlas-level").click()
+        assert (
+            page.locator("#living-chart .atlas-path").evaluate_all(
+                "els => els.map(el => el.getAttribute('d'))"
+            )
+            == level_paths
+        )
+        assert page.locator("#score-chart .mark").count() == len(payload["clusters"]["points"])
+        assert "partly mechanical" in page.locator("#score-note").inner_text()
+        origins = payload.get("rollingAudit", {}).get("origins", [])
+        if origins:
+            assert page.locator("#audit-chart .x-tick").all_text_contents() == [
+                str(origin["year"]) for origin in sorted(origins, key=lambda row: row["year"])
+            ], "Audit year ticks should not contain thousands separators."
+            audit_rows = page.locator("#audit-table tbody tr")
+            assert audit_rows.count() == len(origins)
+            for index, origin in enumerate(sorted(origins, key=lambda row: row["year"])):
+                cells = audit_rows.nth(index).locator("th, td").all_text_contents()
+                assert cells[:3] == [
+                    str(origin["year"]),
+                    origin["selected"],
+                    str(origin["n"]),
+                ]
+                for column, key in [(3, "mae"), (4, "baselineMae"), (5, "improvement")]:
+                    assert abs(float(cells[column].replace(",", "")) - origin[key]) <= 0.00051
+            assert page.locator("#audit-chart .mark").count() == len(origins)
+            assert "not independent" in page.locator("#audit-note").inner_text()
+            summary = payload["rollingAudit"]["summary"]
+            if "incrementalFeatureImprovement" in summary:
+                assert page.locator("#audit-ablation").is_visible()
+                values = page.locator("#audit-ablation strong").all_text_contents()
+                for value, key in zip(
+                    values,
+                    ["priorOnlyRidgeMae", "fullRidgeMae", "incrementalFeatureImprovement"],
+                    strict=True,
+                ):
+                    assert abs(float(value.replace(" points", "")) - summary[key]) <= 0.00051
+                assert "not a new selection" in page.locator("#audit-ablation").inner_text()
+        else:
+            assert "not available" in page.locator("#audit-summary").inner_text()
+            assert page.locator("#audit-chart .mark").count() == 0
         if args.screenshots:
             folder = ROOT / "docs" / "assets"
             folder.mkdir(parents=True, exist_ok=True)
+            figures = ROOT / "outputs" / "figures"
+            figures.mkdir(parents=True, exist_ok=True)
+            screenshot_style = ".masthead, .skip { visibility: hidden !important; }"
+            page.locator(".living-atlas").screenshot(
+                path=str(figures / "story-living-level.png"), style=screenshot_style
+            )
+            page.locator("#atlas-change").click()
+            page.wait_for_timeout(650)
+            page.locator(".living-atlas").screenshot(
+                path=str(figures / "story-living-change.png"), style=screenshot_style
+            )
+            page.locator("#atlas-level").click()
+            page.wait_for_timeout(650)
+            page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
             page.screenshot(path=str(folder / "preview.png"))
             page.screenshot(
                 path=str(ROOT / "outputs" / "figures" / "story-desktop.png"), full_page=True
@@ -77,6 +194,11 @@ def main():
         page.locator("#theme-toggle").click()
         assert page.locator("html").get_attribute("data-theme") != initial_theme
         if args.screenshots:
+            page.locator(".living-atlas").screenshot(
+                path=str(ROOT / "outputs" / "figures" / "story-living-dark.png"),
+                style=screenshot_style,
+            )
+            page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
             page.screenshot(path=str(ROOT / "outputs" / "figures" / "story-dark.png"))
         page.locator("#theme-toggle").click()
         before = page.locator("svg").evaluate_all("(els) => els.map(e => e.outerHTML).join('')")
@@ -112,15 +234,28 @@ def main():
         trajectory.select_option(value)
         after = page.locator("svg").evaluate_all("(els) => els.map(e => e.outerHTML).join('')")
         assert before != after, "Trajectory selection did not update the chart."
+        page.locator("#cluster-evidence > summary").click()
         page.get_by_role("button", name="Profile 2", exact=True).click()
         page.locator("#prediction-select").select_option("Office of Personnel Management")
         assert not errors, errors
         for width, height in [(320, 844), (390, 844), (768, 1024), (1440, 1050)]:
             page.set_viewport_size({"width": width, "height": height})
             page.wait_for_timeout(200)
-            assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
-                f"Horizontal overflow at {width}px"
-            )
+            for theme in ["light", "dark"]:
+                page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
+                assert page.locator("#living-chart").evaluate(
+                    """el => {
+                        const selected = getComputedStyle(el.querySelector(".is-selected"));
+                        const background = getComputedStyle(
+                            el.querySelector(".atlas-path:not(.is-selected)"));
+                        return Number(background.opacity) > 0
+                            && Number(selected.opacity) > Number(background.opacity)
+                            && selected.stroke !== background.stroke;
+                    }"""
+                ), f"The selected rose path must remain distinct in {theme}."
+                assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth"), (
+                    f"Horizontal overflow at {width}px in {theme}"
+                )
             assert page.locator("#hero-title").evaluate(
                 """el => {
                     const range = document.createRange();
@@ -140,14 +275,37 @@ def main():
         assert page.locator("#hero-art .atlas-landmark").first.evaluate(
             "el => Number(getComputedStyle(el).opacity) > 0"
         ), "The static atlas should retain its landmarks."
+        page.locator("#atlas-change").click()
+        assert page.locator("#living-chart").get_attribute("data-mode") == "change"
+        assert page.locator("#living-chart").evaluate(
+            "el => el.getAnimations({subtree:true}).length === 0"
+        ), "Reduced motion should not animate the data transformation."
+        for theme in ["light", "dark"]:
+            separator = "&" if "?" in url else "?"
+            page.goto(f"{url}{separator}scoutTheme={theme}", wait_until="load")
+            assert page.locator("html").get_attribute("data-theme") == theme
         if args.screenshots:
             page.set_viewport_size({"width": 390, "height": 844})
             page.evaluate("window.scrollTo(0, 0)")
             page.screenshot(path=str(ROOT / "outputs" / "figures" / "story-mobile.png"))
+        html = (ROOT / "docs" / "index.html").read_text(encoding="utf-8")
+        without_audit = dict(payload)
+        without_audit.pop("rollingAudit", None)
+        missing_html = re.sub(
+            r"const DATA = .*?;\s*(?=\(\(\) =>)",
+            lambda _: f"const DATA = {json.dumps(without_audit)};\n",
+            html,
+            count=1,
+            flags=re.DOTALL,
+        )
+        page.goto("about:blank")
+        page.set_content(missing_html, wait_until="load")
+        assert "not available" in page.locator("#audit-summary").inner_text()
+        assert page.locator("#audit-chart .mark").count() == 0
+        assert "No audit origins supplied" in page.locator("#audit-table").text_content()
+        assert not errors, errors
         browser.close()
-    print(
-        "PASS: real-data charts, filters, empty states, trajectories, profiles, themes and mobile."
-    )
+    print("PASS: living paths, temporal audit, filters, profiles, keyboard, themes and mobile.")
 
 
 if __name__ == "__main__":

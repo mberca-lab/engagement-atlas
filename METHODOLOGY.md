@@ -273,6 +273,11 @@ content, or all measurement error. Inspect the condition number and interval
 widths for collinearity. Few or related clusters compromise standard-error
 reliability. A coefficient is not a predicted intervention effect.
 
+**Role in the story:** this regression is a measurement demonstration rather
+than the headline scientific result. Changes in constituent indexes can almost
+reconstruct changes in their composite; very high in-sample fit and narrow
+intervals therefore do not establish independently useful HR drivers.
+
 ## 9. Leakage-aware next-year forecasting
 
 ### Target and features
@@ -343,6 +348,34 @@ an interval spanning zero is not proof of equivalence.
 This experiment backtests the last observed year. It is not a verified live
 2025 forecast or a model of individual engagement.
 
+### Separate nested rolling-origin robustness audit
+
+`atlas/validation.py` repeats the protocol for each eligible target year:
+reserve the immediately preceding target year for calibration; use only earlier
+targets for development; select from persistence and the same five fixed ML
+configurations using expanding-window folds within that development period;
+fit the locked winner on development; calibrate and evaluate without refitting.
+Two earlier target years provide warm-up before the first inner validation fold.
+The current panel supports audit targets 2022, 2023 and 2024. The original
+2024 headline model selection and predictions are not replaced.
+
+Every origin records training, inner-selection, calibration and evaluation
+years, per-agency predictions, MAE, baseline MAE, interval coverage and width.
+Summaries weight eligible target years equally rather than pooling correlated
+agency-years as independent observations. A matched Ridge ablation compares
+prior EEI alone with prior EEI plus the other indexes under the same partitions
+and preprocessing. Incremental predictive performance is not a causal effect.
+
+**Information boundary:** this audit was added after the historical outcomes
+were available. It is retrospective sensitivity analysis, not a set of fresh
+independent tests. The panel combines rolling publications that may revise
+historical values, and source-availability feature selection uses the full
+published panel. Earlier-only observation-year fitting does not reconstruct
+the data and feature schema actually available at each historical forecast
+origin. An as-of-vintage prospective evaluation would require dated archived
+publications and a frozen schema. Related agencies and repeated organizations
+also prevent treating all audit rows as independent evidence.
+
 ### Predictive explanation and agency transportability
 
 Thirty-repeat permutation importance on the final test describes the best
@@ -388,6 +421,12 @@ diagnostics. Small category samples and selection make them unstable; they
 cannot establish protected-group employee fairness.
 
 ## 11. Exploratory profiles: PCA and KMeans
+
+**Presentation decision:** show a continuous landscape first, colored by each
+eligible agency's mean standardized input index. This is a descriptive summary
+with no validated cutoff, not a new psychometric scale. The KMeans partitions
+remain available as a diagnostic of whether discretization adds information.
+If the one-score partition is identical, do not claim distinct experience types.
 
 The latest-year clustering sample requires complete values across selected input
 features. It excludes engagement as a clustering input, standardizes the remaining
@@ -473,6 +512,19 @@ rather than treated as zero. Neither check corrects selection or common-method b
 Linked versus unlinked counts, median engagement, median response rate, and agency-
 size composition make coverage differences visible. These are descriptive
 comparisons, not a missing-at-random test or a guarantee of representativeness.
+
+### Independent outcome validation: deliberately not claimed
+
+OPM publishes actual separation counts through its
+[federal workforce datasets](https://www.opm.gov/data/datasets/) and
+[FedScope separations catalog](https://catalog.data.gov/dataset/fedscope-separations-cubes).
+Availability alone does not establish a valid join. FEVS reporting organizations
+and personnel-system agency/subagency codes can have different scopes; counts
+also require compatible workforce denominators and a justified time window.
+No validated scope-preserving crosswalk and denominator alignment was established
+for this panel in the bounded source review. No such outcome was therefore
+ingested or imputed. The matched lagged-feature ablation tests incremental
+prediction within the existing survey, not external criterion validity.
 
 ## 13. HR interpretation and decision gates
 

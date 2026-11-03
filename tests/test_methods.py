@@ -115,6 +115,12 @@ def test_balanced_change_requires_observed_engagement_in_every_year():
     assert result["meanChange"] == 15
     assert (result["low"], result["high"]) == (10, 20)
     assert [r["engagement"] for r in result["trend"]] == [25, 32.5, 40]
+    assert (result["gained"], result["declined"], result["unchanged"]) == (2, 0, 0)
+    mixed = frame[frame.organization.isin(["A", "B"])].copy()
+    mixed.loc[mixed.organization == "A", "engagement"] = [20, 15, 10]
+    mixed.loc[mixed.organization == "B", "engagement"] = [40, 40, 40]
+    directions = balanced_longitudinal(mixed)
+    assert (directions["gained"], directions["declined"], directions["unchanged"]) == (0, 1, 1)
     with pytest.raises(ValueError, match="unique"):
         balanced_longitudinal(pd.concat([frame, frame.iloc[:1]]))
     with pytest.raises(ValueError, match="At least two"):

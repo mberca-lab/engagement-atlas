@@ -14036,10 +14036,10 @@
       {
         "name": "Extra trees",
         "mae": 3.2655991185065054,
-        "rmse": 5.383989768088826,
-        "r2": 0.5808645637603532,
-        "low": 2.384636382426171,
-        "high": 4.306572713254652
+        "rmse": 5.383989768088827,
+        "r2": 0.5808645637603531,
+        "low": 2.384636382426169,
+        "high": 4.3065727132546545
       },
       {
         "name": "Ridge",
@@ -14075,7 +14075,7 @@
       },
       {
         "name": "Random forest",
-        "mae": 3.4943464684758094,
+        "mae": 3.4943464684758085,
         "rmse": 5.537327460411599,
         "r2": 0.5566503777860367,
         "low": 2.58707384307859,
@@ -14086,8 +14086,8 @@
       {
         "name": "Extra trees",
         "n": 81,
-        "difference": 0.07393338766633381,
-        "low": -0.5216081107443746,
+        "difference": 0.0739333876663331,
+        "low": -0.5216081107443762,
         "high": 0.9205227944470851,
         "fractionBetter": 0.4691358024691358,
         "medianAbsoluteError": 1.6673697520567714
@@ -14124,9 +14124,9 @@
         "n": 81,
         "difference": -0.15481396230296984,
         "low": -0.7697880645472864,
-        "high": 0.6797065604373469,
+        "high": 0.6797065604373461,
         "fractionBetter": 0.35802469135802467,
-        "medianAbsoluteError": 2.0287118460466615
+        "medianAbsoluteError": 2.0287118460466758
       }
     ],
     "comparisonNotes": "Positive differences mean lower MAE than persistence on the same held-out agencies. Percentile 95% intervals use 5,000 paired agency resamples with seed 42. These post-hoc diagnostics do not change validation-based model selection, adjust for five comparisons, or include model-training uncertainty. Related agencies may weaken the independent-agency resampling assumption.",
@@ -15850,7 +15850,7 @@
         "organization": "African Development Foundation",
         "model": "Random forest",
         "actual": 85.170497,
-        "predicted": 75.01296649013662,
+        "predicted": 75.01296649013663,
         "baseline": 74.516591
       },
       {
@@ -15892,7 +15892,7 @@
         "organization": "Court Services and Offender Supervision Agency",
         "model": "Random forest",
         "actual": 69.042119,
-        "predicted": 70.68688369992047,
+        "predicted": 70.68688369992046,
         "baseline": 69.550309
       },
       {
@@ -15920,7 +15920,7 @@
         "organization": "Department of Education",
         "model": "Random forest",
         "actual": 74.603856,
-        "predicted": 74.96469468722583,
+        "predicted": 74.96469468722584,
         "baseline": 76.356104
       },
       {
@@ -15948,14 +15948,14 @@
         "organization": "Department of Housing and Urban Development",
         "model": "Random forest",
         "actual": 76.149513,
-        "predicted": 76.26539407243096,
+        "predicted": 76.26539407243094,
         "baseline": 77.467012
       },
       {
         "organization": "Department of Justice",
         "model": "Random forest",
         "actual": 67.62958,
-        "predicted": 65.60086815395334,
+        "predicted": 65.60086815395333,
         "baseline": 65.032644
       },
       {
@@ -15983,7 +15983,7 @@
         "organization": "Department of the Interior",
         "model": "Random forest",
         "actual": 73.064337,
-        "predicted": 71.81323317817876,
+        "predicted": 71.81323317817875,
         "baseline": 72.265192
       },
       {
@@ -15997,7 +15997,7 @@
         "organization": "Environmental Protection Agency",
         "model": "Random forest",
         "actual": 80.696705,
-        "predicted": 79.97240644440399,
+        "predicted": 79.972406444404,
         "baseline": 79.236417
       },
       {
@@ -16011,7 +16011,7 @@
         "organization": "Export-Import Bank of the United States",
         "model": "Random forest",
         "actual": 63.119735,
-        "predicted": 69.65855087918227,
+        "predicted": 69.65855087918229,
         "baseline": 64.891409
       },
       {
@@ -16046,7 +16046,7 @@
         "organization": "Federal Housing Finance Agency",
         "model": "Random forest",
         "actual": 70.74043,
-        "predicted": 71.50481674306437,
+        "predicted": 71.50481674306438,
         "baseline": 70.751987
       },
       {
@@ -16067,21 +16067,21 @@
         "organization": "Federal Mediation and Conciliation Service",
         "model": "Random forest",
         "actual": 70.151788,
-        "predicted": 68.20028542846272,
+        "predicted": 68.2002854284627,
         "baseline": 63.501525
       },
       {
         "organization": "Federal Retirement Thrift Investment Board",
         "model": "Random forest",
         "actual": 76.683037,
-        "predicted": 75.48153937529412,
+        "predicted": 75.4815393752941,
         "baseline": 77.224295
       },
       {
         "organization": "Federal Trade Commission",
         "model": "Random forest",
         "actual": 80.257961,
-        "predicted": 75.30081322782623,
+        "predicted": 75.30081322782621,
         "baseline": 78.712089
       },
       {
@@ -16109,14 +16109,14 @@
         "organization": "International Boundary and Water Commission",
         "model": "Random forest",
         "actual": 70.38871,
-        "predicted": 71.88201209958335,
+        "predicted": 71.88201209958332,
         "baseline": 69.872591
       },
       {
         "organization": "John F. Kennedy Center for the Performing Arts",
         "model": "Random forest",
         "actual": 55.417321,
-        "predicted": 64.0973203205694,
+        "predicted": 64.09732032056938,
         "baseline": 56.083234
       },
       {
@@ -16130,7 +16130,7 @@
         "organization": "Merit Systems Protection Board",
         "model": "Random forest",
         "actual": 69.836412,
-        "predicted": 71.28260808792048,
+        "predicted": 71.2826080879205,
         "baseline": 71.466414
       },
       {
@@ -16165,14 +16165,14 @@
         "organization": "National Endowment for the Humanities",
         "model": "Random forest",
         "actual": 86.031928,
-        "predicted": 86.85850721414545,
+        "predicted": 86.85850721414543,
         "baseline": 86.363186
       },
       {
         "organization": "National Gallery of Art",
         "model": "Random forest",
         "actual": 68.692025,
-        "predicted": 67.47470722961046,
+        "predicted": 67.47470722961044,
         "baseline": 67.683555
       },
       {
@@ -16200,7 +16200,7 @@
         "organization": "National Science Foundation",
         "model": "Random forest",
         "actual": 72.921352,
-        "predicted": 79.21146271938622,
+        "predicted": 79.21146271938623,
         "baseline": 78.649535
       },
       {
@@ -16256,21 +16256,21 @@
         "organization": "Peace Corps",
         "model": "Random forest",
         "actual": 74.844826,
-        "predicted": 74.64068513215669,
+        "predicted": 74.64068513215668,
         "baseline": 73.562934
       },
       {
         "organization": "Pension Benefit Guaranty Corporation",
         "model": "Random forest",
         "actual": 88.960446,
-        "predicted": 85.77464008905838,
+        "predicted": 85.77464008905837,
         "baseline": 87.205096
       },
       {
         "organization": "Postal Regulatory Commission",
         "model": "Random forest",
         "actual": 82.246889,
-        "predicted": 90.93588172668224,
+        "predicted": 90.93588172668225,
         "baseline": 89.65428
       },
       {
@@ -16284,7 +16284,7 @@
         "organization": "Railroad Retirement Board",
         "model": "Random forest",
         "actual": 77.444791,
-        "predicted": 75.11534372561881,
+        "predicted": 75.11534372561884,
         "baseline": 76.503406
       },
       {
@@ -16305,14 +16305,14 @@
         "organization": "Social Security Administration",
         "model": "Random forest",
         "actual": 68.419714,
-        "predicted": 64.83565662286104,
+        "predicted": 64.83565662286105,
         "baseline": 65.046148
       },
       {
         "organization": "Surface Transportation Board",
         "model": "Random forest",
         "actual": 81.619472,
-        "predicted": 78.97593300740344,
+        "predicted": 78.97593300740347,
         "baseline": 79.343563
       },
       {
@@ -16326,7 +16326,7 @@
         "organization": "U.S. Agency for Global Media",
         "model": "Random forest",
         "actual": 69.929538,
-        "predicted": 71.86379074504774,
+        "predicted": 71.86379074504772,
         "baseline": 69.747767
       },
       {
@@ -16361,28 +16361,28 @@
         "organization": "U.S. Office of Government Ethics",
         "model": "Random forest",
         "actual": 90.140695,
-        "predicted": 88.65519171198349,
+        "predicted": 88.65519171198348,
         "baseline": 90.305077
       },
       {
         "organization": "U.S. Office of Special Counsel",
         "model": "Random forest",
         "actual": 85.724666,
-        "predicted": 86.7389544934749,
+        "predicted": 86.73895449347489,
         "baseline": 88.117921
       },
       {
         "organization": "U.S. Trade and Development Agency",
         "model": "Random forest",
         "actual": 85.219644,
-        "predicted": 85.17443160824256,
+        "predicted": 85.17443160824254,
         "baseline": 88.69963
       },
       {
         "organization": "United States Department of the Air Force",
         "model": "Random forest",
         "actual": 73.440435,
-        "predicted": 73.17890962429422,
+        "predicted": 73.17890962429423,
         "baseline": 73.705671
       },
       {
@@ -16396,28 +16396,28 @@
         "organization": "United States Department of the Navy",
         "model": "Random forest",
         "actual": 74.206142,
-        "predicted": 72.79351321108086,
+        "predicted": 72.79351321108085,
         "baseline": 72.137174
       },
       {
         "organization": "AbilityOne Commission",
         "model": "Extra trees",
         "actual": 70.069957,
-        "predicted": 68.20540017722747,
+        "predicted": 68.20540017722746,
         "baseline": 67.410595
       },
       {
         "organization": "Advisory Council on Historic Preservation",
         "model": "Extra trees",
         "actual": 66.05174,
-        "predicted": 83.78606065970668,
+        "predicted": 83.78606065970669,
         "baseline": 84.125991
       },
       {
         "organization": "African Development Foundation",
         "model": "Extra trees",
         "actual": 85.170497,
-        "predicted": 74.72825706452619,
+        "predicted": 74.7282570645262,
         "baseline": 74.516591
       },
       {
@@ -16445,21 +16445,21 @@
         "organization": "Consumer Product Safety Commission",
         "model": "Extra trees",
         "actual": 79.741247,
-        "predicted": 75.40363365572584,
+        "predicted": 75.40363365572583,
         "baseline": 76.322349
       },
       {
         "organization": "Corporation for National and Community Service",
         "model": "Extra trees",
         "actual": 82.419883,
-        "predicted": 77.47639035557064,
+        "predicted": 77.47639035557063,
         "baseline": 79.297023
       },
       {
         "organization": "Court Services and Offender Supervision Agency",
         "model": "Extra trees",
         "actual": 69.042119,
-        "predicted": 70.82852829260423,
+        "predicted": 70.82852829260425,
         "baseline": 69.550309
       },
       {
@@ -16473,7 +16473,7 @@
         "organization": "Department of Agriculture",
         "model": "Extra trees",
         "actual": 72.93029,
-        "predicted": 72.40127589171465,
+        "predicted": 72.40127589171466,
         "baseline": 71.604944
       },
       {
@@ -16508,7 +16508,7 @@
         "organization": "Department of Homeland Security",
         "model": "Extra trees",
         "actual": 68.79855,
-        "predicted": 67.91814135781914,
+        "predicted": 67.91814135781912,
         "baseline": 66.93375
       },
       {
@@ -16522,7 +16522,7 @@
         "organization": "Department of Justice",
         "model": "Extra trees",
         "actual": 67.62958,
-        "predicted": 66.19996752075842,
+        "predicted": 66.19996752075843,
         "baseline": 65.032644
       },
       {
@@ -16543,21 +16543,21 @@
         "organization": "Department of Transportation",
         "model": "Extra trees",
         "actual": 73.508332,
-        "predicted": 74.30867430872179,
+        "predicted": 74.3086743087218,
         "baseline": 73.437136
       },
       {
         "organization": "Department of the Interior",
         "model": "Extra trees",
         "actual": 73.064337,
-        "predicted": 72.31127902912687,
+        "predicted": 72.31127902912688,
         "baseline": 72.265192
       },
       {
         "organization": "Department of the Treasury",
         "model": "Extra trees",
         "actual": 74.286652,
-        "predicted": 73.96662277392574,
+        "predicted": 73.96662277392575,
         "baseline": 73.727152
       },
       {
@@ -16571,35 +16571,35 @@
         "organization": "Equal Employment Opportunity Commission",
         "model": "Extra trees",
         "actual": 79.081448,
-        "predicted": 77.65443816545512,
+        "predicted": 77.65443816545513,
         "baseline": 78.634077
       },
       {
         "organization": "Export-Import Bank of the United States",
         "model": "Extra trees",
         "actual": 63.119735,
-        "predicted": 69.37688997577447,
+        "predicted": 69.37688997577449,
         "baseline": 64.891409
       },
       {
         "organization": "Farm Credit Administration",
         "model": "Extra trees",
         "actual": 81.661059,
-        "predicted": 84.11263465810042,
+        "predicted": 84.11263465810043,
         "baseline": 84.170203
       },
       {
         "organization": "Federal Communications Commission",
         "model": "Extra trees",
         "actual": 78.798674,
-        "predicted": 75.73456648460619,
+        "predicted": 75.73456648460622,
         "baseline": 76.149919
       },
       {
         "organization": "Federal Election Commission",
         "model": "Extra trees",
         "actual": 73.707994,
-        "predicted": 73.5146909466242,
+        "predicted": 73.51469094662416,
         "baseline": 74.117962
       },
       {
@@ -16620,7 +16620,7 @@
         "organization": "Federal Labor Relations Authority",
         "model": "Extra trees",
         "actual": 85.027109,
-        "predicted": 82.8877509736228,
+        "predicted": 82.88775097362281,
         "baseline": 84.317485
       },
       {
@@ -16634,7 +16634,7 @@
         "organization": "Federal Mediation and Conciliation Service",
         "model": "Extra trees",
         "actual": 70.151788,
-        "predicted": 67.79891535819957,
+        "predicted": 67.79891535819955,
         "baseline": 63.501525
       },
       {
@@ -16690,14 +16690,14 @@
         "organization": "Marine Mammal Commission",
         "model": "Extra trees",
         "actual": 98.056361,
-        "predicted": 96.1362550824604,
+        "predicted": 96.13625508246038,
         "baseline": 97.986588
       },
       {
         "organization": "Merit Systems Protection Board",
         "model": "Extra trees",
         "actual": 69.836412,
-        "predicted": 71.20748962618515,
+        "predicted": 71.20748962618516,
         "baseline": 71.466414
       },
       {
@@ -16725,7 +16725,7 @@
         "organization": "National Endowment for the Arts",
         "model": "Extra trees",
         "actual": 72.250251,
-        "predicted": 74.46827286437227,
+        "predicted": 74.46827286437225,
         "baseline": 74.350419
       },
       {
@@ -16746,7 +16746,7 @@
         "organization": "National Indian Gaming Commission",
         "model": "Extra trees",
         "actual": 88.866532,
-        "predicted": 88.79897720461953,
+        "predicted": 88.79897720461952,
         "baseline": 89.101499
       },
       {
@@ -16774,7 +16774,7 @@
         "organization": "National Transportation Safety Board",
         "model": "Extra trees",
         "actual": 72.461217,
-        "predicted": 72.0790135378703,
+        "predicted": 72.07901353787028,
         "baseline": 71.107024
       },
       {
@@ -16795,7 +16795,7 @@
         "organization": "Occupational Safety and Health Review Commission",
         "model": "Extra trees",
         "actual": 94.912725,
-        "predicted": 94.50643385694814,
+        "predicted": 94.50643385694812,
         "baseline": 96.216812
       },
       {
@@ -16809,7 +16809,7 @@
         "organization": "Office of Personnel Management",
         "model": "Extra trees",
         "actual": 80.023419,
-        "predicted": 79.27585085868415,
+        "predicted": 79.27585085868417,
         "baseline": 79.705074
       },
       {
@@ -16823,7 +16823,7 @@
         "organization": "Peace Corps",
         "model": "Extra trees",
         "actual": 74.844826,
-        "predicted": 74.31151980213029,
+        "predicted": 74.31151980213032,
         "baseline": 73.562934
       },
       {
@@ -16886,14 +16886,14 @@
         "organization": "U.S. Access Board",
         "model": "Extra trees",
         "actual": 64.881849,
-        "predicted": 73.11583863895392,
+        "predicted": 73.1158386389539,
         "baseline": 71.762723
       },
       {
         "organization": "U.S. Agency for Global Media",
         "model": "Extra trees",
         "actual": 69.929538,
-        "predicted": 71.40573544145332,
+        "predicted": 71.4057354414533,
         "baseline": 69.747767
       },
       {
@@ -16921,7 +16921,7 @@
         "organization": "U.S. International Trade Commission",
         "model": "Extra trees",
         "actual": 80.090134,
-        "predicted": 77.32107094283626,
+        "predicted": 77.32107094283624,
         "baseline": 79.203546
       },
       {
@@ -16949,14 +16949,14 @@
         "organization": "United States Department of the Air Force",
         "model": "Extra trees",
         "actual": 73.440435,
-        "predicted": 73.34577321642766,
+        "predicted": 73.34577321642767,
         "baseline": 73.705671
       },
       {
         "organization": "United States Department of the Army",
         "model": "Extra trees",
         "actual": 75.208411,
-        "predicted": 72.42977200224402,
+        "predicted": 72.42977200224401,
         "baseline": 73.268752
       },
       {
@@ -17538,32 +17538,32 @@
       {
         "feature": "engagement",
         "label": "Prior-year engagement",
-        "mean": 1.424835397418273,
-        "std": 0.22528584197808835
+        "mean": 1.4248353974182741,
+        "std": 0.2252858419780886
       },
       {
         "feature": "leaders",
         "label": "Leaders lead",
-        "mean": 0.7339488049382812,
-        "std": 0.1443310120952406
+        "mean": 0.7339488049382835,
+        "std": 0.14433101209524077
       },
       {
         "feature": "satisfaction",
         "label": "Global satisfaction",
-        "mean": 0.1665719447181069,
-        "std": 0.0791991667490238
+        "mean": 0.16657194471810807,
+        "std": 0.07919916674902369
       },
       {
         "feature": "supervisors",
         "label": "Supervisory support",
-        "mean": 0.12216080033582934,
-        "std": 0.0759308399859096
+        "mean": 0.12216080033583038,
+        "std": 0.07593083998590988
       },
       {
         "feature": "intrinsic",
         "label": "Intrinsic work experience",
-        "mean": 0.10134920697500639,
-        "std": 0.05260501795295977
+        "mean": 0.101349206975008,
+        "std": 0.05260501795295953
       }
     ],
     "predictions": [
@@ -18252,7 +18252,7 @@
       {
         "name": "Random forest",
         "year": 2020,
-        "mae": 6.363126982185446,
+        "mae": 6.363126982185445,
         "n": 78
       },
       {
@@ -18294,7 +18294,7 @@
       {
         "name": "Extra trees",
         "year": 2021,
-        "mae": 3.5772439088768286,
+        "mae": 3.5772439088768317,
         "n": 78
       },
       {
@@ -18324,13 +18324,13 @@
       {
         "name": "Random forest",
         "year": 2022,
-        "mae": 2.5752373855443333,
+        "mae": 2.575237385544334,
         "n": 73
       },
       {
         "name": "Extra trees",
         "year": 2022,
-        "mae": 2.242986868663913,
+        "mae": 2.242986868663912,
         "n": 73
       },
       {
@@ -18347,7 +18347,7 @@
       },
       {
         "name": "Extra trees",
-        "mae": 3.9996092715615448
+        "mae": 3.9996092715615457
       },
       {
         "name": "Elastic net",
@@ -18414,6 +18414,2870 @@
       }
     ],
     "balancedOrgCount": 72
+  },
+  "rollingAudit": {
+    "origins": [
+      {
+        "year": 2022,
+        "testYear": 2022,
+        "selected": "Extra trees",
+        "n": 73,
+        "mae": 2.4346123815652176,
+        "baselineMae": 2.019578972602741,
+        "improvement": -0.41503340896247654,
+        "coverage": 0.9726027397260274,
+        "nominal": 0.9,
+        "width": 17.43506331759488,
+        "covered": 71,
+        "nCalibration": 78,
+        "nTraining": 231,
+        "calibrationYear": 2021,
+        "selectionYears": [
+          2020
+        ],
+        "trainingYears": [
+          2018,
+          2019,
+          2020
+        ],
+        "selection": [
+          {
+            "name": "Extra trees",
+            "mae": 6.178597037143892
+          },
+          {
+            "name": "Persistence",
+            "mae": 6.27840408974359
+          },
+          {
+            "name": "Gradient boosting",
+            "mae": 6.295945109721992
+          },
+          {
+            "name": "Ridge",
+            "mae": 6.353845350788024
+          },
+          {
+            "name": "Elastic net",
+            "mae": 6.356365857554857
+          },
+          {
+            "name": "Random forest",
+            "mae": 6.363126982185446
+          }
+        ],
+        "candidates": [
+          {
+            "name": "Extra trees",
+            "selectionMae": 6.178597037143892,
+            "mae": 2.4346123815652176,
+            "n": 73
+          },
+          {
+            "name": "Persistence",
+            "selectionMae": 6.27840408974359,
+            "mae": 2.019578972602741,
+            "n": 73
+          },
+          {
+            "name": "Gradient boosting",
+            "selectionMae": 6.295945109721992,
+            "mae": 4.052994432065041,
+            "n": 73
+          },
+          {
+            "name": "Ridge",
+            "selectionMae": 6.353845350788024,
+            "mae": 2.318585349965155,
+            "n": 73
+          },
+          {
+            "name": "Elastic net",
+            "selectionMae": 6.356365857554857,
+            "mae": 2.2692852423857848,
+            "n": 73
+          },
+          {
+            "name": "Random forest",
+            "selectionMae": 6.363126982185446,
+            "mae": 3.1538093097329805,
+            "n": 73
+          }
+        ],
+        "ablation": {
+          "priorOnlyRidgeMae": 2.33648118266488,
+          "fullRidgeMae": 2.318585349965155,
+          "incrementalFeatureImprovement": 0.017895832699724945,
+          "priorOnlyVsPersistence": -0.31690221006213903
+        }
+      },
+      {
+        "year": 2023,
+        "testYear": 2023,
+        "selected": "Extra trees",
+        "n": 77,
+        "mae": 2.7119279072530933,
+        "baselineMae": 2.9402085064935077,
+        "improvement": 0.22828059924041444,
+        "coverage": 0.8051948051948052,
+        "nominal": 0.9,
+        "width": 9.84274807648453,
+        "covered": 62,
+        "nCalibration": 73,
+        "nTraining": 309,
+        "calibrationYear": 2022,
+        "selectionYears": [
+          2020,
+          2021
+        ],
+        "trainingYears": [
+          2018,
+          2019,
+          2020,
+          2021
+        ],
+        "selection": [
+          {
+            "name": "Extra trees",
+            "mae": 4.877920473010361
+          },
+          {
+            "name": "Persistence",
+            "mae": 4.915060615384617
+          },
+          {
+            "name": "Ridge",
+            "mae": 4.955288979558353
+          },
+          {
+            "name": "Elastic net",
+            "mae": 4.955651731537063
+          },
+          {
+            "name": "Random forest",
+            "mae": 5.150662278852291
+          },
+          {
+            "name": "Gradient boosting",
+            "mae": 5.397978777133352
+          }
+        ],
+        "candidates": [
+          {
+            "name": "Extra trees",
+            "selectionMae": 4.877920473010361,
+            "mae": 2.7119279072530933,
+            "n": 77
+          },
+          {
+            "name": "Persistence",
+            "selectionMae": 4.915060615384617,
+            "mae": 2.9402085064935077,
+            "n": 77
+          },
+          {
+            "name": "Ridge",
+            "selectionMae": 4.955288979558353,
+            "mae": 3.0227756838144146,
+            "n": 77
+          },
+          {
+            "name": "Elastic net",
+            "selectionMae": 4.955651731537063,
+            "mae": 3.046775067832213,
+            "n": 77
+          },
+          {
+            "name": "Random forest",
+            "selectionMae": 5.150662278852291,
+            "mae": 2.9169180174821485,
+            "n": 77
+          },
+          {
+            "name": "Gradient boosting",
+            "selectionMae": 5.397978777133352,
+            "mae": 2.8986846772274566,
+            "n": 77
+          }
+        ],
+        "ablation": {
+          "priorOnlyRidgeMae": 3.0671947552744507,
+          "fullRidgeMae": 3.0227756838144146,
+          "incrementalFeatureImprovement": 0.0444190714600361,
+          "priorOnlyVsPersistence": -0.126986248780943
+        }
+      },
+      {
+        "year": 2024,
+        "testYear": 2024,
+        "selected": "Persistence",
+        "n": 81,
+        "mae": 3.339532506172839,
+        "baselineMae": 3.339532506172839,
+        "improvement": 0.0,
+        "coverage": 0.8641975308641975,
+        "nominal": 0.9,
+        "width": 12.48333185185187,
+        "covered": 70,
+        "nCalibration": 77,
+        "nTraining": 382,
+        "calibrationYear": 2023,
+        "selectionYears": [
+          2020,
+          2021,
+          2022
+        ],
+        "trainingYears": [
+          2018,
+          2019,
+          2020,
+          2021,
+          2022
+        ],
+        "selection": [
+          {
+            "name": "Persistence",
+            "mae": 3.949900067790658
+          },
+          {
+            "name": "Extra trees",
+            "mae": 3.9996092715615457
+          },
+          {
+            "name": "Elastic net",
+            "mae": 4.036131741969275
+          },
+          {
+            "name": "Ridge",
+            "mae": 4.051017914988279
+          },
+          {
+            "name": "Random forest",
+            "mae": 4.292187314416306
+          },
+          {
+            "name": "Gradient boosting",
+            "mae": 4.601594635533276
+          }
+        ],
+        "candidates": [
+          {
+            "name": "Persistence",
+            "selectionMae": 3.949900067790658,
+            "mae": 3.339532506172839,
+            "n": 81
+          },
+          {
+            "name": "Extra trees",
+            "selectionMae": 3.9996092715615457,
+            "mae": 3.2655991185065054,
+            "n": 81
+          },
+          {
+            "name": "Elastic net",
+            "selectionMae": 4.036131741969275,
+            "mae": 3.2960986673359876,
+            "n": 81
+          },
+          {
+            "name": "Ridge",
+            "selectionMae": 4.051017914988279,
+            "mae": 3.290117999017476,
+            "n": 81
+          },
+          {
+            "name": "Random forest",
+            "selectionMae": 4.292187314416306,
+            "mae": 3.4943464684758094,
+            "n": 81
+          },
+          {
+            "name": "Gradient boosting",
+            "selectionMae": 4.601594635533276,
+            "mae": 3.42550026375568,
+            "n": 81
+          }
+        ],
+        "ablation": {
+          "priorOnlyRidgeMae": 3.343069775163829,
+          "fullRidgeMae": 3.290117999017476,
+          "incrementalFeatureImprovement": 0.05295177614635316,
+          "priorOnlyVsPersistence": -0.00353726899099005
+        }
+      }
+    ],
+    "summary": {
+      "nOrigins": 3,
+      "years": [
+        2022,
+        2023,
+        2024
+      ],
+      "n": 231,
+      "mae": 2.8286909316637168,
+      "baselineMae": 2.766439995089696,
+      "improvement": -0.0622509365740207,
+      "coverage": 0.8806650252616767,
+      "nominal": 0.9,
+      "width": 13.253714415310426,
+      "covered": 203,
+      "originsImproved": 1,
+      "priorOnlyRidgeMae": 2.91558190436772,
+      "fullRidgeMae": 2.8771596775990154,
+      "incrementalFeatureImprovement": 0.03842222676870444
+    },
+    "predictions": [
+      {
+        "year": 2022,
+        "organization": "AbilityOne Commission",
+        "actual": 67.458301,
+        "predicted": 68.96811679998339,
+        "baseline": 65.0,
+        "lower": 60.15766320596724,
+        "upper": 77.77857039399954,
+        "priorOnlyRidge": 68.14954937611928,
+        "fullRidge": 68.36081821976224
+      },
+      {
+        "year": 2022,
+        "organization": "American Battle Monuments Commission",
+        "actual": 64.354386,
+        "predicted": 70.11082456203934,
+        "baseline": 69.572733,
+        "lower": 61.30037096802319,
+        "upper": 78.9212781560555,
+        "priorOnlyRidge": 71.75226995433714,
+        "fullRidge": 71.0759713663065
+      },
+      {
+        "year": 2022,
+        "organization": "Commission on Civil Rights",
+        "actual": 75.209402,
+        "predicted": 66.62473624106248,
+        "baseline": 65.0,
+        "lower": 57.814282647046326,
+        "upper": 75.43518983507863,
+        "priorOnlyRidge": 68.14954937611928,
+        "fullRidge": 67.76073996245206
+      },
+      {
+        "year": 2022,
+        "organization": "Commodity Futures Trading Commission",
+        "actual": 70.65312,
+        "predicted": 73.08339661907877,
+        "baseline": 71.92666,
+        "lower": 64.27294302506262,
+        "upper": 81.89385021309492,
+        "priorOnlyRidge": 73.60685915570153,
+        "fullRidge": 73.51021341687726
+      },
+      {
+        "year": 2022,
+        "organization": "Consumer Product Safety Commission",
+        "actual": 71.247607,
+        "predicted": 71.87762754156812,
+        "baseline": 70.870549,
+        "lower": 63.067173947551964,
+        "upper": 80.68808113558427,
+        "priorOnlyRidge": 72.77478065197471,
+        "fullRidge": 72.4955542897457
+      },
+      {
+        "year": 2022,
+        "organization": "Corporation for National and Community Service",
+        "actual": 76.205351,
+        "predicted": 74.84954193385367,
+        "baseline": 75.248445,
+        "lower": 66.03908833983752,
+        "upper": 83.65999552786982,
+        "priorOnlyRidge": 76.22399494209347,
+        "fullRidge": 76.17976596376951
+      },
+      {
+        "year": 2022,
+        "organization": "Court Services and Offender Supervision Agency",
+        "actual": 67.41327,
+        "predicted": 70.76531624807565,
+        "baseline": 70.029116,
+        "lower": 61.9548626540595,
+        "upper": 79.5757698420918,
+        "priorOnlyRidge": 72.1118405712196,
+        "fullRidge": 71.75662661067732
+      },
+      {
+        "year": 2022,
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "actual": 80.324058,
+        "predicted": 84.50725333667583,
+        "baseline": 81.710325,
+        "lower": 75.69679974265968,
+        "upper": 93.31770693069198,
+        "priorOnlyRidge": 81.31511835777822,
+        "fullRidge": 81.2937006167455
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Agriculture",
+        "actual": 70.316418,
+        "predicted": 70.28369652579339,
+        "baseline": 70.066238,
+        "lower": 61.473242931777236,
+        "upper": 79.09415011980954,
+        "priorOnlyRidge": 72.14108789296452,
+        "fullRidge": 71.78844497531153
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Commerce",
+        "actual": 75.102522,
+        "predicted": 75.13943908950351,
+        "baseline": 76.457425,
+        "lower": 66.32898549548736,
+        "upper": 83.94989268351966,
+        "priorOnlyRidge": 77.17651439263953,
+        "fullRidge": 77.2153144637013
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Education",
+        "actual": 76.303031,
+        "predicted": 75.21080817329648,
+        "baseline": 75.659004,
+        "lower": 66.40035457928033,
+        "upper": 84.02126176731264,
+        "priorOnlyRidge": 76.54746218977063,
+        "fullRidge": 76.50761749740045
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Energy",
+        "actual": 77.600753,
+        "predicted": 76.41995797843238,
+        "baseline": 77.280869,
+        "lower": 67.60950438441623,
+        "upper": 85.23041157244853,
+        "priorOnlyRidge": 77.825281474341,
+        "fullRidge": 77.80163193810692
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Health and Human Services",
+        "actual": 77.88105,
+        "predicted": 76.7485313345185,
+        "baseline": 77.397895,
+        "lower": 67.93807774050235,
+        "upper": 85.55898492853466,
+        "priorOnlyRidge": 77.91748278554516,
+        "fullRidge": 78.09346540520197
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Homeland Security",
+        "actual": 64.322037,
+        "predicted": 67.40889178646789,
+        "baseline": 65.19231,
+        "lower": 58.59843819245174,
+        "upper": 76.21934538048404,
+        "priorOnlyRidge": 68.30106471593841,
+        "fullRidge": 68.16787769317236
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Housing and Urban Development",
+        "actual": 76.24659,
+        "predicted": 76.56455400932286,
+        "baseline": 77.283444,
+        "lower": 67.75410041530671,
+        "upper": 85.37500760333901,
+        "priorOnlyRidge": 77.82731024039599,
+        "fullRidge": 77.96954724071374
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Justice",
+        "actual": 63.058871,
+        "predicted": 66.48022709387183,
+        "baseline": 65.035721,
+        "lower": 57.66977349985568,
+        "upper": 75.29068068788798,
+        "priorOnlyRidge": 68.17769289155623,
+        "fullRidge": 68.05277823802668
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Labor",
+        "actual": 74.519035,
+        "predicted": 75.58803928548176,
+        "baseline": 75.51094,
+        "lower": 66.7775856914656,
+        "upper": 84.39849287949791,
+        "priorOnlyRidge": 76.43080695980352,
+        "fullRidge": 76.51641010706757
+      },
+      {
+        "year": 2022,
+        "organization": "Department of State",
+        "actual": 70.409055,
+        "predicted": 72.4575076412362,
+        "baseline": 71.158052,
+        "lower": 63.64705404722005,
+        "upper": 81.26796123525236,
+        "priorOnlyRidge": 73.00129573046264,
+        "fullRidge": 73.0742262976464
+      },
+      {
+        "year": 2022,
+        "organization": "Department of Transportation",
+        "actual": 71.93318,
+        "predicted": 72.84002294867513,
+        "baseline": 71.67573,
+        "lower": 64.02956935465897,
+        "upper": 81.65047654269128,
+        "priorOnlyRidge": 73.40915885815689,
+        "fullRidge": 73.29577353715291
+      },
+      {
+        "year": 2022,
+        "organization": "Department of the Interior",
+        "actual": 70.365338,
+        "predicted": 71.00825598248457,
+        "baseline": 70.202419,
+        "lower": 62.19780238846842,
+        "upper": 79.81870957650072,
+        "priorOnlyRidge": 72.24838086000683,
+        "fullRidge": 71.95535098729277
+      },
+      {
+        "year": 2022,
+        "organization": "Department of the Treasury",
+        "actual": 73.740793,
+        "predicted": 74.76426109145109,
+        "baseline": 74.286643,
+        "lower": 65.95380749743494,
+        "upper": 83.57471468546724,
+        "priorOnlyRidge": 75.46621969967913,
+        "fullRidge": 75.57742915149262
+      },
+      {
+        "year": 2022,
+        "organization": "Environmental Protection Agency",
+        "actual": 77.960624,
+        "predicted": 79.04649927254724,
+        "baseline": 78.047514,
+        "lower": 70.23604567853108,
+        "upper": 87.85695286656339,
+        "priorOnlyRidge": 78.42929831015623,
+        "fullRidge": 78.48995991566908
+      },
+      {
+        "year": 2022,
+        "organization": "Equal Employment Opportunity Commission",
+        "actual": 77.562517,
+        "predicted": 80.60141721749106,
+        "baseline": 79.76424,
+        "lower": 71.79096362347491,
+        "upper": 89.41187081150721,
+        "priorOnlyRidge": 79.7818557604516,
+        "fullRidge": 80.0968938382632
+      },
+      {
+        "year": 2022,
+        "organization": "Export-Import Bank of the United States",
+        "actual": 70.391081,
+        "predicted": 81.22140823980612,
+        "baseline": 79.863318,
+        "lower": 72.41095464578997,
+        "upper": 90.03186183382228,
+        "priorOnlyRidge": 79.85991637528495,
+        "fullRidge": 79.62040636740728
+      },
+      {
+        "year": 2022,
+        "organization": "Farm Credit Administration",
+        "actual": 83.027483,
+        "predicted": 84.90072739821194,
+        "baseline": 81.761471,
+        "lower": 76.09027380419579,
+        "upper": 93.7111809922281,
+        "priorOnlyRidge": 81.35541477278726,
+        "fullRidge": 81.35683185983136
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Communications Commission",
+        "actual": 75.92971,
+        "predicted": 78.67465487558611,
+        "baseline": 78.686745,
+        "lower": 69.86420128156996,
+        "upper": 87.48510846960227,
+        "priorOnlyRidge": 78.93292943795983,
+        "fullRidge": 79.12837851020274
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Election Commission",
+        "actual": 74.306054,
+        "predicted": 71.95062013532694,
+        "baseline": 72.091816,
+        "lower": 63.14016654131079,
+        "upper": 80.7610737293431,
+        "priorOnlyRidge": 73.73698066505187,
+        "fullRidge": 73.2686600260756
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Energy Regulatory Commission",
+        "actual": 82.774045,
+        "predicted": 86.69190666942832,
+        "baseline": 84.259577,
+        "lower": 77.88145307541217,
+        "upper": 95.50236026344447,
+        "priorOnlyRidge": 83.32359832795426,
+        "fullRidge": 83.65658483635244
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Housing Finance Agency",
+        "actual": 76.462089,
+        "predicted": 76.32906653258391,
+        "baseline": 75.457331,
+        "lower": 67.51861293856776,
+        "upper": 85.13952012660006,
+        "priorOnlyRidge": 76.3885700202145,
+        "fullRidge": 76.48748172109751
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Labor Relations Authority",
+        "actual": 82.551982,
+        "predicted": 79.70048885850096,
+        "baseline": 78.037802,
+        "lower": 70.89003526448481,
+        "upper": 88.51094245251711,
+        "priorOnlyRidge": 78.42164651368009,
+        "fullRidge": 78.62771205922921
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Maritime Commission",
+        "actual": 76.340672,
+        "predicted": 81.26788871809654,
+        "baseline": 80.523332,
+        "lower": 72.45743512408039,
+        "upper": 90.0783423121127,
+        "priorOnlyRidge": 80.37992181179564,
+        "fullRidge": 80.6218555330028
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Mediation and Conciliation Service",
+        "actual": 70.281698,
+        "predicted": 69.61028615717115,
+        "baseline": 68.664896,
+        "lower": 60.79983256315499,
+        "upper": 78.4207397511873,
+        "priorOnlyRidge": 71.0370121333431,
+        "fullRidge": 70.3856995301619
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Retirement Thrift Investment Board",
+        "actual": 76.253391,
+        "predicted": 75.3099478362255,
+        "baseline": 76.798773,
+        "lower": 66.49949424220935,
+        "upper": 84.12040143024166,
+        "priorOnlyRidge": 77.44545234811025,
+        "fullRidge": 77.03504031820188
+      },
+      {
+        "year": 2022,
+        "organization": "Federal Trade Commission",
+        "actual": 74.207031,
+        "predicted": 72.94840723310762,
+        "baseline": 73.937345,
+        "lower": 64.13795363909146,
+        "upper": 81.75886082712377,
+        "priorOnlyRidge": 75.1910181752231,
+        "fullRidge": 74.50259836085694
+      },
+      {
+        "year": 2022,
+        "organization": "General Services Administration",
+        "actual": 82.914504,
+        "predicted": 85.82859276151173,
+        "baseline": 83.296568,
+        "lower": 77.01813916749558,
+        "upper": 94.63904635552788,
+        "priorOnlyRidge": 82.56487212607259,
+        "fullRidge": 82.8404678865169
+      },
+      {
+        "year": 2022,
+        "organization": "Institute of Museum and Library Services",
+        "actual": 80.69636,
+        "predicted": 84.08847873213637,
+        "baseline": 83.159848,
+        "lower": 75.27802513812021,
+        "upper": 92.89893232615252,
+        "priorOnlyRidge": 82.45715449693178,
+        "fullRidge": 82.93991869859435
+      },
+      {
+        "year": 2022,
+        "organization": "Inter-American Foundation",
+        "actual": 77.976529,
+        "predicted": 85.19699185108034,
+        "baseline": 83.482452,
+        "lower": 76.38653825706419,
+        "upper": 94.0074454450965,
+        "priorOnlyRidge": 82.71132461126282,
+        "fullRidge": 83.43079956591615
+      },
+      {
+        "year": 2022,
+        "organization": "International Boundary and Water Commission",
+        "actual": 64.159319,
+        "predicted": 65.17093165064361,
+        "baseline": 60.54107,
+        "lower": 56.36047805662746,
+        "upper": 73.98138524465976,
+        "priorOnlyRidge": 64.63649080308804,
+        "fullRidge": 64.39369626934015
+      },
+      {
+        "year": 2022,
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "actual": 53.22884,
+        "predicted": 62.170219963630224,
+        "baseline": 56.0,
+        "lower": 53.35976636961407,
+        "upper": 70.98067355764638,
+        "priorOnlyRidge": 61.05871656257854,
+        "fullRidge": 60.2642828089613
+      },
+      {
+        "year": 2022,
+        "organization": "Marine Mammal Commission",
+        "actual": 95.79718,
+        "predicted": 96.97895615953365,
+        "baseline": 95.194345,
+        "lower": 88.1685025655175,
+        "upper": 100.0,
+        "priorOnlyRidge": 91.93877741049374,
+        "fullRidge": 92.60629718794915
+      },
+      {
+        "year": 2022,
+        "organization": "Merit Systems Protection Board",
+        "actual": 74.401549,
+        "predicted": 79.3410215633467,
+        "baseline": 79.793368,
+        "lower": 70.53056796933055,
+        "upper": 88.15147515736285,
+        "priorOnlyRidge": 79.80480484691748,
+        "fullRidge": 79.89989140674
+      },
+      {
+        "year": 2022,
+        "organization": "National Archives and Records Administration",
+        "actual": 74.357908,
+        "predicted": 75.08411486642109,
+        "baseline": 76.842197,
+        "lower": 66.27366127240494,
+        "upper": 83.89456846043724,
+        "priorOnlyRidge": 77.47966482856528,
+        "fullRidge": 77.3725422001202
+      },
+      {
+        "year": 2022,
+        "organization": "National Capital Planning Commission",
+        "actual": 94.124373,
+        "predicted": 96.34912435343128,
+        "baseline": 94.714919,
+        "lower": 87.53867075941513,
+        "upper": 100.0,
+        "priorOnlyRidge": 91.56105189799769,
+        "fullRidge": 92.17413900853744
+      },
+      {
+        "year": 2022,
+        "organization": "National Credit Union Administration",
+        "actual": 75.957163,
+        "predicted": 76.91484546105015,
+        "baseline": 76.891946,
+        "lower": 68.104391867034,
+        "upper": 85.7252990550663,
+        "priorOnlyRidge": 77.51886058874759,
+        "fullRidge": 77.70252682879595
+      },
+      {
+        "year": 2022,
+        "organization": "National Endowment for the Arts",
+        "actual": 78.13644,
+        "predicted": 78.36784414894085,
+        "baseline": 78.16044,
+        "lower": 69.5573905549247,
+        "upper": 87.178297742957,
+        "priorOnlyRidge": 78.51826935307865,
+        "fullRidge": 78.60460035572113
+      },
+      {
+        "year": 2022,
+        "organization": "National Endowment for the Humanities",
+        "actual": 84.377113,
+        "predicted": 81.16930497788557,
+        "baseline": 80.092294,
+        "lower": 72.35885138386942,
+        "upper": 89.97975857190173,
+        "priorOnlyRidge": 80.04031976798642,
+        "fullRidge": 80.14086188402385
+      },
+      {
+        "year": 2022,
+        "organization": "National Gallery of Art",
+        "actual": 66.363533,
+        "predicted": 67.15672037274403,
+        "baseline": 65.811522,
+        "lower": 58.34626677872788,
+        "upper": 75.96717396676019,
+        "priorOnlyRidge": 68.78892346795375,
+        "fullRidge": 68.63356815996222
+      },
+      {
+        "year": 2022,
+        "organization": "National Indian Gaming Commission",
+        "actual": 81.68166,
+        "predicted": 83.40134931071435,
+        "baseline": 80.938274,
+        "lower": 74.5908957166982,
+        "upper": 92.2118029047305,
+        "priorOnlyRidge": 80.70684229505301,
+        "fullRidge": 81.18377242632192
+      },
+      {
+        "year": 2022,
+        "organization": "National Labor Relations Board",
+        "actual": 74.855064,
+        "predicted": 72.83531077025253,
+        "baseline": 73.34234,
+        "lower": 64.02485717623638,
+        "upper": 81.64576436426869,
+        "priorOnlyRidge": 74.72223139986524,
+        "fullRidge": 74.56757858122147
+      },
+      {
+        "year": 2022,
+        "organization": "National Science Foundation",
+        "actual": 82.252111,
+        "predicted": 85.33490541036937,
+        "baseline": 84.489,
+        "lower": 76.52445181635322,
+        "upper": 94.14535900438553,
+        "priorOnlyRidge": 83.50435389868548,
+        "fullRidge": 83.87702733421835
+      },
+      {
+        "year": 2022,
+        "organization": "National Transportation Safety Board",
+        "actual": 71.967143,
+        "predicted": 77.52703624327455,
+        "baseline": 76.333479,
+        "lower": 68.7165826492584,
+        "upper": 86.3374898372907,
+        "priorOnlyRidge": 77.07886101887206,
+        "fullRidge": 77.29604133738202
+      },
+      {
+        "year": 2022,
+        "organization": "Nuclear Regulatory Commission",
+        "actual": 75.733992,
+        "predicted": 74.809781398954,
+        "baseline": 76.204302,
+        "lower": 65.99932780493785,
+        "upper": 83.62023499297015,
+        "priorOnlyRidge": 76.97708629549932,
+        "fullRidge": 76.81990448455163
+      },
+      {
+        "year": 2022,
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "actual": 73.078387,
+        "predicted": 72.60138136258601,
+        "baseline": 72.710938,
+        "lower": 63.79092776856986,
+        "upper": 81.41183495660216,
+        "priorOnlyRidge": 74.2247685087391,
+        "fullRidge": 74.31744799198758
+      },
+      {
+        "year": 2022,
+        "organization": "Occupational Safety and Health Review Commission",
+        "actual": 89.933354,
+        "predicted": 93.80716124691835,
+        "baseline": 94.089621,
+        "lower": 84.9967076529022,
+        "upper": 100.0,
+        "priorOnlyRidge": 91.06839816725974,
+        "fullRidge": 91.27745539541549
+      },
+      {
+        "year": 2022,
+        "organization": "Office of Management and Budget",
+        "actual": 76.743908,
+        "predicted": 78.99889320529623,
+        "baseline": 79.70164,
+        "lower": 70.18843961128007,
+        "upper": 87.80934679931238,
+        "priorOnlyRidge": 79.73253507888187,
+        "fullRidge": 79.93462620787565
+      },
+      {
+        "year": 2022,
+        "organization": "Office of Personnel Management",
+        "actual": 76.68131,
+        "predicted": 76.32588359780924,
+        "baseline": 77.214495,
+        "lower": 67.51543000379309,
+        "upper": 85.13633719182539,
+        "priorOnlyRidge": 77.77298737021145,
+        "fullRidge": 77.86918145400557
+      },
+      {
+        "year": 2022,
+        "organization": "Office of the U.S. Trade Representative",
+        "actual": 71.206625,
+        "predicted": 75.30661844217786,
+        "baseline": 73.905178,
+        "lower": 66.49616484816171,
+        "upper": 84.11707203619402,
+        "priorOnlyRidge": 75.1656747508772,
+        "fullRidge": 75.52210406934161
+      },
+      {
+        "year": 2022,
+        "organization": "Pension Benefit Guaranty Corporation",
+        "actual": 86.026327,
+        "predicted": 85.53387084828296,
+        "baseline": 84.480733,
+        "lower": 76.7234172542668,
+        "upper": 94.34432444229911,
+        "priorOnlyRidge": 83.49784057481108,
+        "fullRidge": 83.79148776200982
+      },
+      {
+        "year": 2022,
+        "organization": "Postal Regulatory Commission",
+        "actual": 85.69572,
+        "predicted": 88.05304376785762,
+        "baseline": 87.725705,
+        "lower": 79.24259017384146,
+        "upper": 96.86349736187377,
+        "priorOnlyRidge": 86.05445767888008,
+        "fullRidge": 86.27130104014115
+      },
+      {
+        "year": 2022,
+        "organization": "Railroad Retirement Board",
+        "actual": 73.788525,
+        "predicted": 72.49795385091258,
+        "baseline": 71.939887,
+        "lower": 63.68750025689643,
+        "upper": 81.30840744492873,
+        "priorOnlyRidge": 73.6172803163265,
+        "fullRidge": 73.77290406283434
+      },
+      {
+        "year": 2022,
+        "organization": "Selective Service System",
+        "actual": 80.414126,
+        "predicted": 85.83893574879413,
+        "baseline": 84.448543,
+        "lower": 77.02848215477798,
+        "upper": 94.64938934281028,
+        "priorOnlyRidge": 83.47247902944798,
+        "fullRidge": 83.98492339236994
+      },
+      {
+        "year": 2022,
+        "organization": "Small Business Administration",
+        "actual": 78.578,
+        "predicted": 75.09254866925005,
+        "baseline": 75.786819,
+        "lower": 66.2820950752339,
+        "upper": 83.9030022632662,
+        "priorOnlyRidge": 76.6481638337776,
+        "fullRidge": 76.69444487545256
+      },
+      {
+        "year": 2022,
+        "organization": "Social Security Administration",
+        "actual": 65.70613,
+        "predicted": 68.8922524276509,
+        "baseline": 68.681612,
+        "lower": 60.08179883363475,
+        "upper": 77.70270602166705,
+        "priorOnlyRidge": 71.05018217348878,
+        "fullRidge": 71.11552677633979
+      },
+      {
+        "year": 2022,
+        "organization": "Surface Transportation Board",
+        "actual": 83.90067,
+        "predicted": 82.88866973823394,
+        "baseline": 80.451531,
+        "lower": 74.07821614421779,
+        "upper": 91.6991233322501,
+        "priorOnlyRidge": 80.32335193547954,
+        "fullRidge": 80.65560614118883
+      },
+      {
+        "year": 2022,
+        "organization": "U.S. Agency for Global Media",
+        "actual": 69.177826,
+        "predicted": 71.61225988732842,
+        "baseline": 70.243108,
+        "lower": 62.80180629331227,
+        "upper": 80.42271348134457,
+        "priorOnlyRidge": 72.28043851515685,
+        "fullRidge": 72.19287315274389
+      },
+      {
+        "year": 2022,
+        "organization": "U.S. Agency for International Development",
+        "actual": 73.836323,
+        "predicted": 75.15903054187775,
+        "baseline": 74.703721,
+        "lower": 66.3485769478616,
+        "upper": 83.96948413589391,
+        "priorOnlyRidge": 75.79482307392423,
+        "fullRidge": 75.89327585865826
+      },
+      {
+        "year": 2022,
+        "organization": "U.S. International Development Finance Corporation",
+        "actual": 76.697219,
+        "predicted": 76.02831265723135,
+        "baseline": 76.853776,
+        "lower": 67.2178590632152,
+        "upper": 84.8387662512475,
+        "priorOnlyRidge": 77.48878757891505,
+        "fullRidge": 77.68560541352922
+      },
+      {
+        "year": 2022,
+        "organization": "U.S. International Trade Commission",
+        "actual": 81.326566,
+        "predicted": 84.76938029298591,
+        "baseline": 83.50779,
+        "lower": 75.95892669896976,
+        "upper": 93.57983388700207,
+        "priorOnlyRidge": 82.73128766924388,
+        "fullRidge": 82.92552791395964
+      },
+      {
+        "year": 2022,
+        "organization": "U.S. Office of Government Ethics",
+        "actual": 84.324353,
+        "predicted": 88.83228685241997,
+        "baseline": 88.901278,
+        "lower": 80.02183325840382,
+        "upper": 97.64274044643612,
+        "priorOnlyRidge": 86.98065674589259,
+        "fullRidge": 87.25436026848203
+      },
+      {
+        "year": 2022,
+        "organization": "U.S. Office of Special Counsel",
+        "actual": 84.827031,
+        "predicted": 86.62952757407284,
+        "baseline": 87.41788,
+        "lower": 77.81907398005669,
+        "upper": 95.43998116808899,
+        "priorOnlyRidge": 85.81193149989917,
+        "fullRidge": 86.16468306835073
+      },
+      {
+        "year": 2022,
+        "organization": "United States Department of the Air Force",
+        "actual": 72.591374,
+        "predicted": 72.49248681238046,
+        "baseline": 72.110827,
+        "lower": 63.68203321836431,
+        "upper": 81.30294040639662,
+        "priorOnlyRidge": 73.75195886756501,
+        "fullRidge": 73.77262549021248
+      },
+      {
+        "year": 2022,
+        "organization": "United States Department of the Army",
+        "actual": 70.573399,
+        "predicted": 71.77107388185627,
+        "baseline": 70.227937,
+        "lower": 62.960620287840115,
+        "upper": 80.58152747587242,
+        "priorOnlyRidge": 72.26848573464414,
+        "fullRidge": 72.27740438563552
+      },
+      {
+        "year": 2022,
+        "organization": "United States Department of the Navy",
+        "actual": 70.368539,
+        "predicted": 72.83504033276463,
+        "baseline": 71.454258,
+        "lower": 64.02458673874848,
+        "upper": 81.64549392678079,
+        "priorOnlyRidge": 73.23466764428127,
+        "fullRidge": 73.13228992190082
+      },
+      {
+        "year": 2023,
+        "organization": "AbilityOne Commission",
+        "actual": 67.410595,
+        "predicted": 68.98329645193306,
+        "baseline": 67.458301,
+        "lower": 64.0568932062863,
+        "upper": 73.90969969757981,
+        "priorOnlyRidge": 70.02042725413763,
+        "fullRidge": 70.30519195273577
+      },
+      {
+        "year": 2023,
+        "organization": "Advisory Council on Historic Preservation",
+        "actual": 84.125991,
+        "predicted": 82.73051929190171,
+        "baseline": 81.981347,
+        "lower": 77.80411604625496,
+        "upper": 87.65692253754847,
+        "priorOnlyRidge": 81.44315293842455,
+        "fullRidge": 81.56470077865274
+      },
+      {
+        "year": 2023,
+        "organization": "American Battle Monuments Commission",
+        "actual": 60.59109,
+        "predicted": 69.03486240463744,
+        "baseline": 64.354386,
+        "lower": 64.10845915899068,
+        "upper": 73.96126565028419,
+        "priorOnlyRidge": 67.57912330231213,
+        "fullRidge": 67.01348739555777
+      },
+      {
+        "year": 2023,
+        "organization": "Commission on Civil Rights",
+        "actual": 71.91875,
+        "predicted": 74.70815812362972,
+        "baseline": 75.209402,
+        "lower": 69.78175487798296,
+        "upper": 79.63456136927647,
+        "priorOnlyRidge": 76.11685499210678,
+        "fullRidge": 75.9209198148507
+      },
+      {
+        "year": 2023,
+        "organization": "Commodity Futures Trading Commission",
+        "actual": 70.785268,
+        "predicted": 71.75177417775946,
+        "baseline": 70.65312,
+        "lower": 66.8253709321127,
+        "upper": 76.67817742340621,
+        "priorOnlyRidge": 72.53322939274875,
+        "fullRidge": 72.37969433906477
+      },
+      {
+        "year": 2023,
+        "organization": "Consumer Product Safety Commission",
+        "actual": 76.322349,
+        "predicted": 72.51668089901278,
+        "baseline": 71.247607,
+        "lower": 67.59027765336603,
+        "upper": 77.44308414465954,
+        "priorOnlyRidge": 73.00080774538048,
+        "fullRidge": 72.69458236549849
+      },
+      {
+        "year": 2023,
+        "organization": "Corporation for National and Community Service",
+        "actual": 79.297023,
+        "predicted": 76.19158352549337,
+        "baseline": 76.205351,
+        "lower": 71.26518027984662,
+        "upper": 81.11798677114012,
+        "priorOnlyRidge": 76.90019288296934,
+        "fullRidge": 76.62769887851091
+      },
+      {
+        "year": 2023,
+        "organization": "Court Services and Offender Supervision Agency",
+        "actual": 69.550309,
+        "predicted": 68.96055895162534,
+        "baseline": 67.41327,
+        "lower": 64.03415570597859,
+        "upper": 73.8869621972721,
+        "priorOnlyRidge": 69.9850092873909,
+        "fullRidge": 69.56680941392041
+      },
+      {
+        "year": 2023,
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "actual": 82.538728,
+        "predicted": 79.34812941256234,
+        "baseline": 80.324058,
+        "lower": 74.42172616691559,
+        "upper": 84.2745326582091,
+        "priorOnlyRidge": 80.13965519927353,
+        "fullRidge": 79.86254682385689
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Agriculture",
+        "actual": 71.604944,
+        "predicted": 71.05736291037579,
+        "baseline": 70.316418,
+        "lower": 66.13095966472903,
+        "upper": 75.98376615602254,
+        "priorOnlyRidge": 72.26840515523338,
+        "fullRidge": 71.8816537275013
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Commerce",
+        "actual": 75.977209,
+        "predicted": 74.83993985252123,
+        "baseline": 75.102522,
+        "lower": 69.91353660687447,
+        "upper": 79.76634309816798,
+        "priorOnlyRidge": 76.03279129629968,
+        "fullRidge": 75.88990349372355
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Education",
+        "actual": 76.356104,
+        "predicted": 75.68378090023228,
+        "baseline": 76.303031,
+        "lower": 70.75737765458553,
+        "upper": 80.61018414587903,
+        "priorOnlyRidge": 76.97702055705653,
+        "fullRidge": 76.79560417361502
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Energy",
+        "actual": 79.206557,
+        "predicted": 76.95008926235903,
+        "baseline": 77.600753,
+        "lower": 72.02368601671228,
+        "upper": 81.87649250800578,
+        "priorOnlyRidge": 77.99771018514585,
+        "fullRidge": 77.90236873034931
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Health and Human Services",
+        "actual": 78.14407,
+        "predicted": 77.14856628486599,
+        "baseline": 77.88105,
+        "lower": 72.22216303921924,
+        "upper": 82.07496953051275,
+        "priorOnlyRidge": 78.2181705308012,
+        "fullRidge": 78.20460189101898
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Homeland Security",
+        "actual": 66.93375,
+        "predicted": 66.91851337083911,
+        "baseline": 64.322037,
+        "lower": 61.992110125192355,
+        "upper": 71.84491661648586,
+        "priorOnlyRidge": 67.55368003420149,
+        "fullRidge": 67.27168523065279
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Housing and Urban Development",
+        "actual": 77.467012,
+        "predicted": 75.56516905196965,
+        "baseline": 76.24659,
+        "lower": 70.6387658063229,
+        "upper": 80.4915722976164,
+        "priorOnlyRidge": 76.9326283503289,
+        "fullRidge": 76.88566957350834
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Justice",
+        "actual": 65.032644,
+        "predicted": 65.24013419666443,
+        "baseline": 63.058871,
+        "lower": 60.313730951017675,
+        "upper": 70.16653744231118,
+        "priorOnlyRidge": 66.56016953291149,
+        "fullRidge": 66.29482678774316
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Labor",
+        "actual": 76.399209,
+        "predicted": 74.78977472335221,
+        "baseline": 74.519035,
+        "lower": 69.86337147770546,
+        "upper": 79.71617796899896,
+        "priorOnlyRidge": 75.57386470876787,
+        "fullRidge": 75.48717682707388
+      },
+      {
+        "year": 2023,
+        "organization": "Department of State",
+        "actual": 69.023373,
+        "predicted": 71.41510899898361,
+        "baseline": 70.409055,
+        "lower": 66.48870575333686,
+        "upper": 76.34151224463037,
+        "priorOnlyRidge": 72.3412663882843,
+        "fullRidge": 72.19136578716689
+      },
+      {
+        "year": 2023,
+        "organization": "Department of Transportation",
+        "actual": 73.437136,
+        "predicted": 73.25812624366219,
+        "baseline": 71.93318,
+        "lower": 68.33172299801544,
+        "upper": 78.18452948930894,
+        "priorOnlyRidge": 73.54002743218403,
+        "fullRidge": 73.36829675864463
+      },
+      {
+        "year": 2023,
+        "organization": "Department of the Interior",
+        "actual": 72.265192,
+        "predicted": 71.67390711350042,
+        "baseline": 70.365338,
+        "lower": 66.74750386785367,
+        "upper": 76.60031035914717,
+        "priorOnlyRidge": 72.30688191420496,
+        "fullRidge": 72.01699273866974
+      },
+      {
+        "year": 2023,
+        "organization": "Department of the Treasury",
+        "actual": 73.727152,
+        "predicted": 74.10050660133996,
+        "baseline": 73.740793,
+        "lower": 69.1741033556932,
+        "upper": 79.02690984698671,
+        "priorOnlyRidge": 74.96175862014219,
+        "fullRidge": 74.82349563056202
+      },
+      {
+        "year": 2023,
+        "organization": "Environmental Protection Agency",
+        "actual": 79.236417,
+        "predicted": 78.16973769871224,
+        "baseline": 77.960624,
+        "lower": 73.24333445306549,
+        "upper": 83.096140944359,
+        "priorOnlyRidge": 78.28075739953394,
+        "fullRidge": 78.28196609426908
+      },
+      {
+        "year": 2023,
+        "organization": "Equal Employment Opportunity Commission",
+        "actual": 78.634077,
+        "predicted": 76.90780775593896,
+        "baseline": 77.562517,
+        "lower": 71.98140451029221,
+        "upper": 81.83421100158571,
+        "priorOnlyRidge": 77.96763664965857,
+        "fullRidge": 77.91455876847188
+      },
+      {
+        "year": 2023,
+        "organization": "Export-Import Bank of the United States",
+        "actual": 64.891409,
+        "predicted": 71.17749369767624,
+        "baseline": 70.391081,
+        "lower": 66.25109045202949,
+        "upper": 76.103896943323,
+        "priorOnlyRidge": 72.32712940411105,
+        "fullRidge": 71.68138154390068
+      },
+      {
+        "year": 2023,
+        "organization": "Farm Credit Administration",
+        "actual": 84.170203,
+        "predicted": 84.6638604325366,
+        "baseline": 83.027483,
+        "lower": 79.73745718688984,
+        "upper": 89.59026367818335,
+        "priorOnlyRidge": 82.2659641142934,
+        "fullRidge": 82.21421228928969
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Communications Commission",
+        "actual": 76.149919,
+        "predicted": 75.4338227796085,
+        "baseline": 75.92971,
+        "lower": 70.50741953396175,
+        "upper": 80.36022602525526,
+        "priorOnlyRidge": 76.68339459352354,
+        "fullRidge": 76.7092532864244
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Election Commission",
+        "actual": 74.117962,
+        "predicted": 73.95374498902423,
+        "baseline": 74.306054,
+        "lower": 69.02734174337748,
+        "upper": 78.88014823467098,
+        "priorOnlyRidge": 75.40635001942755,
+        "fullRidge": 74.75488128436145
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Energy Regulatory Commission",
+        "actual": 83.079441,
+        "predicted": 84.448810090405,
+        "baseline": 82.774045,
+        "lower": 79.52240684475825,
+        "upper": 89.37521333605176,
+        "priorOnlyRidge": 82.06662901943972,
+        "fullRidge": 82.13663718689693
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Housing Finance Agency",
+        "actual": 70.751987,
+        "predicted": 75.65324393155369,
+        "baseline": 76.462089,
+        "lower": 70.72684068590694,
+        "upper": 80.57964717720044,
+        "priorOnlyRidge": 77.102123507353,
+        "fullRidge": 76.9737278847484
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Labor Relations Authority",
+        "actual": 84.317485,
+        "predicted": 83.00290667602141,
+        "baseline": 82.551982,
+        "lower": 78.07650343037466,
+        "upper": 87.92930992166816,
+        "priorOnlyRidge": 81.89197111822327,
+        "fullRidge": 81.91515269534962
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Maritime Commission",
+        "actual": 70.778145,
+        "predicted": 76.27862045054832,
+        "baseline": 76.340672,
+        "lower": 71.35221720490156,
+        "upper": 81.20502369619507,
+        "priorOnlyRidge": 77.0066261107043,
+        "fullRidge": 77.05816139711538
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Mediation and Conciliation Service",
+        "actual": 63.501525,
+        "predicted": 71.1679107787914,
+        "baseline": 70.281698,
+        "lower": 66.24150753314464,
+        "upper": 76.09431402443815,
+        "priorOnlyRidge": 72.24109703848167,
+        "fullRidge": 71.85090849717812
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Retirement Thrift Investment Board",
+        "actual": 77.224295,
+        "predicted": 75.4279540211989,
+        "baseline": 76.253391,
+        "lower": 70.50155077555215,
+        "upper": 80.35435726684565,
+        "priorOnlyRidge": 76.93797750073294,
+        "fullRidge": 76.72132064787873
+      },
+      {
+        "year": 2023,
+        "organization": "Federal Trade Commission",
+        "actual": 78.712089,
+        "predicted": 73.56288010551462,
+        "baseline": 74.207031,
+        "lower": 68.63647685986787,
+        "upper": 78.48928335116138,
+        "priorOnlyRidge": 75.32846604347408,
+        "fullRidge": 74.57013193963971
+      },
+      {
+        "year": 2023,
+        "organization": "General Services Administration",
+        "actual": 84.65503,
+        "predicted": 84.38363434855508,
+        "baseline": 82.914504,
+        "lower": 79.45723110290832,
+        "upper": 89.31003759420183,
+        "priorOnlyRidge": 82.17710340800043,
+        "fullRidge": 82.29349291264937
+      },
+      {
+        "year": 2023,
+        "organization": "Institute of Museum and Library Services",
+        "actual": 74.109705,
+        "predicted": 80.31063039757522,
+        "baseline": 80.69636,
+        "lower": 75.38422715192847,
+        "upper": 85.23703364322198,
+        "priorOnlyRidge": 80.43247969474862,
+        "fullRidge": 80.64992179294858
+      },
+      {
+        "year": 2023,
+        "organization": "Inter-American Foundation",
+        "actual": 69.060956,
+        "predicted": 77.52663289095676,
+        "baseline": 77.976529,
+        "lower": 72.60022964531001,
+        "upper": 82.45303613660352,
+        "priorOnlyRidge": 78.29326706534431,
+        "fullRidge": 78.18740213381474
+      },
+      {
+        "year": 2023,
+        "organization": "International Boundary and Water Commission",
+        "actual": 69.872591,
+        "predicted": 64.73948611701556,
+        "baseline": 64.159319,
+        "lower": 59.813082871368806,
+        "upper": 69.66588936266231,
+        "priorOnlyRidge": 67.42569840569905,
+        "fullRidge": 67.39012510025427
+      },
+      {
+        "year": 2023,
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "actual": 56.083234,
+        "predicted": 63.11377681042442,
+        "baseline": 53.22884,
+        "lower": 58.187373564777666,
+        "upper": 68.04018005607116,
+        "priorOnlyRidge": 58.82861324774673,
+        "fullRidge": 58.399625402222014
+      },
+      {
+        "year": 2023,
+        "organization": "Marine Mammal Commission",
+        "actual": 97.986588,
+        "predicted": 95.84809469464427,
+        "baseline": 95.79718,
+        "lower": 90.92169144899752,
+        "upper": 100.0,
+        "priorOnlyRidge": 92.30963855438411,
+        "fullRidge": 92.5583106922496
+      },
+      {
+        "year": 2023,
+        "organization": "Merit Systems Protection Board",
+        "actual": 71.466414,
+        "predicted": 74.55861317119546,
+        "baseline": 74.401549,
+        "lower": 69.63220992554871,
+        "upper": 79.48501641684221,
+        "priorOnlyRidge": 75.48145913835626,
+        "fullRidge": 75.3049205220623
+      },
+      {
+        "year": 2023,
+        "organization": "National Archives and Records Administration",
+        "actual": 73.332818,
+        "predicted": 73.55169229259126,
+        "baseline": 74.357908,
+        "lower": 68.6252890469445,
+        "upper": 78.47809553823801,
+        "priorOnlyRidge": 75.44713444010851,
+        "fullRidge": 75.17839103403861
+      },
+      {
+        "year": 2023,
+        "organization": "National Capital Planning Commission",
+        "actual": 86.212377,
+        "predicted": 94.07259785933168,
+        "baseline": 94.124373,
+        "lower": 89.14619461368493,
+        "upper": 98.99900110497843,
+        "priorOnlyRidge": 90.99393553424943,
+        "fullRidge": 91.24076223011168
+      },
+      {
+        "year": 2023,
+        "organization": "National Credit Union Administration",
+        "actual": 77.116472,
+        "predicted": 75.98059634660737,
+        "baseline": 75.957163,
+        "lower": 71.05419310096062,
+        "upper": 80.90699959225412,
+        "priorOnlyRidge": 76.70498703964061,
+        "fullRidge": 76.45890508584954
+      },
+      {
+        "year": 2023,
+        "organization": "National Endowment for the Arts",
+        "actual": 74.350419,
+        "predicted": 76.38590470106978,
+        "baseline": 78.13644,
+        "lower": 71.45950145542302,
+        "upper": 81.31230794671653,
+        "priorOnlyRidge": 78.41904092069805,
+        "fullRidge": 78.11593215116561
+      },
+      {
+        "year": 2023,
+        "organization": "National Endowment for the Humanities",
+        "actual": 86.363186,
+        "predicted": 83.58272854616301,
+        "baseline": 84.377113,
+        "lower": 78.65632530051626,
+        "upper": 88.50913179180976,
+        "priorOnlyRidge": 83.32748063536508,
+        "fullRidge": 83.70342078681098
+      },
+      {
+        "year": 2023,
+        "organization": "National Gallery of Art",
+        "actual": 67.683555,
+        "predicted": 66.47699287543331,
+        "baseline": 66.363533,
+        "lower": 61.55058962978656,
+        "upper": 71.40339612108006,
+        "priorOnlyRidge": 69.15936583823799,
+        "fullRidge": 68.97706921213626
+      },
+      {
+        "year": 2023,
+        "organization": "National Indian Gaming Commission",
+        "actual": 89.101499,
+        "predicted": 81.8385906642193,
+        "baseline": 81.68166,
+        "lower": 76.91218741857254,
+        "upper": 86.76499390986605,
+        "priorOnlyRidge": 81.20744189047036,
+        "fullRidge": 81.46081999616099
+      },
+      {
+        "year": 2023,
+        "organization": "National Labor Relations Board",
+        "actual": 77.748124,
+        "predicted": 74.78756493496768,
+        "baseline": 74.855064,
+        "lower": 69.86116168932092,
+        "upper": 79.71396818061443,
+        "priorOnlyRidge": 75.83815961556395,
+        "fullRidge": 75.44630740482717
+      },
+      {
+        "year": 2023,
+        "organization": "National Science Foundation",
+        "actual": 78.649535,
+        "predicted": 82.86114007812252,
+        "baseline": 82.252111,
+        "lower": 77.93473683247576,
+        "upper": 87.78754332376927,
+        "priorOnlyRidge": 81.65611534983469,
+        "fullRidge": 81.88578706523334
+      },
+      {
+        "year": 2023,
+        "organization": "National Transportation Safety Board",
+        "actual": 71.107024,
+        "predicted": 73.70509763700235,
+        "baseline": 71.967143,
+        "lower": 68.7786943913556,
+        "upper": 78.6315008826491,
+        "priorOnlyRidge": 73.56674015019205,
+        "fullRidge": 73.6131126583105
+      },
+      {
+        "year": 2023,
+        "organization": "Nuclear Regulatory Commission",
+        "actual": 74.426799,
+        "predicted": 74.58350163488875,
+        "baseline": 75.733992,
+        "lower": 69.657098389242,
+        "upper": 79.5099048805355,
+        "priorOnlyRidge": 76.5294576697214,
+        "fullRidge": 76.24928808185885
+      },
+      {
+        "year": 2023,
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "actual": 70.096473,
+        "predicted": 72.97014828021798,
+        "baseline": 73.078387,
+        "lower": 68.04374503457123,
+        "upper": 77.89655152586474,
+        "priorOnlyRidge": 74.44076033716314,
+        "fullRidge": 74.38472375207425
+      },
+      {
+        "year": 2023,
+        "organization": "Occupational Safety and Health Review Commission",
+        "actual": 96.216812,
+        "predicted": 89.26219981723084,
+        "baseline": 89.933354,
+        "lower": 84.33579657158408,
+        "upper": 94.18860306287759,
+        "priorOnlyRidge": 87.69759808722664,
+        "fullRidge": 87.82917192879498
+      },
+      {
+        "year": 2023,
+        "organization": "Office of Management and Budget",
+        "actual": 79.031659,
+        "predicted": 75.28449817359059,
+        "baseline": 76.743908,
+        "lower": 70.35809492794384,
+        "upper": 80.21090141923735,
+        "priorOnlyRidge": 77.32378094268853,
+        "fullRidge": 77.11287610841956
+      },
+      {
+        "year": 2023,
+        "organization": "Office of Personnel Management",
+        "actual": 79.705074,
+        "predicted": 76.06274304678871,
+        "baseline": 76.68131,
+        "lower": 71.13633980114196,
+        "upper": 80.98914629243546,
+        "priorOnlyRidge": 77.27454610707726,
+        "fullRidge": 77.24934989555295
+      },
+      {
+        "year": 2023,
+        "organization": "Office of the U.S. Trade Representative",
+        "actual": 69.809448,
+        "predicted": 71.9606576487844,
+        "baseline": 71.206625,
+        "lower": 67.03425440313765,
+        "upper": 76.88706089443116,
+        "priorOnlyRidge": 72.96857441471462,
+        "fullRidge": 72.79709756147538
+      },
+      {
+        "year": 2023,
+        "organization": "Peace Corps",
+        "actual": 73.562934,
+        "predicted": 74.42053525136737,
+        "baseline": 74.935806,
+        "lower": 69.49413200572062,
+        "upper": 79.34693849701412,
+        "priorOnlyRidge": 75.90166514444547,
+        "fullRidge": 75.80764312910384
+      },
+      {
+        "year": 2023,
+        "organization": "Pension Benefit Guaranty Corporation",
+        "actual": 87.205096,
+        "predicted": 86.33457063954309,
+        "baseline": 86.026327,
+        "lower": 81.40816739389633,
+        "upper": 91.26097388518984,
+        "priorOnlyRidge": 84.62462719240867,
+        "fullRidge": 84.75206415445096
+      },
+      {
+        "year": 2023,
+        "organization": "Postal Regulatory Commission",
+        "actual": 89.65428,
+        "predicted": 85.89319697220837,
+        "baseline": 85.69572,
+        "lower": 80.96679372656162,
+        "upper": 90.81960021785513,
+        "priorOnlyRidge": 84.36459681928272,
+        "fullRidge": 84.22860159644537
+      },
+      {
+        "year": 2023,
+        "organization": "Railroad Retirement Board",
+        "actual": 76.503406,
+        "predicted": 74.48108800440542,
+        "baseline": 73.788525,
+        "lower": 69.55468475875867,
+        "upper": 79.40749125005217,
+        "priorOnlyRidge": 74.999300988483,
+        "fullRidge": 74.97835750744945
+      },
+      {
+        "year": 2023,
+        "organization": "Selective Service System",
+        "actual": 80.280954,
+        "predicted": 80.70014238213297,
+        "baseline": 80.414126,
+        "lower": 75.77373913648621,
+        "upper": 85.62654562777972,
+        "priorOnlyRidge": 80.21049585191157,
+        "fullRidge": 80.37284132385118
+      },
+      {
+        "year": 2023,
+        "organization": "Small Business Administration",
+        "actual": 78.583804,
+        "predicted": 78.9836135917417,
+        "baseline": 78.578,
+        "lower": 74.05721034609495,
+        "upper": 83.91001683738845,
+        "priorOnlyRidge": 78.76633850229037,
+        "fullRidge": 78.86793958047492
+      },
+      {
+        "year": 2023,
+        "organization": "Social Security Administration",
+        "actual": 65.046148,
+        "predicted": 66.81912149220668,
+        "baseline": 65.70613,
+        "lower": 61.89271824655992,
+        "upper": 71.74552473785343,
+        "priorOnlyRidge": 68.6423025353312,
+        "fullRidge": 68.40432514760849
+      },
+      {
+        "year": 2023,
+        "organization": "Surface Transportation Board",
+        "actual": 79.343563,
+        "predicted": 83.85378304553353,
+        "baseline": 83.90067,
+        "lower": 78.92737979988678,
+        "upper": 88.78018629118029,
+        "priorOnlyRidge": 82.95274673359278,
+        "fullRidge": 82.99065140092524
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. Agency for Global Media",
+        "actual": 69.747767,
+        "predicted": 69.7562478139996,
+        "baseline": 69.177826,
+        "lower": 64.82984456835284,
+        "upper": 74.68265105964635,
+        "priorOnlyRidge": 71.37287510717572,
+        "fullRidge": 71.28226445726801
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. Agency for International Development",
+        "actual": 69.911679,
+        "predicted": 74.17578874017988,
+        "baseline": 73.836323,
+        "lower": 69.24938549453313,
+        "upper": 79.10219198582664,
+        "priorOnlyRidge": 75.03689526741438,
+        "fullRidge": 74.89689767403826
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "actual": 69.342144,
+        "predicted": 62.02316853386872,
+        "baseline": 40.292648,
+        "lower": 57.09676528822197,
+        "upper": 66.94957177951548,
+        "priorOnlyRidge": 48.653986477627896,
+        "fullRidge": 47.69400069385165
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. International Development Finance Corporation",
+        "actual": 70.477083,
+        "predicted": 75.44043531173263,
+        "baseline": 76.697219,
+        "lower": 70.51403206608587,
+        "upper": 80.36683855737938,
+        "priorOnlyRidge": 77.28705891898403,
+        "fullRidge": 77.1671776989822
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. International Trade Commission",
+        "actual": 79.203546,
+        "predicted": 80.22226574003224,
+        "baseline": 81.326566,
+        "lower": 75.29586249438549,
+        "upper": 85.148668985679,
+        "priorOnlyRidge": 80.92815190170793,
+        "fullRidge": 80.77464761998951
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. Office of Government Ethics",
+        "actual": 90.305077,
+        "predicted": 84.57577805586918,
+        "baseline": 84.324353,
+        "lower": 79.64937481022243,
+        "upper": 89.50218130151593,
+        "priorOnlyRidge": 83.28598362384953,
+        "fullRidge": 83.27224384394349
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. Office of Special Counsel",
+        "actual": 88.117921,
+        "predicted": 84.22062845625244,
+        "baseline": 84.827031,
+        "lower": 79.29422521060569,
+        "upper": 89.1470317018992,
+        "priorOnlyRidge": 83.68135198538512,
+        "fullRidge": 83.95958696356837
+      },
+      {
+        "year": 2023,
+        "organization": "U.S. Trade and Development Agency",
+        "actual": 88.69963,
+        "predicted": 84.76823160261847,
+        "baseline": 87.270786,
+        "lower": 79.84182835697172,
+        "upper": 89.69463484826522,
+        "priorOnlyRidge": 85.60342418736015,
+        "fullRidge": 85.48820520947307
+      },
+      {
+        "year": 2023,
+        "organization": "United States Department of the Air Force",
+        "actual": 73.705671,
+        "predicted": 72.91314223873991,
+        "baseline": 72.591374,
+        "lower": 67.98673899309316,
+        "upper": 77.83954548438666,
+        "priorOnlyRidge": 74.05771287565392,
+        "fullRidge": 73.90545325432137
+      },
+      {
+        "year": 2023,
+        "organization": "United States Department of the Army",
+        "actual": 73.268752,
+        "predicted": 72.0962370364464,
+        "baseline": 70.573399,
+        "lower": 67.16983379079964,
+        "upper": 77.02264028209315,
+        "priorOnlyRidge": 72.47052690497333,
+        "fullRidge": 72.317149036866
+      },
+      {
+        "year": 2023,
+        "organization": "United States Department of the Navy",
+        "actual": 72.137174,
+        "predicted": 72.04623732359786,
+        "baseline": 70.368539,
+        "lower": 67.11983407795111,
+        "upper": 76.97264056924462,
+        "priorOnlyRidge": 72.30939957784904,
+        "fullRidge": 72.0509177605214
+      },
+      {
+        "year": 2024,
+        "organization": "AbilityOne Commission",
+        "actual": 70.069957,
+        "predicted": 67.410595,
+        "baseline": 67.410595,
+        "lower": 61.12713699999999,
+        "upper": 73.69405300000001,
+        "priorOnlyRidge": 69.7150414211933,
+        "fullRidge": 69.67799501460206
+      },
+      {
+        "year": 2024,
+        "organization": "Advisory Council on Historic Preservation",
+        "actual": 66.05174,
+        "predicted": 84.125991,
+        "baseline": 84.125991,
+        "lower": 77.84253299999999,
+        "upper": 90.40944900000001,
+        "priorOnlyRidge": 82.90527480011072,
+        "fullRidge": 82.9890121491181
+      },
+      {
+        "year": 2024,
+        "organization": "African Development Foundation",
+        "actual": 85.170497,
+        "predicted": 74.516591,
+        "baseline": 74.516591,
+        "lower": 68.233133,
+        "upper": 80.80004900000002,
+        "priorOnlyRidge": 75.32243149616693,
+        "fullRidge": 74.8683336301102
+      },
+      {
+        "year": 2024,
+        "organization": "American Battle Monuments Commission",
+        "actual": 72.458096,
+        "predicted": 60.59109,
+        "baseline": 60.59109,
+        "lower": 54.30763199999999,
+        "upper": 66.874548,
+        "priorOnlyRidge": 64.33372335498092,
+        "fullRidge": 64.47740993976304
+      },
+      {
+        "year": 2024,
+        "organization": "Commission on Civil Rights",
+        "actual": 59.82732,
+        "predicted": 71.91875,
+        "baseline": 71.91875,
+        "lower": 65.63529199999999,
+        "upper": 78.20220800000001,
+        "priorOnlyRidge": 73.27245738419732,
+        "fullRidge": 73.66280736918276
+      },
+      {
+        "year": 2024,
+        "organization": "Commodity Futures Trading Commission",
+        "actual": 73.400484,
+        "predicted": 70.785268,
+        "baseline": 70.785268,
+        "lower": 64.50180999999999,
+        "upper": 77.06872600000001,
+        "priorOnlyRidge": 72.37801898077558,
+        "fullRidge": 72.1582018263305
+      },
+      {
+        "year": 2024,
+        "organization": "Consumer Product Safety Commission",
+        "actual": 79.741247,
+        "predicted": 76.322349,
+        "baseline": 76.322349,
+        "lower": 70.03889099999999,
+        "upper": 82.60580700000001,
+        "priorOnlyRidge": 76.74736749205043,
+        "fullRidge": 76.44406601964769
+      },
+      {
+        "year": 2024,
+        "organization": "Corporation for National and Community Service",
+        "actual": 82.419883,
+        "predicted": 79.297023,
+        "baseline": 79.297023,
+        "lower": 73.01356499999999,
+        "upper": 85.580481,
+        "priorOnlyRidge": 79.09470310325567,
+        "fullRidge": 78.62445866950067
+      },
+      {
+        "year": 2024,
+        "organization": "Court Services and Offender Supervision Agency",
+        "actual": 69.042119,
+        "predicted": 69.550309,
+        "baseline": 69.550309,
+        "lower": 63.26685099999999,
+        "upper": 75.83376700000001,
+        "priorOnlyRidge": 71.40350438217472,
+        "fullRidge": 70.95842257410824
+      },
+      {
+        "year": 2024,
+        "organization": "Defense Nuclear Facilities Safety Board",
+        "actual": 79.524619,
+        "predicted": 82.538728,
+        "baseline": 82.538728,
+        "lower": 76.25527,
+        "upper": 88.82218600000002,
+        "priorOnlyRidge": 81.65275470404357,
+        "fullRidge": 81.6206831912111
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Agriculture",
+        "actual": 72.93029,
+        "predicted": 71.604944,
+        "baseline": 71.604944,
+        "lower": 65.321486,
+        "upper": 77.88840200000001,
+        "priorOnlyRidge": 73.02483092200016,
+        "fullRidge": 72.44055539097195
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Commerce",
+        "actual": 76.512831,
+        "predicted": 75.977209,
+        "baseline": 75.977209,
+        "lower": 69.69375099999999,
+        "upper": 82.26066700000001,
+        "priorOnlyRidge": 76.47501515601246,
+        "fullRidge": 76.17023824109867
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Education",
+        "actual": 74.603856,
+        "predicted": 76.356104,
+        "baseline": 76.356104,
+        "lower": 70.07264599999999,
+        "upper": 82.63956200000001,
+        "priorOnlyRidge": 76.77400379355984,
+        "fullRidge": 76.41617268752717
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Energy",
+        "actual": 79.840176,
+        "predicted": 79.206557,
+        "baseline": 79.206557,
+        "lower": 72.923099,
+        "upper": 85.49001500000001,
+        "priorOnlyRidge": 79.02331576353264,
+        "fullRidge": 78.9232146269238
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Health and Human Services",
+        "actual": 78.671859,
+        "predicted": 78.14407,
+        "baseline": 78.14407,
+        "lower": 71.86061199999999,
+        "upper": 84.42752800000001,
+        "priorOnlyRidge": 78.18490000048007,
+        "fullRidge": 78.10482888911054
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Homeland Security",
+        "actual": 68.79855,
+        "predicted": 66.93375,
+        "baseline": 66.93375,
+        "lower": 60.65029199999999,
+        "upper": 73.21720800000001,
+        "priorOnlyRidge": 69.33875976830456,
+        "fullRidge": 69.07242776031336
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Housing and Urban Development",
+        "actual": 76.149513,
+        "predicted": 77.467012,
+        "baseline": 77.467012,
+        "lower": 71.18355399999999,
+        "upper": 83.75047,
+        "priorOnlyRidge": 77.65062889909167,
+        "fullRidge": 77.55679902475696
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Justice",
+        "actual": 67.62958,
+        "predicted": 65.032644,
+        "baseline": 65.032644,
+        "lower": 58.749185999999995,
+        "upper": 71.31610200000001,
+        "priorOnlyRidge": 67.83858401308703,
+        "fullRidge": 67.43671022850971
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Labor",
+        "actual": 76.590049,
+        "predicted": 76.399209,
+        "baseline": 76.399209,
+        "lower": 70.11575099999999,
+        "upper": 82.68266700000001,
+        "priorOnlyRidge": 76.80801824405795,
+        "fullRidge": 76.60874533895634
+      },
+      {
+        "year": 2024,
+        "organization": "Department of State",
+        "actual": 70.501606,
+        "predicted": 69.023373,
+        "baseline": 69.023373,
+        "lower": 62.739914999999996,
+        "upper": 75.30683100000002,
+        "priorOnlyRidge": 70.98769557837771,
+        "fullRidge": 70.63772599692327
+      },
+      {
+        "year": 2024,
+        "organization": "Department of Transportation",
+        "actual": 73.508332,
+        "predicted": 73.437136,
+        "baseline": 73.437136,
+        "lower": 67.15367799999999,
+        "upper": 79.720594,
+        "priorOnlyRidge": 74.47062616819028,
+        "fullRidge": 74.28503220922018
+      },
+      {
+        "year": 2024,
+        "organization": "Department of the Interior",
+        "actual": 73.064337,
+        "predicted": 72.265192,
+        "baseline": 72.265192,
+        "lower": 65.98173399999999,
+        "upper": 78.54865000000001,
+        "priorOnlyRidge": 73.54583713734579,
+        "fullRidge": 73.21614433997577
+      },
+      {
+        "year": 2024,
+        "organization": "Department of the Treasury",
+        "actual": 74.286652,
+        "predicted": 73.727152,
+        "baseline": 73.727152,
+        "lower": 67.443694,
+        "upper": 80.01061000000001,
+        "priorOnlyRidge": 74.6994797785756,
+        "fullRidge": 74.3935703212872
+      },
+      {
+        "year": 2024,
+        "organization": "Environmental Protection Agency",
+        "actual": 80.696705,
+        "predicted": 79.236417,
+        "baseline": 79.236417,
+        "lower": 72.95295899999999,
+        "upper": 85.51987500000001,
+        "priorOnlyRidge": 79.04687849388581,
+        "fullRidge": 79.02348229615787
+      },
+      {
+        "year": 2024,
+        "organization": "Equal Employment Opportunity Commission",
+        "actual": 79.081448,
+        "predicted": 78.634077,
+        "baseline": 78.634077,
+        "lower": 72.350619,
+        "upper": 84.91753500000002,
+        "priorOnlyRidge": 78.57156787764572,
+        "fullRidge": 78.41172042331922
+      },
+      {
+        "year": 2024,
+        "organization": "Export-Import Bank of the United States",
+        "actual": 63.119735,
+        "predicted": 64.891409,
+        "baseline": 64.891409,
+        "lower": 58.607950999999986,
+        "upper": 71.174867,
+        "priorOnlyRidge": 67.72713450801568,
+        "fullRidge": 66.03507810667716
+      },
+      {
+        "year": 2024,
+        "organization": "Farm Credit Administration",
+        "actual": 81.661059,
+        "predicted": 84.170203,
+        "baseline": 84.170203,
+        "lower": 77.88674499999999,
+        "upper": 90.45366100000001,
+        "priorOnlyRidge": 82.94016279188482,
+        "fullRidge": 82.76253857993649
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Communications Commission",
+        "actual": 78.798674,
+        "predicted": 76.149919,
+        "baseline": 76.149919,
+        "lower": 69.86646099999999,
+        "upper": 82.43337700000001,
+        "priorOnlyRidge": 76.61130179898956,
+        "fullRidge": 76.53052366382693
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Election Commission",
+        "actual": 73.707994,
+        "predicted": 74.117962,
+        "baseline": 74.117962,
+        "lower": 67.834504,
+        "upper": 80.40142000000002,
+        "priorOnlyRidge": 75.00787062416578,
+        "fullRidge": 73.70068680030953
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Energy Regulatory Commission",
+        "actual": 85.671379,
+        "predicted": 83.079441,
+        "baseline": 83.079441,
+        "lower": 76.79598299999999,
+        "upper": 89.36289900000001,
+        "priorOnlyRidge": 82.07943503282635,
+        "fullRidge": 82.01196510321803
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Housing Finance Agency",
+        "actual": 70.74043,
+        "predicted": 70.751987,
+        "baseline": 70.751987,
+        "lower": 64.46852899999999,
+        "upper": 77.03544500000001,
+        "priorOnlyRidge": 72.35175671591007,
+        "fullRidge": 71.6955164062195
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Labor Relations Authority",
+        "actual": 85.027109,
+        "predicted": 84.317485,
+        "baseline": 84.317485,
+        "lower": 78.034027,
+        "upper": 90.60094300000002,
+        "priorOnlyRidge": 83.05638402604006,
+        "fullRidge": 83.27352626472717
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Maritime Commission",
+        "actual": 63.627229,
+        "predicted": 70.778145,
+        "baseline": 70.778145,
+        "lower": 64.49468699999998,
+        "upper": 77.061603,
+        "priorOnlyRidge": 72.37239817272783,
+        "fullRidge": 72.27707807723354
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Mediation and Conciliation Service",
+        "actual": 70.151788,
+        "predicted": 63.501525,
+        "baseline": 63.501525,
+        "lower": 57.21806699999999,
+        "upper": 69.78498300000001,
+        "priorOnlyRidge": 66.63036753165309,
+        "fullRidge": 66.53010799251079
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Retirement Thrift Investment Board",
+        "actual": 76.683037,
+        "predicted": 77.224295,
+        "baseline": 77.224295,
+        "lower": 70.94083699999999,
+        "upper": 83.50775300000001,
+        "priorOnlyRidge": 77.45909925330699,
+        "fullRidge": 77.09398198760431
+      },
+      {
+        "year": 2024,
+        "organization": "Federal Trade Commission",
+        "actual": 80.257961,
+        "predicted": 78.712089,
+        "baseline": 78.712089,
+        "lower": 72.428631,
+        "upper": 84.99554700000002,
+        "priorOnlyRidge": 78.6331276807372,
+        "fullRidge": 77.85172776043296
+      },
+      {
+        "year": 2024,
+        "organization": "General Services Administration",
+        "actual": 85.595863,
+        "predicted": 84.65503,
+        "baseline": 84.65503,
+        "lower": 78.37157199999999,
+        "upper": 90.938488,
+        "priorOnlyRidge": 83.32274309560005,
+        "fullRidge": 83.44129634167486
+      },
+      {
+        "year": 2024,
+        "organization": "Institute of Museum and Library Services",
+        "actual": 82.335445,
+        "predicted": 74.109705,
+        "baseline": 74.109705,
+        "lower": 67.826247,
+        "upper": 80.39316300000002,
+        "priorOnlyRidge": 75.00135496895726,
+        "fullRidge": 74.87338201311506
+      },
+      {
+        "year": 2024,
+        "organization": "Inter-American Foundation",
+        "actual": 46.190933,
+        "predicted": 69.060956,
+        "baseline": 69.060956,
+        "lower": 62.777497999999994,
+        "upper": 75.34441400000001,
+        "priorOnlyRidge": 71.01735258088486,
+        "fullRidge": 70.59099263330225
+      },
+      {
+        "year": 2024,
+        "organization": "International Boundary and Water Commission",
+        "actual": 70.38871,
+        "predicted": 69.872591,
+        "baseline": 69.872591,
+        "lower": 63.58913299999999,
+        "upper": 76.15604900000001,
+        "priorOnlyRidge": 71.65781931397916,
+        "fullRidge": 71.6261141964019
+      },
+      {
+        "year": 2024,
+        "organization": "John F. Kennedy Center for the Performing Arts",
+        "actual": 55.417321,
+        "predicted": 56.083234,
+        "baseline": 56.083234,
+        "lower": 49.79977599999999,
+        "upper": 62.36669200000001,
+        "priorOnlyRidge": 60.77654333492316,
+        "fullRidge": 60.481175351437734
+      },
+      {
+        "year": 2024,
+        "organization": "Marine Mammal Commission",
+        "actual": 98.056361,
+        "predicted": 97.986588,
+        "baseline": 97.986588,
+        "lower": 91.70312999999999,
+        "upper": 100.0,
+        "priorOnlyRidge": 93.8427667507126,
+        "fullRidge": 93.81636312517968
+      },
+      {
+        "year": 2024,
+        "organization": "Merit Systems Protection Board",
+        "actual": 69.836412,
+        "predicted": 71.466414,
+        "baseline": 71.466414,
+        "lower": 65.18295599999999,
+        "upper": 77.74987200000001,
+        "priorOnlyRidge": 72.91551595094106,
+        "fullRidge": 71.97132031620839
+      },
+      {
+        "year": 2024,
+        "organization": "National Archives and Records Administration",
+        "actual": 73.370837,
+        "predicted": 73.332818,
+        "baseline": 73.332818,
+        "lower": 67.04936,
+        "upper": 79.61627600000001,
+        "priorOnlyRidge": 74.38830812046818,
+        "fullRidge": 73.92800732026024
+      },
+      {
+        "year": 2024,
+        "organization": "National Capital Planning Commission",
+        "actual": 84.373186,
+        "predicted": 86.212377,
+        "baseline": 86.212377,
+        "lower": 79.928919,
+        "upper": 92.49583500000001,
+        "priorOnlyRidge": 84.5516562713308,
+        "fullRidge": 84.87193671909941
+      },
+      {
+        "year": 2024,
+        "organization": "National Credit Union Administration",
+        "actual": 80.042401,
+        "predicted": 77.116472,
+        "baseline": 77.116472,
+        "lower": 70.83301399999999,
+        "upper": 83.39993000000001,
+        "priorOnlyRidge": 77.37401538609768,
+        "fullRidge": 77.23203901937893
+      },
+      {
+        "year": 2024,
+        "organization": "National Endowment for the Arts",
+        "actual": 72.250251,
+        "predicted": 74.350419,
+        "baseline": 74.350419,
+        "lower": 68.06696099999999,
+        "upper": 80.63387700000001,
+        "priorOnlyRidge": 75.191304033734,
+        "fullRidge": 74.74903186020373
+      },
+      {
+        "year": 2024,
+        "organization": "National Endowment for the Humanities",
+        "actual": 86.031928,
+        "predicted": 86.363186,
+        "baseline": 86.363186,
+        "lower": 80.07972799999999,
+        "upper": 92.64664400000001,
+        "priorOnlyRidge": 84.67066068532381,
+        "fullRidge": 85.0539322896559
+      },
+      {
+        "year": 2024,
+        "organization": "National Gallery of Art",
+        "actual": 68.692025,
+        "predicted": 67.683555,
+        "baseline": 67.683555,
+        "lower": 61.40009699999999,
+        "upper": 73.96701300000001,
+        "priorOnlyRidge": 69.93043602525229,
+        "fullRidge": 69.67680279678838
+      },
+      {
+        "year": 2024,
+        "organization": "National Indian Gaming Commission",
+        "actual": 88.866532,
+        "predicted": 89.101499,
+        "baseline": 89.101499,
+        "lower": 82.818041,
+        "upper": 95.38495700000001,
+        "priorOnlyRidge": 86.831482213843,
+        "fullRidge": 87.27170400448725
+      },
+      {
+        "year": 2024,
+        "organization": "National Labor Relations Board",
+        "actual": 72.058103,
+        "predicted": 77.748124,
+        "baseline": 77.748124,
+        "lower": 71.464666,
+        "upper": 84.03158200000001,
+        "priorOnlyRidge": 77.87245630214059,
+        "fullRidge": 77.3477739785689
+      },
+      {
+        "year": 2024,
+        "organization": "National Mediation Board",
+        "actual": 64.072269,
+        "predicted": 67.269172,
+        "baseline": 67.269172,
+        "lower": 60.98571399999999,
+        "upper": 73.55263000000001,
+        "priorOnlyRidge": 69.60344356403535,
+        "fullRidge": 69.634487980619
+      },
+      {
+        "year": 2024,
+        "organization": "National Science Foundation",
+        "actual": 72.921352,
+        "predicted": 78.649535,
+        "baseline": 78.649535,
+        "lower": 72.36607699999999,
+        "upper": 84.93299300000001,
+        "priorOnlyRidge": 78.58376589123579,
+        "fullRidge": 78.50655982175223
+      },
+      {
+        "year": 2024,
+        "organization": "National Transportation Safety Board",
+        "actual": 72.461217,
+        "predicted": 71.107024,
+        "baseline": 71.107024,
+        "lower": 64.82356599999999,
+        "upper": 77.390482,
+        "priorOnlyRidge": 72.63191884238023,
+        "fullRidge": 72.53890350884512
+      },
+      {
+        "year": 2024,
+        "organization": "Nuclear Regulatory Commission",
+        "actual": 75.262736,
+        "predicted": 74.426799,
+        "baseline": 74.426799,
+        "lower": 68.14334099999999,
+        "upper": 80.71025700000001,
+        "priorOnlyRidge": 75.25157601445655,
+        "fullRidge": 74.70201622796912
+      },
+      {
+        "year": 2024,
+        "organization": "OSD, Joint Staff, Defense Agencies, and Field Activities (DOD 4th Estate)",
+        "actual": 70.243148,
+        "predicted": 70.096473,
+        "baseline": 70.096473,
+        "lower": 63.81301499999999,
+        "upper": 76.37993100000001,
+        "priorOnlyRidge": 71.83448613236257,
+        "fullRidge": 71.63832600294744
+      },
+      {
+        "year": 2024,
+        "organization": "Occupational Safety and Health Review Commission",
+        "actual": 94.912725,
+        "predicted": 96.216812,
+        "baseline": 96.216812,
+        "lower": 89.933354,
+        "upper": 100.0,
+        "priorOnlyRidge": 92.44622439727945,
+        "fullRidge": 92.38627904643673
+      },
+      {
+        "year": 2024,
+        "organization": "Office of Management and Budget",
+        "actual": 81.851967,
+        "predicted": 79.031659,
+        "baseline": 79.031659,
+        "lower": 72.748201,
+        "upper": 85.31511700000001,
+        "priorOnlyRidge": 78.8853025547815,
+        "fullRidge": 78.72441525559944
+      },
+      {
+        "year": 2024,
+        "organization": "Office of Personnel Management",
+        "actual": 80.023419,
+        "predicted": 79.705074,
+        "baseline": 79.705074,
+        "lower": 73.42161599999999,
+        "upper": 85.988532,
+        "priorOnlyRidge": 79.41669893993824,
+        "fullRidge": 79.28274087645333
+      },
+      {
+        "year": 2024,
+        "organization": "Office of the U.S. Trade Representative",
+        "actual": 65.2035,
+        "predicted": 69.809448,
+        "baseline": 69.809448,
+        "lower": 63.52598999999999,
+        "upper": 76.09290600000001,
+        "priorOnlyRidge": 71.6079927405468,
+        "fullRidge": 71.16816379810766
+      },
+      {
+        "year": 2024,
+        "organization": "Peace Corps",
+        "actual": 74.844826,
+        "predicted": 73.562934,
+        "baseline": 73.562934,
+        "lower": 67.27947599999999,
+        "upper": 79.84639200000001,
+        "priorOnlyRidge": 74.56989423091527,
+        "fullRidge": 74.69546917844553
+      },
+      {
+        "year": 2024,
+        "organization": "Pension Benefit Guaranty Corporation",
+        "actual": 88.960446,
+        "predicted": 87.205096,
+        "baseline": 87.205096,
+        "lower": 80.92163799999999,
+        "upper": 93.48855400000001,
+        "priorOnlyRidge": 85.33501762811142,
+        "fullRidge": 85.44579072296406
+      },
+      {
+        "year": 2024,
+        "organization": "Postal Regulatory Commission",
+        "actual": 82.246889,
+        "predicted": 89.65428,
+        "baseline": 89.65428,
+        "lower": 83.37082199999999,
+        "upper": 95.93773800000001,
+        "priorOnlyRidge": 87.26768548401567,
+        "fullRidge": 87.3679964344941
+      },
+      {
+        "year": 2024,
+        "organization": "Privacy and Civil Liberties Oversight Board",
+        "actual": 81.091228,
+        "predicted": 34.971528,
+        "baseline": 34.971528,
+        "lower": 28.68806999999999,
+        "upper": 41.25498600000001,
+        "priorOnlyRidge": 44.11715164793643,
+        "fullRidge": 43.88374830278637
+      },
+      {
+        "year": 2024,
+        "organization": "Railroad Retirement Board",
+        "actual": 77.444791,
+        "predicted": 76.503406,
+        "baseline": 76.503406,
+        "lower": 70.21994799999999,
+        "upper": 82.78686400000001,
+        "priorOnlyRidge": 76.89024080985196,
+        "fullRidge": 76.87151197020734
+      },
+      {
+        "year": 2024,
+        "organization": "Selective Service System",
+        "actual": 74.772565,
+        "predicted": 80.280954,
+        "baseline": 80.280954,
+        "lower": 73.99749599999998,
+        "upper": 86.564412,
+        "priorOnlyRidge": 79.87112978909379,
+        "fullRidge": 79.98797101800027
+      },
+      {
+        "year": 2024,
+        "organization": "Small Business Administration",
+        "actual": 78.740506,
+        "predicted": 78.583804,
+        "baseline": 78.583804,
+        "lower": 72.30034599999999,
+        "upper": 84.86726200000001,
+        "priorOnlyRidge": 78.5318971092919,
+        "fullRidge": 78.57168719790678
+      },
+      {
+        "year": 2024,
+        "organization": "Social Security Administration",
+        "actual": 68.419714,
+        "predicted": 65.046148,
+        "baseline": 65.046148,
+        "lower": 58.76268999999999,
+        "upper": 71.32960600000001,
+        "priorOnlyRidge": 67.84924011190448,
+        "fullRidge": 67.22034355158927
+      },
+      {
+        "year": 2024,
+        "organization": "Surface Transportation Board",
+        "actual": 81.619472,
+        "predicted": 79.343563,
+        "baseline": 79.343563,
+        "lower": 73.060105,
+        "upper": 85.62702100000001,
+        "priorOnlyRidge": 79.13142813576192,
+        "fullRidge": 78.65153574467226
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. Access Board",
+        "actual": 64.881849,
+        "predicted": 71.762723,
+        "baseline": 71.762723,
+        "lower": 65.47926499999998,
+        "upper": 78.046181,
+        "priorOnlyRidge": 73.14933541069382,
+        "fullRidge": 73.64472103923137
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. Agency for Global Media",
+        "actual": 69.929538,
+        "predicted": 69.747767,
+        "baseline": 69.747767,
+        "lower": 63.464308999999986,
+        "upper": 76.031225,
+        "priorOnlyRidge": 71.55931984131993,
+        "fullRidge": 71.72352374948079
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. Agency for International Development",
+        "actual": 69.884226,
+        "predicted": 69.911679,
+        "baseline": 69.911679,
+        "lower": 63.628220999999996,
+        "upper": 76.19513700000002,
+        "priorOnlyRidge": 71.68866392228608,
+        "fullRidge": 71.3916272818323
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. Chemical Safety and Hazard Investigation Board",
+        "actual": 69.859982,
+        "predicted": 69.342144,
+        "baseline": 69.342144,
+        "lower": 63.058685999999994,
+        "upper": 75.62560200000001,
+        "priorOnlyRidge": 71.2392399560539,
+        "fullRidge": 70.51281332734054
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. International Development Finance Corporation",
+        "actual": 73.829288,
+        "predicted": 70.477083,
+        "baseline": 70.477083,
+        "lower": 64.19362499999998,
+        "upper": 76.760541,
+        "priorOnlyRidge": 72.1348280881469,
+        "fullRidge": 71.36988658462481
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. International Trade Commission",
+        "actual": 80.090134,
+        "predicted": 79.203546,
+        "baseline": 79.203546,
+        "lower": 72.92008799999999,
+        "upper": 85.48700400000001,
+        "priorOnlyRidge": 79.02093976282623,
+        "fullRidge": 78.62562617199004
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. Office of Government Ethics",
+        "actual": 90.140695,
+        "predicted": 90.305077,
+        "baseline": 90.305077,
+        "lower": 84.02161899999999,
+        "upper": 96.58853500000001,
+        "priorOnlyRidge": 87.7812338505814,
+        "fullRidge": 87.47605476439455
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. Office of Special Counsel",
+        "actual": 85.724666,
+        "predicted": 88.117921,
+        "baseline": 88.117921,
+        "lower": 81.83446299999999,
+        "upper": 94.401379,
+        "priorOnlyRidge": 86.0553340827207,
+        "fullRidge": 85.9894174123527
+      },
+      {
+        "year": 2024,
+        "organization": "U.S. Trade and Development Agency",
+        "actual": 85.219644,
+        "predicted": 88.69963,
+        "baseline": 88.69963,
+        "lower": 82.41617199999999,
+        "upper": 94.98308800000001,
+        "priorOnlyRidge": 86.51436463566823,
+        "fullRidge": 86.33634082598674
+      },
+      {
+        "year": 2024,
+        "organization": "United States Department of the Air Force",
+        "actual": 73.440435,
+        "predicted": 73.705671,
+        "baseline": 73.705671,
+        "lower": 67.42221299999999,
+        "upper": 79.989129,
+        "priorOnlyRidge": 74.68252897446585,
+        "fullRidge": 74.39317289722445
+      },
+      {
+        "year": 2024,
+        "organization": "United States Department of the Army",
+        "actual": 75.208411,
+        "predicted": 73.268752,
+        "baseline": 73.268752,
+        "lower": 66.985294,
+        "upper": 79.55221000000002,
+        "priorOnlyRidge": 74.33775320141908,
+        "fullRidge": 74.1545289107323
+      },
+      {
+        "year": 2024,
+        "organization": "United States Department of the Navy",
+        "actual": 74.206142,
+        "predicted": 72.137174,
+        "baseline": 72.137174,
+        "lower": 65.85371599999999,
+        "upper": 78.42063200000001,
+        "priorOnlyRidge": 73.44481725742776,
+        "fullRidge": 73.0430013889866
+      }
+    ],
+    "notes": [
+      "Retrospective expanding-origin sensitivity audit, not fresh independent holdouts. The same organizations and years recur across origins; later development sets include earlier audit outcomes. Do not treat origins as independent replications.",
+      "All year lists are forecast target years; predictors come from the preceding survey year. Each origin requires two initial training years, then earlier-only expanding validation folds. Selection averages MAE equally across validation years; exact ties prefer persistence. Every fit uses a fresh cloned preprocessing pipeline.",
+      "Only development-fold MAE selects the full-feature strategy or persistence. The winner is frozen before preceding-year calibration and target-year evaluation. Final training excludes calibration labels; calibration sets only the 90% interval radius. This audit does not replace the original published selection or test result.",
+      "MAE, improvement, and interval width are engagement-index points (0–100). Positive improvement means baseline MAE minus strategy MAE. Summary metrics are equal-origin means, not pooled-row estimates; n counts organization-year predictions, not distinct agencies. No minimum practically meaningful gain was prespecified; small positive differences alone do not establish actionable benefit.",
+      "The Ridge ablation holds alpha, training rows, and preprocessing specification fixed, comparing prior engagement alone with prior engagement plus all features. It is diagnostic, not another selection candidate or evidence of causal drivers. Candidate test errors are post-selection descriptions, not selection inputs.",
+      "Intervals use finite-sample absolute calibration residuals and are clipped to 0–100. Nominal 90% coverage is not guaranteed under temporal shift or agency dependence. Skipped origins lack sufficient earlier folds or partition observations.",
+      "Published historical revisions and the globally defined feature set were not reconstructed as contemporaneous data vintages; this is not a real-time backtest."
+    ]
   },
   "clusters": {
     "k": 2,
@@ -19363,6 +22227,9 @@
     "firstMean": 70.4825922361111,
     "lastMean": 76.03365101388889,
     "meanChange": 5.551058777777778,
+    "gained": 58,
+    "declined": 14,
+    "unchanged": 0,
     "low": 3.7315844496527784,
     "high": 7.243143239236109,
     "trend": [
@@ -19763,9 +22630,12 @@
     "summary": [
       "630 public organization-year estimates across 85 distinct reporting names and 8 survey years; no individual records.",
       "The organization median is 74.8 in 2024, compared with 69.4 in 2017. The reporting cohort changes; this is not an official governmentwide respondent-weighted trend.",
+      "Within the same 72 continuously observed names, 58 increased and 14 declined between 2017 and 2024 (0 unchanged). A rising average does not describe every agency.",
       "Earlier rolling validation selects Persistence. On the untouched 2024 holdout its MAE is 3.34 points, versus 3.34 for persistence (+0.0% relative error reduction).",
       "Intervals calibrated for nominal 90% coverage cover 86.4% of the later test observations; average width 12.5 points. Temporal distribution shift means coverage is not guaranteed.",
       "Latest-year K-means selects 2 descriptive profiles, with silhouette 0.43 and mean subsample agreement 0.89. Agreement with a one-score partition is 1.000 (ARI; 1 means identical assignments). These are descriptive score profiles, not validated experience types.",
+      "A separate nested rolling-origin audit covers target years 2022, 2023, 2024. Selection, fitting and calibration use earlier target years at each origin. Equal-year MAE is 2.829 for the selected strategy versus 2.766 for persistence. This retrospective sensitivity analysis is not new independent evidence or a vintage-authentic forecast.",
+      "In the matched Ridge ablation, adding the other prior-year indexes changes equal-year MAE from 2.916 to 2.877: an improvement of +0.038 points. This is descriptive incremental prediction evidence, not an equivalence test or a causal effect.",
       "Among 34 explicitly linked agency aggregates, engagement and stated intention to leave have Spearman rho -0.62. Intention is not actual turnover, and this relationship is not causal."
     ],
     "recommendations": [

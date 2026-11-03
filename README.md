@@ -17,6 +17,8 @@ employee engagement. A visual story that lets you inspect the evidence.
 **What does engagement look like across organizations?** Follow published
 engagement, leadership, supervisory support, intrinsic work experience, and
 satisfaction measures across the US federal survey's reporting agencies.
+The living trajectory atlas follows the same organizations through time:
+one rising average can conceal very different journeys.
 
 **Do levels and changes tell the same story?** Compare cross-sectional
 associations with within-organization annual changes, uncertainty, and
@@ -28,16 +30,19 @@ ridge, elastic net, random forests, extra trees, and gradient boosting.
 Compare them with a simple prior-year persistence forecast. Select on
 earlier rolling validation years, reserve a calibration year, and evaluate
 on a genuinely later test year. If the simple model wins, say so.
+A separate nested rolling-origin audit repeats earlier-only selection and
+calibration across several target years. A matched prior-score-only Ridge
+ablation asks whether the additional indexes earn their place.
 
 ## What is inside
 
 | Experience | Evidence |
 |---|---|
-| Interactive editorial story | Annual trends, searchable organization explorer, linked trajectories, correlation views, PCA profiles, model tournament |
+| Interactive editorial story | Living agency trajectories, levels/change reveal, searchable organization explorer, continuous profiles, model tournament |
 | In-depth executed notebook | Data quality, distributions, outliers, relationship tests, temporal comparisons, clustering, predictive evaluation, HR interpretation |
 | Statistical analysis | Spearman correlations, false-discovery adjustment, agency-trajectory bootstrap, first-difference regression with clustered uncertainty |
 | Advanced machine learning | Five regularized/ensemble models, expanding-window validation, persistence baseline, permutation importance, calibration intervals |
-| Interpretation checks | Paired model-error differences, continuous-cohort change, one-score cluster comparison, intention coverage and leave-one-agency-out sensitivity |
+| Interpretation checks | Nested rolling-origin audit, matched feature ablation, paired model-error differences, continuous-cohort change, one-score cluster comparison, intention coverage and leave-one-agency-out sensitivity |
 | Reproducible publication | Source checksums, processed public aggregates, machine-readable results, tests, locked dependencies, GitHub Actions |
 
 **Real data, not synthetic.** These are published **organization aggregates**
@@ -53,6 +58,7 @@ analysis units are public reporting organizations.
 [Public aggregate panel](data/processed/agency_panel.csv) ·
 [Forecast observations](outputs/forecast_panel.csv) ·
 [All-model held-out predictions](outputs/model_predictions.csv) ·
+[Rolling-origin predictions](outputs/rolling_predictions.csv) ·
 [Figures](outputs/figures)
 
 The website is **static and self-contained**: no installation, account,
@@ -111,6 +117,13 @@ estimates. Agency size is descriptive context, not demographic fairness evidence
 Self-reported intention to leave is **not** actual attrition. Bootstrap intervals
 describe between-organization uncertainty; they do not recover survey sampling
 errors. Time-shifted prediction intervals are evaluated rather than assumed valid.
+
+The component regression is a **measurement demonstration**, not discovery of
+engagement drivers. Profiles are presented continuously; discrete clusters add
+little when the same partition can be reproduced by one overall score.
+Rolling-origin results are retrospective sensitivity checks, not fresh
+independent holdouts or forecasts reconstructed from historical publication
+vintages. No independently measured turnover outcome has been validated here.
 
 This is an independent learning and portfolio project, **not an OPM or Microsoft
 product, endorsement, or claim of professional business impact**.

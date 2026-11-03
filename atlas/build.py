@@ -20,6 +20,7 @@ from atlas.statistics import (
     change_analysis,
     intention_analysis,
 )
+from atlas.validation import rolling_origin_audit
 
 
 def clean_json(value):
@@ -193,12 +194,21 @@ def export_figures(data, frame):
 
     points = pd.DataFrame(data["clusters"]["points"])
     fig, ax = plt.subplots(figsize=(10, 6))
-    sns.scatterplot(
-        data=points, x="x", y="y", hue="cluster", palette="colorblind", s=55, alpha=0.8, ax=ax
+    eligible = latest.dropna(subset=list(features))
+    coordinates = points.set_index("organization").loc[eligible.organization]
+    scores = eligible[list(features)].apply(lambda col: (col - col.mean()) / col.std(ddof=0))
+    continuous = ax.scatter(
+        coordinates.x,
+        coordinates.y,
+        c=scores.mean(axis=1),
+        cmap="cividis",
+        s=55,
+        alpha=0.8,
     )
+    fig.colorbar(continuous, ax=ax, label="Mean standardized input index (descriptive)")
     variance = data["clusters"]["variance"]
     ax.set(
-        title="A landscape of reporting-agency experience profiles\nDescriptive PCA and K-means; engagement excluded from clustering",
+        title="A continuous survey-score landscape, not distinct experience types\nDescriptive PCA; color shows overall input-score level",
         xlabel=f"Principal component 1 ({variance[0]:.1%} variance)",
         ylabel=f"Principal component 2 ({variance[1]:.1%} variance)",
     )
@@ -220,7 +230,7 @@ def export_figures(data, frame):
     ax.axvline(0, ls="--", color="#919191")
     ax.set_yticks(positions, coefficients.label)
     ax.set(
-        title="When experience changes, does engagement change with it?\nYear-adjusted first differences; organization-clustered 95% intervals",
+        title="A measurement check, not discovery of engagement drivers\nComponents reconstruct the index; clustered 95% intervals",
         xlabel="Engagement-index change per one SD of feature change (association, not causation)",
         ylabel="Published survey measure",
     )
@@ -236,6 +246,33 @@ def export_figures(data, frame):
             ylabel="Considering leaving within next year (%)",
         )
         save("08-engagement-and-intention", fig)
+
+    origins = pd.DataFrame(data["rollingAudit"]["origins"])
+    if not origins.empty:
+        fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+        axes[0].plot(origins.year, origins.baselineMae, "--o", color="#5c5c5c", label="Persistence")
+        axes[0].plot(
+            origins.year, origins.mae, "-o", color=accent, label="Earlier-selected strategy"
+        )
+        axes[0].set(
+            title="Does the strategy travel across years?",
+            xlabel="Retrospective target year",
+            ylabel="MAE (index points; lower is better)",
+            xticks=origins.year,
+        )
+        axes[0].legend(fontsize=8)
+        axes[1].plot(origins.year, origins.coverage * 100, "-o", color=accent)
+        axes[1].axhline(90, ls="--", color="#5c5c5c", label="Nominal 90%")
+        axes[1].set(
+            title="Coverage changes with the target year",
+            xlabel="Retrospective target year",
+            ylabel="Observed interval coverage (%)",
+            ylim=(0, 100),
+            xticks=origins.year,
+        )
+        axes[1].legend(fontsize=8)
+        fig.suptitle("Rolling-origin audit: earlier-only fitting, not fresh historical vintages")
+        save("09-rolling-origin-audit", fig)
 
 
 def findings(data):
@@ -263,6 +300,33 @@ def findings(data):
         f"{data['clusters']['levelCheck']['adjustedRand']:.3f} (ARI; 1 means identical assignments). "
         "These are descriptive score profiles, not validated experience types.",
     ]
+    cohort = data["cohortSensitivity"]
+    summary.insert(
+        2,
+        f"Within the same {cohort['n']} continuously observed names, "
+        f"{cohort['gained']} increased and {cohort['declined']} declined between "
+        f"{cohort['firstYear']} and {cohort['lastYear']} "
+        f"({cohort['unchanged']} unchanged). A rising average does not describe every agency.",
+    )
+    origins = data["rollingAudit"]["origins"]
+    if origins:
+        audit_summary = data["rollingAudit"]["summary"]
+        summary.append(
+            f"A separate nested rolling-origin audit covers target years "
+            f"{', '.join(str(row['year']) for row in origins)}. Selection, fitting and "
+            f"calibration use earlier target years at each origin. Equal-year MAE is "
+            f"{audit_summary['mae']:.3f} for the selected strategy versus "
+            f"{audit_summary['baselineMae']:.3f} for persistence. This retrospective "
+            "sensitivity analysis is not new independent evidence or a vintage-authentic forecast."
+        )
+        summary.append(
+            "In the matched Ridge ablation, adding the other prior-year indexes changes "
+            f"equal-year MAE from {audit_summary['priorOnlyRidgeMae']:.3f} to "
+            f"{audit_summary['fullRidgeMae']:.3f}: an improvement of "
+            f"{audit_summary['incrementalFeatureImprovement']:+.3f} points. "
+            "This is descriptive incremental prediction evidence, not an equivalence test "
+            "or a causal effect."
+        )
     if data["intentionAnalysis"]["n"] >= 10:
         intention = data["intentionAnalysis"]
         summary.append(
@@ -296,6 +360,45 @@ def write_report(data):
         "## Executive interpretation",
         "",
         *[f"- {value}" for value in data["findings"]["summary"]],
+        "",
+        "## One rising average, different journeys",
+        "",
+        "Follow the same reporting names across all observed years rather than comparing "
+        "a changing roster. Endpoint directions describe published scores, not statistically "
+        "significant agency-level changes or improvements caused by an intervention.",
+        "",
+        "## Rolling-origin forecast audit",
+        "",
+        *data["rollingAudit"]["notes"],
+        "",
+        "| Target year | Earlier-selected strategy | Agencies | MAE | Persistence MAE | "
+        "Improvement | Coverage | Interval width |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
+        *[
+            f"| {r['year']} | {r['selected']} | {r['n']} | {r['mae']:.3f} | "
+            f"{r['baselineMae']:.3f} | {r['improvement']:+.3f} | "
+            f"{r['coverage']:.1%} | {r['width']:.2f} |"
+            for r in data["rollingAudit"]["origins"]
+        ],
+        "",
+        "### Do the extra indexes add predictive information?",
+        "",
+        "Matched Ridge configurations use the same earlier-only training and target agencies. "
+        "Positive improvement favors the full feature set; no equivalence or causal claim is made.",
+        "",
+        "| Target year | Prior-EEI-only Ridge MAE | Full Ridge MAE | Extra-feature improvement |",
+        "|---|---:|---:|---:|",
+        *[
+            f"| {r['year']} | {r['ablation']['priorOnlyRidgeMae']:.3f} | "
+            f"{r['ablation']['fullRidgeMae']:.3f} | "
+            f"{r['ablation']['incrementalFeatureImprovement']:+.3f} |"
+            for r in data["rollingAudit"]["origins"]
+        ],
+        "",
+        "No compatible independently measured turnover outcome has been validated for this "
+        "panel. Intention-to-leave remains a selected same-survey association, not external "
+        "outcome validation. A turnover linkage requires documented organization scope, "
+        "time alignment and workforce denominators before it can support claims.",
         "",
         "## The model comparison",
         "",
@@ -333,6 +436,9 @@ def write_report(data):
         f"{cohort['firstMean']:.2f} in {cohort['firstYear']} and {cohort['lastMean']:.2f} "
         f"in {cohort['lastYear']}: a mean paired change of {cohort['meanChange']:+.2f} points "
         f"(95% agency-bootstrap interval {cohort['low']:.2f}–{cohort['high']:.2f}).",
+        f"Endpoint directions: {cohort['gained']} increased, {cohort['declined']} declined, "
+        f"{cohort['unchanged']} unchanged. These are descriptive directions, not agency-level "
+        "significance tests.",
         cohort["interpretation"],
         "",
         "## Interval coverage context",
@@ -357,7 +463,7 @@ def write_report(data):
         lines.append(f"| {row['label']} | {row['rho']:.3f} | {row['q']:.3g} | {row['n']} |")
     lines += [
         "",
-        "## Annual change, adjusted for survey year",
+        "## Measurement demonstration: annual change in a composite index",
         "",
         "Coefficients describe associations in index-point change per one SD of feature",
         "change, conditional on the other changes and year effects. They are not causal.",
@@ -377,7 +483,10 @@ def write_report(data):
         f"Its in-sample R² is {data['changeAnalysis']['r2']:.5f}; a close compositional fit "
         "is not external validation.",
         "",
-        "## Profile distinctiveness check",
+        "## Continuous profiles before discrete clusters",
+        "",
+        "The primary profile view is continuous: the mean of standardized input indexes. "
+        "K-means is retained as a simplification diagnostic, not a discovery of distinct types.",
         "",
         data["clusters"]["levelCheck"]["interpretation"],
         f"Observed adjusted Rand agreement: {data['clusters']['levelCheck']['adjustedRand']:.3f}.",
@@ -465,6 +574,11 @@ def main():
     )
     print("Computing temporal forecasts...", flush=True)
     models, panel = forecast(frame, features)
+    print("Computing retrospective nested rolling-origin audit...", flush=True)
+    rolling_audit = rolling_origin_audit(frame, features)
+    pd.DataFrame(rolling_audit["predictions"]).to_csv(
+        output / "rolling_predictions.csv", index=False
+    )
     print("Computing descriptive profiles...", flush=True)
     clusters = segmentation(latest, features)
     print("Computing clustered annual-change uncertainty...", flush=True)
@@ -528,6 +642,7 @@ def main():
         "rows": frame.to_dict(orient="records"),
         "correlations": feature_correlations(latest, features),
         "models": models,
+        "rollingAudit": rolling_audit,
         "clusters": clusters,
         "changeAnalysis": change,
         "intentionAnalysis": intention_result,

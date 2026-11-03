@@ -55,6 +55,9 @@ def balanced_longitudinal(frame):
         "firstMean": float(panel[years[0]].mean()),
         "lastMean": float(panel[years[-1]].mean()),
         "meanChange": float(changes.mean()),
+        "gained": int((changes > 0).sum()),
+        "declined": int((changes < 0).sum()),
+        "unchanged": int((changes == 0).sum()),
         "low": float(low),
         "high": float(high),
         "trend": [

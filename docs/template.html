@@ -161,6 +161,33 @@
     .correlation-axis { display: flex; justify-content: space-between; color: var(--cp-text-muted); font-size: 11px; }
     .trajectory-picks { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
     .landscape { background: var(--cp-surface); }
+    .living-atlas { margin-bottom: 48px; border-top: 2px solid var(--cp-text); border-bottom: 1px solid var(--cp-border-strong); padding: 32px 0; }
+    .living-heading { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: end; margin-bottom: 28px; }
+    .living-heading h3 { font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif; font-size: clamp(36px,5vw,68px); font-weight: 400; letter-spacing: -.05em; line-height: 1.04; margin-top: 12px; }
+    .living-heading h3 em { color: var(--cp-accent); font-weight: 400; }
+    .living-heading p { color: var(--cp-text-muted); font-size: 14px; }
+    .atlas-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; padding: 24px 0; border-top: 1px solid var(--cp-border); }
+    .atlas-metrics strong { display: block; font-size: clamp(28px,4vw,48px); font-weight: 400; letter-spacing: -.06em; line-height: 1.1; }
+    .atlas-metrics span { display: block; font-size: 12px; color: var(--cp-text-muted); margin-top: 8px; }
+    .atlas-mode { display: flex; gap: 8px; flex-wrap: wrap; }
+    .atlas-path { fill: none; stroke: var(--cp-text-muted); stroke-width: 1.15; opacity: .36; vector-effect: non-scaling-stroke; }
+    html[data-theme="dark"] .atlas-path:not(.is-selected):not(:focus) { stroke: var(--cp-text-soft); opacity: .48; }
+    .atlas-path.is-selected { stroke: var(--cp-accent); stroke-width: 3; opacity: 1; }
+    .atlas-path:focus { stroke: var(--cp-accent); stroke-width: 4; opacity: 1; outline: none; }
+    .atlas-median { fill: none; stroke: var(--cp-text); stroke-width: 3; stroke-dasharray: 8 5; vector-effect: non-scaling-stroke; }
+    .swatch.median { background: none; border-top: 2px dashed var(--cp-text); }
+    .atlas-chart { background: var(--cp-bg-elevated); border: 1px solid var(--cp-border); border-radius: 16px; padding: 12px; }
+    .atlas-readout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: center; padding: 24px 0 0; }
+    .atlas-readout .detail { min-height: 0; border-left: 3px solid var(--cp-accent); }
+    .audit-panel { margin: 40px 0; border-top: 2px solid var(--cp-accent); }
+    .audit-summary { font-size: 19px; line-height: 1.5; letter-spacing: -.025em; max-width: 850px; }
+    .continuous-profile { margin-bottom: 24px; }
+    @media (max-width: 760px) {
+      .living-heading, .atlas-readout { grid-template-columns: 1fr; gap: 16px; }
+      .atlas-metrics { gap: 12px; }
+      .atlas-mode button { flex: 1; font-size: 12px; }
+      .atlas-chart { padding: 8px; }
+    }
     .profile-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
     .profile-tabs button { font-size: 12px; }
     .profile-feature { margin: 16px 0; }
@@ -307,6 +334,14 @@
     <section class="section" id="over-time" aria-labelledby="time-heading">
       <div class="wrap">
         <div class="section-heading"><span class="chapter">01</span><h2 id="time-heading">The view<br>across time.</h2><p>Averages tell one story. The spread between organizations tells another. Start with both, and check who is represented each year.</p></div>
+        <article class="living-atlas" aria-labelledby="living-heading">
+          <div class="living-heading"><div><span class="eyebrow accent">The living atlas / a matched panel</span><h3 id="living-heading">One rising average.<br><em>Different journeys.</em></h3></div><p id="living-premise">Follow the same reporting names through time. Then remove their starting levels to see how differently their paths unfold.</p></div>
+          <div class="atlas-metrics" id="living-metrics"></div>
+          <div class="controls"><div class="atlas-mode" role="group" aria-label="Living atlas display"><button id="atlas-level" type="button" aria-pressed="true">01 / Published levels</button><button id="atlas-change" type="button" aria-pressed="false">02 / From the same starting line</button></div><div class="field"><label for="atlas-agency">Follow one agency</label><select id="atlas-agency"></select></div></div>
+          <div class="atlas-chart"><div class="panel-top"><h3 id="atlas-chart-heading">Published engagement</h3><span id="atlas-axis-note"></span></div><div class="chart-scroll" id="living-chart"></div></div>
+          <div class="atlas-readout"><div class="detail" id="atlas-detail" aria-live="polite"></div><div><div class="legend"><span class="legend-item"><i class="swatch"></i>Selected agency</span><span class="legend-item"><i class="swatch secondary"></i>Each continuous agency path</span><span class="legend-item"><i class="swatch median"></i>Equal-agency median</span></div><p class="status" id="atlas-status" role="status"></p><p class="chart-caption">Use the agency selector, or focus a path and use arrow keys to explore; Home / End jump to the first / last name. Each path is one agency, not a person. Directions are descriptive score differences—not statistically significant agency changes or causal improvements; agency sampling errors are unknown. Same names do not guarantee unchanged boundaries, workforce, survey response, or measurement. All agencies have equal weight; this is not an employee-weighted federal estimate.</p></div></div>
+          <details><summary>Read the continuous-cohort observations</summary><div class="table-scroll" id="living-table"></div></details>
+        </article>
         <div class="split">
           <div class="panel"><div class="panel-top"><h3>Engagement, year by year</h3><span>INDEX · 0–100</span></div><div class="chart-scroll" id="annual-chart"></div><div class="legend"><span class="legend-item"><i class="swatch"></i>Mean engagement</span><span class="legend-item"><i class="swatch secondary"></i>Median</span><span class="legend-item" id="balanced-legend" hidden><svg viewBox="0 0 28 8" style="width:28px" aria-hidden="true"><line x1="0" x2="28" y1="4" y2="4" stroke="var(--cp-text)" stroke-width="2" stroke-dasharray="2 5"/></svg>Continuously observed agency names · mean</span><span class="legend-item">Shaded band: organization min–max</span></div><p class="chart-caption">Annual summaries are across included agencies, not an estimate for all employees. Changing coverage can change the mean. The continuous cohort, when shown, uses reporting names observed in every source year—not a guarantee of unchanged agency boundaries or workforces.</p><details><summary>Read the annual data table</summary><div class="table-scroll" id="annual-table"></div></details></div>
           <aside class="aside"><div class="insight" id="annual-insight"></div><p class="chart-caption" id="cohort-sensitivity"></p><div class="question"><span class="eyebrow accent">A question for HR</span><p>Does a change in the average reflect a shared shift, a few organizations, or a change in who is included?</p></div><div id="summary-insights"></div></aside>
@@ -337,22 +372,26 @@
       <div class="wrap">
         <div class="section-heading"><span class="chapter">04</span><h2 id="trajectory-heading">The path matters<br>as much as the point.</h2><p>A single snapshot hides direction. Compare published organization trajectories without treating year-to-year differences as proven change in individual employees.</p></div>
         <div class="panel"><div class="trajectory-picks" id="trajectory-controls"></div><div class="chart-scroll" id="trajectory-chart"></div><div class="legend" id="trajectory-legend"></div><p class="status" id="trajectory-status" aria-live="polite"></p><p class="chart-caption">Lines connect consecutive survey years only. Missing years remain gaps; organization naming or survey changes may affect comparability. Default examples are alphabetical, not selected for performance.</p><details><summary>Read the selected trajectories</summary><div class="table-scroll" id="trajectory-table"></div></details></div>
-        <div class="panel" id="change-panel" style="margin-top:24px" hidden><div class="panel-top"><h3>What changes together within agencies?</h3><span>FIRST DIFFERENCES · DESCRIPTIVE</span></div><p class="chart-caption">Adjusted associations in annual engagement change per one standard deviation of feature change, with year effects. EEI components are part of the outcome itself: a close fit is partly compositional, not validation of independent drivers or interventions.</p><div class="chart-scroll" id="change-chart"></div><p class="chart-caption" id="change-caption"></p><details><summary>Read adjusted change estimates and uncertainty</summary><div class="table-scroll" id="change-table"></div></details><details><summary>Read change correlations and cluster-bootstrap intervals</summary><div class="table-scroll" id="change-correlation-table"></div></details><details><summary>Within-agency change methodology</summary><div id="change-method"></div></details></div>
+        <details id="change-panel" style="margin-top:24px" hidden><summary>Measurement check / how index components move with their whole</summary><div class="panel"><div class="panel-top"><h3>Composition, not a driver discovery.</h3><span>FIRST DIFFERENCES · DESCRIPTIVE</span></div><p class="chart-caption">Adjusted associations in annual engagement change per one standard deviation of feature change, with year effects. EEI components are part of the outcome itself: a close fit is partly compositional, not validation of independent drivers or interventions.</p><div class="chart-scroll" id="change-chart"></div><p class="chart-caption" id="change-caption"></p><details><summary>Read adjusted change estimates and uncertainty</summary><div class="table-scroll" id="change-table"></div></details><details><summary>Read change correlations and cluster-bootstrap intervals</summary><div class="table-scroll" id="change-correlation-table"></div></details><details><summary>Within-agency change methodology</summary><div id="change-method"></div></details></div></details>
       </div>
     </section>
 
     <section class="section landscape" id="landscape" aria-labelledby="landscape-heading">
       <div class="wrap">
-        <div class="section-heading"><span class="chapter">05</span><h2 id="landscape-heading">A landscape.<br>Not a taxonomy.</h2><p>Multiple survey dimensions, seen together. A two-dimensional PCA projection makes similarities visible; descriptive clusters organize questions, not people.</p></div>
+        <div class="section-heading"><span class="chapter">05</span><h2 id="landscape-heading">A continuum.<br>Not a taxonomy.</h2><p>Start with continuous survey scores, not labels. Check whether a more elaborate grouping adds anything beyond a single overall score.</p></div>
+        <div class="panel continuous-profile"><div class="panel-top"><h3>One score before many labels</h3><span>CONTINUOUS · NOT A MATURITY RATING</span></div><div class="chart-scroll" id="score-chart"></div><p class="chart-caption" id="score-note"></p><div class="detail" id="score-detail" aria-live="polite"></div><details><summary>Read continuous survey scores</summary><div class="table-scroll" id="score-table"></div></details></div>
+        <p class="question" id="cluster-level-check"></p>
+        <details id="cluster-evidence"><summary>Secondary evidence / inspect PCA and the descriptive grouping</summary>
         <div class="split"><div class="panel"><div class="panel-top"><h3>Multivariate survey landscape</h3><span id="pca-variance"></span></div><div class="chart-scroll" id="cluster-chart"></div><div class="legend" id="cluster-legend"></div><div class="detail" id="cluster-detail" aria-live="polite"></div><p class="chart-caption">Coordinates are principal-component scores, not index points. Proximity in this projection is an imperfect summary of the full feature space. Cluster numbers have no rank.</p><details><summary>Read the PCA coordinates and clusters</summary><div class="table-scroll" id="cluster-table"></div></details></div><aside class="aside"><div class="profile-tabs" id="profile-tabs" role="group" aria-label="Select a descriptive cluster profile"></div><div id="cluster-profile"></div><div class="question"><span class="eyebrow accent">A question for HR</span><p>Do organizations with similar survey profiles share a meaningful context, or only similar averages?</p></div></aside></div>
-        <p class="chart-caption" id="cluster-level-check"></p>
         <details><summary>How to interpret these descriptive clusters</summary><p id="cluster-method"></p><p>Feature standardization gives survey dimensions comparable influence on the projection. Cluster profiles below return to the original 0–100 scale. A silhouette score is a geometric diagnostic, not evidence of distinct types of organization; neither PCA nor clustering identifies causes.</p></details>
+        </details>
       </div>
     </section>
 
     <section class="section model-section" id="forecast" aria-labelledby="forecast-heading">
       <div class="wrap">
         <div class="section-heading"><span class="chapter">06</span><h2 id="forecast-heading">The future.<br>With a reality check.</h2><p>A next-year engagement forecasting tournament, judged on an actual temporal holdout. More sophisticated models must earn their place against a simple baseline.</p></div>
+        <article class="panel audit-panel" aria-labelledby="audit-heading"><div class="panel-top"><h3 id="audit-heading">Does the advantage travel through time?</h3><span>ROLLING-ORIGIN AUDIT</span></div><p class="audit-summary" id="audit-summary"></p><div class="chart-scroll" id="audit-chart"></div><div class="legend"><span class="legend-item"><i class="swatch"></i>Earlier-selected model MAE</span><span class="legend-item"><i class="swatch secondary"></i>Persistence MAE</span></div><p class="chart-caption" id="audit-note"></p><div class="question" id="audit-ablation" hidden></div><details><summary>Read every origin, selection window and interval diagnostic</summary><div class="table-scroll" id="audit-table"></div><div id="audit-method"></div></details></article>
         <div class="model-strip" id="model-strip"></div>
         <div class="split"><div class="panel"><div class="panel-top"><h3>The model tournament</h3><span>MAE · INDEX POINTS · LOWER IS BETTER</span></div><div class="tournament" id="model-tournament"></div><p class="chart-caption" id="model-caption"></p><details><summary>Read the full holdout scorecard</summary><div class="table-scroll" id="model-table"></div></details></div><aside class="aside"><div class="insight" id="model-insight"></div><div class="question"><span class="eyebrow accent">A question for HR</span><p>Is the forecast more useful than carrying the last observation forward—and is its uncertainty acceptable for the decision?</p></div></aside></div>
         <details><summary>Does each ML model improve on persistence? Read the paired comparison</summary><p class="chart-caption" id="paired-comparison-note"></p><div class="table-scroll" id="paired-comparison-table"></div></details>
@@ -415,14 +454,14 @@
       const colors = ["var(--cp-accent)", "var(--cp-text-muted)", "var(--cp-border-strong)", "var(--cp-text)"];
       const dash = ["", "8 5", "2 5", "12 4 2 4"];
       const chartBox = { w:900, h:440, left:72, right:32, top:24, bottom:64 };
-      function chartFrame(id, title, description, xLabel, yLabel, xDomain = [0,100], yDomain = [0,100], xTicks, yTicks) {
+      function chartFrame(id, title, description, xLabel, yLabel, xDomain = [0,100], yDomain = [0,100], xTicks, yTicks, xUnit = "number") {
         const b = chartBox;
         const x = v => b.left + (v-xDomain[0])/(xDomain[1]-xDomain[0] || 1)*(b.w-b.left-b.right);
         const y = v => b.h-b.bottom-(v-yDomain[0])/(yDomain[1]-yDomain[0] || 1)*(b.h-b.top-b.bottom);
         const ticks = domain => Array.from({length:6}, (_,i)=>domain[0]+i*(domain[1]-domain[0])/5);
         let body = `<title id="${id}-title">${esc(title)}</title><desc id="${id}-desc">${esc(description)}</desc>`;
         (yTicks || ticks(yDomain)).forEach(v => { body += `<line class="grid-line" x1="${b.left}" x2="${b.w-b.right}" y1="${y(v)}" y2="${y(v)}"/><text x="${b.left-12}" y="${y(v)+4}" text-anchor="end">${esc(fmt(v,Number.isInteger(v)?0:1))}</text>`; });
-        (xTicks || ticks(xDomain)).forEach(v=> { body += `<text x="${x(v)}" y="${b.h-b.bottom+26}" text-anchor="middle">${esc(fmt(v,Number.isInteger(v)?0:1))}</text>`; });
+        (xTicks || ticks(xDomain)).forEach(v=> { body += `<text class="x-tick" x="${x(v)}" y="${b.h-b.bottom+26}" text-anchor="middle">${esc(xUnit==="year" && Number.isInteger(v) ? String(v) : fmt(v,Number.isInteger(v)?0:1))}</text>`; });
         body += `<text class="axis-title" x="${(b.left+b.w-b.right)/2}" y="${b.h-8}" text-anchor="middle">${esc(xLabel)}</text><text class="axis-title" transform="translate(19 ${(b.top+b.h-b.bottom)/2}) rotate(-90)" text-anchor="middle">${esc(yLabel)}</text>`;
         const finish = marks => `<svg viewBox="0 0 ${b.w} ${b.h}" role="group" aria-labelledby="${id}-title ${id}-desc">${body}${marks}</svg>`;
         return { x, y, finish };
@@ -533,7 +572,7 @@
       function renderAnnual() {
         if (!annual.length) { empty("annual-chart"); empty("annual-table"); empty("annual-insight"); return; }
         const domain = years.length > 1 ? [years[0],years.at(-1)] : [annual[0].year-1,annual[0].year+1];
-        const frame = chartFrame("annual","Annual engagement mean, median and range","Mean and median engagement on a 0–100 index, with a minimum-to-maximum band. Read the accompanying annual table for exact values.","Survey year","Engagement index",domain,[0,100],annual.map(r=>r.year));
+        const frame = chartFrame("annual","Annual engagement mean, median and range","Mean and median engagement on a 0–100 index, with a minimum-to-maximum band. Read the accompanying annual table for exact values.","Survey year","Engagement index",domain,[0,100],annual.map(r=>r.year),undefined,"year");
         const bandRows = annual.filter(r=>valid(r.min)&&valid(r.max));
         let marks = "";
         const bandGroups = [];
@@ -567,6 +606,81 @@
       const cohort=DATA.cohortSensitivity || {};
       if(valid(cohort.meanChange)) text("cohort-sensitivity",`Coverage check: among the same ${integer(cohort.n)} reporting names in every year, mean engagement changed by ${sign(cohort.meanChange)} points (${cohort.firstYear}–${cohort.lastYear}); paired 95% agency-bootstrap interval ${fmt(cohort.low,2)} to ${fmt(cohort.high,2)} points. A rise within this cohort cannot be explained solely by changing reporting-name coverage. This does not establish unchanged workforces, survey comparability, or a causal improvement. ${cohort.interpretation || ""}`);
       $("summary-insights").innerHTML=(findings.summary || []).map(s=>`<p class="chart-caption">${esc(s)}</p>`).join("");
+
+      const continuous = [...new Set(rows.map(r=>r.organization))].sort((a,b)=>String(a).localeCompare(String(b))).map(organization=>({
+        organization,
+        observations: years.map(year=>rows.find(r=>r.organization===organization && r.year===year))
+      })).filter(s=>years.length>1 && s.observations.every(r=>r && valid(r.engagement)));
+      const median = values => {
+        const sorted=values.slice().sort((a,b)=>a-b), mid=Math.floor(sorted.length/2);
+        return sorted.length ? (sorted.length%2 ? sorted[mid] : (sorted[mid-1]+sorted[mid])/2) : null;
+      };
+      let atlasMode="level";
+      let atlasSelected=continuous[0]?.organization;
+      function focusAtlasAgency(organization) {
+        atlasSelected=organization;
+        $("atlas-agency").value=organization;
+        $("living-chart").querySelectorAll(".atlas-path").forEach(path=>{
+          const chosen=continuous[Number(path.dataset.point)]?.organization===organization;
+          path.classList.toggle("is-selected",chosen);
+          path.setAttribute("tabindex",chosen?"0":"-1");
+          path.setAttribute("aria-pressed",String(chosen));
+        });
+        const series=continuous.find(s=>s.organization===organization);
+        if(!series) return;
+        const first=series.observations[0], last=series.observations.at(-1), change=last.engagement-first.engagement;
+        $("atlas-detail").innerHTML=`<span class="eyebrow accent">ONE PATH / ${esc(first.year)}–${esc(last.year)}</span><h3>${esc(organization)}</h3><div class="detail-grid"><div><strong>${fmt(first.engagement)}</strong><span>Starting engagement</span></div><div><strong>${fmt(last.engagement)}</strong><span>Latest engagement</span></div><div><strong class="accent">${sign(change)}</strong><span>Change · index points</span></div></div>`;
+      }
+      function renderLivingAtlas() {
+        if(!continuous.length) {
+          empty("living-chart","No complete multi-year agency trajectories are available. No paths have been invented.");
+          $("atlas-level").disabled=true; $("atlas-change").disabled=true; $("atlas-agency").disabled=true;
+          return;
+        }
+        const delta=atlasMode==="change";
+        const values=continuous.flatMap(s=>s.observations.map(r=>delta?r.engagement-s.observations[0].engagement:r.engagement));
+        const extent=Math.max(5,Math.ceil(Math.max(...values.map(Math.abs))/5)*5);
+        const domain=delta?[-extent,extent]:[Math.max(0,Math.floor((Math.min(...values)-3)/10)*10),100];
+        const frame=chartFrame("living","The living atlas of continuously observed agencies",`${continuous.length} agency paths. ${delta?"Change from each agency's first observed score.":"Published engagement levels; vertical axis is cropped as labeled."} Dashed line is the equal-agency median of plotted values. Select paths with arrow keys. Exact observations are in the table.`,"Survey year",delta?`Change since ${years[0]} · index points`:"Published engagement · index points",[years[0],years.at(-1)],domain,years,undefined,"year");
+        let marks="";
+        if(delta) marks+=`<line x1="${frame.x(years[0])}" x2="${frame.x(years.at(-1))}" y1="${frame.y(0)}" y2="${frame.y(0)}" stroke="var(--cp-text-muted)" stroke-width="1.5"/>`;
+        continuous.forEach((s,i)=>{
+          const points=s.observations.map(r=>({...r,value:delta?r.engagement-s.observations[0].engagement:r.engagement}));
+          marks+=`<path class="atlas-path${s.organization===atlasSelected?" is-selected":""}" data-point="${i}" d="${linePath(points,frame.x,frame.y,"year","value")}"/>`;
+        });
+        const medians=years.map((year,i)=>({year,value:median(continuous.map(s=>delta?s.observations[i].engagement-s.observations[0].engagement:s.observations[i].engagement))}));
+        marks+=`<path class="atlas-median" d="${linePath(medians,frame.x,frame.y,"year","value")}"/>`;
+        const oldPaths=[...$("living-chart").querySelectorAll(".atlas-path")].map(p=>p.getAttribute("d"));
+        $("living-chart").innerHTML=frame.finish(marks);
+        bindMarks("living-chart",continuous,s=>`${s.organization}, ${sign(s.observations.at(-1).engagement-s.observations[0].engagement)} points from ${years[0]} to ${years.at(-1)}`,s=>focusAtlasAgency(s.organization));
+        focusAtlasAgency(atlasSelected);
+        if(!matchMedia("(prefers-reduced-motion: reduce)").matches && oldPaths.length===continuous.length) {
+          $("living-chart").querySelectorAll(".atlas-path").forEach((path,i)=>{
+            path.animate([{d:`path("${oldPaths[i]}")`},{d:`path("${path.getAttribute("d")}")`}],{duration:600,easing:"cubic-bezier(.22,.61,.36,1)"});
+          });
+        }
+        text("atlas-chart-heading",delta?"Different journeys, one starting line.":"The landscape of published engagement.");
+        text("atlas-axis-note",delta?`ZERO = EACH AGENCY'S ${years[0]} SCORE`:`CROPPED VERTICAL SCALE · ${domain[0]}–100`);
+        text("atlas-status",`${integer(continuous.length)} complete paths · ${delta?"Change from baseline: the median of agency changes is not a change in the annual median.":"Published levels: each line retains its own starting point."}`);
+        $("atlas-level").setAttribute("aria-pressed",String(!delta));
+        $("atlas-change").setAttribute("aria-pressed",String(delta));
+        $("living-chart").dataset.mode=atlasMode;
+      }
+      if(continuous.length) {
+        const changes=continuous.map(s=>s.observations.at(-1).engagement-s.observations[0].engagement);
+        const gained=changes.filter(v=>v>0).length, declined=changes.filter(v=>v<0).length, unchanged=changes.filter(v=>v===0).length;
+        const meanChange=changes.reduce((a,b)=>a+b,0)/changes.length;
+        $("living-heading").innerHTML=`One ${meanChange>0?"rising":meanChange<0?"falling":"unchanged"} average.<br><em>${integer(continuous.length)} different journeys.</em>`;
+        text("living-premise",`The same ${integer(continuous.length)} agency names, ${years[0]}–${years.at(-1)}. A mean change of ${sign(meanChange)} points conceals ${gained && declined?"paths that go in opposite directions":"different agency paths"}. Remove the starting levels to see the divergence.`);
+        $("living-metrics").innerHTML=[[gained,"finished above their starting score"],[declined,"finished below their starting score"],[`${sign(Math.min(...changes))} → ${sign(Math.max(...changes))}`,"range of agency changes · points"]].map(([value,label])=>`<div><strong>${esc(value)}</strong><span>${esc(label)}</span></div>`).join("");
+        if(unchanged) $("living-metrics").insertAdjacentHTML("beforeend",`<div><strong>${integer(unchanged)}</strong><span>unchanged from their starting score</span></div>`);
+        $("atlas-agency").innerHTML=options(continuous.map(s=>({value:s.organization,label:s.organization})),atlasSelected);
+        table("living-table","Continuously observed reporting names; change from the first observed year, equal agency weights",["Organization","Year","Published engagement","Change from baseline (pts)"],continuous.flatMap(s=>s.observations.map(r=>[s.organization,r.year,fmt(r.engagement,3),fmt(r.engagement-s.observations[0].engagement,3)])));
+      }
+      $("atlas-agency").addEventListener("change",()=>{atlasSelected=$("atlas-agency").value; renderLivingAtlas();});
+      $("atlas-level").addEventListener("click",()=>{atlasMode="level"; renderLivingAtlas();});
+      $("atlas-change").addEventListener("click",()=>{atlasMode="change"; renderLivingAtlas();});
+      renderLivingAtlas();
 
       const explorerDimensions = [...features];
       if(rows.some(r=>valid(r.response_rate)) && !features.some(f=>f.key==="response_rate")) explorerDimensions.push({key:"response_rate",label:"Survey response rate"});
@@ -650,7 +764,7 @@
         const data = selected.map(o=>rows.filter(r=>r.organization===o).sort((a,b)=>a.year-b.year));
         if(!selected.length || !years.length) { empty("trajectory-chart","Choose at least one organization to explore its trajectory."); $("trajectory-legend").innerHTML=""; text("trajectory-status","No organization selected."); empty("trajectory-table"); return; }
         const domain = years.length>1 ? [years[0],years.at(-1)] : [years[0]-1,years[0]+1];
-        const frame = chartFrame("trajectories","Selected organization engagement trajectories","Up to three organizations. Missing years remain gaps. See the adjacent legend and data table.","Survey year","Engagement index",domain,[0,100],years);
+        const frame = chartFrame("trajectories","Selected organization engagement trajectories","Up to three organizations. Missing years remain gaps. See the adjacent legend and data table.","Survey year","Engagement index",domain,[0,100],years,undefined,"year");
         let marks="", points=[];
         data.forEach((series,i)=> {
           marks+=`<path d="${linePath(series,frame.x,frame.y,"year","engagement")}" fill="none" stroke="${colors[i]}" stroke-width="3" stroke-dasharray="${dash[i]}"/>`;
@@ -700,6 +814,26 @@
 
       const profiles = (clusters.profiles || []).slice().sort((a,b)=>a.cluster-b.cluster);
       const clusterPoints = (clusters.points || []).filter(p=>valid(p.x)&&valid(p.y));
+      function renderContinuousScores() {
+        const complete=clusterPoints.map(p=>rows.find(r=>r.organization===p.organization && r.year===latest)).filter(r=>r && features.length && features.every(f=>valid(r[f.key])));
+        if(!complete.length) { empty("score-chart","Complete latest-year feature profiles are unavailable."); return; }
+        const scales=features.map(f=>{
+          const mean=complete.reduce((sum,r)=>sum+r[f.key],0)/complete.length;
+          const sd=Math.sqrt(complete.reduce((sum,r)=>sum+(r[f.key]-mean)**2,0)/complete.length);
+          return {...f,mean,sd:sd || 1};
+        });
+        const scores=complete.map(r=>({...r,score:scales.reduce((sum,f)=>sum+(r[f.key]-f.mean)/f.sd,0)/scales.length})).sort((a,b)=>a.score-b.score);
+        const lo=Math.min(...scores.map(r=>r.score)), hi=Math.max(...scores.map(r=>r.score)), pad=(hi-lo || 1)*.08;
+        const frame=chartFrame("scores","Continuous overall survey score and engagement","Each agency has an equal-weight mean of standardized feature values. Engagement includes three of these dimensions, so agreement is partly compositional, not independent validation.","Mean standardized input score","Engagement index",[lo-pad,hi+pad],[0,100]);
+        const marks=scores.map((r,i)=>`<circle class="mark" data-point="${i}" cx="${frame.x(r.score)}" cy="${frame.y(r.engagement)}" r="5" fill="var(--cp-accent)" opacity=".7"/>`).join("");
+        $("score-chart").innerHTML=frame.finish(marks);
+        const detail=r=>{$("score-detail").innerHTML=`<h3>${esc(r.organization)}</h3><div class="detail-grid"><div><strong>${fmt(r.score,2)}</strong><span>Mean standardized input score</span></div><div><strong>${fmt(r.engagement)}</strong><span>Engagement index</span></div></div>${features.map(f=>`<div class="profile-feature"><div class="line"><span>${esc(f.label)}</span><span>${fmt(r[f.key])}</span></div><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:${clamp(r[f.key],0,100)}%"></div></div></div>`).join("")}`;};
+        bindMarks("score-chart",scores,r=>`${r.organization}: overall score ${fmt(r.score,2)}, engagement ${fmt(r.engagement)}`,detail);
+        detail(scores[Math.floor(scores.length/2)]);
+        text("score-note",`${latest}: ${integer(scores.length)} complete agency profiles. Horizontal score = equal-weight mean of the ${features.length} input dimensions after centering and population-standardizing within these agencies. Zero is the feature-wise agency average, not a threshold for good work. The original 0–100 dimensions remain visible on selection. EEI contains three input dimensions, so this association is partly mechanical. No distinct types or independent drivers are inferred.`);
+        table("score-table",`${latest} continuous scores; input dimensions on their original 0–100 scale`,["Organization","Mean standardized input score","Engagement",...features.map(f=>f.label)],scores.map(r=>[r.organization,fmt(r.score,3),fmt(r.engagement),...features.map(f=>fmt(r[f.key]))]));
+      }
+      renderContinuousScores();
       let selectedCluster = profiles[0]?.cluster;
       const clusterIndex = id => Math.max(0,profiles.findIndex(p=>String(p.cluster)===String(id)));
       function clusterMark(p,index,x,y) {
@@ -750,6 +884,44 @@
           `<details><summary>Read this profile’s feature means</summary><div class="table-scroll"><table><caption>${esc(p.name || `Profile ${p.cluster}`)} · ${integer(p.n)} organizations</caption><thead><tr><th scope="col">Feature</th><th scope="col">Mean</th></tr></thead><tbody>${features.map(f=>`<tr><th scope="row">${esc(f.label)}</th><td>${fmt(p.features?.[f.key])}</td></tr>`).join("")}</tbody></table></div></details>`;
       }
       renderClusters();
+
+      function renderRollingAudit() {
+        const audit=DATA.rollingAudit || {}, origins=(audit.origins || []).slice().sort((a,b)=>a.year-b.year);
+        if(!origins.length) {
+          text("audit-summary","Rolling-origin evidence is not available in this build.");
+          empty("audit-chart","No rolling-origin results supplied. The single holdout below is not a substitute for a temporal audit.");
+          text("audit-note","No missing audit values are imputed or replaced with the final holdout.");
+          empty("audit-table","No audit origins supplied.");
+          return;
+        }
+        const scored=origins.filter(r=>valid(r.year)&&valid(r.mae)&&valid(r.baselineMae));
+        if(!scored.length) empty("audit-chart","Origins were supplied without complete paired MAE values.");
+        else {
+          const originYears=scored.map(r=>r.year), lo=Math.min(...originYears), hi=Math.max(...originYears);
+          const max=Math.max(...scored.flatMap(r=>[r.mae,r.baselineMae]),1)*1.15;
+          const frame=chartFrame("audit","Earlier-selected forecast versus persistence over rolling origins","Paired mean absolute errors in index points. Lower is better. Each model is selected using its earlier selection window. These retrospective origins overlap and are not independent replications.","Forecast target year","MAE · index points",lo===hi?[lo-1,hi+1]:[lo,hi],[0,max],originYears,undefined,"year");
+          let marks="";
+          scored.forEach((r,i)=>{
+            const x=frame.x(r.year);
+            marks+=`<line x1="${x}" x2="${x}" y1="${frame.y(r.mae)}" y2="${frame.y(r.baselineMae)}" stroke="var(--cp-border-strong)" stroke-width="3"/><circle class="mark" data-point="${i}" cx="${x}" cy="${frame.y(r.mae)}" r="6" fill="var(--cp-accent)"/><rect x="${x-4}" y="${frame.y(r.baselineMae)-4}" width="8" height="8" fill="var(--cp-text-muted)"/><text x="${x}" y="${frame.y(Math.max(r.mae,r.baselineMae))-15}" text-anchor="middle">${esc(r.selected || "Not supplied")}</text>`;
+          });
+          $("audit-chart").innerHTML=frame.finish(marks);
+          bindMarks("audit-chart",scored,r=>`${r.year}: ${r.selected || "Selected model not supplied"} MAE ${fmt(r.mae,3)}, persistence ${fmt(r.baselineMae,3)}, improvement ${sign(r.improvement)} points`,()=>{});
+        }
+        const comparable=origins.filter(r=>valid(r.improvement)), wins=comparable.filter(r=>r.improvement>0).length;
+        const summary=audit.summary || {};
+        text("audit-summary",`${integer(origins.length)} forecast origins (${origins.map(r=>r.year).join(", ")}). The earlier-selected model beats persistence in ${integer(wins)} of ${integer(comparable.length)} origins with a reported paired improvement. ${valid(summary.mae)&&valid(summary.baselineMae)?`Equal-origin mean MAE: selected strategy ${fmt(summary.mae,3)} vs persistence ${fmt(summary.baselineMae,3)} points. `:""}One favorable year is not a durable advantage.`);
+        if(valid(summary.priorOnlyRidgeMae)&&valid(summary.fullRidgeMae)&&valid(summary.incrementalFeatureImprovement)) {
+          $("audit-ablation").hidden=false;
+          $("audit-ablation").innerHTML=`<span class="eyebrow accent">Do the extra dimensions earn their place?</span><p>Same Ridge specification, same training rows: prior engagement alone has mean MAE <strong>${fmt(summary.priorOnlyRidgeMae,3)}</strong>; adding the survey dimensions gives <strong>${fmt(summary.fullRidgeMae,3)}</strong>. MAE improvement: <strong>${summary.incrementalFeatureImprovement>0?"+":""}${fmt(summary.incrementalFeatureImprovement,3)} points</strong> (positive favors added features). These are equal-origin means. This ablation is diagnostic—not a new selection contest or a causal driver finding. No practically meaningful gain threshold was prespecified.</p>`;
+        }
+        const notes=Array.isArray(audit.notes)?audit.notes:[String(audit.notes || "")];
+        text("audit-note","Positive MAE improvement favors the earlier-selected model; negative favors persistence. Selection, training and calibration windows are shown for each origin. Coverage and width must be read together. These are retrospective, overlapping pseudo-prospective evaluations using revised publications—not independent fresh holdouts or historical as-of data vintages.");
+        $("audit-method").innerHTML=notes.map(note=>`<p class="chart-caption">${esc(note)}</p>`).join("");
+        const yearList=value=>Array.isArray(value)?value.join(", "):value ?? "—";
+        table("audit-table","Rolling-origin forecast audit; unavailable values are shown as —; all error and width units are index points",["Target year","Earlier-selected model","Agencies","Selected MAE","Persistence MAE","MAE improvement","Coverage (%)","Nominal (%)","Mean width","Calibration year","Selection years","Training target years"],origins.map(r=>[r.year,r.selected ?? "—",integer(r.n),fmt(r.mae,3),fmt(r.baselineMae,3),fmt(r.improvement,3),valid(r.coverage)?fmt(r.coverage*100):"—",valid(r.nominal)?fmt(r.nominal*100):"—",fmt(r.width,3),r.calibrationYear ?? "—",yearList(r.selectionYears),yearList(r.trainingYears)]));
+      }
+      renderRollingAudit();
 
       function isBaseline(metric) { return metric.baseline === true || /baseline|na[iï]ve|persistence|last[\s_-]*(value|year|observation)|carry[\s_-]*forward/i.test(metric.name || ""); }
       const metrics=(models.metrics || []).filter(m=>valid(m.mae)).slice().sort((a,b)=>a.mae-b.mae);

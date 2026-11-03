@@ -429,7 +429,12 @@ def build_notebook():
         finish(fig, "balanced_trajectories")
     """)
     markdown(r"""
-    ## 6. Annual changes: a more demanding association question
+    ## 6. Measurement demonstration: components reconstruct their index
+
+    **This is not the main discovery.** EEI includes leadership, supervisory
+    support and intrinsic-work components. Regressing its change on component
+    changes largely reconstructs the measurement formula. A nearly perfect fit
+    and tiny p-values do not identify independent levers or intervention effects.
 
     Only consecutive-year, exact-name observations are differenced. The persisted
     regression adjusts for common year effects and simultaneous standardized
@@ -462,7 +467,7 @@ def build_notebook():
         ax.scatter(ordered.estimate, positions)
         ax.axvline(0, color="gray", linestyle="--")
         ax.set_yticks(positions, ordered.label)
-        ax.set(title="Annual-change regression: clustered 95% coefficient intervals",
+        ax.set(title="Composite-index measurement check: not independent drivers",
                xlabel="EEI points per SD of feature change", ylabel="Index change")
         finish(fig, "change_coefficients")
     display(Markdown("**Collinearity gate:** Review the condition number and interval widths. "
@@ -526,6 +531,71 @@ def build_notebook():
            xlabel="Held-out target year", ylabel="MAE (EEI points)")
     ax.legend(title="Candidate", fontsize=8)
     finish(fig, "temporal_cv")
+    """)
+    markdown(r"""
+    ### 7b. Does the strategy travel? A nested rolling-origin audit
+
+    Repeat the forecasting protocol at each eligible target year. Each origin
+    selects a strategy using expanding folds **within earlier development years**,
+    fits on that development period, reserves the preceding year for calibration,
+    and evaluates the later year. Persistence is always a candidate.
+
+    This is a **retrospective robustness check**, not multiple newly untouched
+    holdouts. These years have already been inspected in the project; the source
+    rolling publications may also revise historical scores. Chronological
+    observation-year splits do not reproduce the exact data vintages available
+    at each historical decision date. The original development-selected result
+    remains unchanged. Do not select a new winner using these audit results.
+
+    A matched Ridge ablation compares prior EEI alone with prior EEI plus the
+    other indexes. This tests incremental predictive information, not whether
+    changing a component causes future engagement to improve.
+    """)
+    code(r"""
+    audit = evidence["rollingAudit"]
+    origins = pd.DataFrame(audit["origins"])
+    rolling_predictions = pd.read_csv(ROOT / "outputs" / "rolling_predictions.csv")
+    if origins.empty:
+        raise ValueError("No eligible rolling-origin audit years.")
+    for row in origins.itertuples():
+        if not (max(row.trainingYears) < row.calibrationYear < row.year):
+            raise ValueError("Rolling audit training/calibration/test order is invalid.")
+        if not (max(row.selectionYears) < row.calibrationYear):
+            raise ValueError("Rolling audit selection used calibration or later outcomes.")
+        observations = rolling_predictions[rolling_predictions.year == row.year]
+        if len(observations) != row.n or observations.organization.duplicated().any():
+            raise ValueError("Rolling prediction roster does not match the origin.")
+        mae = np.abs(observations.actual - observations.predicted).mean()
+        baseline_mae = np.abs(observations.actual - observations.baseline).mean()
+        coverage = observations.actual.between(observations.lower, observations.upper).mean()
+        if not np.allclose([mae, baseline_mae, coverage],
+                           [row.mae, row.baselineMae, row.coverage]):
+            raise ValueError("Rolling metrics do not reproduce from saved predictions.")
+        prior_ridge = np.abs(observations.actual - observations.priorOnlyRidge).mean()
+        full_ridge = np.abs(observations.actual - observations.fullRidge).mean()
+        if not np.allclose([prior_ridge, full_ridge],
+                           [row.ablation["priorOnlyRidgeMae"], row.ablation["fullRidgeMae"]]):
+            raise ValueError("Matched Ridge ablation does not reproduce from saved predictions.")
+    display(origins[["year", "selected", "n", "mae", "baselineMae", "improvement",
+                     "coverage", "width", "calibrationYear"]])
+    display(pd.Series(audit["summary"]).to_frame("equal-year audit summary"))
+    display(pd.DataFrame([
+        {"year": row["year"], **row["ablation"]} for row in audit["origins"]
+    ]))
+    for note in audit["notes"]:
+        print(note)
+    fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+    axes[0].plot(origins.year, origins.baselineMae, "--o", label="Persistence")
+    axes[0].plot(origins.year, origins.mae, "-o", label="Earlier-selected strategy")
+    axes[0].set(title="A strategy, tested across years", xlabel="Target year",
+                ylabel="MAE (index points)", xticks=origins.year)
+    axes[0].legend()
+    axes[1].plot(origins.year, origins.coverage * 100, "-o")
+    axes[1].axhline(90, color="gray", linestyle="--", label="Nominal 90%")
+    axes[1].set(title="Interval coverage is not constant", xlabel="Target year",
+                ylabel="Observed coverage (%)", ylim=(0, 100), xticks=origins.year)
+    axes[1].legend()
+    finish(fig, "rolling_origin_audit")
     """)
     markdown(r"""
     ## 8. Calibration and error: uncertainty is part of the product
@@ -603,7 +673,13 @@ def build_notebook():
     finish(fig, "permutation_importance")
     """)
     markdown(r"""
-    ## 10. Profile studio: describe similarities without labeling people
+    ## 10. Continuous profiles first; clustering as a simplification check
+
+    The primary view colors organizations by their **mean standardized input
+    index**, a continuous descriptive score with no validated cutoffs. The
+    one-score diagnostic below determines whether clustering adds anything
+    beyond this overall level. Identical partitions are a reason to simplify,
+    not evidence of distinct employee-experience types.
 
     Latest-year complete profiles are standardized; **engagement is excluded from
     clustering inputs**. KMeans candidates range from k=2 to k=5 when sample size
@@ -647,11 +723,13 @@ def build_notebook():
     points["profile"] = points.cluster.map(lambda value: f"Profile {int(value) + 1}")
     print("Eligible latest-year organizations:", len(points), "of", len(latest))
     fig, ax = plt.subplots()
-    sns.scatterplot(points, x="x", y="y", hue="profile", alpha=0.8, ax=ax)
-    ax.set(title=f"Organizational survey profiles · {latest_year}",
+    level_by_name = pd.Series(scaled.mean(axis=1), index=eligible.organization)
+    points["overall_level"] = points.organization.map(level_by_name)
+    scatter = ax.scatter(points.x, points.y, c=points.overall_level, cmap="cividis", alpha=0.8)
+    fig.colorbar(scatter, ax=ax, label="Mean standardized input index")
+    ax.set(title=f"A continuous survey-score landscape · {latest_year}",
            xlabel=f"PC1 ({clusters['variance'][0]:.1%} explained variance)",
            ylabel=f"PC2 ({clusters['variance'][1]:.1%} explained variance)")
-    ax.legend(title="Exploratory profile")
     finish(fig, "cluster_pca")
     profile_rows = [
         {"profile": item["name"], "n": item["n"],
@@ -745,7 +823,7 @@ def build_notebook():
     | Annual-change association | Prioritize hypotheses for triangulation | Claim that an intervention causes the coefficient |
     | Locked forecast | Benchmark next-year organization-level expectations | Predict individual performance or departures |
     | Calibrated interval | Communicate uncertainty and observed coverage | Promise nominal coverage under arbitrary shifts |
-    | Profile cluster | Structure exploratory leadership conversations | Diagnose organizations or classify employees |
+    | Continuous profile | Describe overall score levels and relative strengths | Assert distinct types or validated thresholds |
     | Intention aggregate | Discuss reasons people consider leaving | Estimate realized turnover or monetary ROI |
 
     **A practical action sequence**
