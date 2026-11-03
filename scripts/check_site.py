@@ -50,6 +50,11 @@ def main():
         "cluster-evidence",
         "audit-chart",
         "audit-table",
+        "paired-errors",
+        "paired-model",
+        "paired-agency",
+        "paired-error-chart",
+        "paired-error-table",
     ]:
         assert f'id="{selector}"' in html, f"Missing evidence interface: {selector}"
     assert "not an employee-weighted federal estimate" in html

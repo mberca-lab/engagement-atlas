@@ -345,6 +345,16 @@ intervals are not adjusted for five comparisons, do not refit models, and do not
 change the development-selected winner. Agency dependence remains a limitation;
 an interval spanning zero is not proof of equivalence.
 
+The paired-error swarm displays each held-out agency's absolute-error difference
+on the same symmetric horizontal scale across ML comparators. Vertical packing
+only prevents overlap; it encodes no additional variable. All comparisons require
+the complete original test-agency roster, identical actual scores and identical
+persistence forecasts. The default comparator is the development-selected ML
+explanation model, not a new winner chosen using these dots. Lower-error counts,
+the mean difference and the existing paired interval should be read together:
+many small differences can offset a few large ones. No new inferential test or
+model selection is introduced by this visualization.
+
 This experiment backtests the last observed year. It is not a verified live
 2025 forecast or a model of individual engagement.
 

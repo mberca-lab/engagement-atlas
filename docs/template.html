@@ -182,9 +182,24 @@
     .audit-panel { margin: 40px 0; border-top: 2px solid var(--cp-accent); }
     .audit-summary { font-size: 19px; line-height: 1.5; letter-spacing: -.025em; max-width: 850px; }
     .continuous-profile { margin-bottom: 24px; }
+    .paired-panel { margin-top: 32px; border-top: 2px solid var(--cp-text); }
+    .paired-heading { display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: end; margin-bottom: 28px; }
+    .paired-heading h3 { font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif; font-size: clamp(32px,4vw,52px); font-weight: 400; letter-spacing: -.045em; line-height: 1.08; margin: 8px 0 0; }
+    .paired-heading h3 em { color: var(--cp-accent); font-weight: 400; }
+    .paired-heading p { color: var(--cp-text-muted); font-size: 14px; margin: 0; }
+    .paired-summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; padding: 20px 0; border-top: 1px solid var(--cp-border); }
+    .paired-summary strong { display: block; font-size: clamp(24px,3vw,38px); font-weight: 400; letter-spacing: -.05em; line-height: 1.1; }
+    .paired-summary span { display: block; font-size: 11px; color: var(--cp-text-muted); margin-top: 8px; }
+    .error-dot { fill: var(--cp-text-muted); opacity: .8; }
+    .error-dot.is-positive { fill: var(--cp-accent); }
+    .error-dot.is-tied { fill: var(--cp-surface); stroke: var(--cp-text-muted); }
+    svg .error-dot.is-selected { stroke: var(--cp-text); stroke-width: 3; opacity: 1; }
+    .paired-zero { stroke: var(--cp-text); stroke-width: 1.5; }
+    .paired-mean { fill: var(--cp-text); }
     @media (max-width: 760px) {
-      .living-heading, .atlas-readout { grid-template-columns: 1fr; gap: 16px; }
+      .living-heading, .atlas-readout, .paired-heading { grid-template-columns: 1fr; gap: 16px; }
       .atlas-metrics { gap: 12px; }
+      .paired-summary { gap: 12px; }
       .atlas-mode button { flex: 1; font-size: 12px; }
       .atlas-chart { padding: 8px; }
     }
@@ -394,7 +409,18 @@
         <article class="panel audit-panel" aria-labelledby="audit-heading"><div class="panel-top"><h3 id="audit-heading">Does the advantage travel through time?</h3><span>ROLLING-ORIGIN AUDIT</span></div><p class="audit-summary" id="audit-summary"></p><div class="chart-scroll" id="audit-chart"></div><div class="legend"><span class="legend-item"><i class="swatch"></i>Earlier-selected model MAE</span><span class="legend-item"><i class="swatch secondary"></i>Persistence MAE</span></div><p class="chart-caption" id="audit-note"></p><div class="question" id="audit-ablation" hidden></div><details><summary>Read every origin, selection window and interval diagnostic</summary><div class="table-scroll" id="audit-table"></div><div id="audit-method"></div></details></article>
         <div class="model-strip" id="model-strip"></div>
         <div class="split"><div class="panel"><div class="panel-top"><h3>The model tournament</h3><span>MAE · INDEX POINTS · LOWER IS BETTER</span></div><div class="tournament" id="model-tournament"></div><p class="chart-caption" id="model-caption"></p><details><summary>Read the full holdout scorecard</summary><div class="table-scroll" id="model-table"></div></details></div><aside class="aside"><div class="insight" id="model-insight"></div><div class="question"><span class="eyebrow accent">A question for HR</span><p>Is the forecast more useful than carrying the last observation forward—and is its uncertainty acceptable for the decision?</p></div></aside></div>
-        <details><summary>Does each ML model improve on persistence? Read the paired comparison</summary><p class="chart-caption" id="paired-comparison-note"></p><div class="table-scroll" id="paired-comparison-table"></div></details>
+        <article class="panel paired-panel" id="paired-errors" aria-labelledby="paired-error-heading">
+          <div class="paired-heading"><div><span class="eyebrow accent">A CLOSER LOOK / THE SAME HELD-OUT AGENCIES</span><h3 id="paired-error-heading">A small average.<br><em>Different errors.</em></h3></div><p>Does a model help everywhere, or do gains and losses offset? Each dot compares two forecasts for the same agency. Switch models without changing the horizontal scale.</p></div>
+          <div class="controls"><div class="field"><label for="paired-model">Compare with persistence</label><select id="paired-model"></select></div><div class="field search"><label for="paired-agency">Follow one agency</label><select id="paired-agency"></select></div></div>
+          <div class="paired-summary" id="paired-error-summary"></div>
+          <div class="chart-scroll" id="paired-error-chart"></div>
+          <p class="status" id="paired-error-status" role="status" aria-live="polite"></p>
+          <div class="detail" id="paired-error-detail" aria-live="polite"></div>
+          <p class="chart-caption">Horizontal position = persistence absolute error minus alternative-model absolute error, in index points. Zero means equal error. Vertical stacking only separates dots; it carries no additional measure. The diamond marks the mean difference. Every dot has equal weight.</p>
+          <p class="chart-caption">Select a dot or use the agency menu; arrow keys and Home / End navigate dots. On narrow screens, swipe horizontally to explore the full scale. Counts of lower errors do not show their magnitude. This is retrospective exploration of an already inspected holdout—not a new model-selection step, a causal effect, or evidence of a durable advantage.</p>
+          <details><summary>Read the paired uncertainty and all-model comparison</summary><p class="chart-caption" id="paired-comparison-note"></p><div class="table-scroll" id="paired-comparison-table"></div></details>
+          <details><summary>Read the selected model's agency-by-agency errors</summary><div class="table-scroll" id="paired-error-table"></div></details>
+        </article>
         <div class="methods"><div class="panel"><div class="panel-top"><h3>Prediction meets observation</h3><span id="prediction-year"></span></div><div class="chart-scroll" id="prediction-chart"></div><p class="chart-caption">Selected model predictions against actual held-out engagement. The diagonal is perfect agreement, not a fitted line. These are retrospective forecasts, not future promises.</p><div class="field" style="margin-top:20px"><label for="prediction-select">Inspect a held-out organization</label><select id="prediction-select"></select></div><div class="detail" id="prediction-detail" aria-live="polite" style="margin-top:16px"></div><details><summary>Read held-out predictions and baseline</summary><div class="table-scroll" id="prediction-table"></div></details></div><div class="panel"><h3>Inside the explanatory ML model</h3><p class="chart-caption" id="importance-caption">Supplied permutation importance: change in model error when a feature is shuffled. This is predictive relevance, not causal leverage; correlated features can share or obscure importance. The explained ML model need not be the tournament winner.</p><div id="importance-list"></div><details><summary>Read permutation importance statistics</summary><div class="table-scroll" id="importance-table"></div></details><div class="insight" id="interval-insight"></div></div></div>
         <details><summary>Open the forecasting methodology</summary><div id="forecast-method"></div></details>
       </div>
@@ -992,6 +1018,111 @@
       }
       $("prediction-select").addEventListener("change",renderPredictionDetail);
       renderModels();
+
+      const pairedReference = new Map(predictions.map(p=>[p.organization,p]));
+      const pairedReferenceValid = predictions.length === models.nTest && pairedReference.size === predictions.length &&
+        predictions.every(p=>typeof p.organization==="string" && valid(p.baseline));
+      const pairedSource = Array.isArray(models.modelPredictions) ? models.modelPredictions : [];
+      function pairedErrors(name) {
+        const source = pairedSource.filter(p=>p.model===name), seen = new Set(), result = [];
+        if(!pairedReferenceValid || !source.length || source.length!==pairedReference.size) return [];
+        for(const p of source) {
+          const reference = pairedReference.get(p.organization);
+          if(!reference || seen.has(p.organization) || !valid(p.actual) || !valid(p.predicted) || !valid(p.baseline) ||
+            Math.abs(p.actual-reference.actual)>1e-8 || Math.abs(p.baseline-reference.baseline)>1e-8) return [];
+          seen.add(p.organization);
+          const baselineError = Math.abs(p.actual-p.baseline), modelError = Math.abs(p.actual-p.predicted);
+          result.push({...p,baselineError,modelError,difference:baselineError-modelError});
+        }
+        return result.sort((a,b)=>a.organization.localeCompare(b.organization));
+      }
+      const pairedSets = new Map(metrics.filter(m=>!isBaseline(m)).map(m=>[m.name,pairedErrors(m.name)]).filter(([,pairs])=>pairs.length));
+      const pairedNames = [...pairedSets.keys()].sort((a,b)=>a.localeCompare(b));
+      const pairedExtent = Math.max(5,Math.ceil(Math.max(0,...[...pairedSets.values()].flatMap(list=>list.map(p=>Math.abs(p.difference))))/5)*5);
+      const pairedX = value=>48+(value+pairedExtent)/(pairedExtent*2)*804;
+      function packErrors(pairs) {
+        const placed = [], gap = 9;
+        pairs.slice().sort((a,b)=>a.difference-b.difference || a.organization.localeCompare(b.organization)).forEach(p=> {
+          const x = pairedX(p.difference), candidates = [0];
+          placed.forEach(q=> {
+            const dx = x-q.x;
+            if(Math.abs(dx)<gap) {
+              const dy = Math.sqrt(gap*gap-dx*dx);
+              candidates.push(q.offset-dy,q.offset+dy);
+            }
+          });
+          candidates.sort((a,b)=>Math.abs(a)-Math.abs(b) || a-b);
+          const offset = candidates.find(y=>placed.every(q=>(x-q.x)**2+(y-q.offset)**2>=gap*gap-1e-6));
+          placed.push({...p,x,offset:offset ?? 0});
+        });
+        const positions = new Map(placed.map(p=>[p.organization,p]));
+        return pairs.map(p=>positions.get(p.organization));
+      }
+      const pairedLayouts = new Map([...pairedSets].map(([name,pairs])=>[name,packErrors(pairs)]));
+      const pairedHeight = Math.max(100,Math.ceil(Math.max(0,...[...pairedLayouts.values()].flatMap(list=>list.map(p=>Math.abs(p.offset))))/20)*20)+12;
+      let pairedModel = pairedSets.has(models.explanationModel) ? models.explanationModel : pairedNames[0];
+      let pairedAgency = pairedSets.get(pairedModel)?.[0]?.organization;
+      const pairedDifference = value=>`${value>0?"+":""}${fmt(value,3)}`;
+      const describePairedError = p=>`${p.organization}: observed ${fmt(p.actual,2)}, persistence ${fmt(p.baseline,2)}, ${pairedModel} ${fmt(p.predicted,2)}. Absolute errors ${fmt(p.baselineError,3)} and ${fmt(p.modelError,3)}; difference ${pairedDifference(p.difference)} points.`;
+      function renderPairedSelection() {
+        const p = pairedSets.get(pairedModel)?.find(p=>p.organization===pairedAgency);
+        if(!p) return;
+        $("paired-agency").value = pairedAgency;
+        $("paired-error-chart").querySelectorAll(".error-dot").forEach(mark=> {
+          const selected = mark.dataset.agency===pairedAgency;
+          mark.classList.toggle("is-selected",selected);
+          mark.setAttribute("tabindex",selected?"0":"-1");
+          mark.setAttribute("aria-pressed",String(selected));
+        });
+        const viewport = $("paired-error-chart"), svg = viewport.querySelector("svg");
+        viewport.scrollLeft = pairedX(p.difference)/900*svg.getBoundingClientRect().width-viewport.clientWidth/2;
+        $("paired-error-detail").innerHTML=`<span class="eyebrow">${esc(models.testYear)} / PAIRED FORECASTS</span><h3>${esc(p.organization)}</h3><div class="detail-grid"><div><strong>${fmt(p.actual,2)}</strong><span>Observed engagement</span></div><div><strong>${fmt(p.baseline,2)}</strong><span>Persistence forecast</span></div><div><strong class="accent">${fmt(p.predicted,2)}</strong><span>${esc(pairedModel)} forecast</span></div></div><p class="chart-caption">Absolute error: persistence ${fmt(p.baselineError,3)} vs ${esc(pairedModel)} ${fmt(p.modelError,3)} points. Difference ${pairedDifference(p.difference)} points: ${p.difference>0?`${esc(pairedModel)} has lower error`:p.difference<0?"persistence has lower error":"the errors are equal"} for this agency in this holdout.</p>`;
+      }
+      function renderPairedErrors() {
+        const pairs = pairedSets.get(pairedModel), layout = pairedLayouts.get(pairedModel);
+        if(!pairs?.length) {
+          $("paired-model").disabled = true; $("paired-agency").disabled = true;
+          $("paired-error-summary").hidden = true; $("paired-error-detail").hidden = true;
+          empty("paired-error-chart","Paired agency predictions are not available. No error distribution is inferred from aggregate metrics.");
+          empty("paired-error-table");
+          text("paired-error-status","A complete matched agency roster is required for both forecasts.");
+          return;
+        }
+        hideTooltip();
+        const previous = new Map([...$("paired-error-chart").querySelectorAll(".error-dot")].map(el=>[el.dataset.agency,[Number(el.getAttribute("cx")),Number(el.getAttribute("cy"))]]));
+        if(!pairs.some(p=>p.organization===pairedAgency)) pairedAgency = pairs[0].organization;
+        $("paired-agency").innerHTML = options(pairs.map(p=>({value:p.organization,label:p.organization})),pairedAgency);
+        const lower = pairs.filter(p=>p.difference<0).length, higher = pairs.filter(p=>p.difference>0).length;
+        const ties = pairs.length-lower-higher, mean = pairs.reduce((sum,p)=>sum+p.difference,0)/pairs.length;
+        $("paired-error-summary").innerHTML=`<div><strong>${integer(lower)}</strong><span>Persistence has lower error</span></div><div><strong class="accent">${integer(higher)}</strong><span>${esc(pairedModel)} has lower error</span></div><div><strong>${pairedDifference(mean)}</strong><span>Mean error difference · points</span></div>`;
+        const middle = pairedHeight+60, height = pairedHeight*2+160, axis = height-70;
+        let marks = `<title id="paired-swarm-title">Different agencies, different forecast errors</title><desc id="paired-swarm-desc">Every dot is one agency on the same ${models.testYear} holdout. Negative differences favor persistence; positive differences favor ${esc(pairedModel)}. Vertical stacking avoids overlap and has no analytical meaning. All models use a fixed horizontal scale.</desc><rect x="48" y="46" width="402" height="${axis-46}" fill="var(--cp-surface-soft)"/><rect x="450" y="46" width="402" height="${axis-46}" fill="var(--cp-accent-soft)"/><text x="48" y="26" style="font-size:11px;letter-spacing:.06em">PERSISTENCE LOWER ERROR</text><text x="852" y="26" text-anchor="end" style="font-size:11px;letter-spacing:.06em">ALTERNATIVE LOWER ERROR</text>`;
+        for(let index=0; index<=6; index++) {
+          const tick = pairedExtent*(index-3)/3;
+          const value = Math.abs(tick)<1e-8 ? 0 : tick;
+          marks+=`<line class="${value===0?"paired-zero":"grid-line"}" x1="${pairedX(value)}" x2="${pairedX(value)}" y1="46" y2="${axis}"/><text class="paired-tick" x="${pairedX(value)}" y="${axis+28}" text-anchor="middle">${value>0?"+":""}${esc(fmt(value,Number.isInteger(value)?0:1))}</text>`;
+        }
+        marks+=layout.map((p,i)=>`<circle class="mark error-dot${p.difference>0?" is-positive":p.difference===0?" is-tied":""}" data-point="${i}" data-agency="${esc(p.organization)}" data-difference="${p.difference}" cx="${p.x}" cy="${middle+p.offset}" r="3.5"/>`).join("");
+        const mx = pairedX(mean);
+        marks+=`<path class="paired-mean" d="M${mx},${axis-7} l7,7 l-7,7 l-7,-7 Z" aria-hidden="true"/><text class="axis-title" x="450" y="${height-12}" text-anchor="middle">Difference in absolute forecast error · index points</text>`;
+        $("paired-error-chart").dataset.extent = String(pairedExtent);
+        $("paired-error-chart").innerHTML=`<svg viewBox="0 0 900 ${height}" role="group" aria-labelledby="paired-swarm-title paired-swarm-desc">${marks}</svg>`;
+        bindMarks("paired-error-chart",pairs,describePairedError,p=> { pairedAgency=p.organization; renderPairedSelection(); });
+        renderPairedSelection();
+        const interval = (models.pairedComparisons || []).find(c=>c.name===pairedModel && c.n===pairs.length && Math.abs(c.difference-mean)<1e-8 && valid(c.low) && valid(c.high));
+        text("paired-error-status",`${integer(pairs.length)} paired agencies · ${integer(ties)} equal errors. ${interval?`Paired 95% agency-bootstrap interval for the mean difference: ${fmt(interval.low,3)} to ${fmt(interval.high,3)} points. `:"No matching paired interval supplied. "}Earlier validation still selects ${models.selected}; this view does not change it.`);
+        table("paired-error-table",`${pairedModel} vs persistence, ${models.testYear}; same agencies, actual scores and baseline forecasts`,["Agency","Observed","Persistence forecast","Alternative forecast","Persistence absolute error","Alternative absolute error","Error difference"],pairs.map(p=>[p.organization,fmt(p.actual,3),fmt(p.baseline,3),fmt(p.predicted,3),fmt(p.baselineError,3),fmt(p.modelError,3),pairedDifference(p.difference)]));
+        if(previous.size && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          $("paired-error-chart").querySelectorAll(".error-dot").forEach(mark=> {
+            const old = previous.get(mark.dataset.agency);
+            if(old) mark.animate([{transform:`translate(${old[0]-Number(mark.getAttribute("cx"))}px,${old[1]-Number(mark.getAttribute("cy"))}px)`},{transform:"translate(0px,0px)"}],{duration:480,easing:"cubic-bezier(.2,.7,.2,1)"});
+          });
+        }
+      }
+      $("paired-model").innerHTML=options(pairedNames.map(name=>({value:name,label:name})),pairedModel);
+      $("paired-model").addEventListener("change",()=> { pairedModel=$("paired-model").value; renderPairedErrors(); });
+      $("paired-agency").addEventListener("change",()=> { pairedAgency=$("paired-agency").value; hideTooltip(); renderPairedSelection(); });
+      renderPairedErrors();
 
       $("recommendations").innerHTML=(findings.recommendations || []).map((r,i)=>`<div class="insight"><span class="eyebrow accent">QUESTION ${String(i+1).padStart(2,"0")}</span><p>${esc(r)}</p></div>`).join("") || `<div class="question"><p>What additional evidence would change your interpretation—and what decision is this aggregate data actually fit to support?</p></div>`;
       $("quality-summary").innerHTML=`<p class="chart-caption">${integer(meta.rowCount ?? rows.length)} agency-year rows · ${integer(quality.duplicates)} duplicate agency-year keys reported.</p>`+(quality.notes || []).map(n=>`<p class="chart-caption">${esc(n)}</p>`).join("");

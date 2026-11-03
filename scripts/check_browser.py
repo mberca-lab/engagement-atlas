@@ -137,6 +137,91 @@ def main():
         )
         assert page.locator("#score-chart .mark").count() == len(payload["clusters"]["points"])
         assert "partly mechanical" in page.locator("#score-note").inner_text()
+        assert page.locator("#paired-model").input_value() == payload["models"]["explanationModel"]
+        paired_reference = {row["organization"]: row for row in payload["models"]["predictions"]}
+        paired_names = page.locator("#paired-model option").evaluate_all(
+            "els => els.map(el => el.value)"
+        )
+        paired_extent = page.locator("#paired-error-chart").get_attribute("data-extent")
+
+        def verify_paired_errors(name):
+            page.locator("#paired-model").select_option(name)
+            expected_pairs = {
+                row["organization"]: row
+                for row in payload["models"]["modelPredictions"]
+                if row["model"] == name
+            }
+            dots = page.locator("#paired-error-chart .error-dot").evaluate_all(
+                """els => els.map(el => ({
+                    agency: el.dataset.agency, difference: Number(el.dataset.difference),
+                    x: Number(el.getAttribute("cx")), y: Number(el.getAttribute("cy")),
+                    r: Number(el.getAttribute("r"))
+                }))"""
+            )
+            assert len(dots) == len(expected_pairs) == len(paired_reference)
+            assert {dot["agency"] for dot in dots} == set(paired_reference)
+            assert page.locator("#paired-error-chart").get_attribute("data-extent") == paired_extent
+            differences = []
+            for dot in dots:
+                row = expected_pairs[dot["agency"]]
+                reference = paired_reference[dot["agency"]]
+                assert row["actual"] == reference["actual"]
+                assert row["baseline"] == reference["baseline"]
+                difference = abs(row["actual"] - row["baseline"]) - abs(
+                    row["actual"] - row["predicted"]
+                )
+                differences.append(difference)
+                assert abs(dot["difference"] - difference) < 1e-10
+                expected_x = (
+                    48 + (difference + float(paired_extent)) / (2 * float(paired_extent)) * 804
+                )
+                assert abs(dot["x"] - expected_x) < 1e-8
+            for index, dot in enumerate(dots):
+                for other in dots[index + 1 :]:
+                    assert (dot["x"] - other["x"]) ** 2 + (dot["y"] - other["y"]) ** 2 >= (
+                        dot["r"] + other["r"] + 2
+                    ) ** 2 - 1e-5
+            summary_values = page.locator("#paired-error-summary strong").all_text_contents()
+            assert int(summary_values[0]) == sum(value < 0 for value in differences)
+            assert int(summary_values[1]) == sum(value > 0 for value in differences)
+            assert abs(float(summary_values[2]) - sum(differences) / len(differences)) <= 0.00051
+            assert page.locator("#paired-error-table tbody tr").count() == len(dots)
+            assert (
+                payload["models"]["selected"] in page.locator("#paired-error-status").inner_text()
+            )
+            return {dot["agency"]: dot["x"] for dot in dots}
+
+        original_paired_positions = verify_paired_errors(payload["models"]["explanationModel"])
+        agency_names = sorted(paired_reference)
+        page.locator("#paired-agency").select_option(agency_names[-1])
+        assert agency_names[-1] in page.locator("#paired-error-detail").inner_text()
+        moved = False
+        for name in paired_names:
+            positions = verify_paired_errors(name)
+            moved = moved or positions != original_paired_positions
+            assert page.locator("#paired-agency").input_value() == agency_names[-1]
+        assert moved, "Switching models must change the actual agency error positions."
+        page.locator("#paired-model").select_option(paired_names[0])
+        assert page.locator("#paired-error-chart").evaluate(
+            """el => {
+                const animations = el.getAnimations({subtree:true});
+                return animations.length > 0 && animations.every(animation =>
+                    animation.effect.getComputedTiming().iterations === 1 &&
+                    animation.effect.getComputedTiming().endTime <= 600);
+            }"""
+        ), "Paired-error transitions must be finite and brief."
+        selected_error = page.locator("#paired-error-chart .error-dot[tabindex='0']")
+        selected_error.focus()
+        selected_error.press("Home")
+        assert page.locator("#paired-agency").input_value() == agency_names[0]
+        page.locator("#paired-error-chart .error-dot[tabindex='0']").press("ArrowRight")
+        assert page.locator("#paired-agency").input_value() == agency_names[1]
+        assert (
+            page.locator("#paired-error-chart .is-selected").get_attribute("aria-pressed") == "true"
+        )
+        page.locator("#paired-error-chart .error-dot[tabindex='0']").press("Escape")
+        assert not page.locator("#tooltip").is_visible()
+        verify_paired_errors(payload["models"]["explanationModel"])
         origins = payload.get("rollingAudit", {}).get("origins", [])
         if origins:
             assert page.locator("#audit-chart .x-tick").all_text_contents() == [
@@ -183,6 +268,9 @@ def main():
             page.locator(".living-atlas").screenshot(
                 path=str(figures / "story-living-change.png"), style=screenshot_style
             )
+            page.locator("#paired-errors").screenshot(
+                path=str(figures / "story-paired-errors.png"), style=screenshot_style
+            )
             page.locator("#atlas-level").click()
             page.wait_for_timeout(650)
             page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
@@ -196,6 +284,10 @@ def main():
         if args.screenshots:
             page.locator(".living-atlas").screenshot(
                 path=str(ROOT / "outputs" / "figures" / "story-living-dark.png"),
+                style=screenshot_style,
+            )
+            page.locator("#paired-errors").screenshot(
+                path=str(ROOT / "outputs" / "figures" / "story-paired-errors-dark.png"),
                 style=screenshot_style,
             )
             page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
@@ -241,6 +333,14 @@ def main():
         for width, height in [(320, 844), (390, 844), (768, 1024), (1440, 1050)]:
             page.set_viewport_size({"width": width, "height": height})
             page.wait_for_timeout(200)
+            page.locator("#paired-agency").select_option(agency_names[0])
+            assert page.locator("#paired-error-chart").evaluate(
+                """el => {
+                    const viewport = el.getBoundingClientRect();
+                    const point = el.querySelector(".is-selected").getBoundingClientRect();
+                    return point.left >= viewport.left - 1 && point.right <= viewport.right + 1;
+                }"""
+            ), f"The selected agency must remain visible at {width}px."
             for theme in ["light", "dark"]:
                 page.evaluate("theme => document.documentElement.dataset.theme = theme", theme)
                 assert page.locator("#living-chart").evaluate(
@@ -280,6 +380,11 @@ def main():
         assert page.locator("#living-chart").evaluate(
             "el => el.getAnimations({subtree:true}).length === 0"
         ), "Reduced motion should not animate the data transformation."
+        page.locator("#paired-model").select_option(paired_names[0])
+        assert page.locator("#paired-error-chart .error-dot").count() == len(paired_reference)
+        assert page.locator("#paired-error-chart").evaluate(
+            "el => el.getAnimations({subtree:true}).length === 0"
+        ), "Reduced motion should show the new model without animating dots."
         for theme in ["light", "dark"]:
             separator = "&" if "?" in url else "?"
             page.goto(f"{url}{separator}scoutTheme={theme}", wait_until="load")
@@ -304,8 +409,43 @@ def main():
         assert page.locator("#audit-chart .mark").count() == 0
         assert "No audit origins supplied" in page.locator("#audit-table").text_content()
         assert not errors, errors
+        incomplete_pairs = json.loads(json.dumps(payload))
+        default_model = payload["models"]["explanationModel"]
+        first_pair = next(
+            row
+            for row in incomplete_pairs["models"]["modelPredictions"]
+            if row["model"] == default_model
+        )
+        incomplete_pairs["models"]["modelPredictions"].remove(first_pair)
+        incomplete_html = re.sub(
+            r"const DATA = .*?;\s*(?=\(\(\) =>)",
+            lambda _: f"const DATA = {json.dumps(incomplete_pairs)};\n",
+            html,
+            count=1,
+            flags=re.DOTALL,
+        )
+        page.goto("about:blank")
+        page.set_content(incomplete_html, wait_until="load")
+        assert default_model not in page.locator("#paired-model option").evaluate_all(
+            "els => els.map(el => el.value)"
+        ), "An incomplete model must not silently change the comparison cohort."
+        assert page.locator("#paired-error-chart .error-dot").count() == len(paired_reference)
+        incomplete_pairs["models"].pop("modelPredictions")
+        missing_pairs_html = re.sub(
+            r"const DATA = .*?;\s*(?=\(\(\) =>)",
+            lambda _: f"const DATA = {json.dumps(incomplete_pairs)};\n",
+            html,
+            count=1,
+            flags=re.DOTALL,
+        )
+        page.goto("about:blank")
+        page.set_content(missing_pairs_html, wait_until="load")
+        assert page.locator("#paired-model").is_disabled()
+        assert page.locator("#paired-error-chart .error-dot").count() == 0
+        assert "not available" in page.locator("#paired-error-chart").inner_text()
+        assert not errors, errors
         browser.close()
-    print("PASS: living paths, temporal audit, filters, profiles, keyboard, themes and mobile.")
+    print("PASS: paired agency errors, living paths, temporal audit, keyboard, themes and mobile.")
 
 
 if __name__ == "__main__":

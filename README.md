@@ -38,7 +38,7 @@ ablation asks whether the additional indexes earn their place.
 
 | Experience | Evidence |
 |---|---|
-| Interactive editorial story | Living agency trajectories, levels/change reveal, searchable organization explorer, continuous profiles, model tournament |
+| Interactive editorial story | Living agency trajectories, levels/change reveal, searchable organization explorer, continuous profiles, paired agency-error swarm, model tournament |
 | In-depth executed notebook | Data quality, distributions, outliers, relationship tests, temporal comparisons, clustering, predictive evaluation, HR interpretation |
 | Statistical analysis | Spearman correlations, false-discovery adjustment, agency-trajectory bootstrap, first-difference regression with clustered uncertainty |
 | Advanced machine learning | Five regularized/ensemble models, expanding-window validation, persistence baseline, permutation importance, calibration intervals |
