@@ -10,8 +10,8 @@ from pathlib import Path
 import requests
 
 ROOT = Path(__file__).resolve().parents[1]
-REPOSITORY = "mberca/engagement-atlas"
-URL = "https://mberca.github.io/engagement-atlas/"
+REPOSITORY = "Mbc81/engagement-atlas"
+URL = "https://mbc81.github.io/engagement-atlas/"
 TRAILERS = (
     "\n\nCo-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
     "\nCopilot-Session: 39116952-ee4a-435b-b203-6270df3fdd43"
@@ -52,12 +52,12 @@ def commit_owned_files(paths, message, cwd=ROOT):
 
 def main():
     account = json.loads(run(["gh", "api", "user"]).stdout)
-    if account["login"] != "mberca":
-        raise RuntimeError("Publication requires the signed-in mberca GitHub account.")
+    if account["login"] != "Mbc81":
+        raise RuntimeError("Publication requires the signed-in Mbc81 GitHub account.")
     for check in ["check_site.py", "check_browser.py"]:
         run([sys.executable, ROOT / "scripts" / check])
-    identity = f"{account['id']}+mberca@users.noreply.github.com"
-    git(["config", "user.name", "mberca"])
+    identity = f"{account['id']}+Mbc81@users.noreply.github.com"
+    git(["config", "user.name", "Mbc81"])
     git(["config", "user.email", identity])
     commit_owned_files(
         [
@@ -159,22 +159,22 @@ def main():
     if not deployed:
         raise RuntimeError("Repository pushed; Pages is not yet verified. Profile was not pushed.")
     run([sys.executable, ROOT / "scripts" / "check_site.py", "--url", URL])
-    profile = ROOT.parent / "mberca"
+    profile = ROOT.parent / "Mbc81"
     if not profile.is_dir():
         raise RuntimeError("Site is live, but the prepared profile repository is not available.")
     profile_remote = git(["remote", "get-url", "origin"], profile).stdout.strip()
-    if profile_remote != "https://github.com/mberca/mberca.git":
+    if profile_remote != "https://github.com/Mbc81/Mbc81.git":
         raise RuntimeError("Unexpected profile remote; refusing to publish.")
     content = (profile / "README.md").read_text(encoding="utf-8")
     if URL not in content or "## Projects" not in content:
         raise RuntimeError("Prepared profile Projects section was not found.")
-    git(["config", "user.name", "mberca"], profile)
+    git(["config", "user.name", "Mbc81"], profile)
     git(["config", "user.email", identity], profile)
     commit_owned_files(["README.md"], "Feature the real-data Engagement Atlas in Projects", profile)
     git(["push", "origin", "main"], profile)
-    published = run(["gh", "api", "repos/mberca/mberca/readme", "--jq", ".content"]).stdout
+    published = run(["gh", "api", "repos/Mbc81/Mbc81/readme", "--jq", ".content"]).stdout
     assert URL in base64.b64decode(published).decode("utf-8")
-    print(f"VERIFIED: {URL} and https://github.com/mberca#projects")
+    print(f"VERIFIED: {URL} and https://github.com/Mbc81#projects")
 
 
 if __name__ == "__main__":

@@ -6,11 +6,11 @@ An independent, AI-assisted **HR analytics study of real public agency-level
 employee survey statistics**. Eight survey years. Multiple perspectives on
 employee engagement. A visual story that lets you inspect the evidence.
 
-**[Explore the live atlas](https://mberca.github.io/engagement-atlas/)** ·
+**[Explore the live atlas](https://mbc81.github.io/engagement-atlas/)** ·
 **[Notebook](notebooks/engagement_atlas.ipynb)** ·
 **[Methods](METHODOLOGY.md)** · **[Data provenance](DATA_SOURCES.md)**
 
-[![The Engagement Atlas: interactive employee-engagement study](docs/assets/preview.png)](https://mberca.github.io/engagement-atlas/)
+[![The Engagement Atlas: interactive employee-engagement study](docs/assets/preview.png)](https://mbc81.github.io/engagement-atlas/)
 
 ## The questions
 
@@ -91,7 +91,7 @@ public-aggregate panel. Refresh downloads directly from OPM and records the
 file URLs and SHA-256 checksums in `outputs/source_manifest.json`.
 Original downloaded workbooks remain in ignored `data/raw/`.
 
-The publication helper uses the signed-in `mberca` account and publishes the
+The publication helper uses the signed-in `Mbc81` account and publishes the
 prepared profile link only after the live site is verified:
 
 ```powershell
